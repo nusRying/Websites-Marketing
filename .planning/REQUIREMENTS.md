@@ -9,6 +9,9 @@
 - **LEAD-01: Apollo Lead Sourcing**: Automate pulling businesses without websites from Apollo.io.
 - **LEAD-02: Clay Enrichment Pipeline**: Enrich leads with company-specific facts (address, industry, name, owner info) to drive personalization.
 - **LEAD-03: Multi-Stage Email Verification**: Implement Apollo and MillionVerifier verification to minimize bounce rates.
+- **LEAD-GM-01: Scrapling v0.4.1 G-Maps Scraper**: Build a stealthy scraper that identifies businesses without websites on Google Maps.
+- **LEAD-GM-02: Scraper Detail Extraction**: Extract name, phone, address, and recent reviews from G-Maps listings.
+- **LEAD-GM-03: Excel Lead Export**: Save filtered lead data (no-website businesses) to an Excel file with detailed attribution.
 
 ## Website Generation (SITE)
 - **SITE-01: Dynamic Next.js Template**: Build a fast-loading template that renders personalized content (name, industry, logo) based on URL parameters.
@@ -23,9 +26,9 @@
 - **OUT-03: Real-Time Alerts (Slack/Webhook)**: Notifications for when a lead views their site or responds to an email.
 
 ## v1 Scope Summary
-Total v1 Requirements: 14
+Total v1 Requirements: 17
 - Infrastructure: 3
-- Lead Intelligence: 3
+- Lead Intelligence: 6
 - Website Generation: 5
 - Outreach Engine: 3
 
@@ -39,6 +42,9 @@ Total v1 Requirements: 14
 | LEAD-01 | Phase 2 | Pending |
 | LEAD-02 | Phase 2 | Pending |
 | LEAD-03 | Phase 2 | Pending |
+| LEAD-GM-01 | Phase 03-google-maps-lead-intelligence | Pending |
+| LEAD-GM-02 | Phase 03-google-maps-lead-intelligence | Pending |
+| LEAD-GM-03 | Phase 03-google-maps-lead-intelligence | Pending |
 | SITE-01 | Phase 2 | Pending |
 | SITE-02 | Phase 2 | Pending |
 | SITE-03 | Phase 3 | Pending |

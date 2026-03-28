@@ -10,7 +10,7 @@ Building an automated sales engine that identifies businesses without websites a
 - **Distributed Architecture:** Separate ingestion, display, and outreach.
 
 ## Tech Stack (Planned)
-- **Lead Sourcing:** Apollo.io
+- **Lead Sourcing:** Apollo.io, **Scrapling (Google Maps Scraper)**
 - **Enrichment:** Clay
 - **Website Gen:** Next.js (App Router), Vercel, Supabase
 - **Outreach:** Smartlead.ai / Instantly.ai
