@@ -63,7 +63,7 @@ class GoogleMapsScraper:
         
         # Parse the results
         leads = []
-        all_links = response.css(MAPS_SELECTORS["listing_link"])
+        all_links = response.css(MAPS_SELECTORS["listing_link"])[:max_results]
         self.logger.info(f"Parsing {len(all_links)} results from response...")
 
         social_media_domains = ['facebook.com', 'instagram.com', 'linkedin.com', 'twitter.com', 'x.com', 'youtube.com', 'tiktok.com', 'yelp.com']

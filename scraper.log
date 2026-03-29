@@ -708,3 +708,246 @@ Call log:
 
 2026-03-28 22:56:08,172 [ERROR] Main:    Failed to process Gym Kitchen Cafe Bradford: RetryError[<Future at 0x1cc421dbc50 state=finished raised Error>]
 2026-03-28 22:56:11,070 [INFO] Main: SUCCESS: Exported 1 leads to: exports\Cafes_Bradford_20260328_225610.xlsx
+2026-03-29 16:58:27,459 [INFO] Main: --- Starting Lead Generation: Handyman in London ---
+2026-03-29 16:58:27,460 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-29 16:58:27,461 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 16:58:27,461 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 16:58:27,463 [INFO] Main: Engines initialized successfully.
+2026-03-29 16:58:27,463 [INFO] Main: Searching for listings for query: Handyman in London
+2026-03-29 16:58:27,464 [INFO] src.scrapers.google_maps: Searching Google Maps for: Handyman in London
+2026-03-29 16:58:27,465 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Handyman%20in%20London
+2026-03-29 16:59:04,729 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-29 16:59:05,030 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Handyman+in+London/@51.4636511,-0.0240324,9z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 16:59:36,214 [INFO] src.scrapers.google_maps: Parsing 20 results from response...
+2026-03-29 16:59:36,217 [INFO] Main: Found 20 total listings. 0 identified as leads without websites.
+2026-03-29 16:59:36,218 [WARNING] Main: No qualified leads found. Exiting.
+2026-03-29 16:59:50,884 [INFO] Main: --- Starting Lead Generation: Locksmiths in London ---
+2026-03-29 16:59:50,885 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-29 16:59:50,886 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 16:59:50,887 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 16:59:50,889 [INFO] Main: Engines initialized successfully.
+2026-03-29 16:59:50,891 [INFO] Main: Searching for listings for query: Locksmiths in London
+2026-03-29 16:59:50,893 [INFO] src.scrapers.google_maps: Searching Google Maps for: Locksmiths in London
+2026-03-29 16:59:50,894 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Locksmiths%20in%20London
+2026-03-29 17:00:02,912 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-29 17:00:03,022 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Locksmiths+in+London/@51.5286416,-0.1015987,11z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:00:34,138 [INFO] src.scrapers.google_maps: Parsing 20 results from response...
+2026-03-29 17:00:34,144 [INFO] Main: Found 20 total listings. 1 identified as leads without websites.
+2026-03-29 17:00:34,145 [INFO] Main: Starting deep enrichment for 1 leads...
+2026-03-29 17:00:34,146 [INFO] Main: [1/1] Processing Details: Honest Locksmiths
+2026-03-29 17:00:34,147 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Honest Locksmiths
+2026-03-29 17:01:19,718 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Honest+Locksmiths/@45.2452878,-42.4115243,4z/data=!4m10!1m2!2m1!1sHonest+Locksmiths!3m6!1s0x48761187676abea9:0x6c7d3e71b84f7a3e!8m2!3d51.5547316!4d-0.1952436!15sChFIb25lc3QgTG9ja3NtaXRoc5IBCWxvY2tzbWl0aOABAA!16s%2Fg%2F11lyn8ksd5?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:01:23,855 [INFO] Main:    Skipping: Website detected during enrichment (https://honestlocksmithsllc.com/)
+2026-03-29 17:01:25,856 [WARNING] Main: No enriched leads found to export.
+2026-03-29 17:01:42,059 [INFO] Main: --- Starting Lead Generation: Mobile car detailing in London ---
+2026-03-29 17:01:42,060 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-29 17:01:42,061 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:01:42,061 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:01:42,062 [INFO] Main: Engines initialized successfully.
+2026-03-29 17:01:42,063 [INFO] Main: Searching for listings for query: Mobile car detailing in London
+2026-03-29 17:01:42,063 [INFO] src.scrapers.google_maps: Searching Google Maps for: Mobile car detailing in London
+2026-03-29 17:01:42,064 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Mobile%20car%20detailing%20in%20London
+2026-03-29 17:01:50,596 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-29 17:01:50,760 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Mobile%20car%20detailing%20in%20London> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:02:21,765 [INFO] src.scrapers.google_maps: Parsing 20 results from response...
+2026-03-29 17:02:21,770 [INFO] Main: Found 20 total listings. 3 identified as leads without websites.
+2026-03-29 17:02:21,771 [INFO] Main: Starting deep enrichment for 3 leads...
+2026-03-29 17:02:21,771 [INFO] Main: [1/3] Processing Details: Mobile Car Detailing London
+2026-03-29 17:02:21,772 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Mobile Car Detailing London
+2026-03-29 17:03:08,791 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Jewels+Passion+Detailing+Mobile+Car+Valeting/@51.4924934,-0.194052,10z/data=!4m10!1m2!2m1!1sMobile+Car+Detailing+London!3m6!1s0x47d8a7022b24b339:0x87d2b53f187e5f18!8m2!3d51.5476912!4d0.0351795!15sChtNb2JpbGUgQ2FyIERldGFpbGluZyBMb25kb25aHSIbbW9iaWxlIGNhciBkZXRhaWxpbmcgbG9uZG9ukgEVY2FyX2RldGFpbGluZ19zZXJ2aWNlmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU5pTVVreWVUSjNSUkFC4AEA-gEECCYQPQ!16s%2Fg%2F11h0l5f8fw?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:03:10,705 [INFO] Main:    Skipping: Website detected during enrichment (http://www.medusaautodetailing.co.uk/)
+2026-03-29 17:03:12,707 [INFO] Main: [2/3] Processing Details: Upscale Detailing - Mobile Car Wash & Valeting Service
+2026-03-29 17:03:12,709 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Upscale Detailing - Mobile Car Wash %26 Valeting Service
+2026-03-29 17:03:59,149 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Upscale+Detailing+-+Mobile+Car+Wash+%26+Valeting+Service/@51.5091263,-0.3005699,17z/data=!3m1!4b1!4m6!3m5!1s0x48760d55c9c6c54d:0xc2475edea20e2c0e!8m2!3d51.5091263!4d-0.3005699!16s%2Fg%2F11jpf2zzhg?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:04:02,278 [INFO] Main: [3/3] Processing Details: MASTER AUTO DETAILING - Mobile Car Detailing Service
+2026-03-29 17:04:02,279 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): MASTER AUTO DETAILING - Mobile Car Detailing Service
+2026-03-29 17:04:47,495 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Auto+Artist+-+Detailing+%26+Protection/@32.1845324,-3.8591051,3z/data=!4m10!1m2!2m1!1sMASTER+AUTO+DETAILING+-+Mobile+Car+Detailing+Service!3m6!1s0x391f299840223f95:0x1a52089e6027d55f!8m2!3d32.1845324!4d74.1877699!15sCjRNQVNURVIgQVVUTyBERVRBSUxJTkcgLSBNb2JpbGUgQ2FyIERldGFpbGluZyBTZXJ2aWNlWjQiMm1hc3RlciBhdXRvIGRldGFpbGluZyBtb2JpbGUgY2FyIGRldGFpbGluZyBzZXJ2aWNlkgEVY2FyX2RldGFpbGluZ19zZXJ2aWNlmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU4wYjAxaGRWWkJFQUXgAQD6AQQICxAh!16s%2Fg%2F11h1z85bsz?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:04:48,340 [INFO] Main:    Skipping: Website detected during enrichment (http://detailmasters.co.in/)
+2026-03-29 17:04:51,024 [INFO] Main: SUCCESS: Exported 1 leads to: exports\Mobile_car_detailing_London_20260329_170450.xlsx
+2026-03-29 17:07:11,618 [INFO] Main: --- Starting Lead Generation: Roofing contractors in Liverpool ---
+2026-03-29 17:07:11,619 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-29 17:07:11,619 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:07:11,620 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:07:11,620 [INFO] Main: Engines initialized successfully.
+2026-03-29 17:07:11,620 [INFO] Main: Searching for listings for query: Roofing contractors in Liverpool
+2026-03-29 17:07:11,621 [INFO] src.scrapers.google_maps: Searching Google Maps for: Roofing contractors in Liverpool
+2026-03-29 17:07:11,621 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Roofing%20contractors%20in%20Liverpool
+2026-03-29 17:07:22,583 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-29 17:07:22,704 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Roofing%20contractors%20in%20Liverpool> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:07:53,841 [INFO] src.scrapers.google_maps: Parsing 20 results from response...
+2026-03-29 17:07:53,845 [INFO] Main: Found 20 total listings. 3 identified as leads without websites.
+2026-03-29 17:07:53,845 [INFO] Main: Starting deep enrichment for 3 leads...
+2026-03-29 17:07:53,845 [INFO] Main: [1/3] Processing Details: TAYLOR ROOFING
+2026-03-29 17:07:53,846 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): TAYLOR ROOFING
+2026-03-29 17:08:26,060 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/TAYLOR%20ROOFING", waiting until "load"
+. Retrying in 1s...
+2026-03-29 17:09:08,106 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/TAYLOR+ROOFING/@41.9082696,-44.9227483,4z/data=!4m10!1m2!2m1!1sTAYLOR+ROOFING!3m6!1s0x487b21de314c9941:0x6f5aab759bb58b23!8m2!3d53.3770538!4d-2.903911!15sCg5UQVlMT1IgUk9PRklOR5IBEnJvb2ZpbmdfY29udHJhY3RvcuABAA!16s%2Fg%2F11qpjm0z4l?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:09:09,423 [INFO] Main:    Skipping: Website detected during enrichment (http://www.roofsbytaylor.com/)
+2026-03-29 17:09:11,425 [INFO] Main: [2/3] Processing Details: Roscoe Roofing Services Ltd
+2026-03-29 17:09:11,425 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Roscoe Roofing Services Ltd
+2026-03-29 17:09:57,510 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Roscoe+Roofing+Services+Ltd/@53.4298349,-2.9940604,17z/data=!3m1!4b1!4m6!3m5!1s0x487b1e59ac81c647:0xbeaeaaf7755a7d0a!8m2!3d53.4298349!4d-2.9940604!16s%2Fg%2F11ckvlvvl4?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:09:58,498 [INFO] src.scrapers.discovery: Checking Instagram bio for email: https://instagram.com/roscoeroofingservicesltd
+2026-03-29 17:10:30,888 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://instagram.com/roscoeroofingservicesltd", waiting until "load"
+. Retrying in 1s...
+2026-03-29 17:10:56,180 [INFO] scrapling: Fetched (301) <GET https://instagram.com/roscoeroofingservicesltd> (referer: https://www.google.com/search?q=instagram)
+2026-03-29 17:10:56,922 [INFO] scrapling: Fetched (200) <GET https://www.instagram.com/roscoeroofingservicesltd> (referer: https://www.google.com/search?q=instagram)
+2026-03-29 17:11:00,405 [INFO] Main: [3/3] Processing Details: M.D Roofing
+2026-03-29 17:11:00,406 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): M.D Roofing
+2026-03-29 17:11:44,926 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/MD+Roofing/@33.7104164,-78.8803861,17z/data=!3m1!4b1!4m6!3m5!1s0x89006eefaa63d42b:0xb72b74efa7424fdd!8m2!3d33.7104164!4d-78.8803861!16s%2Fg%2F11fx8f8v8x?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:11:46,308 [INFO] Main:    Skipping: Website detected during enrichment (http://www.mdroofing.us/)
+2026-03-29 17:11:49,021 [INFO] Main: SUCCESS: Exported 1 leads to: exports\Roofing_contractors_Liverpool_20260329_171148.xlsx
+2026-03-29 17:20:45,764 [INFO] Main: --- Starting Lead Generation: Plumbers in London ---
+2026-03-29 17:20:45,766 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-29 17:20:45,767 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:20:45,767 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:20:45,768 [INFO] Main: Engines initialized successfully.
+2026-03-29 17:20:45,768 [INFO] Main: Searching for listings for query: Plumbers in London
+2026-03-29 17:20:45,769 [INFO] src.scrapers.google_maps: Searching Google Maps for: Plumbers in London
+2026-03-29 17:20:45,769 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Plumbers%20in%20London
+2026-03-29 17:20:45,769 [DEBUG] src.scrapers.engine: Executing custom page action.
+2026-03-29 17:20:45,771 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-29 17:20:59,066 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-29 17:20:59,204 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Plumbers%20in%20London> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:21:30,433 [INFO] src.scrapers.google_maps: Parsing 20 results from response...
+2026-03-29 17:21:30,437 [INFO] Main: Found 20 total listings. 0 identified as leads without websites.
+2026-03-29 17:21:30,437 [WARNING] Main: No qualified leads found. Exiting.
+2026-03-29 17:22:32,373 [INFO] Main: --- Starting Lead Generation: Plumbers in London ---
+2026-03-29 17:22:32,374 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-29 17:22:32,374 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:22:32,374 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:22:32,375 [INFO] Main: Engines initialized successfully.
+2026-03-29 17:22:32,375 [INFO] Main: Searching for listings for query: Plumbers in London
+2026-03-29 17:22:32,376 [INFO] src.scrapers.google_maps: Searching Google Maps for: Plumbers in London
+2026-03-29 17:22:32,376 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Plumbers%20in%20London
+2026-03-29 17:22:32,376 [DEBUG] src.scrapers.engine: Executing custom page action.
+2026-03-29 17:22:32,377 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-29 17:22:48,637 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-29 17:22:48,961 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Plumbers+in+London/@51.4893323,-0.0881553,10z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:23:20,300 [INFO] src.scrapers.google_maps: Parsing 20 results from response...
+2026-03-29 17:23:20,303 [INFO] Main: Found 20 total listings. 1 identified as leads without websites.
+2026-03-29 17:23:20,303 [INFO] Main: Starting deep enrichment for 1 leads...
+2026-03-29 17:23:20,303 [INFO] Main: [1/1] Processing Details: London Plumbers
+2026-03-29 17:23:20,316 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): London Plumbers
+2026-03-29 17:23:20,317 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-29 17:23:41,929 [INFO] src.scrapers.details:    Deep Review Extraction: Target 3
+2026-03-29 17:24:12,159 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/East+London+Plumbers/@51.4902732,-0.0881553,10z/data=!4m10!1m2!2m1!1sLondon+Plumbers!3m6!1s0x48761d2dc47c5613:0x504a0d61b3ba03df!8m2!3d51.5248227!4d-0.0248716!15sCg9Mb25kb24gUGx1bWJlcnNaESIPbG9uZG9uIHBsdW1iZXJzkgEHcGx1bWJlcpoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VSeWJIVlBZbEJCRUFF4AEA-gEECEMQPg!16s%2Fg%2F11y5vh49ds?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:24:13,523 [INFO] Main:    Skipping: Website detected during enrichment (http://londonplumbers.com/)
+2026-03-29 17:24:15,525 [WARNING] Main: No enriched leads found to export.
+2026-03-29 17:24:44,903 [INFO] Main: --- Starting Lead Generation: Plumbers in London ---
+2026-03-29 17:24:44,904 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-29 17:24:44,904 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:24:44,905 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:24:44,905 [INFO] Main: Engines initialized successfully.
+2026-03-29 17:24:44,905 [INFO] Main: Searching for listings for query: Plumbers in London
+2026-03-29 17:24:44,906 [INFO] src.scrapers.google_maps: Searching Google Maps for: Plumbers in London
+2026-03-29 17:24:44,906 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Plumbers%20in%20London
+2026-03-29 17:24:44,906 [DEBUG] src.scrapers.engine: Executing custom page action.
+2026-03-29 17:24:44,907 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-29 17:24:59,395 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-29 17:24:59,677 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Plumbers+in+London/@51.4893323,-0.0881553,10z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:25:30,934 [INFO] src.scrapers.google_maps: Parsing 20 results from response...
+2026-03-29 17:25:30,937 [INFO] Main: Found 20 total listings. 1 identified as leads without websites.
+2026-03-29 17:25:30,937 [INFO] Main: Starting deep enrichment for 1 leads...
+2026-03-29 17:25:30,937 [INFO] Main: [1/1] Processing Details: London Plumbers
+2026-03-29 17:25:30,938 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): London Plumbers
+2026-03-29 17:25:30,938 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-29 17:25:46,592 [INFO] src.scrapers.details:    Deep Review Extraction: Target 3
+2026-03-29 17:26:16,822 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Pimlico+Plumbers/@51.4902732,-0.0881553,10z/data=!4m10!1m2!2m1!1sLondon+Plumbers!3m6!1s0x487604bfe981a7d5:0x5c52ea845400c21e!8m2!3d51.4946311!4d-0.115964!15sCg9Mb25kb24gUGx1bWJlcnNaESIPbG9uZG9uIHBsdW1iZXJzkgEHcGx1bWJlcpoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyczVTbHBIWkhWVVJWbzBVMjFLTTJWRk5YcGFXRm95VEZSUmVXTlhZeEFC4AEA-gEECAAQOA!16s%2Fg%2F1tr1711v?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:26:18,074 [DEBUG] Main:    No email found for London Plumbers
+2026-03-29 17:26:20,735 [INFO] Main: SUCCESS: Exported 1 leads to: exports\Plumbers_London_20260329_172620.xlsx
+2026-03-29 17:29:33,723 [INFO] Main: --- Starting Lead Generation: Locksmiths in London ---
+2026-03-29 17:29:33,724 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-29 17:29:33,724 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:29:33,725 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:29:33,725 [INFO] Main: Engines initialized successfully.
+2026-03-29 17:29:33,726 [INFO] Main: Searching for listings for query: Locksmiths in London
+2026-03-29 17:29:33,726 [INFO] src.scrapers.google_maps: Searching Google Maps for: Locksmiths in London
+2026-03-29 17:29:33,732 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Locksmiths%20in%20London
+2026-03-29 17:29:43,120 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-29 17:29:43,254 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Locksmiths%20in%20London> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:30:14,407 [INFO] src.scrapers.google_maps: Parsing 20 results from response...
+2026-03-29 17:30:14,410 [INFO] Main: Found 20 total listings. 1 identified as leads without websites.
+2026-03-29 17:30:14,411 [INFO] Main: Starting deep enrichment for 1 leads...
+2026-03-29 17:30:14,411 [INFO] Main: [1/1] Processing Details: Honest Locksmiths
+2026-03-29 17:30:14,412 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Honest Locksmiths
+2026-03-29 17:30:47,556 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-29 17:31:17,761 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Honest+Locksmiths/@45.2452878,-42.4115243,4z/data=!4m10!1m2!2m1!1sHonest+Locksmiths!3m6!1s0x48761187676abea9:0x6c7d3e71b84f7a3e!8m2!3d51.5547316!4d-0.1952436!15sChFIb25lc3QgTG9ja3NtaXRoc5IBCWxvY2tzbWl0aOABAA!16s%2Fg%2F11lyn8ksd5?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:31:18,920 [INFO] Main:    Skipping: Website detected during enrichment (https://honestlocksmithsllc.com/)
+2026-03-29 17:31:20,921 [WARNING] Main: No enriched leads found to export.
+2026-03-29 17:37:41,264 [INFO] Main: --- Starting Lead Generation: Plumbers in London ---
+2026-03-29 17:37:41,265 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-29 17:37:41,266 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:37:41,267 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:37:41,268 [INFO] Main: Engines initialized successfully.
+2026-03-29 17:37:41,268 [INFO] Main: Searching for listings for query: Plumbers in London
+2026-03-29 17:37:41,269 [INFO] src.scrapers.google_maps: Searching Google Maps for: Plumbers in London
+2026-03-29 17:37:41,269 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Plumbers%20in%20London
+2026-03-29 17:38:05,777 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-29 17:38:06,687 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Plumbers+in+London/@51.4893323,-0.0881553,10z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:38:38,701 [INFO] src.scrapers.google_maps: Parsing 20 results from response...
+2026-03-29 17:38:38,711 [INFO] Main: Found 20 total listings.
+2026-03-29 17:38:38,712 [INFO] Main: Starting processing for 20 businesses...
+2026-03-29 17:38:38,713 [INFO] Main: [1/20] Processing: London Plumbers
+2026-03-29 17:38:38,713 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-29 17:38:38,741 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): London Plumbers
+2026-03-29 17:39:01,762 [INFO] src.scrapers.details:    Deep Review Extraction: Target 3
+2026-03-29 17:39:32,080 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Pimlico+Plumbers/@51.4902732,-0.0881553,10z/data=!4m10!1m2!2m1!1sLondon+Plumbers!3m6!1s0x487604bfe981a7d5:0x5c52ea845400c21e!8m2!3d51.4946311!4d-0.115964!15sCg9Mb25kb24gUGx1bWJlcnNaESIPbG9uZG9uIHBsdW1iZXJzkgEHcGx1bWJlcpoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyeFNja3hYVVhkVWJGSnlZVmhzUkZkV1FsQmhiVTV6VFRCU1lWVkZSUkFC4AEA-gEECBEQRQ!16s%2Fg%2F1tr1711v?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:39:34,267 [INFO] Main:    Skipping deep scan: Website found in details (http://londonplumbers.com/)
+2026-03-29 17:39:36,268 [INFO] Main: [2/20] Processing: Pimlico Plumbers
+2026-03-29 17:39:36,268 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-29 17:39:36,269 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Pimlico Plumbers
+2026-03-29 17:39:49,791 [INFO] src.scrapers.details:    Deep Review Extraction: Target 3
+2026-03-29 17:40:19,990 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Pimlico+Plumbers/@51.4946311,-0.115964,17z/data=!3m1!4b1!4m6!3m5!1s0x487604bfe981a7d5:0x5c52ea845400c21e!8m2!3d51.4946311!4d-0.115964!16s%2Fg%2F1tr1711v?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:40:21,644 [INFO] Main:    Skipping deep scan: Website found in details (https://www.pimlicoplumbers.com/)
+2026-03-29 17:40:23,645 [INFO] Main: [3/20] Processing: Aza & Sons Services Domestic & Commercial Plumber, Gas Engineer & Ac Engineer In London Ltd
+2026-03-29 17:40:23,646 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-29 17:40:23,652 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Aza %26 Sons Services Domestic %26 Commercial Plumber, Gas Engineer %26 Ac Engineer In London Ltd
+2026-03-29 17:40:37,278 [INFO] src.scrapers.details:    Deep Review Extraction: Target 3
+2026-03-29 17:41:28,416 [INFO] Main: --- Starting Lead Generation: Plumbers in London ---
+2026-03-29 17:41:28,417 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-29 17:41:28,418 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:41:28,419 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-29 17:41:28,420 [INFO] Main: Engines initialized successfully.
+2026-03-29 17:41:28,420 [INFO] Main: Searching for listings for query: Plumbers in London
+2026-03-29 17:41:28,421 [INFO] src.scrapers.google_maps: Searching Google Maps for: Plumbers in London
+2026-03-29 17:41:28,422 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Plumbers%20in%20London
+2026-03-29 17:41:50,614 [INFO] src.scrapers.google_maps: Discovered 21 listings in search feed.
+2026-03-29 17:41:51,107 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Plumbers+in+London/@51.4893323,-0.0881553,10z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:42:24,965 [INFO] src.scrapers.google_maps: Parsing 5 results from response...
+2026-03-29 17:42:24,969 [INFO] Main: Found 5 total listings.
+2026-03-29 17:42:24,969 [INFO] Main: Starting processing for 5 businesses...
+2026-03-29 17:42:24,970 [INFO] Main: [1/5] Processing: Handyman Services
+2026-03-29 17:42:24,971 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-29 17:42:24,973 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Handyman Services
+2026-03-29 17:42:49,503 [INFO] src.scrapers.details:    Deep Review Extraction: Target 3
+2026-03-29 17:43:20,022 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/handy+man+services/@32.5549461,73.7602991,8z/data=!4m10!1m2!2m1!1sHandyman+Services!3m6!1s0x391903a21354cdb3:0x3571ab2639148395!8m2!3d31.5405345!4d74.3014347!15sChFIYW5keW1hbiBTZXJ2aWNlc1oTIhFoYW5keW1hbiBzZXJ2aWNlc5IBC2VsZWN0cmljaWFumgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU5LTjJGVFdEQm5SUkFC4AEA-gEECAAQIg!16s%2Fg%2F11svx0w1zj?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:43:22,601 [INFO] Main:    Skipping deep scan: Website found in details (https://homeserviceslhr.com/)
+2026-03-29 17:43:24,603 [INFO] Main: [2/5] Processing: London Plumbers
+2026-03-29 17:43:24,604 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-29 17:43:24,605 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): London Plumbers
+2026-03-29 17:43:52,494 [INFO] src.scrapers.details:    Deep Review Extraction: Target 3
+2026-03-29 17:44:23,206 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/London+Plumbing+%26+Heating+Systems+Ltd/@51.3826254,-0.2521103,10z/data=!4m10!1m2!2m1!1sLondon+Plumbers!3m6!1s0x69b3b65e209a0983:0x283d05ca6deb3618!8m2!3d51.5393473!4d-0.0087363!15sCg9Mb25kb24gUGx1bWJlcnNaESIPbG9uZG9uIHBsdW1iZXJzkgEHcGx1bWJlcpoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQydDBRbEl4WkVoVlZVcG1XVEpHUkdKRldreE5lbFpaVFZoV2FsVldSUkFC4AEA-gEFCOUBEEQ!16s%2Fg%2F11vj98q4c5?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:44:25,080 [INFO] Main:    Skipping deep scan: Website found in details (http://londonplumbers.com/)
+2026-03-29 17:44:27,082 [INFO] Main: [3/5] Processing: Pimlico Plumbers
+2026-03-29 17:44:27,082 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-29 17:44:27,083 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Pimlico Plumbers
+2026-03-29 17:44:41,949 [INFO] src.scrapers.details:    Deep Review Extraction: Target 3
+2026-03-29 17:45:12,182 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Pimlico+Plumbers/@51.4946311,-0.115964,17z/data=!3m1!4b1!4m6!3m5!1s0x487604bfe981a7d5:0x5c52ea845400c21e!8m2!3d51.4946311!4d-0.115964!16s%2Fg%2F1tr1711v?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:45:13,320 [INFO] Main:    Skipping deep scan: Website found in details (https://www.pimlicoplumbers.com/)
+2026-03-29 17:45:15,321 [INFO] Main: [4/5] Processing: Aza & Sons Services Domestic & Commercial Plumber, Gas Engineer & Ac Engineer In London Ltd
+2026-03-29 17:45:15,322 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-29 17:45:15,322 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Aza %26 Sons Services Domestic %26 Commercial Plumber, Gas Engineer %26 Ac Engineer In London Ltd
+2026-03-29 17:45:28,318 [INFO] src.scrapers.details:    Deep Review Extraction: Target 3
+2026-03-29 17:45:58,577 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Aza+%26+Sons+Services+Domestic+%26+Commercial+Plumber,+Gas+Engineer+%26+Ac+Engineer+In+London+Ltd/@51.5286416,-0.1015987,11z/data=!3m1!4b1!4m6!3m5!1s0x48761d3785afffff:0x11c40b6378be181b!8m2!3d51.5286416!4d-0.1015987!16s%2Fg%2F11hd56g5lm?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:45:59,977 [INFO] Main:    Skipping deep scan: Website found in details (https://www.azasons.com/)
+2026-03-29 17:46:01,978 [INFO] Main: [5/5] Processing: City Plumbers London
+2026-03-29 17:46:01,979 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-29 17:46:01,980 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): City Plumbers London
+2026-03-29 17:46:18,835 [INFO] src.scrapers.details:    Deep Review Extraction: Target 3
+2026-03-29 17:46:49,072 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/City+Plumbing+Ltd+and+City+Bathrooms/@51.5196579,-0.0654914,11z/data=!4m10!1m2!2m1!1sCity+Plumbers+London!3m6!1s0x47d8a72d8abcc9dd:0xbe183e09194c66d8!8m2!3d51.5953105!4d0.0353724!15sChRDaXR5IFBsdW1iZXJzIExvbmRvbloWIhRjaXR5IHBsdW1iZXJzIGxvbmRvbpIBFXBsdW1iaW5nX3N1cHBseV9zdG9yZZoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyMWFlbUpYT1dwaVJXZzBZMWM0ZVZGVlNuUk1WVXBNVVROUk1sWXpZeEFC4AEA-gEECAAQPw!16s%2Fg%2F1tfcmlt3?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-29 17:46:50,587 [INFO] Main:    Skipping deep scan: Website found in details (https://cityplumberslondon.co.uk/)
+2026-03-29 17:46:54,384 [INFO] Main: SUCCESS: Exported MASTER list of 5 businesses to: exports\Plumbers_London_MASTER_20260329_174652.xlsx

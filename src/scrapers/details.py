@@ -19,7 +19,7 @@ class GoogleMapsDetails:
         self.logger = logging.getLogger(__name__)
 
     @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=2, max=10))
-    def extract(self, name_or_url: str) -> Dict:
+    def extract(self, name_or_url: str, get_reviews: bool = False, max_reviews: int = 20) -> Dict:
         """
         Extract details with Explicit Wait and Fallback Items.
         Uses tenacity for retries on network or selector failures.
@@ -59,54 +59,50 @@ class GoogleMapsDetails:
                 self.logger.warning(f"Failed to find business 'h1' for {search_query}: {e}")
                 return
 
-            # 3. Trigger & Extract Reviews
+            # 3. Trigger & Extract Reviews (Robust Sync Version)
             reviews = []
-            try:
-                # Use selector from config
-                trigger = page.locator(MAPS_SELECTORS["reviews_btn"]).first
-                if trigger.is_visible():
-                    trigger.click()
-                    self.logger.info("   Reviews: Clicked.")
-                    
-                    # WAIT for content to appear
-                    try:
-                        # Review item selector
-                        page.wait_for_selector('.jftiEf', timeout=10000)
-                    except:
-                        page.wait_for_selector('div[role="main"]', timeout=5000)
-                    
-                    # Scroll & Extract using evaluate
-                    # Note: We keep some hardcoded logic inside the JS string but could abstract further
-                    reviews = page.evaluate(f'''() => {{
-                        const items = [];
-                        const grab = () => {{
-                            const els = document.querySelectorAll('.jftiEf, div[aria-label*="review"]');
-                            els.forEach(el => {{
-                                const author = el.querySelector('.d4r55, .XE7Z9')?.innerText;
-                                const text = el.querySelector('.wiU7W, .MyV73d, .G6B9hd')?.innerText;
-                                if(author && text && text.length > 5) {{
-                                    items.push({{author, text: text.trim()}});
-                                }}
-                            }});
-                        }};
-
-                        const pane = document.querySelector('div.m67q60, .dS8AEf, div[role="main"]');
-                        for(let i=0; i<8; i++) {{
-                            if(pane) pane.scrollBy(0, 5000);
-                            const s = Date.now(); while(Date.now()-s < 800){{}}
-                            grab();
-                        }}
+            if get_reviews:
+                try:
+                    self.logger.info(f"   Deep Review Extraction: Target {max_reviews}")
+                    trigger = page.locator(MAPS_SELECTORS["reviews_btn"]).first
+                    if trigger.is_visible():
+                        trigger.click()
+                        time.sleep(2)
                         
-                        const seen = new Set();
-                        return items.filter(r => {{
-                            const id = r.author + r.text;
-                            if(seen.has(id)) return false;
-                            seen.add(id); return true;
-                        }});
-                    }}''')
-                    self.logger.info(f"   Success: {len(reviews)} reviews captured.")
-            except Exception as e:
-                self.logger.debug(f"Review extraction failed for {search_query}: {e}")
+                        # Wait for reviews container
+                        scroller_sel = MAPS_SELECTORS["review_scroller"]
+                        page.wait_for_selector(scroller_sel, timeout=10000)
+                        
+                        # Scroll to load
+                        last_count = 0
+                        for _ in range(15): # Max 15 scrolls
+                            page.evaluate(f"document.querySelector('{scroller_sel}').scrollBy(0, 10000)")
+                            time.sleep(1.5)
+                            current_count = page.locator(MAPS_SELECTORS["review_container"]).count()
+                            if current_count >= max_reviews or current_count == last_count:
+                                break
+                            last_count = current_count
+                        
+                        # Parse
+                        containers = page.locator(MAPS_SELECTORS["review_container"]).all()
+                        for i in range(min(len(containers), max_reviews)):
+                            c = containers[i]
+                            try:
+                                author = c.locator(MAPS_SELECTORS["review_reviewer"]).inner_text()
+                                text = c.locator(MAPS_SELECTORS["review_text"]).inner_text()
+                                rating_attr = c.locator(MAPS_SELECTORS["review_rating"]).get_attribute("aria-label")
+                                rating = rating_attr.split()[0] if rating_attr else "0"
+                                
+                                if author and text:
+                                    reviews.append({
+                                        "author": author.strip(),
+                                        "rating": rating,
+                                        "text": text.strip()
+                                    })
+                            except: continue
+                        self.logger.info(f"   Success: {len(reviews)} reviews captured.")
+                except Exception as e:
+                    self.logger.warning(f"   Review extraction failed: {e}")
 
             # 4. Final Metadata
             nonlocal extracted_data

@@ -26,6 +26,8 @@ def main():
     parser.add_argument("--location", type=str, required=True, help="Target location (e.g., 'London')")
     parser.add_argument("--max-results", type=int, default=10, help="Max results to fetch")
     parser.add_argument("--headless", action="store_true", default=True, help="Run browser in headless mode")
+    parser.add_argument("--get-reviews", action="store_true", help="Extract all reviews for leads")
+    parser.add_argument("--max-reviews", type=int, default=20, help="Max reviews per lead")
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     args = parser.parse_args()
 
@@ -50,65 +52,77 @@ def main():
     # 3. Search & Filter
     logger.info(f"Searching for listings for query: {args.niche} in {args.location}")
     all_leads = search_scraper.search(args.niche, args.location, max_results=args.max_results)
-    no_website_leads = search_scraper.filter_no_website(all_leads)
+    logger.info(f"Found {len(all_leads)} total listings.")
     
-    logger.info(f"Found {len(all_leads)} total listings. {len(no_website_leads)} identified as leads without websites.")
-    
-    if not no_website_leads:
-        logger.warning("No qualified leads found. Exiting.")
+    if not all_leads:
+        logger.warning("No listings found. Exiting.")
         return
 
     # 4. Deep Extraction & Discovery
-    enriched_leads = []
+    final_data = []
     social_media_domains = ['facebook.com', 'instagram.com', 'linkedin.com', 'twitter.com', 'x.com', 'youtube.com', 'tiktok.com', 'yelp.com']
     
-    logger.info(f"Starting deep enrichment for {len(no_website_leads)} leads...")
-    for i, lead in enumerate(no_website_leads):
-        logger.info(f"[{i+1}/{len(no_website_leads)}] Processing Details: {lead['name']}")
-        try:
-            # Get detailed info (retries handled by decorator in details.py)
-            details = details_extractor.extract(lead['url'])
-            
-            # Additional validation: Ensure we don't pick up leads that actually have websites
-            website = details.get('website', '').lower()
-            is_social = any(domain in website for domain in social_media_domains) if website else False
-            
-            if not website or is_social:
-                # 5. DISCOVERY: Find Email via Social Media
-                socials = details.get('social_links', {})
-                email = None
-                
-                if socials.get('facebook'):
-                    logger.debug(f"   Searching Facebook: {socials['facebook']}")
-                    email = discovery_engine.find_email_on_facebook(socials['facebook'])
-                
-                if not email and socials.get('instagram'):
-                    logger.debug(f"   Searching Instagram: {socials['instagram']}")
-                    email = discovery_engine.find_email_on_instagram(socials['instagram'])
-                
-                details['email'] = email if email else "Not found"
-                if email:
-                    logger.info(f"   Found Email: {email}")
-                else:
-                    logger.debug(f"   No email found for {lead['name']}")
-                
-                enriched_leads.append(details)
-            else:
-                logger.info(f"   Skipping: Website detected during enrichment ({details['website']})")
-                
-        except Exception as e:
-            logger.error(f"   Failed to process {lead['name']}: {e}")
+    logger.info(f"Starting processing for {len(all_leads)} businesses...")
+    for i, lead in enumerate(all_leads):
+        logger.info(f"[{i+1}/{len(all_leads)}] Processing: {lead['name']}")
         
-        # Polite delay
-        time.sleep(SCRAPE_SETTINGS.get("request_delay", 2))
+        # Check if we need deep enrichment (no website or social media domain)
+        website = lead.get('website', '').lower()
+        is_social = any(domain in website for domain in social_media_domains) if website else False
+        needs_enrichment = not website or is_social
+        
+        if needs_enrichment:
+            logger.info("   -> No website detected. Starting deep enrichment...")
+            try:
+                # Get detailed info (retries handled by decorator in details.py)
+                details = details_extractor.extract(lead['url'], get_reviews=args.get_reviews, max_reviews=args.max_reviews)
+                
+                # Double-check website from details (more accurate)
+                detail_website = details.get('website', '').lower()
+                detail_is_social = any(domain in detail_website for domain in social_media_domains) if detail_website else False
+                
+                if not detail_website or detail_is_social:
+                    # 5. DISCOVERY: Find Email via Social Media
+                    socials = details.get('social_links', {})
+                    email = None
+                    
+                    if socials.get('facebook'):
+                        logger.debug(f"   Searching Facebook: {socials['facebook']}")
+                        email = discovery_engine.find_email_on_facebook(socials['facebook'])
+                    
+                    if not email and socials.get('instagram'):
+                        logger.debug(f"   Searching Instagram: {socials['instagram']}")
+                        email = discovery_engine.find_email_on_instagram(socials['instagram'])
+                    
+                    details['email'] = email if email else "Not found"
+                    if email:
+                        logger.info(f"   Found Email: {email}")
+                    
+                    # Merge basic lead info with details (in case search had something details missed)
+                    merged_lead = {**lead, **details}
+                    final_data.append(merged_lead)
+                else:
+                    logger.info(f"   Skipping deep scan: Website found in details ({detail_website})")
+                    final_data.append(lead) # Keep original search info
+                    
+            except Exception as e:
+                logger.error(f"   Failed to deeply enrich {lead['name']}: {e}")
+                final_data.append(lead) # At least keep basic info
+        else:
+            logger.info("   -> Website already exists. Keeping basic info.")
+            final_data.append(lead)
+        
+        # Polite delay between deep scrapes only
+        if needs_enrichment:
+            time.sleep(SCRAPE_SETTINGS.get("request_delay", 2))
 
     # 6. Export
-    if enriched_leads:
+    if final_data:
         try:
             exporter = ExcelExporter()
-            filename_clean = f"{args.niche.replace(' ', '_')}_{args.location.replace(' ', '_')}"
-            filepath = exporter.save(enriched_leads, filename_prefix=filename_clean)
-            logger.info(f"SUCCESS: Exported {len(enriched_leads)} leads to: {filepath}")
+            filename_clean = f"{args.niche.replace(' ', '_')}_{args.location.replace(' ', '_')}_MASTER"
+            filepath = exporter.save(final_data, filename_prefix=filename_clean)
+            logger.info(f"SUCCESS: Exported MASTER list of {len(final_data)} businesses to: {filepath}")
         except Exception as e:
             logger.error(f"Failed to export results: {e}")
     else:

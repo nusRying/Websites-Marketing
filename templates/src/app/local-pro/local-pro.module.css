@@ -1,0 +1,95 @@
+.header {
+  padding: 15px 0;
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: #2563eb; /* Friendly Blue */
+}
+
+.hero {
+  padding: 60px 0;
+  background: #eff6ff;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: #dbeafe;
+  color: #1e40af;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.services {
+  padding: 80px 0;
+}
+
+.pricingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.priceCard {
+  padding: 40px 30px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  transition: border-color 0.2s ease;
+}
+
+.priceCard:hover {
+  border-color: #2563eb;
+}
+
+.price {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 20px 0;
+}
+
+.featureList {
+  list-style: none;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.featureList li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.featureList li::before {
+  content: '✓';
+  color: #10b981;
+  font-weight: 900;
+}
+
+.reviews {
+  padding: 80px 0;
+  background: #f8fafc;
+}
+
+.reviewCard {
+  background: white;
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
