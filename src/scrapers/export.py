@@ -26,15 +26,42 @@ class ExcelExporter:
         # Prepare data for pandas
         formatted_data = []
         for lead in data:
-            # Reviews should be a single string for Excel
-            reviews_str = " | ".join(lead.get('reviews', []))
+            # Format Reviews
+            reviews_list = lead.get('reviews', [])
+            reviews_str = ""
+            for i, r in enumerate(reviews_list):
+                reviews_str += f"[{i+1}] {r.get('author', 'Anon')} ({r.get('rating', 'N/A')} - {r.get('date', 'N/A')}): {r.get('text', '')}\n---\n"
             
+            # Format Hours
+            hours_dict = lead.get('hours', {})
+            hours_str = "\n".join([f"{d}: {t}" for d, t in hours_dict.items()])
+            
+            # Format Social Links
+            social_dict = lead.get('social_links', {})
+            fb = social_dict.get('facebook', '')
+            ig = social_dict.get('instagram', '')
+            li = social_dict.get('linkedin', '')
+            tw = social_dict.get('twitter', '')
+            
+            # Format Attributes
+            attributes_str = ", ".join(lead.get('attributes', []))
+
             formatted_data.append({
                 "Name": lead.get('name', 'Unknown'),
-                "Website": lead.get('website', ''), # Should be empty or placeholder as requested
+                "Rating": lead.get('rating', 'N/A'),
+                "Email": lead.get('email', 'Not found'),
+                "Category": lead.get('category', ''),
+                "Website": lead.get('website', ''),
+                "Facebook": fb,
+                "Instagram": ig,
+                "LinkedIn": li,
+                "X / Twitter": tw,
                 "Phone": lead.get('phone', 'Not found'),
                 "Address": lead.get('address', 'Not found'),
-                "Recent Reviews": reviews_str,
+                "Photo URL": lead.get('photo_url', ''),
+                "Attributes": attributes_str,
+                "Business Hours": hours_str,
+                "Recent Reviews (All)": reviews_str.strip(),
                 "Google Maps URL": lead.get('url', '')
             })
 
@@ -46,9 +73,16 @@ class ExcelExporter:
         filepath = os.path.join(self.export_dir, filename)
 
         # Save to Excel
-        df.to_excel(filepath, index=False, engine='openpyxl')
-        print(f"Data exported successfully to: {filepath}")
+        with pd.ExcelWriter(filepath, engine='openpyxl') as writer:
+            df.to_excel(writer, index=False)
+            # Basic formatting: set column width for readability
+            worksheet = writer.sheets['Sheet1']
+            for i, col in enumerate(df.columns):
+                column_len = df[col].astype(str).str.len().max()
+                column_len = max(column_len, len(col)) + 2
+                worksheet.column_dimensions[chr(65 + i)].width = min(column_len, 50) # Cap width at 50
         
+        print(f"Data exported successfully to: {filepath}")
         return filepath
 
 if __name__ == "__main__":

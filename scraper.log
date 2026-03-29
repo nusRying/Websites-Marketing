@@ -1,0 +1,710 @@
+2026-03-28 22:39:12,170 [INFO] Main: --- Starting Lead Generation: Plumbers in London ---
+2026-03-28 22:39:12,171 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-28 22:39:12,172 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-28 22:39:12,172 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-28 22:39:12,173 [INFO] Main: Engines initialized successfully.
+2026-03-28 22:39:12,173 [INFO] Main: Searching for listings for query: Plumbers in London
+2026-03-28 22:39:12,173 [INFO] src.scrapers.google_maps: Searching Google Maps for: Plumbers in London
+2026-03-28 22:39:12,174 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Plumbers%20in%20London
+2026-03-28 22:39:12,176 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:39:25,547 [ERROR] scrapling: Error executing page_action: 'feed_container'
+2026-03-28 22:39:55,636 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Plumbers+in+London/@51.4893323,-0.0881553,10z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-28 22:39:56,539 [INFO] src.scrapers.google_maps: Parsing 12 results from response...
+2026-03-28 22:39:56,541 [INFO] Main: Found 12 total listings. 0 identified as leads without websites.
+2026-03-28 22:39:56,542 [WARNING] Main: No qualified leads found. Exiting.
+2026-03-28 22:41:03,066 [INFO] Main: --- Starting Lead Generation: Plumbers in London ---
+2026-03-28 22:41:03,067 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-28 22:41:03,067 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-28 22:41:03,068 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-28 22:41:03,069 [INFO] Main: Engines initialized successfully.
+2026-03-28 22:41:03,069 [INFO] Main: Searching for listings for query: Plumbers in London
+2026-03-28 22:41:03,069 [INFO] src.scrapers.google_maps: Searching Google Maps for: Plumbers in London
+2026-03-28 22:41:03,070 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Plumbers%20in%20London
+2026-03-28 22:41:03,070 [DEBUG] src.scrapers.engine: Executing custom page action.
+2026-03-28 22:41:03,071 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:41:10,293 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-28 22:41:10,411 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Plumbers%20in%20London> (referer: https://www.google.com/search?q=google)
+2026-03-28 22:41:41,411 [INFO] src.scrapers.google_maps: Parsing 20 results from response...
+2026-03-28 22:41:41,414 [INFO] Main: Found 20 total listings. 0 identified as leads without websites.
+2026-03-28 22:41:41,415 [WARNING] Main: No qualified leads found. Exiting.
+2026-03-28 22:46:56,494 [INFO] Main: --- Starting Lead Generation: Cafes in Bradford ---
+2026-03-28 22:46:56,497 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-28 22:46:56,498 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-28 22:46:56,500 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-28 22:46:56,502 [INFO] Main: Engines initialized successfully.
+2026-03-28 22:46:56,503 [INFO] Main: Searching for listings for query: Cafes in Bradford
+2026-03-28 22:46:56,507 [INFO] src.scrapers.google_maps: Searching Google Maps for: Cafes in Bradford
+2026-03-28 22:46:56,508 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Cafes%20in%20Bradford
+2026-03-28 22:46:56,509 [DEBUG] src.scrapers.engine: Executing custom page action.
+2026-03-28 22:46:56,513 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:47:07,117 [INFO] src.scrapers.google_maps: Discovered 16 listings in search feed.
+2026-03-28 22:47:07,404 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Cafes+in+Bradford/@53.8055556,-1.737513,13z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-28 22:47:38,371 [INFO] src.scrapers.google_maps: Parsing 16 results from response...
+2026-03-28 22:47:38,374 [INFO] Main: Found 16 total listings. 16 identified as leads without websites.
+2026-03-28 22:47:38,375 [INFO] Main: Starting deep enrichment for 16 leads...
+2026-03-28 22:47:38,375 [INFO] Main: [1/16] Processing Details: Cafe Patisserie
+2026-03-28 22:47:38,376 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Cafe Patisserie
+2026-03-28 22:47:38,376 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:48:19,304 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Ideal+Healthy+Bakery+%26+Cafe/@31.999154,74.3500652,9z/data=!4m10!1m2!2m1!1sCafe+Patisserie!3m6!1s0x391ec30a9adc7597:0x699b058abe0d1fdf!8m2!3d32.414146!4d74.4771824!15sCg9DYWZlIFBhdGlzc2VyaWVaESIPY2FmZSBwYXRpc3NlcmllkgEGYmFrZXJ5mgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDJwV1dWUlhiRXBVUmxaRlVraHJOVTVYZUVWWmFtaHBXSHBXTVU1VlJSQULgAQD6AQQIWhBM!16s%2Fg%2F11pzyjhnvg?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-28 22:48:21,382 [DEBUG] Main:    No email found for Cafe Patisserie
+2026-03-28 22:48:23,383 [INFO] Main: [2/16] Processing Details: Tiffin Coffee
+2026-03-28 22:48:23,384 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Tiffin Coffee
+2026-03-28 22:48:23,385 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:48:57,195 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Tiffin%20Coffee", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:49:16,888 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NETWORK_CHANGED at https://www.google.com/maps/search/Tiffin%20Coffee
+Call log:
+  - navigating to "https://www.google.com/maps/search/Tiffin%20Coffee", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:49:29,224 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NETWORK_CHANGED at https://www.google.com/maps/search/Tiffin%20Coffee
+Call log:
+  - navigating to "https://www.google.com/maps/search/Tiffin%20Coffee", waiting until "load"
+
+2026-03-28 22:49:33,552 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Tiffin Coffee
+2026-03-28 22:49:33,554 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:49:36,819 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_INTERNET_DISCONNECTED at https://www.google.com/maps/search/Tiffin%20Coffee
+Call log:
+  - navigating to "https://www.google.com/maps/search/Tiffin%20Coffee", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:49:38,287 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_INTERNET_DISCONNECTED at https://www.google.com/maps/search/Tiffin%20Coffee
+Call log:
+  - navigating to "https://www.google.com/maps/search/Tiffin%20Coffee", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:49:42,962 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NETWORK_CHANGED at https://www.google.com/maps/search/Tiffin%20Coffee
+Call log:
+  - navigating to "https://www.google.com/maps/search/Tiffin%20Coffee", waiting until "load"
+
+2026-03-28 22:49:45,914 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Tiffin Coffee
+2026-03-28 22:49:45,914 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:50:18,248 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Tiffin%20Coffee", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:50:49,421 [WARNING] scrapling: Attempt 2 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Tiffin%20Coffee", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:51:20,486 [ERROR] scrapling: Failed after 3 attempts: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Tiffin%20Coffee", waiting until "load"
+
+2026-03-28 22:51:21,052 [ERROR] Main:    Failed to process Tiffin Coffee: RetryError[<Future at 0x1cc43b2efd0 state=finished raised TimeoutError>]
+2026-03-28 22:51:23,053 [INFO] Main: [3/16] Processing Details: Cafe J'adore
+2026-03-28 22:51:23,053 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Cafe J%27adore
+2026-03-28 22:51:23,054 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:51:31,654 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Cafe%20J%2527adore
+Call log:
+  - navigating to "https://www.google.com/maps/search/Cafe%20J%2527adore", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:51:32,857 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Cafe%20J%2527adore
+Call log:
+  - navigating to "https://www.google.com/maps/search/Cafe%20J%2527adore", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:51:34,052 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Cafe%20J%2527adore
+Call log:
+  - navigating to "https://www.google.com/maps/search/Cafe%20J%2527adore", waiting until "load"
+
+2026-03-28 22:51:36,524 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Cafe J%27adore
+2026-03-28 22:51:36,525 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:51:38,324 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Cafe%20J%2527adore
+Call log:
+  - navigating to "https://www.google.com/maps/search/Cafe%20J%2527adore", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:51:39,514 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Cafe%20J%2527adore
+Call log:
+  - navigating to "https://www.google.com/maps/search/Cafe%20J%2527adore", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:51:40,616 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Cafe%20J%2527adore
+Call log:
+  - navigating to "https://www.google.com/maps/search/Cafe%20J%2527adore", waiting until "load"
+
+2026-03-28 22:51:43,205 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Cafe J%27adore
+2026-03-28 22:51:43,206 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:51:45,152 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Cafe%20J%2527adore
+Call log:
+  - navigating to "https://www.google.com/maps/search/Cafe%20J%2527adore", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:51:46,255 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Cafe%20J%2527adore
+Call log:
+  - navigating to "https://www.google.com/maps/search/Cafe%20J%2527adore", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:51:47,404 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Cafe%20J%2527adore
+Call log:
+  - navigating to "https://www.google.com/maps/search/Cafe%20J%2527adore", waiting until "load"
+
+2026-03-28 22:51:47,902 [ERROR] Main:    Failed to process Cafe J'adore: RetryError[<Future at 0x1cc43dd1ae0 state=finished raised Error>]
+2026-03-28 22:51:49,903 [INFO] Main: [4/16] Processing Details: Smorgasbord Coffee Bar
+2026-03-28 22:51:49,903 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Smorgasbord Coffee Bar
+2026-03-28 22:51:49,904 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:51:51,537 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:51:53,713 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:51:54,808 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar", waiting until "load"
+
+2026-03-28 22:51:57,325 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Smorgasbord Coffee Bar
+2026-03-28 22:51:57,326 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:51:59,322 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:00,464 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:01,552 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar", waiting until "load"
+
+2026-03-28 22:52:04,047 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Smorgasbord Coffee Bar
+2026-03-28 22:52:04,047 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:52:05,802 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:07,014 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:08,153 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Smorgasbord%20Coffee%20Bar", waiting until "load"
+
+2026-03-28 22:52:08,717 [ERROR] Main:    Failed to process Smorgasbord Coffee Bar: RetryError[<Future at 0x1cc43cc1250 state=finished raised Error>]
+2026-03-28 22:52:10,718 [INFO] Main: [5/16] Processing Details: Lefteris Coffee & Tearoom
+2026-03-28 22:52:10,719 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Lefteris Coffee %26 Tearoom
+2026-03-28 22:52:10,719 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:52:12,427 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:13,589 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:14,689 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom", waiting until "load"
+
+2026-03-28 22:52:17,303 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Lefteris Coffee %26 Tearoom
+2026-03-28 22:52:17,304 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:52:19,112 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:20,258 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:21,443 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom", waiting until "load"
+
+2026-03-28 22:52:23,984 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Lefteris Coffee %26 Tearoom
+2026-03-28 22:52:23,985 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:52:25,884 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:27,106 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:28,206 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lefteris%20Coffee%20%2526%20Tearoom", waiting until "load"
+
+2026-03-28 22:52:28,747 [ERROR] Main:    Failed to process Lefteris Coffee & Tearoom: RetryError[<Future at 0x1cc434b4ad0 state=finished raised Error>]
+2026-03-28 22:52:30,748 [INFO] Main: [6/16] Processing Details: The Cake'ole Bradford
+2026-03-28 22:52:30,749 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Cake%27ole Bradford
+2026-03-28 22:52:30,749 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:52:32,777 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:34,227 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:35,454 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford", waiting until "load"
+
+2026-03-28 22:52:38,339 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Cake%27ole Bradford
+2026-03-28 22:52:38,340 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:52:40,120 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:41,251 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:42,353 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford", waiting until "load"
+
+2026-03-28 22:52:44,884 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Cake%27ole Bradford
+2026-03-28 22:52:44,884 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:52:46,940 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:48,133 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:49,348 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Cake%2527ole%20Bradford", waiting until "load"
+
+2026-03-28 22:52:49,933 [ERROR] Main:    Failed to process The Cake'ole Bradford: RetryError[<Future at 0x1cc41bf3290 state=finished raised Error>]
+2026-03-28 22:52:51,933 [INFO] Main: [7/16] Processing Details: Lela’s cafe & brunch
+2026-03-28 22:52:51,935 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Lela%E2%80%99s cafe %26 brunch
+2026-03-28 22:52:51,935 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:52:53,813 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:55,201 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:52:56,441 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch", waiting until "load"
+
+2026-03-28 22:52:58,926 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Lela%E2%80%99s cafe %26 brunch
+2026-03-28 22:52:58,927 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:53:00,662 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:01,847 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:03,041 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch", waiting until "load"
+
+2026-03-28 22:53:05,678 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Lela%E2%80%99s cafe %26 brunch
+2026-03-28 22:53:05,678 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:53:07,472 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:08,664 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:09,758 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lela%25E2%2580%2599s%20cafe%20%2526%20brunch", waiting until "load"
+
+2026-03-28 22:53:10,316 [ERROR] Main:    Failed to process Lela’s cafe & brunch: RetryError[<Future at 0x1cc4219c100 state=finished raised Error>]
+2026-03-28 22:53:12,316 [INFO] Main: [8/16] Processing Details: Coffee28
+2026-03-28 22:53:12,317 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Coffee28
+2026-03-28 22:53:12,317 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:53:14,211 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Coffee28
+Call log:
+  - navigating to "https://www.google.com/maps/search/Coffee28", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:15,375 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Coffee28
+Call log:
+  - navigating to "https://www.google.com/maps/search/Coffee28", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:16,541 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Coffee28
+Call log:
+  - navigating to "https://www.google.com/maps/search/Coffee28", waiting until "load"
+
+2026-03-28 22:53:19,121 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Coffee28
+2026-03-28 22:53:19,122 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:53:20,799 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Coffee28
+Call log:
+  - navigating to "https://www.google.com/maps/search/Coffee28", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:22,403 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Coffee28
+Call log:
+  - navigating to "https://www.google.com/maps/search/Coffee28", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:23,892 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Coffee28
+Call log:
+  - navigating to "https://www.google.com/maps/search/Coffee28", waiting until "load"
+
+2026-03-28 22:53:26,335 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Coffee28
+2026-03-28 22:53:26,335 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:53:28,054 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Coffee28
+Call log:
+  - navigating to "https://www.google.com/maps/search/Coffee28", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:29,247 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Coffee28
+Call log:
+  - navigating to "https://www.google.com/maps/search/Coffee28", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:30,347 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Coffee28
+Call log:
+  - navigating to "https://www.google.com/maps/search/Coffee28", waiting until "load"
+
+2026-03-28 22:53:31,223 [ERROR] Main:    Failed to process Coffee28: RetryError[<Future at 0x1cc41c4c560 state=finished raised Error>]
+2026-03-28 22:53:33,224 [INFO] Main: [9/16] Processing Details: The Lodge Cafe
+2026-03-28 22:53:33,225 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Lodge Cafe
+2026-03-28 22:53:33,225 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:53:34,995 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Lodge%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Lodge%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:36,149 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Lodge%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Lodge%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:37,422 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Lodge%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Lodge%20Cafe", waiting until "load"
+
+2026-03-28 22:53:39,911 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Lodge Cafe
+2026-03-28 22:53:39,912 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:53:41,576 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Lodge%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Lodge%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:43,064 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Lodge%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Lodge%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:44,191 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Lodge%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Lodge%20Cafe", waiting until "load"
+
+2026-03-28 22:53:46,715 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Lodge Cafe
+2026-03-28 22:53:46,715 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:53:48,226 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Lodge%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Lodge%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:49,376 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Lodge%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Lodge%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:50,525 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Lodge%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Lodge%20Cafe", waiting until "load"
+
+2026-03-28 22:53:50,932 [ERROR] Main:    Failed to process The Lodge Cafe: RetryError[<Future at 0x1cc42315c50 state=finished raised Error>]
+2026-03-28 22:53:52,933 [INFO] Main: [10/16] Processing Details: The Record Café
+2026-03-28 22:53:52,934 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Record Caf%C3%A9
+2026-03-28 22:53:52,934 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:53:54,457 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:55,570 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:53:56,725 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9", waiting until "load"
+
+2026-03-28 22:53:59,467 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Record Caf%C3%A9
+2026-03-28 22:53:59,467 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:54:01,221 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:02,396 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:03,617 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9", waiting until "load"
+
+2026-03-28 22:54:06,040 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Record Caf%C3%A9
+2026-03-28 22:54:06,040 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:54:07,762 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:08,923 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:10,048 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Record%20Caf%25C3%25A9", waiting until "load"
+
+2026-03-28 22:54:10,460 [ERROR] Main:    Failed to process The Record Café: RetryError[<Future at 0x1cc4229ebd0 state=finished raised Error>]
+2026-03-28 22:54:12,460 [INFO] Main: [11/16] Processing Details: Java Joe
+2026-03-28 22:54:12,461 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Java Joe
+2026-03-28 22:54:12,462 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:54:14,266 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Java%20Joe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Java%20Joe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:15,440 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Java%20Joe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Java%20Joe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:16,641 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Java%20Joe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Java%20Joe", waiting until "load"
+
+2026-03-28 22:54:19,228 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Java Joe
+2026-03-28 22:54:19,229 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:54:21,252 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Java%20Joe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Java%20Joe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:22,387 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Java%20Joe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Java%20Joe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:23,544 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Java%20Joe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Java%20Joe", waiting until "load"
+
+2026-03-28 22:54:26,167 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Java Joe
+2026-03-28 22:54:26,168 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:54:27,878 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Java%20Joe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Java%20Joe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:29,090 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Java%20Joe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Java%20Joe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:30,183 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Java%20Joe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Java%20Joe", waiting until "load"
+
+2026-03-28 22:54:30,615 [ERROR] Main:    Failed to process Java Joe: RetryError[<Future at 0x1cc43b8e150 state=finished raised Error>]
+2026-03-28 22:54:32,616 [INFO] Main: [12/16] Processing Details: Sapphire Bradford
+2026-03-28 22:54:32,616 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Sapphire Bradford
+2026-03-28 22:54:32,617 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:54:34,351 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Sapphire%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Sapphire%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:35,601 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Sapphire%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Sapphire%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:36,807 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Sapphire%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Sapphire%20Bradford", waiting until "load"
+
+2026-03-28 22:54:39,242 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Sapphire Bradford
+2026-03-28 22:54:39,242 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:54:40,650 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Sapphire%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Sapphire%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:41,795 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Sapphire%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Sapphire%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:42,896 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Sapphire%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Sapphire%20Bradford", waiting until "load"
+
+2026-03-28 22:54:45,331 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Sapphire Bradford
+2026-03-28 22:54:45,332 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:54:46,862 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Sapphire%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Sapphire%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:48,004 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Sapphire%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Sapphire%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:49,153 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Sapphire%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Sapphire%20Bradford", waiting until "load"
+
+2026-03-28 22:54:49,571 [ERROR] Main:    Failed to process Sapphire Bradford: RetryError[<Future at 0x1cc43630fd0 state=finished raised Error>]
+2026-03-28 22:54:51,572 [INFO] Main: [13/16] Processing Details: Kaka'Z Cafe
+2026-03-28 22:54:51,572 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Kaka%27Z Cafe
+2026-03-28 22:54:51,572 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:54:53,142 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Kaka%2527Z%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Kaka%2527Z%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:54,285 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Kaka%2527Z%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Kaka%2527Z%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:54:56,392 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Kaka%2527Z%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Kaka%2527Z%20Cafe", waiting until "load"
+
+2026-03-28 22:54:58,930 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Kaka%27Z Cafe
+2026-03-28 22:54:58,931 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:55:00,661 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Kaka%2527Z%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Kaka%2527Z%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:03,774 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Kaka%2527Z%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Kaka%2527Z%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:04,872 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Kaka%2527Z%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Kaka%2527Z%20Cafe", waiting until "load"
+
+2026-03-28 22:55:07,271 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Kaka%27Z Cafe
+2026-03-28 22:55:07,272 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:55:08,745 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Kaka%2527Z%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Kaka%2527Z%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:09,851 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Kaka%2527Z%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Kaka%2527Z%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:10,951 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Kaka%2527Z%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Kaka%2527Z%20Cafe", waiting until "load"
+
+2026-03-28 22:55:11,416 [ERROR] Main:    Failed to process Kaka'Z Cafe: RetryError[<Future at 0x1cc42249b50 state=finished raised Error>]
+2026-03-28 22:55:13,416 [INFO] Main: [14/16] Processing Details: Fat Lads Cafe
+2026-03-28 22:55:13,417 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Fat Lads Cafe
+2026-03-28 22:55:13,417 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:55:14,781 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Fat%20Lads%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Fat%20Lads%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:15,895 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Fat%20Lads%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Fat%20Lads%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:16,980 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Fat%20Lads%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Fat%20Lads%20Cafe", waiting until "load"
+
+2026-03-28 22:55:19,389 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Fat Lads Cafe
+2026-03-28 22:55:19,390 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:55:21,011 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Fat%20Lads%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Fat%20Lads%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:22,199 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Fat%20Lads%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Fat%20Lads%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:23,279 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Fat%20Lads%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Fat%20Lads%20Cafe", waiting until "load"
+
+2026-03-28 22:55:25,838 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Fat Lads Cafe
+2026-03-28 22:55:25,838 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:55:27,388 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Fat%20Lads%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Fat%20Lads%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:28,566 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Fat%20Lads%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Fat%20Lads%20Cafe", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:29,662 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Fat%20Lads%20Cafe
+Call log:
+  - navigating to "https://www.google.com/maps/search/Fat%20Lads%20Cafe", waiting until "load"
+
+2026-03-28 22:55:30,082 [ERROR] Main:    Failed to process Fat Lads Cafe: RetryError[<Future at 0x1cc43970d50 state=finished raised Error>]
+2026-03-28 22:55:32,083 [INFO] Main: [15/16] Processing Details: Lina's Coffee Booth & Bar
+2026-03-28 22:55:32,083 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Lina%27s Coffee Booth %26 Bar
+2026-03-28 22:55:32,084 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:55:33,561 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:34,739 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:35,831 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar", waiting until "load"
+
+2026-03-28 22:55:38,251 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Lina%27s Coffee Booth %26 Bar
+2026-03-28 22:55:38,252 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:55:39,943 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:42,084 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:43,202 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar", waiting until "load"
+
+2026-03-28 22:55:45,843 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Lina%27s Coffee Booth %26 Bar
+2026-03-28 22:55:45,843 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:55:47,297 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:48,430 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:49,524 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lina%2527s%20Coffee%20Booth%20%2526%20Bar", waiting until "load"
+
+2026-03-28 22:55:50,035 [ERROR] Main:    Failed to process Lina's Coffee Booth & Bar: RetryError[<Future at 0x1cc422f89d0 state=finished raised Error>]
+2026-03-28 22:55:52,036 [INFO] Main: [16/16] Processing Details: Gym Kitchen Cafe Bradford
+2026-03-28 22:55:52,036 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Gym Kitchen Cafe Bradford
+2026-03-28 22:55:52,037 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:55:53,543 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:54,675 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:55:55,766 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford", waiting until "load"
+
+2026-03-28 22:55:58,181 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Gym Kitchen Cafe Bradford
+2026-03-28 22:55:58,181 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:55:59,610 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:56:00,710 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:56:01,794 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford", waiting until "load"
+
+2026-03-28 22:56:04,182 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Gym Kitchen Cafe Bradford
+2026-03-28 22:56:04,183 [DEBUG] asyncio: Using proactor: IocpProactor
+2026-03-28 22:56:05,562 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:56:06,667 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford", waiting until "load"
+. Retrying in 1s...
+2026-03-28 22:56:07,770 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford
+Call log:
+  - navigating to "https://www.google.com/maps/search/Gym%20Kitchen%20Cafe%20Bradford", waiting until "load"
+
+2026-03-28 22:56:08,172 [ERROR] Main:    Failed to process Gym Kitchen Cafe Bradford: RetryError[<Future at 0x1cc421dbc50 state=finished raised Error>]
+2026-03-28 22:56:11,070 [INFO] Main: SUCCESS: Exported 1 leads to: exports\Cafes_Bradford_20260328_225610.xlsx

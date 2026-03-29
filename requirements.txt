@@ -1,3 +1,4 @@
 scrapling==0.4.1
 pandas
 openpyxl
+tenacity
