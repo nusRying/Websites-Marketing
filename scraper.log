@@ -951,3 +951,1217 @@ Call log:
 2026-03-29 17:46:49,072 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/City+Plumbing+Ltd+and+City+Bathrooms/@51.5196579,-0.0654914,11z/data=!4m10!1m2!2m1!1sCity+Plumbers+London!3m6!1s0x47d8a72d8abcc9dd:0xbe183e09194c66d8!8m2!3d51.5953105!4d0.0353724!15sChRDaXR5IFBsdW1iZXJzIExvbmRvbloWIhRjaXR5IHBsdW1iZXJzIGxvbmRvbpIBFXBsdW1iaW5nX3N1cHBseV9zdG9yZZoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyMWFlbUpYT1dwaVJXZzBZMWM0ZVZGVlNuUk1WVXBNVVROUk1sWXpZeEFC4AEA-gEECAAQPw!16s%2Fg%2F1tfcmlt3?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
 2026-03-29 17:46:50,587 [INFO] Main:    Skipping deep scan: Website found in details (https://cityplumberslondon.co.uk/)
 2026-03-29 17:46:54,384 [INFO] Main: SUCCESS: Exported MASTER list of 5 businesses to: exports\Plumbers_London_MASTER_20260329_174652.xlsx
+2026-03-30 01:55:44,594 [INFO] Main: --- Starting Lead Generation: Construction companies in East London ---
+2026-03-30 01:55:44,595 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False)` instead before fetching
+2026-03-30 01:55:44,596 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-30 01:55:44,597 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-30 01:55:44,597 [INFO] Main: Engines initialized successfully.
+2026-03-30 01:55:44,598 [INFO] Main: Searching for listings for query: Construction companies in East London
+2026-03-30 01:55:44,598 [INFO] src.scrapers.google_maps: Searching Google Maps for: Construction companies in East London
+2026-03-30 01:55:44,598 [INFO] src.scrapers.engine: Fetching: https://www.google.com/maps/search/Construction%20companies%20in%20East%20London
+2026-03-30 01:56:30,053 [INFO] src.scrapers.google_maps: Discovered 100 listings in search feed.
+2026-03-30 01:56:30,231 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Construction+companies+in+East+London/@-32.9897335,27.8692492,13z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 01:57:01,019 [INFO] src.scrapers.google_maps: Parsing 100 results from response...
+2026-03-30 01:57:01,030 [INFO] Main: Found 100 total listings.
+2026-03-30 01:57:01,031 [INFO] Main: Starting processing for 100 businesses...
+2026-03-30 01:57:01,031 [INFO] Main: [1/100] Processing: Dewing Construction (Pty) Ltd
+2026-03-30 01:57:01,031 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 01:57:01,032 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Dewing Construction %28Pty%29 Ltd
+2026-03-30 01:57:15,699 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 01:57:45,793 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Dewing+Construction+(Pty)+Ltd/@-32.9634325,27.8205673,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1b6cfe5f9c3:0xdd5136649e06f35f!8m2!3d-32.9634325!4d27.8205673!16s%2Fg%2F1vz862lh?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 01:57:46,738 [INFO] Main:    Skipping deep scan: Website found in details (https://www.dewingconstruction.co.za/)
+2026-03-30 01:57:48,740 [INFO] Main: [2/100] Processing: Rinoma Construction
+2026-03-30 01:57:48,740 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 01:57:48,740 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Rinoma Construction
+2026-03-30 01:58:24,467 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 01:58:54,616 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Rinoma+Construction/@-32.9634962,27.896841,15z/data=!4m10!1m2!2m1!1sRinoma+Construction!3m6!1s0x1e66e01ade93bea5:0x2a9cee929426090a!8m2!3d-32.9634962!4d27.9158954!15sChNSaW5vbWEgQ29uc3RydWN0aW9ukgEUY29uc3RydWN0aW9uX2NvbXBhbnngAQA!16s%2Fg%2F11h76lwxsz?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 01:58:55,271 [INFO] Main:    Skipping deep scan: Website found in details (https://rinomaconstruction.co.za/)
+2026-03-30 01:58:57,272 [INFO] Main: [3/100] Processing: Transtruct Building and Civil Contractors
+2026-03-30 01:58:57,272 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 01:58:57,272 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Transtruct Building and Civil Contractors
+2026-03-30 01:59:19,634 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 01:59:49,796 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Transtruct+Building+And+Civil+Contractors/@-33.9445298,24.3445515,9z/data=!4m10!1m2!2m1!1sTranstruct+Building+and+Civil+Contractors!3m6!1s0x1e7ad1634b0646ef:0x2ca49d6647cdd8c0!8m2!3d-33.9445298!4d25.5640339!15sCilUcmFuc3RydWN0IEJ1aWxkaW5nIGFuZCBDaXZpbCBDb250cmFjdG9yc5IBFGNvbnN0cnVjdGlvbl9jb21wYW554AEA!16s%2Fg%2F11b6q1fw45?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 01:59:50,499 [INFO] Main:    Skipping deep scan: Website found in details (http://www.transtructsa.co.za/)
+2026-03-30 01:59:52,500 [INFO] Main: [4/100] Processing: KMG Construction
+2026-03-30 01:59:52,501 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 01:59:52,501 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): KMG Construction
+2026-03-30 02:00:21,763 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:00:51,859 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/KMG+Construction/@45.1231638,-93.4168201,17z/data=!3m1!4b1!4m6!3m5!1s0xf18f32df4479bed:0xee5bdd0ab0b69aee!8m2!3d45.1231638!4d-93.4168201!16s%2Fg%2F11q8stnb4y?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:00:52,477 [INFO] Main:    Skipping deep scan: Website found in details (https://www.kmgconstruction.net/)
+2026-03-30 02:00:54,478 [INFO] Main: [5/100] Processing: Inyati Construction (Pty) Ltd
+2026-03-30 02:00:54,479 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:00:54,479 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Inyati Construction %28Pty%29 Ltd
+2026-03-30 02:01:18,788 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:03:53,163 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 02:04:23,230 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Inyati+Construction+(Pty)+Ltd/@-32.9759466,27.8209226,17z/data=!4m12!1m2!2m1!1sInyati+Construction+%2528Pty%2529+Ltd!3m8!1s0x1e671f92b4ffcea7:0x9450ebf4da5ea96e!8m2!3d-32.9759466!4d27.8209226!9m1!1b1!15sCiFJbnlhdGkgQ29uc3RydWN0aW9uICUyOFB0eSUyOSBMdGSSARljaXZpbF9lbmdpbmVlcmluZ19jb21wYW554AEA!16s%2Fg%2F1td1ybfp?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:04:26,915 [INFO] Main: [6/100] Processing: Rumdel (Pty) Ltd
+2026-03-30 02:04:26,916 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:04:26,916 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Rumdel %28Pty%29 Ltd
+2026-03-30 02:04:58,375 [WARNING] src.scrapers.details: Failed to find business 'h1' for Rumdel %28Pty%29 Ltd: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:05:28,454 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Rumdel+%2528Pty%2529+Ltd/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:05:31,289 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Rumdel %28Pty%29 Ltd
+2026-03-30 02:06:00,398 [WARNING] src.scrapers.details: Failed to find business 'h1' for Rumdel %28Pty%29 Ltd: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:06:30,460 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Rumdel+%2528Pty%2529+Ltd/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:06:33,163 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Rumdel %28Pty%29 Ltd
+2026-03-30 02:07:05,725 [WARNING] src.scrapers.details: Failed to find business 'h1' for Rumdel %28Pty%29 Ltd: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:07:35,787 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Rumdel+%2528Pty%2529+Ltd/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:07:36,424 [ERROR] Main:    Failed to deeply enrich Rumdel (Pty) Ltd: RetryError[<Future at 0x2624058a360 state=finished raised ValueError>]
+2026-03-30 02:07:38,425 [INFO] Main: [7/100] Processing: TEWO BUILDING AND CIVIL CONTRACTORS
+2026-03-30 02:07:38,426 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:07:38,426 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): TEWO BUILDING AND CIVIL CONTRACTORS
+2026-03-30 02:07:51,356 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:08:21,440 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/TEWO+BUILDING+AND+CIVIL+CONTRACTORS/@-32.9640274,27.821577,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66ddfac936258f:0xb6bb72ebef3896ef!8m2!3d-32.9640274!4d27.821577!16s%2Fg%2F11h07flg_0?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:08:24,177 [INFO] Main: [8/100] Processing: Mlonyeni Construction
+2026-03-30 02:08:24,178 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:08:24,178 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Mlonyeni Construction
+2026-03-30 02:08:34,014 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:09:04,138 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Mlonyeni+Construction/@-32.9881069,27.8708226,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e15f7e4976cd:0xd186831caf96366c!8m2!3d-32.9881069!4d27.8708226!16s%2Fg%2F11j_ty5k1b?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:09:06,973 [INFO] Main: [9/100] Processing: SGT Construction
+2026-03-30 02:09:06,973 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:09:06,974 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SGT Construction
+2026-03-30 02:09:16,514 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:09:46,651 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/SGT+Construction/@-32.9629578,27.8207268,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66b042a0b68775:0x9ff60c17e5495dad!8m2!3d-32.9629578!4d27.8207268!16s%2Fg%2F11fmm0hpdm?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:09:47,301 [INFO] Main:    Skipping deep scan: Website found in details (https://www.sgtconstruction.co.za/)
+2026-03-30 02:09:49,302 [INFO] Main: [10/100] Processing: East Coast Construction Pty Ltd
+2026-03-30 02:09:49,302 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:09:49,302 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): East Coast Construction Pty Ltd
+2026-03-30 02:10:02,496 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:10:32,640 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/East+Coast+Construction+Pty+Ltd/@-33.0104318,-50.1352404,3z/data=!4m10!1m2!2m1!1sEast+Coast+Construction+Pty+Ltd!3m6!1s0x1e66e122ba2ed377:0xe6e24ed9154cf569!8m2!3d-33.0104318!4d27.9116346!15sCh9FYXN0IENvYXN0IENvbnN0cnVjdGlvbiBQdHkgTHRkkgEUY29uc3RydWN0aW9uX2NvbXBhbnngAQA!16s%2Fg%2F11h71hcvy6?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:10:33,555 [INFO] Main:    Skipping deep scan: Website found in details (https://www.eastcoastconstruction.co.za/)
+2026-03-30 02:10:35,556 [INFO] Main: [11/100] Processing: 100 PERCENT WALLING
+2026-03-30 02:10:35,556 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:10:35,557 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): 100 PERCENT WALLING
+2026-03-30 02:10:46,996 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:11:17,136 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/100+PERCENT+WALLING/@-33.0056885,27.911422,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e14c906e944d:0x707ac68a69fab0de!8m2!3d-33.0056885!4d27.911422!16s%2Fg%2F11k60vjrwb?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:11:19,926 [INFO] Main: [12/100] Processing: Rinoma Construction - Construction and building contractors East London
+2026-03-30 02:11:19,926 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:11:19,926 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Rinoma Construction - Construction and building contractors East London
+2026-03-30 02:11:40,024 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:12:10,168 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Rinoma+Construction/@-32.9634962,27.896841,15z/data=!4m10!1m2!2m1!1sRinoma+Construction+-+Construction+and+building+contractors+East+London!3m6!1s0x1e66e01ade93bea5:0x2a9cee929426090a!8m2!3d-32.9634962!4d27.9158954!15sCkdSaW5vbWEgQ29uc3RydWN0aW9uIC0gQ29uc3RydWN0aW9uIGFuZCBidWlsZGluZyBjb250cmFjdG9ycyBFYXN0IExvbmRvbpIBFGNvbnN0cnVjdGlvbl9jb21wYW554AEA!16s%2Fg%2F11h76lwxsz?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:12:11,158 [INFO] Main:    Skipping deep scan: Website found in details (https://rinomaconstruction.co.za/)
+2026-03-30 02:12:13,159 [INFO] Main: [13/100] Processing: S L Contractors - East London
+2026-03-30 02:12:13,159 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:12:13,160 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): S L Contractors - East London
+2026-03-30 02:12:45,197 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/S%20L%20Contractors%20-%20East%20London", waiting until "load"
+. Retrying in 1s...
+2026-03-30 02:13:03,535 [WARNING] src.scrapers.details: Failed to find business 'h1' for S L Contractors - East London: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:13:33,598 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/S+L+Contractors+-+East+London/@-32.9615707,27.784399,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e74c20a4ffd1:0xc2a9c7152ca530c6!8m2!3d-32.9615707!4d27.784399!16s%2Fg%2F11b6drcx49?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:13:36,163 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): S L Contractors - East London
+2026-03-30 02:14:08,033 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/S%20L%20Contractors%20-%20East%20London", waiting until "load"
+. Retrying in 1s...
+2026-03-30 02:14:14,916 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:14:18,699 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 02:14:48,831 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/S+L+Contractors+-+East+London/@-32.9615707,27.784399,17z/data=!4m8!3m7!1s0x1e66e74c20a4ffd1:0xc2a9c7152ca530c6!8m2!3d-32.9615707!4d27.784399!9m1!1b1!16s%2Fg%2F11b6drcx49?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:14:51,712 [INFO] Main: [14/100] Processing: JDB Construction
+2026-03-30 02:14:51,712 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:14:51,713 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): JDB Construction
+2026-03-30 02:15:25,796 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:18:00,721 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 02:18:30,809 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/JDB+Construction+%26+Roofing/@35.0105073,-163.3216701,3z/data=!4m12!1m2!2m1!1sJDB+Construction!3m8!1s0x88605d963efad6f5:0xb59efef5ef897ccb!8m2!3d35.0105073!4d-85.2747951!9m1!1b1!15sChBKREIgQ29uc3RydWN0aW9uWhIiEGpkYiBjb25zdHJ1Y3Rpb26SARJyb29maW5nX2NvbnRyYWN0b3LgAQA!16s%2Fg%2F11t3f6sf17?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:18:34,500 [INFO] Main:    Skipping deep scan: Website found in details (https://jdbconstructionllc.com/)
+2026-03-30 02:18:36,501 [INFO] Main: [15/100] Processing: SMEC South Africa | East London
+2026-03-30 02:18:36,501 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:18:36,502 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SMEC South Africa %7C East London
+2026-03-30 02:18:47,430 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:19:17,608 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/SMEC+South+Africa+%7C+East+London/@-32.9906253,27.9119536,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e0323c5517c9:0xa7347b2c9b2bdda1!8m2!3d-32.9906253!4d27.9119536!16s%2Fg%2F12jssnvhk?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:19:18,316 [INFO] Main:    Skipping deep scan: Website found in details (http://www.smec.com/)
+2026-03-30 02:19:20,317 [INFO] Main: [16/100] Processing: Nozulu Civils
+2026-03-30 02:19:20,317 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:19:20,317 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Nozulu Civils
+2026-03-30 02:19:30,760 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:20:00,852 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Nozulu+Civils/@-33.0028408,27.9071921,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1c932590bad:0x87bd1b3cc1dfc6c1!8m2!3d-33.0028408!4d27.9071921!16s%2Fg%2F11f01z081y?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:20:03,597 [INFO] Main: [17/100] Processing: JKN DEVELOPMENT CONSULTANTS
+2026-03-30 02:20:03,598 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:20:03,598 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): JKN DEVELOPMENT CONSULTANTS
+2026-03-30 02:20:14,669 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:20:44,787 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/JKN+DEVELOPMENT+CONSULTANTS/@-32.9889692,27.9089073,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e17d24ecee09:0xf99b69385e109e9b!8m2!3d-32.9889692!4d27.9089073!16s%2Fg%2F11g4j98rl5?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:20:51,964 [INFO] Main:    Skipping deep scan: Website found in details (http://www.jkndevcon.co.za/)
+2026-03-30 02:20:53,965 [INFO] Main: [18/100] Processing: Coastal Construction & Roofing (PTY) LTD
+2026-03-30 02:20:53,965 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:20:53,965 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Coastal Construction %26 Roofing %28PTY%29 LTD
+2026-03-30 02:21:11,840 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:23:17,669 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 02:23:47,775 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Coastal+Construction+and+Roofing/@39.2117189,-49.9159711,3z/data=!4m12!1m2!2m1!1sCoastal+Construction+%2526+Roofing+%2528PTY%2529+LTD!3m8!1s0x48739fa4912b19cd:0x54acf1e9a7ff31d5!8m2!3d50.8188002!4d-1.5305312!9m1!1b1!15sCi5Db2FzdGFsIENvbnN0cnVjdGlvbiAlMjYgUm9vZmluZyAlMjhQVFklMjkgTFREWi8iLWNvYXN0YWwgY29uc3RydWN0aW9uICUyNiByb29maW5nIDI4cHR5IDI5IGx0ZJIBFGNvbnN0cnVjdGlvbl9jb21wYW55mgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVEzTTA1TE9XcDNSUkFC4AEA-gEECAAQQQ!16s%2Fg%2F11j52dr6_r?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:23:48,510 [INFO] Main:    Skipping deep scan: Website found in details (https://www.coastalconstruction.uk/)
+2026-03-30 02:23:50,511 [INFO] Main: [19/100] Processing: Norland Group
+2026-03-30 02:23:50,512 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:23:50,512 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Norland Group
+2026-03-30 02:24:07,540 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:24:37,654 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Norland+Limited/@43.3168412,-122.4499639,6z/data=!4m10!1m2!2m1!1sNorland+Group!3m6!1s0x548677138c2bb95b:0x8f6637095f3952e5!8m2!3d49.2536353!4d-122.9137516!15sCg1Ob3JsYW5kIEdyb3VwWg8iDW5vcmxhbmQgZ3JvdXCSARRjb25zdHJ1Y3Rpb25fY29tcGFueZoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VOa2J5MWZTVVZSRUFF4AEA-gEECC0QOw!16s%2Fg%2F11c56rlg02?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:24:38,877 [INFO] Main:    Skipping deep scan: Website found in details (http://www.norlandlimited.com/)
+2026-03-30 02:24:40,878 [INFO] Main: [20/100] Processing: Gaff Tech Project
+2026-03-30 02:24:40,879 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:24:40,879 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Gaff Tech Project
+2026-03-30 02:24:58,906 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:25:29,045 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Gaff+Tech+Project/@-33.0014817,27.9018478,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e11a563fe157:0x1bf56309fc1e14d3!8m2!3d-33.0014817!4d27.9018478!16s%2Fg%2F11wy4s1p5z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:25:33,184 [INFO] Main: [21/100] Processing: SMEC South Africa | East London
+2026-03-30 02:25:33,185 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:25:33,185 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SMEC South Africa %7C East London
+2026-03-30 02:25:45,225 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:26:15,375 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/SMEC+South+Africa+%7C+East+London/@-32.9906253,27.9119536,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e0323c5517c9:0xa7347b2c9b2bdda1!8m2!3d-32.9906253!4d27.9119536!16s%2Fg%2F12jssnvhk?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:26:17,718 [INFO] Main:    Skipping deep scan: Website found in details (http://www.smec.com/)
+2026-03-30 02:26:19,719 [INFO] Main: [22/100] Processing: NLG GROUP
+2026-03-30 02:26:19,719 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:26:19,719 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): NLG GROUP
+2026-03-30 02:26:34,611 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:27:04,736 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/NLG+GROUP/@-32.9755047,27.8842761,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1254722912d:0xf20fe20302f5d8a2!8m2!3d-32.9755047!4d27.8842761!16s%2Fg%2F11t5y1n94z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:27:07,504 [INFO] Main: [23/100] Processing: National Home Builders Registration Council
+2026-03-30 02:27:07,504 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:27:07,505 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): National Home Builders Registration Council
+2026-03-30 02:27:32,405 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:28:02,498 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/National+Home+Builders+Registration+Council/@-26.0373232,28.0656995,17z/data=!3m1!4b1!4m6!3m5!1s0x1e95723355780105:0xc3e4d7c870b245af!8m2!3d-26.0373232!4d28.0656995!16s%2Fg%2F1q62916fz?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:28:03,477 [INFO] Main:    Skipping deep scan: Website found in details (https://www.nhbrc.org.za/)
+2026-03-30 02:28:05,478 [INFO] Main: [24/100] Processing: Branfield Construction
+2026-03-30 02:28:05,478 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:28:05,479 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Branfield Construction
+2026-03-30 02:28:30,982 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:29:01,155 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Branfield+Construction/@-32.9707545,27.8780919,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e07d58bb9871:0x3b55a14824175c67!8m2!3d-32.9707545!4d27.8780919!16s%2Fg%2F1pzrjf1vg?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:29:04,168 [INFO] Main: [25/100] Processing: Tosas - East London
+2026-03-30 02:29:04,168 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:29:04,169 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Tosas - East London
+2026-03-30 02:29:14,740 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:29:44,894 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Tosas+-+East+London/@-32.9786855,27.8245685,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e74d1425bd73:0xb2c0c29df728e16e!8m2!3d-32.9786855!4d27.8245685!16s%2Fg%2F11mqtv6d43?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:29:45,652 [INFO] Main:    Skipping deep scan: Website found in details (https://www.tosas.co.za/)
+2026-03-30 02:29:47,653 [INFO] Main: [26/100] Processing: Singe Construction
+2026-03-30 02:29:47,653 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:29:47,653 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Singe Construction
+2026-03-30 02:29:58,769 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:30:28,901 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Singe+Construction/@-32.9819072,27.9225431,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1346dda7229:0x43b4a8c7296030f!8m2!3d-32.9819072!4d27.9225431!16s%2Fg%2F11twc29b8t?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:30:31,552 [INFO] Main: [27/100] Processing: Ezuluweni Construction (Pty) Ltd
+2026-03-30 02:30:31,552 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:30:31,553 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Ezuluweni Construction %28Pty%29 Ltd
+2026-03-30 02:30:43,124 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:31:13,244 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Ezuluweni+Construction+(Pty)+Ltd/@-32.9643111,25.3796173,8z/data=!4m10!1m2!2m1!1sEzuluweni+Construction+%2528Pty%2529+Ltd!3m6!1s0x1e66ddef8f69ff15:0xaba4faba0dac32c6!8m2!3d-32.9643111!4d27.8185821!15sCiRFenVsdXdlbmkgQ29uc3RydWN0aW9uICUyOFB0eSUyOSBMdGRaJSIjZXp1bHV3ZW5pIGNvbnN0cnVjdGlvbiAyOHB0eSAyOSBsdGSSAQpjb250cmFjdG9ymgFEQ2k5RFFVbFJRVU52WkVOb2RIbGpSamx2VDIxSk1WUXdWbTVXTUZKMFdUQk9ObVJyTVVKWmJrSkhWREpPU21NeFJSQULgAQD6AQQIABA0!16s%2Fg%2F11rf6_0hlj?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:31:13,965 [INFO] Main:    Skipping deep scan: Website found in details (https://ezulwinisa.co.za/)
+2026-03-30 02:31:15,965 [INFO] Main: [28/100] Processing: Urban Projects - East London
+2026-03-30 02:31:15,966 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:31:15,966 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Urban Projects - East London
+2026-03-30 02:31:27,927 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:31:58,023 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Urban+Projects+-+East+London/@-32.9782758,27.92215,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1cc465a90f3:0xc276e2a149a62066!8m2!3d-32.9782758!4d27.92215!16s%2Fg%2F11khd_2jrw?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:32:00,903 [INFO] Main: [29/100] Processing: CruzMbekeni construction
+2026-03-30 02:32:00,903 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:32:00,903 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): CruzMbekeni construction
+2026-03-30 02:32:11,483 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:32:41,612 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/CruzMbekeni+construction/@-33.0371947,27.7974063,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e72f9b2d6255:0x2eee22e96edc7113!8m2!3d-33.0371947!4d27.7974063!16s%2Fg%2F11x32xr07f?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:32:44,258 [INFO] Main: [30/100] Processing: Gaff Tech Project
+2026-03-30 02:32:44,259 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:32:44,259 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Gaff Tech Project
+2026-03-30 02:33:01,008 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:33:31,169 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Gaff+Tech+Project/@-33.0014817,27.9018478,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e11a563fe157:0x1bf56309fc1e14d3!8m2!3d-33.0014817!4d27.9018478!16s%2Fg%2F11wy4s1p5z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:33:34,003 [INFO] Main: [31/100] Processing: Norland Group
+2026-03-30 02:33:34,004 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:33:34,004 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Norland Group
+2026-03-30 02:33:46,445 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:34:16,600 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Norland+Limited/@43.3168412,-122.4499639,6z/data=!4m10!1m2!2m1!1sNorland+Group!3m6!1s0x548677138c2bb95b:0x8f6637095f3952e5!8m2!3d49.2536353!4d-122.9137516!15sCg1Ob3JsYW5kIEdyb3VwWg8iDW5vcmxhbmQgZ3JvdXCSARRjb25zdHJ1Y3Rpb25fY29tcGFueZoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VOa2J5MWZTVVZSRUFF4AEA-gEECC0QOw!16s%2Fg%2F11c56rlg02?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:34:17,359 [INFO] Main:    Skipping deep scan: Website found in details (http://www.norlandlimited.com/)
+2026-03-30 02:34:19,359 [INFO] Main: [32/100] Processing: Cutting Edge Construction
+2026-03-30 02:34:19,360 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:34:19,360 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Cutting Edge Construction
+2026-03-30 02:34:33,253 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:35:03,389 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Cutting+Edge+Construction+Ltd/@49.8276844,-178.2138089,3z/data=!4m10!1m2!2m1!1sCutting+Edge+Construction!3m6!1s0x52e7974d6eb6f19b:0xa220a04380bd12b7!8m2!3d49.8276844!4d-100.1669339!15sChlDdXR0aW5nIEVkZ2UgQ29uc3RydWN0aW9uWhsiGWN1dHRpbmcgZWRnZSBjb25zdHJ1Y3Rpb26SARRjb25zdHJ1Y3Rpb25fY29tcGFueZoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyMXdOazR4UWtKYVZFNTVURlpLUldSNlZqTmhhbGw1V214T1NGa3pZeEFC4AEA-gEFCOsCEBo!16s%2Fg%2F11r8rnxq46?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:35:07,546 [INFO] Main:    Skipping deep scan: Website found in details (https://cuttingedgeltd.ca/)
+2026-03-30 02:35:09,547 [INFO] Main: [33/100] Processing: Flavios & Litchtfield Construction C C
+2026-03-30 02:35:09,548 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:35:09,548 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Flavios %26 Litchtfield Construction C C
+2026-03-30 02:35:30,401 [WARNING] src.scrapers.details: Failed to find business 'h1' for Flavios %26 Litchtfield Construction C C: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:36:00,463 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Flavios+%2526+Litchtfield+Construction+C+C/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:36:05,988 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Flavios %26 Litchtfield Construction C C
+2026-03-30 02:36:28,440 [WARNING] src.scrapers.details: Failed to find business 'h1' for Flavios %26 Litchtfield Construction C C: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:36:58,479 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Flavios+%2526+Litchtfield+Construction+C+C/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:37:03,299 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Flavios %26 Litchtfield Construction C C
+2026-03-30 02:37:22,445 [WARNING] src.scrapers.details: Failed to find business 'h1' for Flavios %26 Litchtfield Construction C C: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:37:52,488 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Flavios+%2526+Litchtfield+Construction+C+C/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:37:56,579 [ERROR] Main:    Failed to deeply enrich Flavios & Litchtfield Construction C C: RetryError[<Future at 0x26242780bd0 state=finished raised ValueError>]
+2026-03-30 02:37:58,580 [INFO] Main: [34/100] Processing: A N THATCHING & BUILDING CONTRACTORS
+2026-03-30 02:37:58,581 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:37:58,581 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): A N THATCHING %26 BUILDING CONTRACTORS
+2026-03-30 02:38:17,991 [WARNING] src.scrapers.details: Failed to find business 'h1' for A N THATCHING %26 BUILDING CONTRACTORS: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:38:48,056 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/A+N+THATCHING+%2526+BUILDING+CONTRACTORS/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:38:50,711 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): A N THATCHING %26 BUILDING CONTRACTORS
+2026-03-30 02:39:08,755 [WARNING] src.scrapers.details: Failed to find business 'h1' for A N THATCHING %26 BUILDING CONTRACTORS: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:39:38,822 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/A+N+THATCHING+%2526+BUILDING+CONTRACTORS/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:39:41,653 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): A N THATCHING %26 BUILDING CONTRACTORS
+2026-03-30 02:40:13,426 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/A%20N%20THATCHING%20%2526%20BUILDING%20CONTRACTORS", waiting until "load"
+. Retrying in 1s...
+2026-03-30 02:40:28,713 [WARNING] src.scrapers.details: Failed to find business 'h1' for A N THATCHING %26 BUILDING CONTRACTORS: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:40:58,779 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/A+N+THATCHING+%2526+BUILDING+CONTRACTORS/@32.1585152,74.1965824,9z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:40:59,466 [ERROR] Main:    Failed to deeply enrich A N THATCHING & BUILDING CONTRACTORS: RetryError[<Future at 0x262447a33d0 state=finished raised ValueError>]
+2026-03-30 02:41:01,467 [INFO] Main: [35/100] Processing: Blue Aqua Projects
+2026-03-30 02:41:01,467 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:41:01,467 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Blue Aqua Projects
+2026-03-30 02:41:13,907 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:43:20,158 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 02:43:50,231 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Blue+Aqua+Projects/@-30.0710503,26.9158521,6z/data=!4m12!1m2!2m1!1sBlue+Aqua+Projects!3m8!1s0x1e66e15d9f96cad7:0x65056cad0f037707!8m2!3d-32.9814415!4d27.9029117!9m1!1b1!15sChJCbHVlIEFxdWEgUHJvamVjdHNaFCISYmx1ZSBhcXVhIHByb2plY3RzkgEUY29uc3RydWN0aW9uX2NvbXBhbnngAQA!16s%2Fg%2F11hzypgtpf?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:43:50,897 [INFO] Main:    Skipping deep scan: Website found in details (http://www.blueaquaprojects.com/)
+2026-03-30 02:43:52,898 [INFO] Main: [36/100] Processing: Esotho Construction & Civils
+2026-03-30 02:43:52,898 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:43:52,899 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Esotho Construction %26 Civils
+2026-03-30 02:44:09,478 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:44:45,177 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 02:45:15,240 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Esotho+Construction+%26+Civils/@-33.0187882,27.8395178,13z/data=!4m12!1m2!2m1!1sEsotho+Construction+%2526+Civils!3m8!1s0x1e66e11a4e63feb1:0x26610c98dfb17f52!8m2!3d-32.9860781!4d27.8960516!9m1!1b1!15sCh5Fc290aG8gQ29uc3RydWN0aW9uICUyNiBDaXZpbHOSARRjb25zdHJ1Y3Rpb25fY29tcGFueeABAA!16s%2Fg%2F11pf811437?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:45:15,895 [INFO] Main:    Skipping deep scan: Website found in details (http://www.esothotrading.co.za/)
+2026-03-30 02:45:17,896 [INFO] Main: [37/100] Processing: Thiyiselani Construction (PTY) LTD
+2026-03-30 02:45:17,896 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:45:17,896 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Thiyiselani Construction %28PTY%29 LTD
+2026-03-30 02:45:37,855 [WARNING] src.scrapers.details: Failed to find business 'h1' for Thiyiselani Construction %28PTY%29 LTD: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:46:07,934 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Thiyiselani+Construction+%2528PTY%2529+LTD/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:46:10,644 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Thiyiselani Construction %28PTY%29 LTD
+2026-03-30 02:46:28,872 [WARNING] src.scrapers.details: Failed to find business 'h1' for Thiyiselani Construction %28PTY%29 LTD: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:46:58,954 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Thiyiselani+Construction+%2528PTY%2529+LTD/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:47:01,884 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Thiyiselani Construction %28PTY%29 LTD
+2026-03-30 02:47:34,902 [WARNING] src.scrapers.details: Failed to find business 'h1' for Thiyiselani Construction %28PTY%29 LTD: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 02:48:04,960 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Thiyiselani+Construction+%2528PTY%2529+LTD/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:48:05,774 [ERROR] Main:    Failed to deeply enrich Thiyiselani Construction (PTY) LTD: RetryError[<Future at 0x26243c84e50 state=finished raised ValueError>]
+2026-03-30 02:48:07,775 [INFO] Main: [38/100] Processing: SKG Properties - East London
+2026-03-30 02:48:07,776 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:48:07,776 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SKG Properties - East London
+2026-03-30 02:48:41,845 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:48:45,872 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 02:49:15,978 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/SKG+Properties+-+East+London/@-32.9512717,27.9287504,17z/data=!4m8!3m7!1s0x1e671fff1c48088b:0xc1b82cc2e3957348!8m2!3d-32.9512717!4d27.9287504!9m1!1b1!16s%2Fg%2F1hjgyz5xv?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:49:18,806 [INFO] Main: [39/100] Processing: S L Contractors - East London
+2026-03-30 02:49:18,806 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:49:18,806 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): S L Contractors - East London
+2026-03-30 02:49:53,105 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:50:23,189 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/S+L+Contractors+-+East+London/@-32.9615707,27.784399,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e74c20a4ffd1:0xc2a9c7152ca530c6!8m2!3d-32.9615707!4d27.784399!16s%2Fg%2F11b6drcx49?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:50:23,873 [INFO] Main:    Skipping deep scan: Website found in details (http://slcontractors.co.za/)
+2026-03-30 02:50:25,874 [INFO] Main: [40/100] Processing: CASGAL CONSTRUCTION (PTY) LTD
+2026-03-30 02:50:25,875 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:50:25,875 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): CASGAL CONSTRUCTION %28PTY%29 LTD
+2026-03-30 02:50:44,987 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:51:15,067 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/CASGAL+CONSTRUCTION+(PTY)+LTD/@-32.9653856,27.9351711,17z/data=!3m1!4b1!4m6!3m5!1s0x1e671fe63585fcbd:0x2089a5428d2fbd7c!8m2!3d-32.9653856!4d27.9351711!16s%2Fg%2F11f1rwr0xy?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:51:17,658 [INFO] Main: [41/100] Processing: Coastal Construction & Roofing (PTY) LTD
+2026-03-30 02:51:17,658 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:51:17,659 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Coastal Construction %26 Roofing %28PTY%29 LTD
+2026-03-30 02:51:37,781 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:53:43,564 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 02:54:13,651 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Coastal+Construction+and+Roofing/@39.2117189,-49.9159711,3z/data=!4m12!1m2!2m1!1sCoastal+Construction+%2526+Roofing+%2528PTY%2529+LTD!3m8!1s0x48739fa4912b19cd:0x54acf1e9a7ff31d5!8m2!3d50.8188002!4d-1.5305312!9m1!1b1!15sCi5Db2FzdGFsIENvbnN0cnVjdGlvbiAlMjYgUm9vZmluZyAlMjhQVFklMjkgTFREWi8iLWNvYXN0YWwgY29uc3RydWN0aW9uICUyNiByb29maW5nIDI4cHR5IDI5IGx0ZJIBFGNvbnN0cnVjdGlvbl9jb21wYW55mgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVEzTTA1TE9XcDNSUkFC4AEA-gEECAAQQQ!16s%2Fg%2F11j52dr6_r?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:54:14,527 [INFO] Main:    Skipping deep scan: Website found in details (https://www.coastalconstruction.uk/)
+2026-03-30 02:54:16,528 [INFO] Main: [42/100] Processing: Blaq Square Construction
+2026-03-30 02:54:16,529 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:54:16,529 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Blaq Square Construction
+2026-03-30 02:54:47,831 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:55:17,993 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Blaq+Square+Construction/@-33.0103822,27.8922809,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e18351218995:0x9c9f4b94568ff0e5!8m2!3d-33.0103822!4d27.8922809!16s%2Fg%2F11tbvxbrkc?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:55:20,712 [INFO] Main: [43/100] Processing: Grinaker LTA Construction
+2026-03-30 02:55:20,712 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:55:20,713 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Grinaker LTA Construction
+2026-03-30 02:55:37,725 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:56:07,874 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Grinaker+LTA+Construction/@-32.9905851,27.9110496,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e03239c46cad:0xf74ee53d0b682192!8m2!3d-32.9905851!4d27.9110496!16s%2Fg%2F1pzyc6t28?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:56:08,579 [INFO] Main:    Skipping deep scan: Website found in details (http://www.grinaker-lta.com/)
+2026-03-30 02:56:10,580 [INFO] Main: [44/100] Processing: Motheo Construction Group
+2026-03-30 02:56:10,581 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:56:10,592 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Motheo Construction Group
+2026-03-30 02:56:45,666 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:56:49,610 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 02:57:19,717 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/MOTHEO+CONSTRUCTION+GROUP/@-26.0969318,23.1212214,7z/data=!4m12!1m2!2m1!1sMotheo+Construction+Group!3m8!1s0x1e957495b5ae7ec9:0x71465e00d4ae6f94!8m2!3d-26.0969318!4d27.9991511!9m1!1b1!15sChlNb3RoZW8gQ29uc3RydWN0aW9uIEdyb3VwWhsiGW1vdGhlbyBjb25zdHJ1Y3Rpb24gZ3JvdXCSARRjb25zdHJ1Y3Rpb25fY29tcGFueZoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyNXNkbEpXU2pWT2JUQjZZVEJTTUdReFZuTlhTRkpzV2taR2VGWllZeEFC4AEA-gEECAAQGw!16s%2Fg%2F1tjvtm9d?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:57:20,515 [INFO] Main:    Skipping deep scan: Website found in details (http://motheogroup.co.za/)
+2026-03-30 02:57:22,516 [INFO] Main: [45/100] Processing: LJR Building Construction
+2026-03-30 02:57:22,516 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:57:22,517 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): LJR Building Construction
+2026-03-30 02:57:42,878 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:57:47,013 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 02:58:17,112 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/L+J+R+Construction+24+Hours+Service+Pvt+Ltd/@-13.0407085,53.9050483,4z/data=!4m12!1m2!2m1!1sLJR+Building+Construction!3m8!1s0x3ae25bc7951cd399:0xa779bc268b073df3!8m2!3d6.8952045!4d79.8618105!9m1!1b1!15sChlMSlIgQnVpbGRpbmcgQ29uc3RydWN0aW9uWhsiGWxqciBidWlsZGluZyBjb25zdHJ1Y3Rpb26SARRjb25zdHJ1Y3Rpb25fY29tcGFueZoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VSc1oxOXlXakJuUlJBQuABAPoBBAgAEC8!16s%2Fg%2F11h_7w08w1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:58:17,867 [INFO] Main:    Skipping deep scan: Website found in details (http://ljrconstruction.lk/)
+2026-03-30 02:58:19,869 [INFO] Main: [46/100] Processing: Pennacchini Projects
+2026-03-30 02:58:19,869 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:58:19,869 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Pennacchini Projects
+2026-03-30 02:58:33,450 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 02:59:03,552 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Pennacchini+Projects/@-33.0105048,27.8978,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1b9a5898a8b:0x1a8b2384257e953c!8m2!3d-33.0105048!4d27.8978!16s%2Fg%2F11g6njfy0f?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 02:59:04,620 [INFO] Main:    Skipping deep scan: Website found in details (http://www.pennacchiniprojects.co.za/)
+2026-03-30 02:59:06,621 [INFO] Main: [47/100] Processing: Ruwacon (Pty) Ltd Eastern Cape Regional Office
+2026-03-30 02:59:06,621 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 02:59:06,622 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Ruwacon %28Pty%29 Ltd Eastern Cape Regional Office
+2026-03-30 02:59:38,987 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Ruwacon%20%2528Pty%2529%20Ltd%20Eastern%20Cape%20Regional%20Office", waiting until "load"
+. Retrying in 1s...
+2026-03-30 02:59:47,240 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:00:22,853 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:00:52,928 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Ruwacon+(Pty)+Ltd+Eastern+Cape+Regional+Office/@-33.0410995,27.8337499,17z/data=!4m8!3m7!1s0x1e671ffb185291f9:0xb7b9223b64dd3d91!8m2!3d-33.0410995!4d27.8337499!9m1!1b1!16s%2Fg%2F11crzj6wx5?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:00:55,530 [INFO] Main: [48/100] Processing: Cape Cladding Contractors
+2026-03-30 03:00:55,531 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:00:55,531 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Cape Cladding Contractors
+2026-03-30 03:01:27,322 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Cape%20Cladding%20Contractors", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:01:44,606 [WARNING] src.scrapers.details: Failed to find business 'h1' for Cape Cladding Contractors: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:02:14,663 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Cape+Cladding+Contractors/@-33.030439,27.8728954,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e189ae0952d9:0x97b0e8e71b18a605!8m2!3d-33.030439!4d27.8728954!16s%2Fg%2F11f789q6r5?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:02:17,188 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Cape Cladding Contractors
+2026-03-30 03:02:45,201 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:03:15,319 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Cape+Cladding+Contractors/@-33.030439,27.8728954,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e189ae0952d9:0x97b0e8e71b18a605!8m2!3d-33.030439!4d27.8728954!16s%2Fg%2F11f789q6r5?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:03:18,064 [INFO] Main: [49/100] Processing: Independent Crushers Cc
+2026-03-30 03:03:18,064 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:03:18,064 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Independent Crushers Cc
+2026-03-30 03:03:48,199 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:04:18,323 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Independent+Crushers+Cc/@-32.9774524,27.8243104,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e75690d1cc83:0xc881a170eb63ce39!8m2!3d-32.9774524!4d27.8243104!16s%2Fg%2F1td8v8pp?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:04:20,998 [INFO] Main: [50/100] Processing: I S G Engineering
+2026-03-30 03:04:20,999 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:04:20,999 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): I S G Engineering
+2026-03-30 03:04:52,418 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:05:22,565 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/ISG/@41.5873415,-171.6609778,3z/data=!4m10!1m2!2m1!1sI+S+G+Engineering!3m6!1s0x87ee99b1f2bf0211:0x840ede8360139841!8m2!3d41.5873415!4d-93.6141028!15sChFJIFMgRyBFbmdpbmVlcmluZ5IBFmVuZ2luZWVyaW5nX2NvbnN1bHRhbnTgAQA!16s%2Fg%2F11b6hwd2zm?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:05:23,339 [INFO] Main:    Skipping deep scan: Website found in details (http://www.isgeng.co.za/)
+2026-03-30 03:05:25,340 [INFO] Main: [51/100] Processing: Aztec Contracting Specialists - Electrical Contractors
+2026-03-30 03:05:25,340 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:05:25,340 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Aztec Contracting Specialists - Electrical Contractors
+2026-03-30 03:05:57,104 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Aztec%20Contracting%20Specialists%20-%20Electrical%20Contractors", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:06:03,164 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:06:06,907 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:06:36,961 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Aztec+Contracting+Specialists+-+Electrical+Contractors/@-32.9959671,27.8747577,17z/data=!4m8!3m7!1s0x1e66e1587e29b1f3:0x7b88c81c0a035483!8m2!3d-32.9959671!4d27.8747577!9m1!1b1!16s%2Fg%2F11gm8tc9v2?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:06:39,517 [INFO] Main: [52/100] Processing: Bigen Africa Services (Pty) Ltd - East London
+2026-03-30 03:06:39,518 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:06:39,518 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Bigen Africa Services %28Pty%29 Ltd - East London
+2026-03-30 03:07:11,194 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Bigen%20Africa%20Services%20%2528Pty%2529%20Ltd%20-%20East%20London", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:07:17,027 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:07:20,810 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:07:50,865 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Bigen+Africa+Services+(Pty)+Ltd+-+East+London/@-32.9560615,27.933846,17z/data=!4m8!3m7!1s0x1e671fc046954335:0xc6a40d7bbbe1e70e!8m2!3d-32.9560615!4d27.933846!9m1!1b1!16s%2Fg%2F11xsnb2nn?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:07:53,570 [INFO] Main: [53/100] Processing: The Mvula Trust
+2026-03-30 03:07:53,570 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:07:53,571 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Mvula Trust
+2026-03-30 03:08:25,319 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/The%20Mvula%20Trust", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:08:42,378 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:11:17,329 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:11:47,418 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/The+Mvula+Trust/@-28.4397237,28.693659,6z/data=!4m12!1m2!2m1!1sThe+Mvula+Trust!3m8!1s0x1e66e1f8f1835c2f:0x972308f7f73a0dc1!8m2!3d-32.9848856!4d27.9085373!9m1!1b1!15sCg9UaGUgTXZ1bGEgVHJ1c3SSARRjb25zdHJ1Y3Rpb25fY29tcGFueeABAA!16s%2Fg%2F11h249qyqm?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:11:48,009 [INFO] Main:    Skipping deep scan: Website found in details (http://www.themvulatrust.org.za/)
+2026-03-30 03:11:50,009 [INFO] Main: [54/100] Processing: Golden Crown Building & Construction
+2026-03-30 03:11:50,010 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:11:50,010 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Golden Crown Building %26 Construction
+2026-03-30 03:12:33,683 [WARNING] src.scrapers.details: Failed to find business 'h1' for Golden Crown Building %26 Construction: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:13:03,741 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Golden+Crown+Building+%2526+Construction/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:13:06,370 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Golden Crown Building %26 Construction
+2026-03-30 03:13:33,027 [WARNING] src.scrapers.details: Failed to find business 'h1' for Golden Crown Building %26 Construction: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:14:03,071 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Golden+Crown+Building+%2526+Construction/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:14:05,803 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Golden Crown Building %26 Construction
+2026-03-30 03:14:48,706 [WARNING] src.scrapers.details: Failed to find business 'h1' for Golden Crown Building %26 Construction: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:15:18,755 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Golden+Crown+Building+%2526+Construction/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:15:19,489 [ERROR] Main:    Failed to deeply enrich Golden Crown Building & Construction: RetryError[<Future at 0x2624423d150 state=finished raised ValueError>]
+2026-03-30 03:15:21,489 [INFO] Main: [55/100] Processing: MASIBUYELEMBO CONSTRUCTION
+2026-03-30 03:15:21,490 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:15:21,490 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): MASIBUYELEMBO CONSTRUCTION
+2026-03-30 03:15:53,100 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/MASIBUYELEMBO%20CONSTRUCTION", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:15:58,882 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:16:02,536 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:16:32,593 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/MASIBUYELEMBO+CONSTRUCTION/@-32.9883669,27.8802228,17z/data=!4m8!3m7!1s0x1e66e1d24cebd251:0xe05b1010ed369ae4!8m2!3d-32.9883669!4d27.8802228!9m1!1b1!16s%2Fg%2F11svdnplgt?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:16:35,138 [INFO] Main: [56/100] Processing: Abasemonti Constr. Caterers T/a Sis TS
+2026-03-30 03:16:35,138 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:16:35,139 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Abasemonti Constr. Caterers T%2Fa Sis TS
+2026-03-30 03:17:14,705 [WARNING] src.scrapers.details: Failed to find business 'h1' for Abasemonti Constr. Caterers T%2Fa Sis TS: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:17:44,757 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Abasemonti+Constr.+Caterers+T%252Fa+Sis+TS/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:17:47,482 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Abasemonti Constr. Caterers T%2Fa Sis TS
+2026-03-30 03:18:29,569 [WARNING] src.scrapers.details: Failed to find business 'h1' for Abasemonti Constr. Caterers T%2Fa Sis TS: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:18:59,615 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Abasemonti+Constr.+Caterers+T%252Fa+Sis+TS/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:19:02,341 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Abasemonti Constr. Caterers T%2Fa Sis TS
+2026-03-30 03:19:18,676 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:19:48,769 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Telangana,+India/@17.8606389,76.7795337,8z/data=!3m1!4b1!4m10!1m2!2m1!1sAbasemonti+Constr.+Caterers+T%252Fa+Sis+TS!3m6!1s0x3a3350db9429ed43:0x63ef7ba741594059!8m2!3d18.1124372!4d79.0192997!15sCihBYmFzZW1vbnRpIENvbnN0ci4gQ2F0ZXJlcnMgVCUyRmEgU2lzIFRTkgEUYWRtaW5pc3RyYXRpdmVfYXJlYTHgAQA!16zL20vMDN4NW5m?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:19:51,482 [INFO] Main: [57/100] Processing: AfriSam East London Depot & Regional Office
+2026-03-30 03:19:51,483 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:19:51,483 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): AfriSam East London Depot %26 Regional Office
+2026-03-30 03:20:23,500 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/AfriSam%20East%20London%20Depot%20%2526%20Regional%20Office", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:20:29,558 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:20:33,457 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:21:03,543 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/AfriSam+East+London+Depot+%26+Regional+Office/@-32.983937,27.8957999,17z/data=!4m8!3m7!1s0x1e66e0441ce235b1:0xeff21e9d4d12758!8m2!3d-32.983937!4d27.8957999!9m1!1b1!16s%2Fg%2F1pzpnxrpr?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:21:06,315 [INFO] Main: [58/100] Processing: The Maintenance Man
+2026-03-30 03:21:06,316 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:21:06,316 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Maintenance Man
+2026-03-30 03:21:28,992 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:21:33,301 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:22:03,411 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/The+Maintenance+Man+-+Sports+Massage/@51.5599263,-0.1144921,17z/data=!4m8!3m7!1s0x48761b9a572e1a85:0xf68e2de1305520ea!8m2!3d51.5599263!4d-0.1144921!9m1!1b1!16s%2Fg%2F11h54lzmgc?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:22:06,156 [INFO] Main: [59/100] Processing: Zondwa Business Solutions
+2026-03-30 03:22:06,157 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:22:06,157 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Zondwa Business Solutions
+2026-03-30 03:22:39,614 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:23:09,723 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Zondwa+Business+Solutions/@-33.0214837,27.9098077,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1d37c3f6717:0x863994a4465d8c10!8m2!3d-33.0214837!4d27.9098077!16s%2Fg%2F11pq9vqc90?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:23:12,420 [INFO] Main: [60/100] Processing: Z G H CONSTRUCTION (PTY) LTD
+2026-03-30 03:23:12,421 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:23:12,421 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Z G H CONSTRUCTION %28PTY%29 LTD
+2026-03-30 03:23:44,153 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Z%20G%20H%20CONSTRUCTION%20%2528PTY%2529%20LTD", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:23:51,244 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:23:55,002 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:24:25,077 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Z.+H.+Construction+(Pvt)+Ltd/@33.6370964,72.9267882,17z/data=!4m8!3m7!1s0x38df97393c955879:0x93314f151173ceb7!8m2!3d33.6370964!4d72.9267882!9m1!1b1!16s%2Fg%2F11rt50hz_s?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:24:27,628 [INFO] Main: [61/100] Processing: ITR East London
+2026-03-30 03:24:27,629 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:24:27,629 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): ITR East London
+2026-03-30 03:24:54,945 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:25:25,063 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/ITR+East+London/@-32.9568219,27.9480904,17z/data=!3m1!4b1!4m6!3m5!1s0x1e671f4f741d9dd7:0x914b8a7218c0ad77!8m2!3d-32.9568219!4d27.9480904!16s%2Fg%2F11b6dq4mm0?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:25:25,746 [INFO] Main:    Skipping deep scan: Website found in details (http://www.itrafrica.com/)
+2026-03-30 03:25:27,748 [INFO] Main: [62/100] Processing: RJN Projects
+2026-03-30 03:25:27,748 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:25:27,749 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): RJN Projects
+2026-03-30 03:25:40,619 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:26:10,750 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/RJN+Projects/@-32.9565029,27.948414,17z/data=!3m1!4b1!4m6!3m5!1s0x1e671ffe6f699869:0xf4d6574135ad29a1!8m2!3d-32.9565029!4d27.948414!16s%2Fg%2F11h6lmglgb?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:26:13,437 [INFO] Main: [63/100] Processing: Siyavuya Power Projects (PTY) Ltd
+2026-03-30 03:26:13,437 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:26:13,438 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Siyavuya Power Projects %28PTY%29 Ltd
+2026-03-30 03:26:37,313 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:27:07,453 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Siyavuya+Power+Projects+(PTY)+Ltd/@-32.9370018,27.9134117,14z/data=!4m10!1m2!2m1!1sSiyavuya+Power+Projects+%2528PTY%2529+Ltd!3m6!1s0x1e67210de7d5e0ab:0x107996466ebaf338!8m2!3d-32.9370018!4d27.9515205!15sCiVTaXlhdnV5YSBQb3dlciBQcm9qZWN0cyAlMjhQVFklMjkgTHRkkgEUY29uc3RydWN0aW9uX2NvbXBhbnngAQA!16s%2Fg%2F11fl7c1q1m?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:27:08,247 [INFO] Main:    Skipping deep scan: Website found in details (http://siyavuya.co.za/)
+2026-03-30 03:27:10,248 [INFO] Main: [64/100] Processing: Terry Knox Construction
+2026-03-30 03:27:10,248 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:27:10,248 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Terry Knox Construction
+2026-03-30 03:27:41,983 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Terry%20Knox%20Construction", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:28:13,095 [WARNING] scrapling: Attempt 2 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Terry%20Knox%20Construction", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:28:44,192 [ERROR] scrapling: Failed after 3 attempts: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Terry%20Knox%20Construction", waiting until "load"
+
+2026-03-30 03:28:46,640 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Terry Knox Construction
+2026-03-30 03:29:18,400 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Terry%20Knox%20Construction", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:29:24,763 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:29:54,884 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Terry+Knox+Construction/@-32.9677142,27.9431863,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e026fe901e1b:0xa65481697b0bda6e!8m2!3d-32.9677142!4d27.9431863!16s%2Fg%2F11h7s41cl0?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:29:57,629 [INFO] Main: [65/100] Processing: Husky Painting and Contracting
+2026-03-30 03:29:57,629 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:29:57,629 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Husky Painting and Contracting
+2026-03-30 03:30:30,494 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:31:00,591 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Husky+Painting+and+Contracting/@-32.9890803,27.9093984,17z/data=!3m1!4b1!4m6!3m5!1s0x1e671f3b4c77d051:0x80d5291793b72ce2!8m2!3d-32.9890803!4d27.9093984!16s%2Fg%2F11h5sqd3z6?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:31:01,350 [INFO] Main:    Skipping deep scan: Website found in details (http://www.huskygroup.co.za/)
+2026-03-30 03:31:03,350 [INFO] Main: [66/100] Processing: Multi Service Contractors CC
+2026-03-30 03:31:03,351 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:31:03,351 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Multi Service Contractors CC
+2026-03-30 03:31:28,000 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:31:58,080 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Multi+Service+Contractors+CC/@-33.0111717,27.8881164,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1e845a13a4b:0x3109a48e49256cc9!8m2!3d-33.0111717!4d27.8881164!16s%2Fg%2F1pzstq8dp?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:32:00,789 [INFO] Main: [67/100] Processing: M G Mopp Construction
+2026-03-30 03:32:00,789 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:32:00,790 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): M G Mopp Construction
+2026-03-30 03:32:32,731 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/M%20G%20Mopp%20Construction", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:32:38,763 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:33:08,877 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/M+G+Mopp+Construction/@-32.9781435,27.9043792,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e03effffffff:0xaec4ddd107902d37!8m2!3d-32.9781435!4d27.9043792!16s%2Fg%2F11b6d3k47b?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:33:12,112 [INFO] Main: [68/100] Processing: Boucon Building Contractors
+2026-03-30 03:33:12,112 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:33:12,113 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Boucon Building Contractors
+2026-03-30 03:33:44,055 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Boucon%20Building%20Contractors", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:33:52,292 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:34:22,429 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Boucon+Building+Contractors/@-32.9717679,27.9488496,17z/data=!3m1!4b1!4m6!3m5!1s0x1e671fc0197cd6db:0x62371e3a9c71f0e8!8m2!3d-32.9717679!4d27.9488496!16s%2Fg%2F11fnwh0485?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:34:25,220 [INFO] Main: [69/100] Processing: Tarsurfacing Contractors
+2026-03-30 03:34:25,220 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:34:25,221 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Tarsurfacing Contractors
+2026-03-30 03:34:59,407 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:35:29,555 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Thermo+Asphalt+Repair+(DBA+TAR+Inc.)/@39.7423666,-84.2132821,17z/data=!3m1!4b1!4m6!3m5!1s0x884086c5cc040303:0x163f07936246b405!8m2!3d39.7423666!4d-84.2132821!16s%2Fg%2F1tzzw5gz?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:35:30,318 [INFO] Main:    Skipping deep scan: Website found in details (http://www.thermoasphaltrepair.com/)
+2026-03-30 03:35:32,319 [INFO] Main: [70/100] Processing: Sparks Reconstruction
+2026-03-30 03:35:32,319 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:35:32,320 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Sparks Reconstruction
+2026-03-30 03:35:52,376 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:36:22,495 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Sparks+Reconstruction/@-33.0155264,27.9042414,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1cf84f862e7:0x8481ba142924bac!8m2!3d-33.0155264!4d27.9042414!16s%2Fg%2F11g0hmn_yg?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:36:25,308 [INFO] Main: [71/100] Processing: Independent Concrete Pty (Ltd)
+2026-03-30 03:36:25,309 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:36:25,309 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Independent Concrete Pty %28Ltd%29
+2026-03-30 03:36:53,887 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:36:57,648 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:37:27,741 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Independent+Concrete+Pty+(Ltd)/@-32.976415,26.6041956,9z/data=!4m12!1m2!2m1!1sIndependent+Concrete+Pty+%2528Ltd%2529!3m8!1s0x1e66e736609229e5:0x27b9c5cc7f7c6e1!8m2!3d-32.976415!4d27.823678!9m1!1b1!15sCiJJbmRlcGVuZGVudCBDb25jcmV0ZSBQdHkgJTI4THRkJTI5kgEbcmVhZHlfbWl4X2NvbmNyZXRlX3N1cHBsaWVy4AEA!16s%2Fg%2F11f6316ttx?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:37:28,495 [INFO] Main:    Skipping deep scan: Website found in details (https://www.thinklocal.co.za/biz/independent-concrete-mthatha)
+2026-03-30 03:37:30,496 [INFO] Main: [72/100] Processing: Thuso Development Consultants East London
+2026-03-30 03:37:30,496 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:37:30,497 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Thuso Development Consultants East London
+2026-03-30 03:37:56,895 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:38:26,980 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Thuso+Development+Consultants+East+London/@-32.961679,27.9352128,17z/data=!3m1!4b1!4m6!3m5!1s0x1e671fe5ce95bc57:0x3e99c5cc09879336!8m2!3d-32.961679!4d27.9352128!16s%2Fg%2F1vq899kx?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:38:29,743 [INFO] Main: [73/100] Processing: mv construction
+2026-03-30 03:38:29,744 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:38:29,744 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): mv construction
+2026-03-30 03:38:58,538 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:39:28,676 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/MV+CONSTRUCTION+COMPANY/@31.6577174,74.8610875,17z/data=!3m1!4b1!4m6!3m5!1s0x391965465af9d5e3:0xb51562c9fec35366!8m2!3d31.6577174!4d74.8610875!16s%2Fg%2F11yq26xr33?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:39:29,629 [INFO] Main:    Skipping deep scan: Website found in details (https://mv-construction-company.odoo.com/)
+2026-03-30 03:39:31,630 [INFO] Main: [74/100] Processing: Kezile Construction
+2026-03-30 03:39:31,630 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:39:31,631 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Kezile Construction
+2026-03-30 03:39:47,646 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:40:17,762 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Kezile+Construction/@-32.9540576,27.9342729,17z/data=!3m1!4b1!4m6!3m5!1s0x1e671ffe9f42c343:0xcf08a40163df1d17!8m2!3d-32.9540576!4d27.9342729!16s%2Fg%2F11y6nsq4q5?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:40:20,594 [INFO] Main: [75/100] Processing: Maxhoba Construction
+2026-03-30 03:40:20,595 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:40:20,595 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Maxhoba Construction
+2026-03-30 03:40:52,805 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Maxhoba%20Construction", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:40:59,202 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:41:29,313 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Maxhoba+Construction/@-32.9639465,27.8373126,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66df38139992cf:0x811590ee925e2861!8m2!3d-32.9639465!4d27.8373126!16s%2Fg%2F11jjm0m43z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:41:32,179 [INFO] Main: [76/100] Processing: Raphael Projects - Building Contractors and Diesel Delivery
+2026-03-30 03:41:32,180 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:41:32,180 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Raphael Projects - Building Contractors and Diesel Delivery
+2026-03-30 03:42:04,036 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Raphael%20Projects%20-%20Building%20Contractors%20and%20Diesel%20Delivery", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:42:10,193 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:42:45,847 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:43:15,910 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Raphael+Projects+-+Building+Contractors+and+Diesel+Delivery/@-32.9393399,27.9590341,17z/data=!4m8!3m7!1s0x1e6721e0ae0f40b5:0x73e62273510647dc!8m2!3d-32.9393399!4d27.9590341!9m1!1b1!16s%2Fg%2F11v029t353?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:43:18,734 [INFO] Main: [77/100] Processing: King Williams Town
+2026-03-30 03:43:18,734 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:43:18,735 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): King Williams Town
+2026-03-30 03:43:50,643 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/King%20Williams%20Town", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:44:21,720 [WARNING] scrapling: Attempt 2 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/King%20Williams%20Town", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:44:49,194 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:45:19,326 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Qonce,+South+Africa/@-32.878832,27.4185969,13z/data=!3m1!4b1!4m6!3m5!1s0x1e66b1ec6c9e6757:0x2365df0d137e5fba!8m2!3d-32.877041!4d27.3910733!16zL20vMDdrczNz?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:45:22,343 [INFO] Main: [78/100] Processing: Reinforcing Steel Contractors
+2026-03-30 03:45:22,343 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:45:22,344 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Reinforcing Steel Contractors
+2026-03-30 03:45:54,862 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Reinforcing%20Steel%20Contractors", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:46:01,682 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:48:36,653 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 03:49:06,735 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Reinforcing+Steel+Contractors+-+RSC+Clayville/@-25.9666818,28.2329548,17z/data=!4m8!3m7!1s0x1e9509255ae07649:0x404363a8d464dc23!8m2!3d-25.9666818!4d28.2329548!9m1!1b1!16s%2Fg%2F11h6gwf_9s?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:49:09,677 [INFO] Main: [79/100] Processing: Shumido Contractors (Pty) Ltd
+2026-03-30 03:49:09,678 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:49:09,678 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Shumido Contractors %28Pty%29 Ltd
+2026-03-30 03:49:48,507 [WARNING] src.scrapers.details: Failed to find business 'h1' for Shumido Contractors %28Pty%29 Ltd: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:50:18,561 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Shumido+Contractors+%2528Pty%2529+Ltd/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:50:21,355 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Shumido Contractors %28Pty%29 Ltd
+2026-03-30 03:50:59,652 [WARNING] src.scrapers.details: Failed to find business 'h1' for Shumido Contractors %28Pty%29 Ltd: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:51:29,722 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Shumido+Contractors+%2528Pty%2529+Ltd/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:51:32,461 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Shumido Contractors %28Pty%29 Ltd
+2026-03-30 03:52:02,166 [WARNING] src.scrapers.details: Failed to find business 'h1' for Shumido Contractors %28Pty%29 Ltd: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:52:32,208 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Shumido+Contractors+%2528Pty%2529+Ltd/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:52:32,999 [ERROR] Main:    Failed to deeply enrich Shumido Contractors (Pty) Ltd: RetryError[<Future at 0x2624345d3d0 state=finished raised ValueError>]
+2026-03-30 03:52:35,000 [INFO] Main: [80/100] Processing: Counterpoint Trading 420 cc
+2026-03-30 03:52:35,000 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:52:35,000 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Counterpoint Trading 420 cc
+2026-03-30 03:53:06,951 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Counterpoint%20Trading%20420%20cc", waiting until "load"
+. Retrying in 1s...
+2026-03-30 03:53:12,913 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:53:43,097 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Counterpoint+Trading+420+cc/@-32.9701524,27.9501124,17z/data=!3m1!4b1!4m6!3m5!1s0x1e671f49c1092765:0xcf3d758aec77f383!8m2!3d-32.9701524!4d27.9501124!16s%2Fg%2F11j2sx1vls?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:53:43,815 [INFO] Main:    Skipping deep scan: Website found in details (http://www.counterpoint420.co.za/)
+2026-03-30 03:53:45,815 [INFO] Main: [81/100] Processing: Siyaya Construction & Building
+2026-03-30 03:53:45,816 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:53:45,816 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Siyaya Construction %26 Building
+2026-03-30 03:54:05,895 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:54:36,004 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Siyaya+Construction+%26+Building/@-28.5864914,28.4527613,6z/data=!4m10!1m2!2m1!1sSiyaya+Construction+%2526+Building!3m6!1s0x1e66e1b0decfc715:0x168793edc2530a2d!8m2!3d-33.0067966!4d27.8944732!15sCiBTaXlheWEgQ29uc3RydWN0aW9uICUyNiBCdWlsZGluZ5IBFGNvbnN0cnVjdGlvbl9jb21wYW554AEA!16s%2Fg%2F11h0_m70gr?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:54:36,817 [INFO] Main:    Skipping deep scan: Website found in details (http://siyayaholdings.co.za/)
+2026-03-30 03:54:38,818 [INFO] Main: [82/100] Processing: a.b.e. Contractors Corner
+2026-03-30 03:54:38,819 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:54:38,819 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): a.b.e. Contractors Corner
+2026-03-30 03:55:07,860 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:55:37,998 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/a.b.e.+Contractors+Corner/@-33.015672,27.912656,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e05b2ba72fd1:0x3848b4c6e0e278cb!8m2!3d-33.015672!4d27.912656!16s%2Fg%2F12mh4h95b?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:55:38,785 [INFO] Main:    Skipping deep scan: Website found in details (http://www.abe.co.za/)
+2026-03-30 03:55:40,786 [INFO] Main: [83/100] Processing: Stutt Group East London Ready Mix Plant
+2026-03-30 03:55:40,787 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:55:40,787 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Stutt Group East London Ready Mix Plant
+2026-03-30 03:56:05,518 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 03:56:35,664 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Stutt+Group+East+London+Ready+Mix+Plant/@-32.9546077,27.9179596,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1899b4570a9:0x25e1391d9049d7c!8m2!3d-32.9546077!4d27.9179596!16s%2Fg%2F11j7vyhmxl?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:56:36,472 [INFO] Main:    Skipping deep scan: Website found in details (http://www.stuttgroup.co.za/)
+2026-03-30 03:56:38,473 [INFO] Main: [84/100] Processing: Rv Smith & Co (PTY) LTD
+2026-03-30 03:56:38,474 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:56:38,474 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Rv Smith %26 Co %28PTY%29 LTD
+2026-03-30 03:57:05,768 [WARNING] src.scrapers.details: Failed to find business 'h1' for Rv Smith %26 Co %28PTY%29 LTD: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:57:35,811 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Rv+Smith+%2526+Co+%2528PTY%2529+LTD/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:57:38,608 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Rv Smith %26 Co %28PTY%29 LTD
+2026-03-30 03:58:07,188 [WARNING] src.scrapers.details: Failed to find business 'h1' for Rv Smith %26 Co %28PTY%29 LTD: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:58:37,246 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Rv+Smith+%2526+Co+%2528PTY%2529+LTD/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:58:39,848 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Rv Smith %26 Co %28PTY%29 LTD
+2026-03-30 03:59:06,048 [WARNING] src.scrapers.details: Failed to find business 'h1' for Rv Smith %26 Co %28PTY%29 LTD: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 03:59:36,115 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Rv+Smith+%2526+Co+%2528PTY%2529+LTD/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 03:59:36,913 [ERROR] Main:    Failed to deeply enrich Rv Smith & Co (PTY) LTD: RetryError[<Future at 0x262419cb1d0 state=finished raised ValueError>]
+2026-03-30 03:59:38,914 [INFO] Main: [85/100] Processing: Malibose Building Construction
+2026-03-30 03:59:38,915 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 03:59:38,915 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Malibose Building Construction
+2026-03-30 04:00:10,896 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Malibose%20Building%20Construction", waiting until "load"
+. Retrying in 1s...
+2026-03-30 04:00:17,607 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:00:47,722 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Malibose+Building+Construction/@-26.1013037,28.074453,17z/data=!3m1!4b1!4m6!3m5!1s0x1e9561fe7cd378c7:0xf491b0cf823df6db!8m2!3d-26.1013037!4d28.074453!16s%2Fg%2F11m68ms67s?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:00:48,474 [INFO] Main:    Skipping deep scan: Website found in details (https://malibosebc.wixsite.com/mbcn)
+2026-03-30 04:00:50,475 [INFO] Main: [86/100] Processing: Bellgrove and Snell
+2026-03-30 04:00:50,475 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:00:50,476 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Bellgrove and Snell
+2026-03-30 04:01:22,109 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:01:52,312 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Bellgrove+and+Snell/@-33.49144,26.7579171,9z/data=!4m10!1m2!2m1!1sBellgrove+and+Snell!3m6!1s0x1e66e1c5f413643f:0xeaba0baeca96fa33!8m2!3d-33.0059794!4d27.9084505!15sChNCZWxsZ3JvdmUgYW5kIFNuZWxskgEIcGFpbnRpbmfgAQA!16s%2Fg%2F1pzr6f2xl?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:01:53,227 [INFO] Main:    Skipping deep scan: Website found in details (https://bellsnell.co.za/)
+2026-03-30 04:01:55,228 [INFO] Main: [87/100] Processing: SIYASEBENZA TARRING & CONSTRUCTION
+2026-03-30 04:01:55,229 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:01:55,229 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SIYASEBENZA TARRING %26 CONSTRUCTION
+2026-03-30 04:02:31,780 [WARNING] src.scrapers.details: Failed to find business 'h1' for SIYASEBENZA TARRING %26 CONSTRUCTION: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 04:03:01,839 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/SIYASEBENZA+TARRING+%2526+CONSTRUCTION/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:03:04,455 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SIYASEBENZA TARRING %26 CONSTRUCTION
+2026-03-30 04:03:39,761 [WARNING] src.scrapers.details: Failed to find business 'h1' for SIYASEBENZA TARRING %26 CONSTRUCTION: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 04:04:09,828 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/SIYASEBENZA+TARRING+%2526+CONSTRUCTION/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:04:12,542 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SIYASEBENZA TARRING %26 CONSTRUCTION
+2026-03-30 04:04:41,991 [WARNING] src.scrapers.details: Failed to find business 'h1' for SIYASEBENZA TARRING %26 CONSTRUCTION: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 04:05:12,055 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/SIYASEBENZA+TARRING+%2526+CONSTRUCTION/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:05:12,820 [ERROR] Main:    Failed to deeply enrich SIYASEBENZA TARRING & CONSTRUCTION: RetryError[<Future at 0x2624636a1d0 state=finished raised ValueError>]
+2026-03-30 04:05:14,821 [INFO] Main: [88/100] Processing: H & T Construction
+2026-03-30 04:05:14,822 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:05:14,822 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): H %26 T Construction
+2026-03-30 04:05:28,990 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:05:59,121 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/T+%26+T+Constructions+and+House+Maintenance+Services/@32.2237583,74.1574731,17z/data=!3m1!4b1!4m6!3m5!1s0x391f290f0483c231:0xc740350a5a2e3718!8m2!3d32.2237583!4d74.1574731!16s%2Fg%2F11n082s1v8?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:06:01,813 [INFO] Main: [89/100] Processing: IMVU Construction Group
+2026-03-30 04:06:01,813 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:06:01,814 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): IMVU Construction Group
+2026-03-30 04:06:12,916 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:06:43,017 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/IMVU+Construction+Group/@-33.5936633,26.8795886,17z/data=!3m1!4b1!4m6!3m5!1s0x1e65cbf2a664df57:0x3f0b5b58a3deba60!8m2!3d-33.5936633!4d26.8795886!16s%2Fg%2F11jsqv29lq?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:06:43,782 [INFO] Main:    Skipping deep scan: Website found in details (http://imvuconstruction.co.za/)
+2026-03-30 04:06:45,783 [INFO] Main: [90/100] Processing: TEMI CONSTRUCTION’S SERVICES
+2026-03-30 04:06:45,785 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:06:45,785 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): TEMI CONSTRUCTION%E2%80%99S SERVICES
+2026-03-30 04:07:23,115 [WARNING] src.scrapers.details: Failed to find business 'h1' for TEMI CONSTRUCTION%E2%80%99S SERVICES: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 04:07:53,173 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/TEMI+CONSTRUCTION%25E2%2580%2599S+SERVICES/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:07:55,886 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): TEMI CONSTRUCTION%E2%80%99S SERVICES
+2026-03-30 04:08:35,843 [WARNING] src.scrapers.details: Failed to find business 'h1' for TEMI CONSTRUCTION%E2%80%99S SERVICES: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 04:09:05,898 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/TEMI+CONSTRUCTION%25E2%2580%2599S+SERVICES/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:09:08,691 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): TEMI CONSTRUCTION%E2%80%99S SERVICES
+2026-03-30 04:09:44,086 [WARNING] src.scrapers.details: Failed to find business 'h1' for TEMI CONSTRUCTION%E2%80%99S SERVICES: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 04:10:14,129 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/TEMI+CONSTRUCTION%25E2%2580%2599S+SERVICES/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:10:14,867 [ERROR] Main:    Failed to deeply enrich TEMI CONSTRUCTION’S SERVICES: RetryError[<Future at 0x262448c7dd0 state=finished raised ValueError>]
+2026-03-30 04:10:16,867 [INFO] Main: [91/100] Processing: Progress Blocks East London
+2026-03-30 04:10:16,868 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:10:16,868 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Progress Blocks East London
+2026-03-30 04:10:48,709 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Progress%20Blocks%20East%20London", waiting until "load"
+. Retrying in 1s...
+2026-03-30 04:10:54,918 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:10:58,668 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 04:11:28,744 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Progress+Blocks+East+London/@-32.932789,27.786631,17z/data=!4m8!3m7!1s0x1e66dd625d4bd441:0x7e2d3ee202684438!8m2!3d-32.932789!4d27.786631!9m1!1b1!16s%2Fg%2F11q83btblp?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:11:31,273 [INFO] Main: [92/100] Processing: RNP Construction
+2026-03-30 04:11:31,274 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:11:31,274 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): RNP Construction
+2026-03-30 04:11:52,588 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:12:22,837 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/RNP+Constructions/@16.7086868,74.2544492,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc101726ab483b5:0x74e3a4d06ecdc4b1!8m2!3d16.7086868!4d74.2544492!16s%2Fg%2F11h6nhkz34?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:12:25,601 [INFO] Main: [93/100] Processing: Lukhozi Consulting Engineers (Pty) Ltd (East London)
+2026-03-30 04:12:25,601 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:12:25,601 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Lukhozi Consulting Engineers %28Pty%29 Ltd %28East London%29
+2026-03-30 04:12:57,487 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Lukhozi%20Consulting%20Engineers%20%2528Pty%2529%20Ltd%20%2528East%20London%2529", waiting until "load"
+. Retrying in 1s...
+2026-03-30 04:13:03,131 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:13:06,868 [INFO] src.scrapers.details:    Success: 0 reviews captured.
+2026-03-30 04:13:36,933 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Lukhozi+Consulting+Engineers+(Pty)+Ltd+(East+London)/@-32.9946114,27.9072679,17z/data=!4m8!3m7!1s0x1e66e1106c11b0ab:0x85c4496c9b408713!8m2!3d-32.9946114!4d27.9072679!9m1!1b1!16s%2Fg%2F11v0ntg1wj?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:13:39,414 [INFO] Main: [94/100] Processing: SM LAQHASHA CONSTRUCTION (PTY)LTD
+2026-03-30 04:13:39,414 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:13:39,414 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SM LAQHASHA CONSTRUCTION %28PTY%29LTD
+2026-03-30 04:14:10,957 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20LAQHASHA%20CONSTRUCTION%20%2528PTY%2529LTD", waiting until "load"
+. Retrying in 1s...
+2026-03-30 04:14:42,037 [WARNING] scrapling: Attempt 2 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20LAQHASHA%20CONSTRUCTION%20%2528PTY%2529LTD", waiting until "load"
+. Retrying in 1s...
+2026-03-30 04:15:13,115 [ERROR] scrapling: Failed after 3 attempts: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20LAQHASHA%20CONSTRUCTION%20%2528PTY%2529LTD", waiting until "load"
+
+2026-03-30 04:15:15,802 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SM LAQHASHA CONSTRUCTION %28PTY%29LTD
+2026-03-30 04:15:47,143 [WARNING] src.scrapers.details: Failed to find business 'h1' for SM LAQHASHA CONSTRUCTION %28PTY%29LTD: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 04:16:17,187 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/SM+LAQHASHA+CONSTRUCTION+%2528PTY%2529LTD/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:16:19,906 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SM LAQHASHA CONSTRUCTION %28PTY%29LTD
+2026-03-30 04:16:51,988 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20LAQHASHA%20CONSTRUCTION%20%2528PTY%2529LTD", waiting until "load"
+. Retrying in 1s...
+2026-03-30 04:17:07,460 [WARNING] src.scrapers.details: Failed to find business 'h1' for SM LAQHASHA CONSTRUCTION %28PTY%29LTD: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-30 04:17:37,540 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/SM+LAQHASHA+CONSTRUCTION+%2528PTY%2529LTD/@32.1585152,74.1965824,11z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:17:38,602 [ERROR] Main:    Failed to deeply enrich SM LAQHASHA CONSTRUCTION (PTY)LTD: RetryError[<Future at 0x262423530d0 state=finished raised ValueError>]
+2026-03-30 04:17:40,603 [INFO] Main: [95/100] Processing: Mpelwane Development Projects
+2026-03-30 04:17:40,604 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:17:40,604 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Mpelwane Development Projects
+2026-03-30 04:17:51,655 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:18:21,787 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Mpelwane+Development+Projects/@-32.9942364,27.913618,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66e1d2ac93ffff:0x82c0d2e44a53ff9!8m2!3d-32.9942364!4d27.913618!16s%2Fg%2F11tcnv6c7y?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:18:22,520 [INFO] Main:    Skipping deep scan: Website found in details (http://mpelwane.co.za/)
+2026-03-30 04:18:24,521 [INFO] Main: [96/100] Processing: Ahluma Construction and Trading
+2026-03-30 04:18:24,521 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:18:24,522 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Ahluma Construction and Trading
+2026-03-30 04:18:39,914 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:19:10,055 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Ahluma+Construction+and+Trading/@-32.972736,27.810509,17z/data=!3m1!4b1!4m6!3m5!1s0x1e66dd9c13cb8605:0xd807ffee5baab127!8m2!3d-32.972736!4d27.810509!16s%2Fg%2F11y9b675y3?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:19:10,611 [INFO] Main:    Skipping deep scan: Website found in details (https://ahlumaconstruction.co.za/)
+2026-03-30 04:19:12,612 [INFO] Main: [97/100] Processing: 3L Construction
+2026-03-30 04:19:12,612 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:19:12,613 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): 3L Construction
+2026-03-30 04:19:23,162 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:19:53,321 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/3L+Construction,+Inc./@32.505558,-97.7349166,17z/data=!3m1!4b1!4m6!3m5!1s0x864e1f1205cbd039:0xbc6f3f3274950518!8m2!3d32.505558!4d-97.7349166!16s%2Fg%2F11bc7d4jwt?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:19:53,871 [INFO] Main:    Skipping deep scan: Website found in details (http://www.3lconstruction.com/)
+2026-03-30 04:19:55,872 [INFO] Main: [98/100] Processing: Shukuma Flooring Systems, East London
+2026-03-30 04:19:55,872 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:19:55,873 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Shukuma Flooring Systems, East London
+2026-03-30 04:20:15,459 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:20:45,532 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Shukuma+Flooring+Systems,+East+London/@-32.9398751,27.9752711,17z/data=!3m1!4b1!4m6!3m5!1s0x1e67210531842559:0x52f715a94094c27c!8m2!3d-32.9398751!4d27.9752711!16s%2Fg%2F11fd449kqy?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:20:46,007 [INFO] Main:    Skipping deep scan: Website found in details (http://www.shukuma.biz/)
+2026-03-30 04:20:48,008 [INFO] Main: [99/100] Processing: William Scott Contracts (Pty) Ltd
+2026-03-30 04:20:48,008 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:20:48,009 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): William Scott Contracts %28Pty%29 Ltd
+2026-03-30 04:21:05,143 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:21:35,224 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/William+Scott+Contracts/@-33.9157134,24.3649871,9z/data=!4m10!1m2!2m1!1sWilliam+Scott+Contracts+%2528Pty%2529+Ltd!3m6!1s0x1e7ad3f172a3c915:0x4e977c993a763978!8m2!3d-33.9157134!4d25.5844695!15sCiVXaWxsaWFtIFNjb3R0IENvbnRyYWN0cyAlMjhQdHklMjkgTHRkWiYiJHdpbGxpYW0gc2NvdHQgY29udHJhY3RzIDI4cHR5IDI5IGx0ZJIBCHBhaW50aW5nmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU53T0RsMWVtWm5FQUXgAQD6AQQIeBA1!16s%2Fg%2F1td2qns7?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:21:35,867 [INFO] Main:    Skipping deep scan: Website found in details (https://www.williamscott.co.za/)
+2026-03-30 04:21:37,868 [INFO] Main: [100/100] Processing: Anchor Tech
+2026-03-30 04:21:37,868 [INFO] Main:    -> No website detected. Starting deep enrichment...
+2026-03-30 04:21:37,868 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Anchor Tech
+2026-03-30 04:21:51,065 [INFO] src.scrapers.details:    Deep Review Extraction: Target 5
+2026-03-30 04:22:21,159 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Anchor+Technologies,+Inc./@39.1940351,-76.8547005,17z/data=!3m1!4b1!4m6!3m5!1s0x89b7dfb4a7474add:0xd16c4e741c6a6c1a!8m2!3d39.1940351!4d-76.8547005!16s%2Fg%2F1tdg8px9?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-30 04:22:21,698 [INFO] Main:    Skipping deep scan: Website found in details (http://www.anchortechnologies.com/)
+2026-03-30 04:22:24,386 [INFO] Main: SUCCESS: Exported MASTER list of 100 businesses to: exports\Construction_companies_East_London_MASTER_20260330_042223.xlsx
+2026-03-31 19:01:56,477 [INFO] Main: --- Starting Lead Generation: Roofing contractors in London ---
+2026-03-31 19:01:56,478 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False, user_agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36)` instead before fetching
+2026-03-31 19:01:56,479 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-31 19:01:56,479 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-31 19:01:56,480 [INFO] Main: Engines initialized successfully.
+2026-03-31 19:01:56,481 [INFO] Main: Searching for listings: Roofing contractors in London
+2026-03-31 19:01:56,481 [INFO] src.scrapers.google_maps: Searching Google Maps for: Roofing contractors in London
+2026-03-31 19:02:00,258 [INFO] src.scrapers.engine: Fetching (Wait: 3.8s): https://www.google.com/maps/search/Roofing%20contractors%20in%20London
+2026-03-31 19:02:22,058 [INFO] src.scrapers.google_maps: Discovered 22 listings in search feed.
+2026-03-31 19:02:22,423 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Roofing+contractors+in+London/@51.5237811,-0.1238701,12z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:02:53,647 [INFO] src.scrapers.google_maps: Parsing 3 results from response...
+2026-03-31 19:02:53,648 [INFO] Main: Discovered 3 potential leads.
+2026-03-31 19:02:53,648 [INFO] Main: Filtering and enriching leads...
+2026-03-31 19:02:53,649 [INFO] Main: [1/3] Analyzing: Katepal Products UK Ltd
+2026-03-31 19:02:53,649 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:02:53,649 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Katepal Products UK Ltd
+2026-03-31 19:03:34,699 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Katepal+Products+UK+Ltd/@51.6734157,-0.5886503,17z/data=!3m1!4b1!4m6!3m5!1s0x48766e6c8cc53355:0xffaaceefb064f845!8m2!3d51.6734157!4d-0.5886503!16s%2Fg%2F1hc6mv9sx?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:03:35,443 [INFO] Main:    Skipped: Website found in second pass (https://www.katepaluk.co.uk/)
+2026-03-31 19:03:37,444 [INFO] Main: [2/3] Analyzing: Aussie Man and Van Ltd.
+2026-03-31 19:03:37,445 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:03:37,445 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Aussie Man and Van Ltd.
+2026-03-31 19:04:22,983 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Aussie+Man+and+Van+Surrey+ltd./@51.4107061,-0.4330192,12z/data=!4m10!1m2!2m1!1sAussie+Man+and+Van+Ltd.!3m6!1s0x487609a2a1bc25e5:0xd36c3e324e74a252!8m2!3d51.4107061!4d-0.2805839!15sChdBdXNzaWUgTWFuIGFuZCBWYW4gTHRkLiIDiAEBWhgiFmF1c3NpZSBtYW4gYW5kIHZhbiBsdGSSAQ5tb3ZpbmdfY29tcGFueeABAA!16s%2Fg%2F11gxgjn490?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:04:24,269 [INFO] Main:    Skipped: Website found in second pass (http://aussieremovals.co.uk/)
+2026-03-31 19:04:26,270 [INFO] Main: [3/3] Analyzing: London Roofing Specialist Solutions Ltd.
+2026-03-31 19:04:26,271 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:04:26,271 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): London Roofing Specialist Solutions Ltd.
+2026-03-31 19:05:10,828 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/London+Roofing+Specialist+Solutions+Ltd./@51.501702,-0.1922481,17z/data=!3m1!4b1!4m6!3m5!1s0x48760ff6e01fbb3b:0x9b4cbab2b95ceb63!8m2!3d51.501702!4d-0.1922481!16s%2Fg%2F11csqczlf6?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:05:14,664 [INFO] Main:    Skipped: Website found in second pass (https://londonroofingspecialist.co.uk/)
+2026-03-31 19:05:16,666 [WARNING] Main: No qualified leads found to export.
+2026-03-31 19:05:28,010 [INFO] Main: --- Starting Lead Generation: Locksmiths in London ---
+2026-03-31 19:05:28,011 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False, user_agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36)` instead before fetching
+2026-03-31 19:05:28,011 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-31 19:05:28,012 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-31 19:05:28,012 [INFO] Main: Engines initialized successfully.
+2026-03-31 19:05:28,013 [INFO] Main: Searching for listings: Locksmiths in London
+2026-03-31 19:05:28,013 [INFO] src.scrapers.google_maps: Searching Google Maps for: Locksmiths in London
+2026-03-31 19:05:30,863 [INFO] src.scrapers.engine: Fetching (Wait: 2.8s): https://www.google.com/maps/search/Locksmiths%20in%20London
+2026-03-31 19:05:41,998 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-31 19:05:42,177 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Locksmiths+in+London/@51.5286416,-0.1015987,11z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:06:12,929 [INFO] src.scrapers.google_maps: Parsing 5 results from response...
+2026-03-31 19:06:12,932 [INFO] Main: Discovered 5 potential leads.
+2026-03-31 19:06:12,932 [INFO] Main: Filtering and enriching leads...
+2026-03-31 19:06:12,933 [INFO] Main: [1/5] Analyzing: London Locks - Locksmiths Keys & Fobs
+2026-03-31 19:06:12,933 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:06:12,934 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): London Locks - Locksmiths Keys %26 Fobs
+2026-03-31 19:06:56,798 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/London+Locks+-+Locksmiths+Keys+%26+Fobs/@51.5281022,-0.0215438,17z/data=!3m1!4b1!4m6!3m5!1s0x48761d46fa154deb:0x17b055d5ab61234f!8m2!3d51.5281022!4d-0.0215438!16s%2Fg%2F1tf64zgf?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:06:58,542 [INFO] Main:    Skipped: Website found in second pass (http://www.londonlocks.com/)
+2026-03-31 19:07:00,543 [INFO] Main: [2/5] Analyzing: Londonlocksmiths.Com
+2026-03-31 19:07:00,543 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:07:00,544 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Londonlocksmiths.Com
+2026-03-31 19:07:43,592 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Londonlocksmiths.Com/@51.4795574,-0.127617,17z/data=!3m1!4b1!4m6!3m5!1s0x487604f0eac61e39:0xa05f86caddab4678!8m2!3d51.4795574!4d-0.127617!16s%2Fg%2F1wn_5l8m?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:07:44,488 [INFO] Main:    Skipped: Website found in second pass (http://www.londonlocksmiths.com/)
+2026-03-31 19:07:46,489 [INFO] Main: [3/5] Analyzing: The Lock Specialist Ltd
+2026-03-31 19:07:46,490 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:07:46,490 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): The Lock Specialist Ltd
+2026-03-31 19:08:29,458 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/The+Lock+Specialist+Ltd/@51.5136105,-0.0711395,17z/data=!3m1!4b1!4m6!3m5!1s0x4876035c9860655d:0xb5990057b6d52171!8m2!3d51.5136105!4d-0.0711395!16s%2Fg%2F11bbrk66ps?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:08:30,433 [INFO] Main:    Skipped: Website found in second pass (http://thelockspecialist.co.uk/)
+2026-03-31 19:08:32,434 [INFO] Main: [4/5] Analyzing: G Worrall & Son Ltd
+2026-03-31 19:08:32,435 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:08:32,436 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): G Worrall %26 Son Ltd
+2026-03-31 19:09:17,732 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/G+Worrall+%26+Son+Ltd/@51.5004265,-0.0978321,17z/data=!3m1!4b1!4m6!3m5!1s0x487604a6c266f1cb:0x1855a0b623a1eaf9!8m2!3d51.5004265!4d-0.0978321!16s%2Fg%2F1tglyg4s?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:09:18,659 [INFO] Main:    Skipped: Website found in second pass (https://www.gworralls.com/)
+2026-03-31 19:09:20,661 [INFO] Main: [5/5] Analyzing: City of London Locksmiths Ltd.
+2026-03-31 19:09:20,661 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:09:20,662 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): City of London Locksmiths Ltd.
+2026-03-31 19:10:05,969 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/City+of+London+Locksmiths+Ltd./@51.5210264,-0.0753655,17z/data=!3m1!4b1!4m6!3m5!1s0x48761b569222dba1:0x88aa46f6e069954f!8m2!3d51.5210264!4d-0.0753655!16s%2Fg%2F1tfgcqs1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:10:07,266 [INFO] Main:    Skipped: Website found in second pass (https://www.cityoflondonlocksmiths.co.uk/)
+2026-03-31 19:10:09,267 [WARNING] Main: No qualified leads found to export.
+2026-03-31 19:10:57,574 [INFO] Main: --- Starting Lead Generation: Handyman in Bradford ---
+2026-03-31 19:10:57,575 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False, user_agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36)` instead before fetching
+2026-03-31 19:10:57,576 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-31 19:10:57,577 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-31 19:10:57,578 [INFO] Main: Engines initialized successfully.
+2026-03-31 19:10:57,579 [INFO] Main: Searching for listings: Handyman in Bradford
+2026-03-31 19:10:57,580 [INFO] src.scrapers.google_maps: Searching Google Maps for: Handyman in Bradford
+2026-03-31 19:10:59,821 [INFO] src.scrapers.engine: Fetching (Wait: 2.2s): https://www.google.com/maps/search/Handyman%20in%20Bradford
+2026-03-31 19:11:13,322 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-31 19:11:13,843 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Handyman+in+Bradford/@47.73855,12.5088275,4z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:11:45,108 [INFO] src.scrapers.google_maps: Parsing 5 results from response...
+2026-03-31 19:11:45,110 [INFO] Main: Discovered 5 potential leads.
+2026-03-31 19:11:45,111 [INFO] Main: Filtering and enriching leads...
+2026-03-31 19:11:45,111 [INFO] Main: [1/5] Analyzing: Man@Work Handyman Services
+2026-03-31 19:11:45,112 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:11:45,112 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Man@Work Handyman Services
+2026-03-31 19:12:28,085 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Man@Work+Handyman+Services/@53.760389,-1.7952075,17z/data=!3m1!4b1!4m6!3m5!1s0x487be71b9ebe538b:0xe7a0ae85751ae133!8m2!3d53.760389!4d-1.7952075!16s%2Fg%2F11b76lwcw0?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:12:29,065 [INFO] Main:    Skipped: Website found in second pass (http://manatwork.co.uk/)
+2026-03-31 19:12:31,067 [INFO] Main: [2/5] Analyzing: DIY KING
+2026-03-31 19:12:31,068 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:12:31,069 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): DIY KING
+2026-03-31 19:12:55,589 [WARNING] src.scrapers.details: Failed to find business 'h1' for DIY KING: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-31 19:13:25,632 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/DIY+KING/@32.0536576,74.1998592,8z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:13:28,587 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): DIY KING
+2026-03-31 19:14:10,698 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/DS+Hardware/@31.4833349,74.4209191,17z/data=!3m1!4b1!4m6!3m5!1s0x39191b903b52b47b:0x2978fab39dcf8b4a!8m2!3d31.4833349!4d74.4209191!16s%2Fg%2F11n90hs7b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:14:11,521 [INFO] Main:    Skipped: Website found in second pass (http://danishsohailgroup.com/)
+2026-03-31 19:14:13,522 [INFO] Main: [3/5] Analyzing: Bradford DIY Handyman
+2026-03-31 19:14:13,522 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:14:13,523 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Bradford DIY Handyman
+2026-03-31 19:14:45,645 [WARNING] scrapling: Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "https://www.google.com/maps/search/Bradford%20DIY%20Handyman", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:15:21,943 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Bradford+DIY+Handyman/@53.823687,-1.7189422,17z/data=!3m1!4b1!4m6!3m5!1s0x487be3f5704cc1d1:0x390ca1a66a17bad!8m2!3d53.823687!4d-1.7189422!16s%2Fg%2F11rpth8572?entry=ttu&g_ep=EgoyMDI2MDMyOS4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 19:15:22,703 [INFO] src.scrapers.discovery: Checking Facebook for email: http://www.facebook.com/aidan.scully.1217
+2026-03-31 19:15:52,080 [INFO] scrapling: Fetched (307) <GET http://www.facebook.com/aidan.scully.1217/about> (referer: https://www.google.com/search?q=facebook)
+2026-03-31 19:15:52,087 [INFO] scrapling: Fetched (307) <GET https://www.facebook.com/aidan.scully.1217/about> (referer: https://www.google.com/search?q=facebook)
+2026-03-31 19:15:52,260 [INFO] scrapling: Fetched (200) <GET https://www.facebook.com/aidan.scully.1217/about> (referer: https://www.google.com/search?q=facebook)
+2026-03-31 19:15:54,873 [INFO] Main: [4/5] Analyzing: SM Fix It Handyman Services
+2026-03-31 19:15:54,873 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:15:54,874 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SM Fix It Handyman Services
+2026-03-31 19:15:56,646 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:15:57,874 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:15:58,996 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services", waiting until "load"
+
+2026-03-31 19:16:01,519 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SM Fix It Handyman Services
+2026-03-31 19:16:03,339 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:16:04,441 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:16:05,663 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services", waiting until "load"
+
+2026-03-31 19:16:08,082 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): SM Fix It Handyman Services
+2026-03-31 19:16:09,745 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:16:11,021 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:16:12,114 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/SM%20Fix%20It%20Handyman%20Services", waiting until "load"
+
+2026-03-31 19:16:12,639 [ERROR] Main:    Extraction failed for SM Fix It Handyman Services: RetryError[<Future at 0x1961af22f10 state=finished raised Error>]
+2026-03-31 19:16:14,640 [INFO] Main: [5/5] Analyzing: Handyman & Carpet Cleaning Services
+2026-03-31 19:16:14,640 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 19:16:14,641 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Handyman %26 Carpet Cleaning Services
+2026-03-31 19:16:16,310 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:16:17,449 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:16:18,646 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services", waiting until "load"
+
+2026-03-31 19:16:21,058 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Handyman %26 Carpet Cleaning Services
+2026-03-31 19:16:22,999 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:16:24,126 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:16:25,225 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services", waiting until "load"
+
+2026-03-31 19:16:27,687 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Handyman %26 Carpet Cleaning Services
+2026-03-31 19:16:29,709 [WARNING] scrapling: Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:16:30,949 [WARNING] scrapling: Attempt 2 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services", waiting until "load"
+. Retrying in 1s...
+2026-03-31 19:16:34,070 [ERROR] scrapling: Failed after 3 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services
+Call log:
+  - navigating to "https://www.google.com/maps/search/Handyman%20%2526%20Carpet%20Cleaning%20Services", waiting until "load"
+
+2026-03-31 19:16:34,783 [ERROR] Main:    Extraction failed for Handyman & Carpet Cleaning Services: RetryError[<Future at 0x19619de4e60 state=finished raised Error>]
+2026-03-31 19:16:37,443 [ERROR] Main: Failed to export results: Cannot save file into a non-existent directory: 'exports\exports'
+2026-03-31 20:34:33,722 [INFO] Main: --- Starting Lead Generation: Plasterers in Bradford ---
+2026-03-31 20:34:33,723 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False, user_agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36)` instead before fetching
+2026-03-31 20:34:33,723 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-31 20:34:33,723 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-31 20:34:33,724 [INFO] Main: Engines initialized successfully.
+2026-03-31 20:34:33,724 [INFO] Main: Searching for listings: Plasterers in Bradford
+2026-03-31 20:34:33,724 [INFO] src.scrapers.google_maps: Searching Google Maps for: Plasterers in Bradford
+2026-03-31 20:34:35,629 [INFO] src.scrapers.engine: Fetching (Wait: 1.9s): https://www.google.com/maps/search/Plasterers%20in%20Bradford
+2026-03-31 20:34:47,274 [INFO] src.scrapers.google_maps: Discovered 19 listings in search feed.
+2026-03-31 20:34:47,411 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Plasterers+in+Bradford/@53.9305002,-1.6349609,8z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:35:18,018 [INFO] src.scrapers.google_maps: Parsing 5 results from response...
+2026-03-31 20:35:18,020 [INFO] Main: Discovered 5 potential leads.
+2026-03-31 20:35:18,020 [INFO] Main: Filtering and enriching leads...
+2026-03-31 20:35:18,021 [INFO] Main: [1/5] Analyzing: MH Plastering
+2026-03-31 20:35:18,021 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 20:35:18,021 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): MH Plastering
+2026-03-31 20:35:58,981 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/M+H+Plastering/@53.0219392,-2.1597434,12z/data=!3m1!4b1!4m6!3m5!1s0x487a4325891e6943:0x75f7bd622b4af94f!8m2!3d53.0219392!4d-2.1597434!16s%2Fg%2F11c6yzjnf4?entry=ttu&g_ep=EgoyMDI2MDMyOS4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:35:59,440 [INFO] Main:    Skipped: Website found in second pass (http://www.mhplasterers.co.uk/)
+2026-03-31 20:36:01,441 [INFO] Main: [2/5] Analyzing: Mick Hudson quality domestic plastering and rendering
+2026-03-31 20:36:01,442 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 20:36:01,443 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Mick Hudson quality domestic plastering and rendering
+2026-03-31 20:36:45,671 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Mick+Hudson+quality+domestic+plastering+and+rendering/@53.7469775,-1.6818454,17z/data=!4m10!1m2!2m1!1sMick+Hudson+quality+domestic+plastering+and+rendering!3m6!1s0x94380fedd6c5139:0x8751103476733244!8m2!3d53.7469775!4d-1.6818454!15sCjVNaWNrIEh1ZHNvbiBxdWFsaXR5IGRvbWVzdGljIHBsYXN0ZXJpbmcgYW5kIHJlbmRlcmluZ1o3IjVtaWNrIGh1ZHNvbiBxdWFsaXR5IGRvbWVzdGljIHBsYXN0ZXJpbmcgYW5kIHJlbmRlcmluZ5IBEnBsYXN0ZXJfY29udHJhY3RvcpoBRENpOURRVWxSUVVOdlpFTm9kSGxqUmpsdlQyMVNObFpXYUZkTk1UbDRXbFJvYldKdE9UVlhWVlpHWWpKamVGRnVZeEFC4AEA-gEECFUQQw!16s%2Fg%2F11vx3p2jv4?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:36:48,183 [INFO] Main: [3/5] Analyzing: Westfield Plastering
+2026-03-31 20:36:48,184 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 20:36:48,184 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Westfield Plastering
+2026-03-31 20:37:33,718 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Westfield+Plastering/@53.8305356,-1.7472892,17z/data=!3m1!4b1!4m6!3m5!1s0x487be3ecfdcc3809:0x4961a5ce9d6f657e!8m2!3d53.8305356!4d-1.7472892!16s%2Fg%2F1x5f9xt2?entry=ttu&g_ep=EgoyMDI2MDMyOS4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:37:34,115 [INFO] src.scrapers.discovery: Checking Facebook for email: https://www.facebook.com/westfieldplasteringservices
+2026-03-31 20:37:50,457 [INFO] scrapling: Fetched (302) <GET https://www.facebook.com/westfieldplasteringservices/about> (referer: https://www.google.com/search?q=facebook)
+2026-03-31 20:37:50,577 [INFO] scrapling: Fetched (200) <GET https://www.facebook.com/Westfieldplasteringservices/about/> (referer: https://www.google.com/search?q=facebook)
+2026-03-31 20:37:53,037 [INFO] Main: [4/5] Analyzing: Whiteoak and Son's Plastering and Rendering
+2026-03-31 20:37:53,038 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 20:37:53,038 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Whiteoak and Son%27s Plastering and Rendering
+2026-03-31 20:38:18,428 [WARNING] src.scrapers.details: Failed to find business 'h1' for Whiteoak and Son%27s Plastering and Rendering: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-31 20:38:48,482 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Whiteoak+and+Son%2527s+Plastering+and+Rendering/@32.0536576,74.1998592,8z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:38:51,273 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Whiteoak and Son%27s Plastering and Rendering
+2026-03-31 20:39:17,865 [WARNING] src.scrapers.details: Failed to find business 'h1' for Whiteoak and Son%27s Plastering and Rendering: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-31 20:39:47,909 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Whiteoak+and+Son%2527s+Plastering+and+Rendering/@32.0536576,74.1998592,8z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:39:50,351 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Whiteoak and Son%27s Plastering and Rendering
+2026-03-31 20:40:13,713 [WARNING] src.scrapers.details: Failed to find business 'h1' for Whiteoak and Son%27s Plastering and Rendering: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-31 20:40:43,746 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Whiteoak+and+Son%2527s+Plastering+and+Rendering/@32.0536576,74.1998592,8z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:40:44,246 [ERROR] Main:    Extraction failed for Whiteoak and Son's Plastering and Rendering: RetryError[<Future at 0x23fd756e250 state=finished raised ValueError>]
+2026-03-31 20:40:46,247 [INFO] Main: [5/5] Analyzing: V&r Plastering
+2026-03-31 20:40:46,247 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 20:40:46,248 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): V%26r Plastering
+2026-03-31 20:41:13,383 [WARNING] src.scrapers.details: Failed to find business 'h1' for V%26r Plastering: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-31 20:41:43,441 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/V%2526r+Plastering/@32.0536576,74.1998592,8z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:41:45,868 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): V%26r Plastering
+2026-03-31 20:42:12,729 [WARNING] src.scrapers.details: Failed to find business 'h1' for V%26r Plastering: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-31 20:42:42,781 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/V%2526r+Plastering/@32.0536576,74.1998592,8z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:42:45,241 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): V%26r Plastering
+2026-03-31 20:43:10,553 [WARNING] src.scrapers.details: Failed to find business 'h1' for V%26r Plastering: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("h1") to be visible
+  - waiting for locator("h1")
+
+2026-03-31 20:43:40,588 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/V%2526r+Plastering/@32.0536576,74.1998592,8z?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:43:41,116 [ERROR] Main:    Extraction failed for V&r Plastering: RetryError[<Future at 0x23fd62eb850 state=finished raised ValueError>]
+2026-03-31 20:43:43,118 [ERROR] Main: Failed to export results: name 'os' is not defined
+2026-03-31 20:44:08,104 [INFO] Main: --- Starting Lead Generation: Plumbers in Leeds ---
+2026-03-31 20:44:08,105 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure(headless=True, disable_resources=False, user_agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36)` instead before fetching
+2026-03-31 20:44:08,105 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-31 20:44:08,105 [WARNING] scrapling: This logic is deprecated now, and have no effect; It will be removed with v0.3. Use `StealthyFetcher.configure()` instead before fetching
+2026-03-31 20:44:08,105 [INFO] Main: Engines initialized successfully.
+2026-03-31 20:44:08,105 [INFO] Main: Searching for listings: Plumbers in Leeds
+2026-03-31 20:44:08,106 [INFO] src.scrapers.google_maps: Searching Google Maps for: Plumbers in Leeds
+2026-03-31 20:44:11,263 [INFO] src.scrapers.engine: Fetching (Wait: 3.2s): https://www.google.com/maps/search/Plumbers%20in%20Leeds
+2026-03-31 20:44:24,728 [INFO] src.scrapers.google_maps: Discovered 20 listings in search feed.
+2026-03-31 20:44:24,792 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/search/Plumbers+in+Leeds/@53.8299719,-1.3592104,10z/data=!3m1!4b1?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:44:55,309 [INFO] src.scrapers.google_maps: Parsing 2 results from response...
+2026-03-31 20:44:55,310 [INFO] Main: Discovered 2 potential leads.
+2026-03-31 20:44:55,310 [INFO] Main: Filtering and enriching leads...
+2026-03-31 20:44:55,311 [INFO] Main: [1/2] Analyzing: Plumbers Leeds
+2026-03-31 20:44:55,311 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 20:44:55,311 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): Plumbers Leeds
+2026-03-31 20:45:52,838 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/Norton+Plumbing/@53.8444731,-2.146614,10z/data=!4m10!1m2!2m1!1sPlumbers+Leeds!3m6!1s0x4879595566d51b03:0xe087655ad70dd30d!8m2!3d53.8444731!4d-1.5368728!15sCg5QbHVtYmVycyBMZWVkc1oQIg5wbHVtYmVycyBsZWVkc5IBB3BsdW1iZXKaASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVTmthRWw1T1ZKQkVBReABAPoBBAgtEEs!16s%2Fg%2F1thhk0bw?entry=ttu&g_ep=EgoyMDI2MDMyOS4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:45:53,277 [INFO] Main:    Skipped: Website found in second pass (http://www.plumbers-leeds.com/)
+2026-03-31 20:45:55,278 [INFO] Main: [2/2] Analyzing: John The Plumber
+2026-03-31 20:45:55,278 [INFO] Main:    -> No website detected. Starting deep scan...
+2026-03-31 20:45:55,279 [INFO] src.scrapers.details: Expert Extraction (Interaction Mode): John The Plumber
+2026-03-31 20:46:43,554 [INFO] scrapling: Fetched (200) <GET https://www.google.com/maps/place/John+the+Plumber/@26.226802,-80.1437123,17z/data=!3m1!4b1!4m6!3m5!1s0x88d90301efcfa4b1:0x657a6dc72dcdd44!8m2!3d26.226802!4d-80.1437123!16s%2Fg%2F1tklrbpd?entry=ttu&g_ep=EgoyMDI2MDMyNC4wIKXMDSoASAFQAw%3D%3D> (referer: https://www.google.com/search?q=google)
+2026-03-31 20:46:43,951 [INFO] Main:    Skipped: Website found in second pass (https://johntheplumberfl.com/?utm_source=gmb&utm_medium=organic)
+2026-03-31 20:46:45,952 [WARNING] Main: No qualified leads found to export.

@@ -1,0 +1,123 @@
+.wrapper {
+  background-color: #ffffff;
+  color: #334155;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.header {
+  padding: 20px 0;
+  background: white;
+  border-bottom: 1px solid #f1f5f9;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(14, 165, 233, 0.05);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: #0ea5e9; /* Diamond Blue */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo span {
+  color: #38bdf8;
+}
+
+.sparkBtn {
+  background: #0ea5e9;
+  color: white;
+  padding: 12px 30px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.2);
+}
+
+.hero {
+  padding: 120px 0;
+  background: radial-gradient(circle at 20% 20%, #f0f9ff 0%, #ffffff 100%);
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 25px;
+  color: #0f172a;
+}
+
+.hero h1 span {
+  display: block;
+  color: #0ea5e9;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  max-width: 700px;
+  margin: 0 auto 50px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 80px;
+}
+
+.card {
+  padding: 50px 40px;
+  background: white;
+  border-radius: 30px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.02);
+  transition: all 0.4s ease;
+}
+
+.card:hover {
+  border-color: #0ea5e9;
+  transform: scale(1.03);
+  box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.1);
+}
+
+.card h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+.purityBanner {
+  padding: 60px 0;
+  background: #0ea5e9;
+  color: white;
+  text-align: center;
+}
+
+.footer {
+  padding: 100px 0;
+  background: #f8fafc;
+  text-align: center;
+  border-top: 1px solid #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.8rem; }
+}
