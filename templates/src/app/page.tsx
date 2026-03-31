@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FileSpreadsheet, Send, Globe, MapPin, Phone, Star, 
   RefreshCcw, Search, User, Info, CheckCircle2, Clock, 
-  MessageSquare, DollarSign, X, MoreVertical, Filter, TrendingUp, Target, Award, Copy, ExternalLink, Zap
+  MessageSquare, DollarSign, X, MoreVertical, Filter, TrendingUp, Target, Award, Copy, ExternalLink, Zap,
+  Image as ImageIcon
 } from 'lucide-react';
 import { autoSelectTemplate } from '@/lib/personalization';
 
@@ -33,8 +34,23 @@ export default function LeadCRM() {
   const [selectedLead, setSelectedLead] = useState<any | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
+  const [qualityFilter, setQualityFilter] = useState('ALL');
   const [notes, setNotes] = useState('');
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [copiedPitch, setCopiedPitch] = useState(false);
+
+  // Editable AI Fields
+  const [editableAI, setEditableAI] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    if (selectedLead) {
+      const ai: Record<string, string> = {};
+      Object.keys(selectedLead).forEach(key => {
+        if (key.startsWith('ai_')) ai[key] = selectedLead[key];
+      });
+      setEditableAI(ai);
+    }
+  }, [selectedLead]);
 
   const templates = [
     { id: '/preview', label: '🚀 Lead Machine (Emergency)' },
@@ -133,10 +149,14 @@ export default function LeadCRM() {
       const matchesSearch = (l.Name || l.name || '').toLowerCase().includes(searchQuery.toLowerCase());
       const leadId = getLeadId(l);
       const status = crmData[leadId]?.status || 'NEW';
+      const quality = getLeadQuality(l).label;
+      
       const matchesStatus = statusFilter === 'ALL' || status === statusFilter;
-      return matchesSearch && matchesStatus;
+      const matchesQuality = qualityFilter === 'ALL' || quality === qualityFilter;
+      
+      return matchesSearch && matchesStatus && matchesQuality;
     });
-  }, [leads, searchQuery, statusFilter, crmData]);
+  }, [leads, searchQuery, statusFilter, qualityFilter, crmData]);
 
   const stats = useMemo(() => {
     const counts = { TOTAL: leads.length, NEW: 0, CONTACTED: 0, CLOSED: 0 };
@@ -148,6 +168,68 @@ export default function LeadCRM() {
     });
     return counts;
   }, [leads, crmData]);
+
+  const generatePitch = (lead: any) => {
+    const name = lead.Name || lead.name;
+    const niche = lead.Category || 'Specialist';
+    const heroTitle = editableAI.ai_hero_title || lead.ai_hero_title || `Premier ${niche} solutions`;
+    const painPoint = editableAI.ai_pain_point || lead.ai_pain_point || "reaching more local customers";
+    
+    return `Hi ${name} team,\n\nI noticed you're doing great work in ${lead.Address || 'the local area'}, but don't seem to have a dedicated website yet.\n\nI've actually built a custom preview for you titled "${heroTitle.replace(/<[^>]*>?/gm, '')}" which addresses ${painPoint.toLowerCase()}.\n\nYou can view your personalized sample site here: ${window.location.origin}${generatePreviewUrl(lead)}\n\nWould you be open to a quick 5-minute chat about how this could help you get more leads?\n\nBest,\n[Your Name]`;
+  };
+
+  const copyPitch = (lead: any) => {
+    navigator.clipboard.writeText(generatePitch(lead));
+    setCopiedPitch(true);
+    setTimeout(() => setCopiedPitch(false), 2000);
+  };
+
+  const exportToOutreach = () => {
+    if (!filteredLeads.length) return;
+
+    // We'll generate a CSV string here for simplicity
+    const headers = ['first_name', 'company_name', 'email', 'phone', 'location', 'sample_site_url', 'custom_hero_title', 'custom_pain_point'];
+    const rows = filteredLeads.map(l => {
+      const niche = selectedFile?.split('_')[0] || 'Specialist';
+      const template = autoSelectTemplate(niche);
+      
+      const params = new URLSearchParams({
+        name: l.Name || l.name || '',
+        phone: l.Phone || l.phone || '',
+        niche: niche,
+        location: (selectedFile?.split('_')[1] || 'Local').replace(/_/g, ' ')
+      });
+
+      // Include AI fields (preferring sidebar state if this was the selected lead)
+      const hero = (selectedLead && getLeadId(l) === getLeadId(selectedLead)) ? editableAI.ai_hero_title : l.ai_hero_title;
+      const pain = (selectedLead && getLeadId(l) === getLeadId(selectedLead)) ? editableAI.ai_pain_point : l.ai_pain_point;
+
+      if (hero) params.append('ai_hero_title', hero);
+      if (pain) params.append('ai_pain_point', pain);
+
+      const url = `${window.location.origin}${template}?${params.toString()}`;
+
+      return [
+        'Team', // first_name fallback
+        l.Name || l.name,
+        l.Email || '',
+        l.Phone || '',
+        l.Address || '',
+        url,
+        (hero || '').replace(/,/g, ''),
+        (pain || '').replace(/,/g, '')
+      ].map(val => `"${val}"`).join(',');
+    });
+
+    const csvContent = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', `outreach_${selectedFile?.replace('.xlsx', '')}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   const generatePreviewUrl = (lead: any) => {
     const params = new URLSearchParams({
@@ -179,6 +261,11 @@ export default function LeadCRM() {
           <p style={{ color: '#64748b', marginTop: '5px' }}>High-performance lead management and sales acceleration.</p>
         </div>
         <div style={{ display: 'flex', gap: '15px' }}>
+          {selectedFile && (
+            <button onClick={exportToOutreach} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', background: '#0f172a', color: 'white', fontWeight: 700, boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}>
+              <FileSpreadsheet size={18} /> Export Outreach CSV
+            </button>
+          )}
           <button onClick={() => { fetchFiles(); fetchCRMData(); }} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '12px', border: '1px solid #e2e8f0', cursor: 'pointer', background: 'white', fontWeight: 700, boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
             <RefreshCcw size={18} /> Sync Pipeline
           </button>
@@ -187,47 +274,81 @@ export default function LeadCRM() {
 
       {/* ANALYTICS TOP BAR */}
       {selectedFile && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '40px' }}>
-          {[
-            { label: 'Identified Leads', val: stats.TOTAL, icon: <Target color="#3b82f6" />, color: '#eff6ff' },
-            { label: 'Untouched', val: stats.NEW, icon: <Clock color="#64748b" />, color: '#f8fafc' },
-            { label: 'Active Outreach', val: stats.CONTACTED, icon: <TrendingUp color="#f59e0b" />, color: '#fffbeb' },
-            { label: 'Deals Closed', val: stats.CLOSED, icon: <Award color="#10b981" />, color: '#f0fdf4' }
-          ].map((s, i) => (
-            <div key={i} style={{ background: s.color, padding: '25px', borderRadius: '20px', border: '1px solid rgba(0,0,0,0.05)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase' }}>{s.label}</span>
-                {s.icon}
+        <div style={{ marginBottom: '40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '20px' }}>
+            {[
+              { label: 'Identified Leads', val: stats.TOTAL, icon: <Target color="#3b82f6" />, color: '#eff6ff' },
+              { label: 'Untouched', val: stats.NEW, icon: <Clock color="#64748b" />, color: '#f8fafc' },
+              { label: 'Active Outreach', val: stats.CONTACTED, icon: <TrendingUp color="#f59e0b" />, color: '#fffbeb' },
+              { label: 'Deals Closed', val: stats.CLOSED, icon: <Award color="#10b981" />, color: '#f0fdf4' }
+            ].map((s, i) => (
+              <div key={i} style={{ background: s.color, padding: '25px', borderRadius: '20px', border: '1px solid rgba(0,0,0,0.05)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase' }}>{s.label}</span>
+                  {s.icon}
+                </div>
+                <div style={{ fontSize: '2rem', fontWeight: 900, marginTop: '10px' }}>{s.val}</div>
               </div>
-              <div style={{ fontSize: '2rem', fontWeight: 900, marginTop: '10px' }}>{s.val}</div>
+            ))}
+          </div>
+          
+          {/* PIPELINE PROGRESS BAR */}
+          <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontSize: '0.8rem', fontWeight: 800, color: '#64748b', textTransform: 'uppercase' }}>
+              <span>Pipeline Conversion</span>
+              <span>{stats.TOTAL > 0 ? Math.round((stats.CLOSED / stats.TOTAL) * 100) : 0}% Closed</span>
             </div>
-          ))}
+            <div style={{ width: '100%', height: '12px', background: '#e2e8f0', borderRadius: '10px', overflow: 'hidden', display: 'flex' }}>
+              <motion.div 
+                initial={{ width: 0 }} 
+                animate={{ width: `${stats.TOTAL > 0 ? (stats.CLOSED / stats.TOTAL) * 100 : 0}%` }} 
+                transition={{ duration: 1 }}
+                style={{ height: '100%', background: '#10b981' }} 
+              />
+              <motion.div 
+                initial={{ width: 0 }} 
+                animate={{ width: `${stats.TOTAL > 0 ? (stats.CONTACTED / stats.TOTAL) * 100 : 0}%` }} 
+                transition={{ duration: 1, delay: 0.2 }}
+                style={{ height: '100%', background: '#f59e0b' }} 
+              />
+            </div>
+          </div>
         </div>
       )}
 
       <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr' + (selectedLead ? ' 450px' : ''), gap: '30px' }}>
         {/* SIDEBAR: File Browser */}
-        <aside style={{ background: '#f8fafc', padding: '25px', borderRadius: '24px', border: '1px solid #e2e8f0', height: 'fit-content' }}>
+        <aside style={{ background: 'white', padding: '25px', borderRadius: '24px', border: '1px solid #e2e8f0', height: 'fit-content', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
           <h2 style={{ fontSize: '0.9rem', fontWeight: 800, marginBottom: '25px', color: '#1e293b', textTransform: 'uppercase', letterSpacing: '1px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <FileSpreadsheet size={18} /> Scraper History
+            <div style={{ background: '#eff6ff', padding: '8px', borderRadius: '10px', color: '#3b82f6' }}>
+              <FileSpreadsheet size={16} />
+            </div>
+            Pipeline Batches
           </h2>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '70vh', overflowY: 'auto', paddingRight: '10px' }}>
+            {files.length === 0 && (
+              <div style={{ padding: '20px', textAlign: 'center', color: '#94a3b8', fontSize: '0.85rem' }}>
+                No scraper exports found. Run the engine to start.
+              </div>
+            )}
             {files.map(f => (
               <motion.button 
-                whileHover={{ x: 5 }}
+                whileHover={{ x: 5, backgroundColor: selectedFile === f.name ? '#f8fafc' : '#f1f5f9' }}
                 key={f.name} 
                 onClick={() => loadLeads(f.name)} 
                 style={{ 
-                  textAlign: 'left', padding: '18px', borderRadius: '16px', border: '1px solid',
-                  borderColor: selectedFile === f.name ? '#3b82f6' : '#e2e8f0',
-                  background: selectedFile === f.name ? '#fff' : 'white',
-                  boxShadow: selectedFile === f.name ? '0 10px 25px -5px rgba(59, 130, 246, 0.1)' : 'none',
-                  cursor: 'pointer'
+                  textAlign: 'left', padding: '16px', borderRadius: '16px', border: '1px solid',
+                  borderColor: selectedFile === f.name ? '#3b82f6' : '#f1f5f9',
+                  background: selectedFile === f.name ? '#eff6ff' : 'white',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
                 }}
               >
-                <div style={{ fontWeight: 800, fontSize: '0.95rem', color: selectedFile === f.name ? '#1e3a8a' : '#334155' }}>{f.name.replace('.xlsx', '').replace(/_/g, ' ')}</div>
-                <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <Clock size={12} /> {new Date(f.date).toLocaleDateString()}
+                <div style={{ fontWeight: 800, fontSize: '0.85rem', color: selectedFile === f.name ? '#1e3a8a' : '#334155', wordBreak: 'break-word', lineHeight: '1.4' }}>
+                  {f.name.replace('.xlsx', '').replace(/_/g, ' ')}
+                </div>
+                <div style={{ fontSize: '0.7rem', color: selectedFile === f.name ? '#3b82f6' : '#94a3b8', marginTop: '8px', display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 600 }}>
+                  <Clock size={10} /> {new Date(f.date).toLocaleDateString()}
                 </div>
               </motion.button>
             ))}
@@ -260,6 +381,16 @@ export default function LeadCRM() {
                       style={{ width: '100%', padding: '12px 12px 12px 45px', borderRadius: '12px', border: '1px solid #e2e8f0', outline: 'none', fontWeight: 600 }}
                     />
                   </div>
+                  <select 
+                    value={qualityFilter}
+                    onChange={(e) => setQualityFilter(e.target.value)}
+                    style={{ padding: '0 20px', borderRadius: '12px', border: '1px solid #e2e8f0', fontWeight: 700, color: '#64748b' }}
+                  >
+                    <option value="ALL">ALL QUALITY</option>
+                    <option value="ELITE">ELITE ONLY</option>
+                    <option value="SOLID">SOLID+</option>
+                    <option value="POTENTIAL">POTENTIAL</option>
+                  </select>
                   <select 
                     value={statusFilter}
                     onChange={(e) => setStatusFilter(e.target.value)}
@@ -325,21 +456,26 @@ export default function LeadCRM() {
                           </select>
                         </td>
                         <td style={{ padding: '25px 30px' }}>
-                          <div style={{ display: 'flex', gap: '10px' }}>
+                          <div style={{ display: 'flex', gap: '8px' }}>
                             <Link href={previewUrl} target="_blank" onClick={(e) => e.stopPropagation()} style={{ 
-                              padding: '12px 20px', background: '#0f172a', color: 'white', 
-                              borderRadius: '10px', fontSize: '0.85rem', fontWeight: 800, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
-                            }}>
-                              <Zap size={16} /> SHOW
+                              padding: '10px 16px', background: '#0f172a', color: 'white', 
+                              borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s',
+                              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                            }}
+                            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                            >
+                              <Zap size={14} /> SHOW
                             </Link>
                             <button 
                               onClick={(e) => { e.stopPropagation(); copyToClipboard(previewUrl, leadId); }}
                               style={{ 
-                                padding: '12px', background: copiedId === leadId ? '#10b981' : '#f1f5f9', color: copiedId === leadId ? 'white' : '#1e293b', 
-                                border: 'none', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s'
+                                padding: '10px', background: copiedId === leadId ? '#10b981' : '#f1f5f9', color: copiedId === leadId ? 'white' : '#475569', 
+                                border: 'none', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center'
                               }}
+                              title="Copy personalized link"
                             >
-                              {copiedId === leadId ? <CheckCircle2 size={18} /> : <Copy size={18} />}
+                              {copiedId === leadId ? <CheckCircle2 size={16} /> : <Copy size={16} />}
                             </button>
                           </div>
                         </td>
@@ -356,11 +492,16 @@ export default function LeadCRM() {
               )}
             </div>
           ) : (
-            <div style={{ height: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#f8fafc', borderRadius: '40px', border: '3px dashed #e2e8f0' }}>
-              <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 3 }}>
-                <Target size={64} color="#cbd5e1" />
+            <div style={{ height: '600px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', borderRadius: '40px', border: '1px solid #e2e8f0', boxShadow: 'inset 0 4px 20px rgba(0,0,0,0.02)' }}>
+              <motion.div 
+                animate={{ y: [0, -15, 0], scale: [1, 1.05, 1] }} 
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                style={{ background: 'white', padding: '30px', borderRadius: '50%', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.1)' }}
+              >
+                <Target size={80} color="#3b82f6" />
               </motion.div>
-              <h3 style={{ marginTop: '20px', color: '#64748b', fontSize: '1.25rem', fontWeight: 700 }}>Select a target scrape to open the pipeline.</h3>
+              <h3 style={{ marginTop: '30px', color: '#1e293b', fontSize: '1.5rem', fontWeight: 900, letterSpacing: '-0.5px' }}>Ready to Launch</h3>
+              <p style={{ color: '#64748b', marginTop: '10px', fontSize: '1rem', maxWidth: '400px', textAlign: 'center', lineHeight: '1.6' }}>Select a target scrape from the history sidebar to open the pipeline and start generating personalized sites.</p>
             </div>
           )}
         </main>
@@ -391,12 +532,50 @@ export default function LeadCRM() {
                 </div>
               </div>
 
+              {/* VISUAL PROOF PREVIEW */}
+              {selectedLead['Screenshot Path'] && (
+                <div style={{ marginBottom: '30px', borderRadius: '20px', overflow: 'hidden', border: '1px solid #e2e8f0', background: '#f8fafc' }}>
+                  <div style={{ padding: '12px 20px', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.7rem', fontWeight: 900, color: '#94a3b8', textTransform: 'uppercase' }}>Visual Proof Ready</span>
+                    <ImageIcon size={14} color="#94a3b8" />
+                  </div>
+                  <div style={{ height: '200px', background: `url(http://localhost:3000/api/proxy-image?path=${encodeURIComponent(selectedLead['Screenshot Path'])})`, backgroundSize: 'cover', backgroundPosition: 'top' }} />
+                </div>
+              )}
+
+              {/* AI CONTENT EDITOR */}
+              {Object.keys(editableAI).length > 0 && (
+                <div style={{ background: '#eff6ff', padding: '25px', borderRadius: '20px', marginBottom: '30px', border: '1px solid rgba(59, 130, 246, 0.1)' }}>
+                  <h4 style={{ fontSize: '0.8rem', fontWeight: 900, color: '#3b82f6', textTransform: 'uppercase', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <Zap size={16} /> AI Personalized Content
+                  </h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                    <div>
+                      <label style={{ fontSize: '0.7rem', fontWeight: 800, color: '#64748b', display: 'block', marginBottom: '8px' }}>HERO HEADLINE</label>
+                      <input 
+                        value={editableAI.ai_hero_title || ''} 
+                        onChange={(e) => setEditableAI({...editableAI, ai_hero_title: e.target.value})}
+                        style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '0.85rem', fontWeight: 600 }}
+                      />
+                    </div>
+                    <div>
+                      <label style={{ fontSize: '0.7rem', fontWeight: 800, color: '#64748b', display: 'block', marginBottom: '8px' }}>CORE PAIN POINT</label>
+                      <input 
+                        value={editableAI.ai_pain_point || ''} 
+                        onChange={(e) => setEditableAI({...editableAI, ai_pain_point: e.target.value})}
+                        style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #cbd5e1', fontSize: '0.85rem', fontWeight: 600 }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* DYNAMIC REVIEWS DISPLAY */}
               <div style={{ background: '#f8fafc', padding: '25px', borderRadius: '20px', marginBottom: '30px' }}>
                 <h4 style={{ fontSize: '0.8rem', fontWeight: 900, color: '#94a3b8', textTransform: 'uppercase', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <MessageSquare size={16} /> Google Reviews Insight
                 </h4>
-                <div style={{ maxHeight: '350px', overflowY: 'auto', paddingRight: '10px' }}>
+                <div style={{ maxHeight: '200px', overflowY: 'auto', paddingRight: '10px' }}>
                   {selectedLead['Recent Reviews (All)'] ? (
                     <div style={{ fontSize: '0.9rem', color: '#334155', whiteSpace: 'pre-line', lineHeight: '1.7' }}>
                       {selectedLead['Recent Reviews (All)']}
@@ -418,14 +597,17 @@ export default function LeadCRM() {
                   onChange={(e) => setNotes(e.target.value)}
                   onBlur={() => updateCRM(getLeadId(selectedLead), undefined, notes)}
                   placeholder="Add details about your pitch, their pain points, or follow-up schedule..."
-                  style={{ width: '100%', height: '150px', padding: '20px', borderRadius: '15px', border: '1px solid #e2e8f0', resize: 'none', fontSize: '0.9rem', fontFamily: 'inherit', outline: 'none' }}
+                  style={{ width: '100%', height: '100px', padding: '20px', borderRadius: '15px', border: '1px solid #e2e8f0', resize: 'none', fontSize: '0.9rem', fontFamily: 'inherit', outline: 'none' }}
                 />
-                <p style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '10px' }}>Notes are auto-saved on click-away.</p>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '15px' }}>
-                <button style={{ width: '100%', padding: '18px', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '16px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', fontSize: '1rem', boxShadow: '0 10px 15px -3px rgba(59, 130, 246, 0.3)' }}>
-                  <Send size={20} /> SEND PERSONALIZED PITCH
+                <button 
+                  onClick={() => copyPitch(selectedLead)}
+                  style={{ width: '100%', padding: '18px', background: copiedPitch ? '#10b981' : '#3b82f6', color: 'white', border: 'none', borderRadius: '16px', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', fontSize: '1rem', boxShadow: '0 10px 15px -3px rgba(59, 130, 246, 0.3)', transition: 'all 0.2s' }}
+                >
+                  {copiedPitch ? <CheckCircle2 size={20} /> : <Send size={20} />} 
+                  {copiedPitch ? 'PITCH COPIED!' : 'COPY PERSONALIZED PITCH'}
                 </button>
               </div>
             </motion.aside>
