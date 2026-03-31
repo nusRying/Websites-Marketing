@@ -1,0 +1,91 @@
+name: Lead Engine Comprehensive CI/CD
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  lint-and-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Backend Lint (Ruff)
+      run: |
+        pip install ruff
+        ruff check .
+        
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Install Frontend Deps
+      working-directory: ./templates
+      run: npm install
+      
+    - name: Frontend Lint & Typecheck
+      working-directory: ./templates
+      run: |
+        npm run lint
+        # npx tsc --noEmit (optional, based on project strictness)
+
+  backend-unit-tests:
+    needs: lint-and-typecheck
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Run Core Logic Tests
+      run: |
+        python -m pytest tests/test_core_logic.py
+        
+    - name: Run API Worker Tests
+      run: |
+        python -m pytest tests/test_api_worker.py
+
+  frontend-build:
+    needs: lint-and-typecheck
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        
+    - name: Build Next.js
+      working-directory: ./templates
+      run: |
+        npm install
+        npm run build
+      env:
+        NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+
+  docker-verify:
+    needs: [backend-unit-tests, frontend-build]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build Docker image
+      run: docker build -t lead-engine-backend .

@@ -11,3 +11,9 @@ uvicorn
 requests
 watchdog
 python-multipart
+sentry-sdk[fastapi]
+pytest
+pytest-asyncio
+pytest-mock
+httpx
+ruff
