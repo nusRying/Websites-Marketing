@@ -1,0 +1,148 @@
+.wrapper {
+  background-color: #ffffff;
+  color: #334155;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.header {
+  padding: 20px 0;
+  background: white;
+  border-bottom: 1px solid #f1f5f9;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: #f59e0b; /* Golden Retriever Yellow */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bookBtn {
+  background: #0ea5e9; /* Sky Blue */
+  color: white;
+  padding: 12px 30px;
+  font-weight: 700;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.3);
+}
+
+.hero {
+  padding: 100px 0;
+  background: #fffbef; /* Very Light Yellow */
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #1e293b;
+  line-height: 1.1;
+  margin-bottom: 25px;
+}
+
+.hero span {
+  color: #f59e0b;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  max-width: 650px;
+  margin: 0 auto 40px;
+  color: #64748b;
+}
+
+.perksSection {
+  padding: 80px 0;
+}
+
+.perkGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.perkCard {
+  padding: 40px;
+  background: white;
+  border-radius: 24px;
+  border: 2px solid #f8fafc;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.perkCard:hover {
+  border-color: #f59e0b;
+  transform: translateY(-10px);
+}
+
+.iconCircle {
+  width: 70px;
+  height: 70px;
+  background: #fff7ed;
+  color: #f59e0b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.treatments {
+  padding: 100px 0;
+  background: #f0f9ff; /* Lightest Blue */
+}
+
+.treatmentList {
+  max-width: 800px;
+  margin: 50px auto 0;
+}
+
+.treatmentItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+.treatmentItem h3 {
+  flex-grow: 1;
+  font-weight: 700;
+}
+
+.priceTag {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 5px 15px;
+  border-radius: 10px;
+  font-weight: 800;
+}
+
+.footer {
+  padding: 100px 0;
+  background: #1e293b;
+  color: white;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+}

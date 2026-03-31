@@ -2,95 +2,170 @@
 
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import { motion } from 'framer-motion';
+import { ShieldAlert, Award, FileCheck, Map, PhoneCall, HardHat, Construction } from 'lucide-react';
+import { Reveal } from '@/components/Reveal';
+import MobileActions from '@/components/MobileActions';
+import { IndustrialConfig as Config } from '@/configs/industrial';
+import { formatContent } from '@/lib/utils';
 import styles from './industrial.module.css';
+
+const ICON_MAP = {
+  Award: Award,
+  ShieldAlert: ShieldAlert,
+  FileCheck: FileCheck
+};
 
 function IndustrialContent() {
   const searchParams = useSearchParams();
   
-  // Dynamic Data
   const name = searchParams.get('name') || 'Industrial Solutions Ltd';
   const phone = searchParams.get('phone') || '0000 000 000';
   const niche = searchParams.get('niche') || 'Industrial Specialist';
   const location = searchParams.get('location') || 'Local Area';
 
+  const data = { name, phone, niche, location };
+
   return (
     <div className={styles.wrapper}>
-      {/* 1. Authoritative Header */}
+      {/* Authoritative SEO Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": Config.schemaType,
+            "name": name,
+            "telephone": phone,
+            "areaServed": location,
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Industrial Services"
+            }
+          })
+        }}
+      />
+
       <header className={styles.header}>
         <div className="container">
           <div className={styles.headerContent}>
-            <div className={styles.logo}>
+            <motion.div 
+              initial={{ x: -30, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              className={styles.logo}
+            >
               {name.split(' ')[0]}<span className={styles.yellow}>{name.split(' ').slice(1).join(' ')}</span>
+            </motion.div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+              <motion.a 
+                whileHover={{ color: '#facc15' }}
+                href={`tel:${phone}`} 
+                style={{fontWeight: 900, fontSize: '1.1rem'}}
+              >
+                {phone}
+              </motion.a>
             </div>
-            <a href={`tel:${phone}`} style={{fontWeight: 800, color: '#facc15'}}>DIRECT: {phone}</a>
           </div>
         </div>
       </header>
 
-      {/* 2. Power Hero */}
       <section className={styles.hero}>
         <div className="container">
-          <h1>Reliable {niche} <span>in {location}</span></h1>
-          <p style={{fontSize: '1.25rem', maxWidth: '600px', marginBottom: '40px', opacity: 0.9}}>
-            Providing industrial-strength {niche.toLowerCase()} solutions for over 15 years. 
-            We specialize in large-scale projects, safety compliance, and rapid deployment across {location}.
-          </p>
-          <a href={`tel:${phone}`} className="btn" style={{backgroundColor: '#facc15', color: '#0f172a', padding: '15px 40px'}}>Request Technical Quote</a>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div style={{ display: 'flex', gap: '15px', color: '#facc15', marginBottom: '30px' }}>
+              <HardHat size={24} /> <Construction size={24} /> <ShieldAlert size={24} />
+            </div>
+            <h1>{formatContent(Config.hero.title, data)}</h1>
+            <p style={{fontSize: '1.3rem', maxWidth: '650px', marginBottom: '50px', opacity: 0.9, lineHeight: 1.6}}>
+              {formatContent(Config.hero.subtitle, data)}
+            </p>
+            <motion.a 
+              whileHover={{ x: 10 }}
+              href={`tel:${phone}`} 
+              className="btn" 
+              style={{backgroundColor: '#facc15', color: '#0f172a', padding: '20px 50px', fontWeight: 900, borderRadius: '0'}}
+            >
+              {Config.hero.cta}
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
-      {/* 3. Credentials Bar */}
       <section className={styles.credentials}>
         <div className="container">
           <div className={styles.credFlex}>
-            <span>✓ FULLY INSURED</span>
-            <span>✓ CHAS ACCREDITED</span>
-            <span>✓ HEALTH & SAFETY COMPLIANT</span>
-            <span>✓ {location.toUpperCase()} COVERAGE</span>
+            <motion.span whileHover={{ y: -3 }}>✓ FULLY INSURED & BONDED</motion.span>
+            <motion.span whileHover={{ y: -3 }}>✓ CHAS & ISO ACCREDITED</motion.span>
+            <motion.span whileHover={{ y: -3 }}>✓ {location.toUpperCase()} REGIONAL HUB</motion.span>
+            <motion.span whileHover={{ y: -3 }}>✓ 24/7 TECHNICAL SUPPORT</motion.span>
           </div>
         </div>
       </section>
 
-      {/* 4. Service Grid */}
       <section className={styles.services}>
         <div className="container">
-          <h2 className="text-center" style={{fontSize: '2.5rem', color: '#0f172a'}}>Professional {niche} Services</h2>
+          <Reveal>
+            <h2 className="text-center" style={{fontSize: '3rem', color: '#0f172a', fontWeight: 900}}>Core Industrial Capabilities</h2>
+          </Reveal>
+          
           <div className={styles.industrialGrid}>
-            <div className={styles.industrialCard}>
-              <h3>Commercial Contracts</h3>
-              <p>Tailored {niche.toLowerCase()} support for developers and property managers in {location}. Reliable scheduling and dedicated account management.</p>
-            </div>
-            <div className={styles.industrialCard}>
-              <h3>Emergency Response</h3>
-              <p>Priority support for critical infrastructure and urgent industrial needs. We are on-call 24/7 to keep your project moving.</p>
-            </div>
-            <div className={styles.industrialCard}>
-              <h3>Expert Consulting</h3>
-              <p>Site surveys and technical assessments conducted by senior {niche.toLowerCase()} engineers with decades of industry experience.</p>
-            </div>
+            {Config.services.map((s, i) => {
+              const Icon = ICON_MAP[Object.keys(ICON_MAP)[i] as keyof typeof ICON_MAP] || Award;
+              return (
+                <Reveal key={i} delay={0.2 * i}>
+                  <div className={styles.industrialCard} style={{ transition: 'all 0.3s ease' }}>
+                    <div style={{ color: '#facc15', marginBottom: '20px' }}><Icon /></div>
+                    <h3>{s.title}</h3>
+                    <p style={{ color: '#475569', lineHeight: 1.7 }}>{formatContent(s.desc, data)}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* 5. Industrial CTA */}
       <section className={styles.quoteSection}>
         <div className="container">
-          <h2>Secure Your Project in {location}</h2>
-          <p style={{fontSize: '1.2rem', marginBottom: '40px'}}>Join the leading developers and contractors who trust {name}.</p>
-          <a href={`tel:${phone}`} className="btn" style={{backgroundColor: '#0f172a', color: 'white', padding: '20px 50px', fontSize: '1.25rem'}}>Call Management: {phone}</a>
+          <Reveal>
+            <div>
+              <Map size={48} style={{ margin: '0 auto 30px' }} />
+              <h2>{formatContent(Config.footer.title, data)}</h2>
+              <p style={{fontSize: '1.3rem', marginBottom: '50px', opacity: 0.9}}>{formatContent(Config.footer.subtitle, data)}</p>
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                href={`tel:${phone}`} 
+                className="btn" 
+                style={{backgroundColor: '#0f172a', color: 'white', padding: '25px 80px', fontSize: '1.4rem', fontWeight: 900, borderRadius: '0'}}
+              >
+                <PhoneCall size={20} style={{ marginRight: 10, display: 'inline' }} />
+                Contact Logistics: {phone}
+              </motion.a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      <footer style={{padding: '40px 0', textAlign: 'center', background: '#f1f5f9', color: '#64748b'}}>
-        <p>© 2026 {name} - Industrial {niche} Excellence in {location}.</p>
+      <footer style={{padding: '60px 0', textAlign: 'center', background: '#0f172a', color: 'white'}}>
+        <div className="container">
+          <div style={{fontWeight: 900, fontSize: '1.5rem', marginBottom: '20px', letterSpacing: '2px'}}>{name.toUpperCase()}</div>
+          <p style={{opacity: 0.5, fontSize: '0.8rem'}}>© 2026 | INDUSTRIAL GRADE {niche.toUpperCase()} | {location.toUpperCase()} REGION</p>
+        </div>
       </footer>
+
+      <MobileActions phone={phone} name={name} />
     </div>
   );
 }
 
 export default function IndustrialPage() {
   return (
-    <Suspense fallback={<div>Loading Industrial Authority...</div>}>
+    <Suspense fallback={<div>Deploying infrastructure...</div>}>
       <IndustrialContent />
     </Suspense>
   );

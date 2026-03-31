@@ -1,0 +1,132 @@
+.wrapper {
+  background-color: #020617; /* Cyber Midnight */
+  color: #f8fafc;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  background-image: radial-gradient(circle at 50% -20%, #4c1d95 0%, transparent 50%);
+}
+
+.header {
+  padding: 25px 0;
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo span {
+  color: #8b5cf6; /* Electric Violet */
+}
+
+.ctaBtn {
+  background: #8b5cf6;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 800;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.ctaBtn:hover {
+  background: #fff;
+  color: #020617;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.hero {
+  padding: 140px 0;
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.hero h1 span {
+  display: block;
+  color: #8b5cf6;
+  text-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+
+.hero p {
+  font-size: 1.3rem;
+  max-width: 750px;
+  margin: 0 auto 50px;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+.services {
+  padding: 100px 0;
+  background: #0a0f1e;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 80px;
+}
+
+.card {
+  padding: 50px 40px;
+  background: rgba(30, 41, 59, 0.3);
+  border-radius: 8px;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  background: rgba(30, 41, 59, 0.5);
+  border-color: #8b5cf6;
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.card h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.footer {
+  padding: 120px 0;
+  background: #020617;
+  text-align: center;
+  border-top: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.8rem; }
+}

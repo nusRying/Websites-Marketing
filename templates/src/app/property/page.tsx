@@ -1,0 +1,175 @@
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+import { motion } from 'framer-motion';
+import { Building2, Home, Key, MapPin, Phone, ArrowUpRight, TrendingUp, Users, ShieldCheck } from 'lucide-react';
+import { Reveal } from '@/components/Reveal';
+import MobileActions from '@/components/MobileActions';
+import { PropertyConfig as Config } from '@/configs/property';
+import { formatContent } from '@/lib/utils';
+import styles from './property.module.css';
+
+function PropertyContent() {
+  const searchParams = useSearchParams();
+  const name = searchParams.get('name') || 'Prime Realty Group';
+  const niche = searchParams.get('niche') || 'Property Specialist';
+  const location = searchParams.get('location') || 'Metropolitan';
+  const phone = searchParams.get('phone') || '0000 000 000';
+  const rating = searchParams.get('rating') || '4.9';
+
+  const data = { name, niche, location, phone, rating };
+
+  return (
+    <div className={styles.wrapper}>
+      {/* Real Estate SEO Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": Config.schemaType,
+            "name": name,
+            "telephone": phone,
+            "areaServed": location,
+            "description": `Premier ${niche} services in ${location}. Managing luxury assets and exclusive listings.`
+          })
+        }}
+      />
+
+      <header className={styles.header}>
+        <div className="container">
+          <div className={styles.headerContent}>
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className={styles.logo}
+            >
+              <Building2 size={24} style={{ marginRight: 10 }} />
+              {name}
+            </motion.div>
+            <motion.a 
+              whileHover={{ scale: 1.05 }}
+              href={`tel:${phone}`} 
+              className={styles.actionBtn}
+            >
+              {Config.hero.cta}
+            </motion.a>
+          </div>
+        </div>
+      </header>
+
+      <section className={styles.hero}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h1>
+              {formatContent(Config.hero.title, data)}
+            </h1>
+            <p>
+              {formatContent(Config.hero.subtitle, data)}
+            </p>
+            <motion.a 
+              whileHover={{ gap: '20px' }}
+              href={`tel:${phone}`} 
+              className={styles.actionBtn} 
+              style={{ padding: '20px 60px', display: 'inline-flex', alignItems: 'center', gap: '10px', fontSize: '1.1rem' }}
+            >
+              Browse Private Collection <ArrowUpRight size={20} />
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className={styles.marketSection}>
+        <div className="container">
+          <Reveal>
+            <div style={{ marginBottom: '60px' }}>
+              <p style={{ fontWeight: 800, textTransform: 'uppercase', letterSpacing: '3px', fontSize: '0.8rem', color: '#666' }}>MARKET AUTHORITY</p>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginTop: '10px' }}>The Numbers of Success</h2>
+            </div>
+          </Reveal>
+          
+          <div className={styles.statGrid}>
+            {Config.stats.map((s, i) => (
+              <Reveal key={i} delay={0.1 * i}>
+                <div className={styles.statItem}>
+                  <h3>{formatContent(s.val, data)}</h3>
+                  <p>{formatContent(s.label, data)}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section style={{ padding: '100px 0', background: '#000', color: '#fff' }}>
+        <div className="container">
+          <Reveal>
+            <div className="text-center" style={{ marginBottom: '80px' }}>
+              <h2 style={{ fontSize: '3rem', fontWeight: 900 }}>Featured Portfolio</h2>
+              <p style={{ opacity: 0.6, marginTop: '20px' }}>Exclusive opportunities currently available in {location}</p>
+            </div>
+          </Reveal>
+          
+          <div className={styles.listingGrid}>
+            {[
+              { name: "The Glass House", area: "West " + location, price: "£2.4M" },
+              { name: "Skyline Penthouse", area: "Central " + location, price: "£1.8M" }
+            ].map((p, i) => (
+              <Reveal key={i} delay={0.2 * i}>
+                <motion.div whileHover={{ scale: 1.02 }} className={styles.propertyCard}>
+                  <div className={styles.propertyInfo}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#ccc', fontSize: '0.8rem', textTransform: 'uppercase', marginBottom: '10px' }}>
+                      <MapPin size={12} /> {p.area}
+                    </div>
+                    <h3>{p.name}</h3>
+                    <div style={{ fontWeight: 900, color: '#fff', fontSize: '1.2rem' }}>{p.price}</div>
+                  </div>
+                </motion.div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer className={styles.footer}>
+        <div className="container text-center">
+          <Reveal>
+            <div>
+              <ShieldCheck size={48} style={{ margin: '0 auto 30px', color: '#fff' }} />
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{formatContent(Config.footer.title, data)}</h2>
+              <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.7, maxWidth: '600px', margin: '0 auto 50px' }}>
+                {formatContent(Config.footer.subtitle, data)}
+              </p>
+              <motion.a 
+                whileHover={{ scale: 1.05 }}
+                href={`tel:${phone}`} 
+                className={styles.actionBtn} 
+                style={{ background: '#fff', color: '#000', padding: '25px 80px', fontSize: '1.4rem' }}
+              >
+                Call Advisory: {phone}
+              </motion.a>
+            </div>
+          </Reveal>
+          <p style={{ marginTop: '100px', opacity: 0.3, fontSize: '0.75rem', letterSpacing: '4px' }}>
+            © 2026 {name.toUpperCase()} | REGULATED {niche.toUpperCase()} | {location.toUpperCase()}
+          </p>
+        </div>
+      </footer>
+
+      <MobileActions phone={phone} name={name} />
+    </div>
+  );
+}
+
+export default function PropertyPage() {
+  return (
+    <Suspense fallback={<div>Opening the vault...</div>}>
+      <PropertyContent />
+    </Suspense>
+  );
+}

@@ -1,0 +1,164 @@
+'use client';
+
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
+import { motion } from 'framer-motion';
+import { Zap, ShieldCheck, Sun, Lightbulb, Home, Phone, ArrowRight, Gauge, Cpu, CheckCircle2 } from 'lucide-react';
+import { Reveal } from '@/components/Reveal';
+import MobileActions from '@/components/MobileActions';
+import { SparkConfig as config } from '@/configs/spark';
+import { formatContent } from '@/lib/utils';
+import styles from './spark.module.css';
+
+function SparkContent() {
+  const searchParams = useSearchParams();
+  const name = searchParams.get('name') || 'Volt Tech Solutions';
+  const niche = searchParams.get('niche') || 'Electrical Specialist';
+  const location = searchParams.get('location') || 'Energy Hub';
+  const phone = searchParams.get('phone') || '0000 000 000';
+  const rating = searchParams.get('rating') || '4.9';
+
+  const data = { name, niche, location, phone, rating };
+
+  return (
+    <div className={styles.wrapper}>
+      {/* Electrical/Solar SEO Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": config.schemaType,
+            "name": name,
+            "telephone": phone,
+            "areaServed": location,
+            "description": `Elite ${niche} and energy solutions in ${location}. Safety-first certified installations.`
+          })
+        }}
+      />
+
+      <header className={styles.header}>
+        <div className="container">
+          <div className={styles.headerContent}>
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className={styles.logo}
+            >
+              <Zap size={28} style={{ color: '#fbbf24' }} />
+              <div>{name.split(' ')[0]} <span>{name.split(' ').slice(1).join(' ')}</span></div>
+            </motion.div>
+            <motion.a 
+              whileHover={{ scale: 1.05 }}
+              href={`tel:${phone}`} 
+              className={styles.actionBtn}
+            >
+              Request Safety Check
+            </motion.a>
+          </div>
+        </div>
+      </header>
+
+      <section className={styles.hero}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div style={{ display: 'flex', gap: '15px', color: '#fbbf24', marginBottom: '30px' }}>
+              <Gauge size={20} /> <Cpu size={20} /> <Lightbulb size={20} />
+            </div>
+            <h1>{formatContent(config.hero.title, data).split('with')[0]} <br/> <span>with {formatContent(config.hero.title, data).split('with')[1]}</span></h1>
+            <p>
+              {formatContent(config.hero.subtitle, data)}
+            </p>
+            <motion.a 
+              whileHover={{ gap: '15px', paddingRight: '45px' }}
+              href={`tel:${phone}`} 
+              className={styles.actionBtn} 
+              style={{ padding: '18px 45px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
+            >
+              {config.hero.cta} <ArrowRight size={20} />
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+
+      <section style={{ padding: '100px 0', background: '#111' }}>
+        <div className="container">
+          <Reveal>
+            <div className="text-center">
+              <h2 style={{ fontSize: '3rem', fontWeight: 900, textTransform: 'uppercase' }}>Technical Solutions</h2>
+              <p style={{ color: '#94a3b8', marginTop: '10px' }}>Safety-first {niche} support for {location}</p>
+            </div>
+          </Reveal>
+          
+          <div className={styles.grid}>
+            {config.solutions.map((s, i) => (
+              <Reveal key={i} delay={0.2 * i}>
+                <div className={styles.card}>
+                  <div style={{ color: '#fbbf24', marginBottom: '20px' }}>
+                    {i === 0 ? <ShieldCheck size={32} /> : i === 1 ? <Sun size={32} /> : <Home size={32} />}
+                  </div>
+                  <h3>{s.title}</h3>
+                  <p style={{ color: '#94a3b8', lineHeight: 1.7 }}>{formatContent(s.desc, data)}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.safetySection}>
+        <div className="container">
+          <Reveal>
+            <h2 style={{ fontSize: '3rem', fontWeight: 900 }}>Certified Safety Partner</h2>
+          </Reveal>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', flexWrap: 'wrap', marginTop: '40px' }}>
+            {config.safetyBar.map((item, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 800 }}>
+                <CheckCircle2 size={24} /> {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer className={styles.footer}>
+        <div className="container text-center">
+          <Reveal>
+            <div style={{ maxWidth: '700px', margin: '0 auto' }}>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{formatContent(config.footer.title, data)}</h2>
+              <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.7 }}>
+                {formatContent(config.footer.subtitle, data)}
+              </p>
+              <motion.a 
+                animate={{ boxShadow: ["0 0 20px rgba(251, 191, 36, 0.3)", "0 0 40px rgba(251, 191, 36, 0.6)", "0 0 20px rgba(251, 191, 36, 0.3)"] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                href={`tel:${phone}`} 
+                className={styles.actionBtn} 
+                style={{ padding: '25px 80px', fontSize: '1.4rem' }}
+              >
+                CALL {name.toUpperCase()}: {phone}
+              </motion.a>
+            </div>
+          </Reveal>
+          <div style={{ marginTop: '100px', opacity: 0.2, fontSize: '0.8rem', letterSpacing: '4px' }}>
+            © 2026 {name.toUpperCase()} | CERTIFIED {niche.toUpperCase()} | {location.toUpperCase()} REGION
+          </div>
+        </div>
+      </footer>
+
+      <MobileActions phone={phone} name={name} />
+    </div>
+  );
+}
+
+export default function SparkPage() {
+  return (
+    <Suspense fallback={<div>Charging systems...</div>}>
+      <SparkContent />
+    </Suspense>
+  );
+}

@@ -46,8 +46,14 @@ class ExcelExporter:
             # Format Attributes
             attributes_str = ", ".join(lead.get('attributes', []))
 
+            # Determine Lead Quality
+            rating = float(lead.get('rating', '0').split()[0] if isinstance(lead.get('rating'), str) else lead.get('rating', 0))
+            quality = "ELITE" if rating >= 4.5 else "SOLID" if rating >= 3.5 else "POTENTIAL"
+
             formatted_data.append({
                 "Name": lead.get('name', 'Unknown'),
+                "Lead Quality": quality,
+                "No Website": "Yes",
                 "Rating": lead.get('rating', 'N/A'),
                 "Email": lead.get('email', 'Not found'),
                 "Category": lead.get('category', ''),

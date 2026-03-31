@@ -1,6 +1,10 @@
 import time
+import random
 import logging
+from typing import Optional
 from scrapling import StealthyFetcher
+from tenacity import retry, stop_after_attempt, wait_exponential
+from src.config import SCRAPE_SETTINGS
 
 class ScraperEngine:
     """
@@ -16,28 +20,37 @@ class ScraperEngine:
         # Initialize fetcher with optional proxy
         fetcher_kwargs = {
             "headless": headless,
-            "disable_resources": False 
+            "disable_resources": False,
+            "user_agent": SCRAPE_SETTINGS.get("user_agent")
         }
         if proxy:
             fetcher_kwargs["proxy"] = proxy
             
         self.fetcher = StealthyFetcher(**fetcher_kwargs)
 
-    def fetch(self, url: str, page_action=None, wait: int = 2000):
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=4, max=10),
+        reraise=True
+    )
+    def fetch(self, url: str, page_action=None, wait: int = 0):
         """
-        Fetches a URL and returns a ScraperResponse.
+        Fetches a URL and returns a ScraperResponse with retry logic.
         """
-        self.logger.info(f"Fetching: {url}")
+        # Apply a small randomized delay before each fetch for stealth
+        delay = random.uniform(1.5, 4.0)
+        time.sleep(delay)
+        
+        self.logger.info(f"Fetching (Wait: {delay:.1f}s): {url}")
         
         try:
             if page_action:
                 self.logger.debug("Executing custom page action.")
-                # Scrapling's fetcher.fetch handles page_action
                 response = self.fetcher.fetch(url, page_action=page_action)
             else:
                 response = self.fetcher.fetch(url)
             
-            # Scrapling wait is handled by the fetcher usually, but we can sleep if needed
+            # Additional explicit wait if requested
             if wait > 0:
                 time.sleep(wait / 1000)
                 
@@ -45,14 +58,11 @@ class ScraperEngine:
         except Exception as e:
             self.logger.error(f"Error fetching {url}: {e}")
             raise
-        # Scrapling handled cleanup usually, but we can add logic here if needed.
-        pass
 
     def close(self):
         """
         Cleanup fetcher resources.
         """
-        # Scrapling handled cleanup usually, but we can add logic here if needed.
         pass
 
 if __name__ == "__main__":

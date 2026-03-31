@@ -70,14 +70,28 @@ class GoogleMapsDetails:
                         time.sleep(2)
                         
                         # Wait for reviews container
-                        scroller_sel = MAPS_SELECTORS["review_scroller"]
-                        page.wait_for_selector(scroller_sel, timeout=10000)
+                        scroller_selectors = ["div[role='main']", "div.m67q60", "div.dS8AEf", "div.fontBodyMedium"]
+                        scroller_sel = None
+                        for sel in scroller_selectors:
+                            try:
+                                if page.locator(sel).first.is_visible(timeout=3000):
+                                    scroller_sel = sel
+                                    break
+                            except: continue
                         
+                        if not scroller_sel:
+                            self.logger.warning("   Could not identify review scroller. Attempting global scroll.")
+                            scroller_sel = "body"
+
                         # Scroll to load
                         last_count = 0
-                        for _ in range(15): # Max 15 scrolls
-                            page.evaluate(f"document.querySelector('{scroller_sel}').scrollBy(0, 10000)")
+                        for _ in range(15):
+                            page.evaluate(f"document.querySelector('{scroller_sel}').scrollBy(0, 5000)")
                             time.sleep(1.5)
+                            
+                            # Expand "More" buttons during scroll to trigger content loading
+                            page.evaluate("document.querySelectorAll('button[aria-label*=\"See more\"]').forEach(b => b.click())")
+                            
                             current_count = page.locator(MAPS_SELECTORS["review_container"]).count()
                             if current_count >= max_reviews or current_count == last_count:
                                 break
@@ -88,9 +102,19 @@ class GoogleMapsDetails:
                         for i in range(min(len(containers), max_reviews)):
                             c = containers[i]
                             try:
-                                author = c.locator(MAPS_SELECTORS["review_reviewer"]).inner_text()
-                                text = c.locator(MAPS_SELECTORS["review_text"]).inner_text()
-                                rating_attr = c.locator(MAPS_SELECTORS["review_rating"]).get_attribute("aria-label")
+                                author = c.locator(MAPS_SELECTORS["review_reviewer"]).first.inner_text()
+                                # Try multiple text selectors for the review body
+                                text_selectors = MAPS_SELECTORS["review_text"].split(', ')
+                                text = ""
+                                for t_sel in text_selectors:
+                                    try:
+                                        found_text = c.locator(t_sel).first.inner_text()
+                                        if found_text:
+                                            text = found_text
+                                            break
+                                    except: continue
+                                
+                                rating_attr = c.locator(MAPS_SELECTORS["review_rating"]).first.get_attribute("aria-label")
                                 rating = rating_attr.split()[0] if rating_attr else "0"
                                 
                                 if author and text:
@@ -99,7 +123,9 @@ class GoogleMapsDetails:
                                         "rating": rating,
                                         "text": text.strip()
                                     })
-                            except: continue
+                            except Exception as e: 
+                                self.logger.debug(f"Failed to parse a review item: {e}")
+                                continue
                         self.logger.info(f"   Success: {len(reviews)} reviews captured.")
                 except Exception as e:
                     self.logger.warning(f"   Review extraction failed: {e}")

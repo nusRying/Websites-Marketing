@@ -11,14 +11,14 @@ MAPS_SELECTORS = {
     "category_field": "button[data-item-id='category']",
     "hours_btn": "div[aria-label*='Hours']",
     "hours_table": "table.e07XUe",
-    "reviews_btn": "button[role='tab'][aria-label*='Reviews']",
+    "reviews_btn": "button[aria-label*='Reviews'], button[jsaction*='pane.reviewlist.goto']",
     "review_container": "div.jftiEf",
     "review_reviewer": "div.d4r55",
     "review_rating": "span.kvMY9b",
-    "review_text": "span.wiI7pd",
+    "review_text": "span.wiU7W, div.MyV73d, span.wiI7pd",
     "review_time": "span.rsqawe",
-    "review_more_btn": "button.w8nwRe.kyuRq",
-    "review_scroller": "div.m6QErb.DxyBCb.kA9KIf.dS8AEf.XiKgde",
+    "review_more_btn": "button[aria-label*='See more'], button.w8Bnu",
+    "review_scroller": "div[role='main'], div.m67q60, div.dS8AEf",
     "social_links": "a[href*='facebook.com'], a[href*='instagram.com'], a[href*='linkedin.com'], a[href*='twitter.com'], a[href*='x.com'], a[href*='youtube.com'], a[href*='tiktok.com']",
     "feed_container": "div[role='feed']"
 }

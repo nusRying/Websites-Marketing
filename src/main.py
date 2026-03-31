@@ -2,6 +2,7 @@ import argparse
 import time
 import logging
 import sys
+import os
 from src.scrapers.engine import ScraperEngine
 from src.scrapers.google_maps import GoogleMapsScraper
 from src.scrapers.details import GoogleMapsDetails
@@ -28,6 +29,7 @@ def main():
     parser.add_argument("--headless", action="store_true", default=True, help="Run browser in headless mode")
     parser.add_argument("--get-reviews", action="store_true", help="Extract all reviews for leads")
     parser.add_argument("--max-reviews", type=int, default=20, help="Max reviews per lead")
+    parser.add_argument("--output", type=str, help="Specify output filename (optional)")
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
     args = parser.parse_args()
 
@@ -50,9 +52,9 @@ def main():
         return
 
     # 3. Search & Filter
-    logger.info(f"Searching for listings for query: {args.niche} in {args.location}")
+    logger.info(f"Searching for listings: {args.niche} in {args.location}")
     all_leads = search_scraper.search(args.niche, args.location, max_results=args.max_results)
-    logger.info(f"Found {len(all_leads)} total listings.")
+    logger.info(f"Discovered {len(all_leads)} potential leads.")
     
     if not all_leads:
         logger.warning("No listings found. Exiting.")
@@ -62,9 +64,9 @@ def main():
     final_data = []
     social_media_domains = ['facebook.com', 'instagram.com', 'linkedin.com', 'twitter.com', 'x.com', 'youtube.com', 'tiktok.com', 'yelp.com']
     
-    logger.info(f"Starting processing for {len(all_leads)} businesses...")
+    logger.info(f"Filtering and enriching leads...")
     for i, lead in enumerate(all_leads):
-        logger.info(f"[{i+1}/{len(all_leads)}] Processing: {lead['name']}")
+        logger.info(f"[{i+1}/{len(all_leads)}] Analyzing: {lead['name']}")
         
         # Check if we need deep enrichment (no website or social media domain)
         website = lead.get('website', '').lower()
@@ -72,12 +74,12 @@ def main():
         needs_enrichment = not website or is_social
         
         if needs_enrichment:
-            logger.info("   -> No website detected. Starting deep enrichment...")
+            logger.info("   -> No website detected. Starting deep scan...")
             try:
-                # Get detailed info (retries handled by decorator in details.py)
+                # Get detailed info
                 details = details_extractor.extract(lead['url'], get_reviews=args.get_reviews, max_reviews=args.max_reviews)
                 
-                # Double-check website from details (more accurate)
+                # Double-check website from details
                 detail_website = details.get('website', '').lower()
                 detail_is_social = any(domain in detail_website for domain in social_media_domains) if detail_website else False
                 
@@ -87,32 +89,27 @@ def main():
                     email = None
                     
                     if socials.get('facebook'):
-                        logger.debug(f"   Searching Facebook: {socials['facebook']}")
                         email = discovery_engine.find_email_on_facebook(socials['facebook'])
                     
                     if not email and socials.get('instagram'):
-                        logger.debug(f"   Searching Instagram: {socials['instagram']}")
                         email = discovery_engine.find_email_on_instagram(socials['instagram'])
                     
                     details['email'] = email if email else "Not found"
                     if email:
-                        logger.info(f"   Found Email: {email}")
+                        logger.info(f"   Success: Email found -> {email}")
                     
-                    # Merge basic lead info with details (in case search had something details missed)
+                    # Merge and append
                     merged_lead = {**lead, **details}
                     final_data.append(merged_lead)
                 else:
-                    logger.info(f"   Skipping deep scan: Website found in details ({detail_website})")
-                    final_data.append(lead) # Keep original search info
-                    
+                    logger.info(f"   Skipped: Website found in second pass ({detail_website})")
             except Exception as e:
-                logger.error(f"   Failed to deeply enrich {lead['name']}: {e}")
-                final_data.append(lead) # At least keep basic info
+                logger.error(f"   Extraction failed for {lead['name']}: {e}")
+                final_data.append(lead)
         else:
-            logger.info("   -> Website already exists. Keeping basic info.")
-            final_data.append(lead)
+            logger.info("   -> Website already exists. Skipping.")
         
-        # Polite delay between deep scrapes only
+        # Delay to avoid detection during heavy enrichment
         if needs_enrichment:
             time.sleep(SCRAPE_SETTINGS.get("request_delay", 2))
 
@@ -120,13 +117,20 @@ def main():
     if final_data:
         try:
             exporter = ExcelExporter()
-            filename_clean = f"{args.niche.replace(' ', '_')}_{args.location.replace(' ', '_')}_MASTER"
-            filepath = exporter.save(final_data, filename_prefix=filename_clean)
-            logger.info(f"SUCCESS: Exported MASTER list of {len(final_data)} businesses to: {filepath}")
+            if args.output:
+                # Strip directory and extension if provided, as Exporter handles them
+                base_name = os.path.basename(args.output).replace('.xlsx', '')
+                filepath = exporter.save(final_data, filename_prefix=base_name)
+            else:
+                filename_clean = f"{args.niche.replace(' ', '_')}_{args.location.replace(' ', '_')}_MASTER"
+                filepath = exporter.save(final_data, filename_prefix=filename_clean)
+
+            logger.info(f"SUCCESS: Exported {len(final_data)} leads to: {filepath}")
         except Exception as e:
             logger.error(f"Failed to export results: {e}")
     else:
-        logger.warning("No enriched leads found to export.")
+        logger.warning("No qualified leads found to export.")
+
 
 if __name__ == "__main__":
     try:

@@ -1,0 +1,123 @@
+.wrapper {
+  background-color: #ffffff;
+  color: #1e293b;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+.header {
+  padding: 20px 0;
+  background: white;
+  border-bottom: 3px solid #1e3a8a; /* Academic Navy */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: #1e3a8a;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.enrollBtn {
+  background: #0d9488; /* Intellectual Teal */
+  color: white;
+  padding: 12px 30px;
+  font-weight: 700;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.hero {
+  padding: 120px 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  text-align: center;
+}
+
+.hero h1 {
+  font-family: serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.1;
+  margin-bottom: 25px;
+}
+
+.hero span {
+  color: #0d9488;
+  border-bottom: 4px solid #0d9488;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  color: #475569;
+}
+
+.subjectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.subjectCard {
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.subjectCard:hover {
+  transform: translateY(-5px);
+  border-color: #0d9488;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+.resultsSection {
+  padding: 100px 0;
+  background: #1e3a8a;
+  color: white;
+  text-align: center;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.statValue {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #5eead4;
+}
+
+.footer {
+  padding: 80px 0;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.5rem; }
+}

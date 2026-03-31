@@ -1,0 +1,124 @@
+.wrapper {
+  background-color: #f8fafc;
+  color: #334155;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.header {
+  padding: 20px 0;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: #0891b2; /* Clinical Cyan */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.actionBtn {
+  background: #0891b2;
+  color: white;
+  padding: 12px 30px;
+  font-weight: 700;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(8, 145, 178, 0.3);
+}
+
+.hero {
+  padding: 120px 0;
+  background: radial-gradient(circle at 80% 20%, #ecfeff 0%, #f8fafc 100%);
+  text-align: left;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #164e63;
+  line-height: 1.1;
+  margin-bottom: 25px;
+}
+
+.hero span {
+  color: #0891b2;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  max-width: 600px;
+  margin-bottom: 40px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.serviceSection {
+  padding: 100px 0;
+  background: white;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.serviceCard {
+  padding: 40px;
+  background: #f8fafc;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s ease;
+}
+
+.serviceCard:hover {
+  background: white;
+  border-color: #0891b2;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+.iconBox {
+  width: 60px;
+  height: 60px;
+  background: #cffafe;
+  color: #0891b2;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.emergencyBanner {
+  padding: 40px 0;
+  background: #164e63;
+  color: white;
+  text-align: center;
+}
+
+.footer {
+  padding: 80px 0;
+  background: #f8fafc;
+  text-align: center;
+  border-top: 1px solid #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.8rem; }
+}

@@ -1,0 +1,121 @@
+.wrapper {
+  background-color: #ffffff;
+  color: #334155;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.header {
+  padding: 20px 0;
+  background: white;
+  border-bottom: 3px solid #10b981; /* Sustainable Green */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.05);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 1.6rem;
+  color: #064e3b;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo span {
+  color: #10b981;
+}
+
+.saveBtn {
+  background: #10b981;
+  color: white;
+  padding: 12px 30px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  border-radius: 4px;
+}
+
+.hero {
+  padding: 120px 0;
+  background: radial-gradient(circle at 80% 20%, #ecfdf5 0%, #ffffff 100%);
+  text-align: left;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 25px;
+  color: #064e3b;
+}
+
+.hero h1 span {
+  display: block;
+  color: #10b981;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  max-width: 700px;
+  margin-bottom: 50px;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 80px;
+}
+
+.card {
+  padding: 50px 40px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+  border-left: 6px solid #10b981;
+  transition: all 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px -12px rgba(16, 185, 129, 0.1);
+}
+
+.card h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #064e3b;
+}
+
+.impactSection {
+  padding: 80px 0;
+  background: #064e3b;
+  color: white;
+  text-align: center;
+}
+
+.footer {
+  padding: 100px 0;
+  background: #f8fafc;
+  text-align: center;
+  border-top: 1px solid #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.8rem; }
+}

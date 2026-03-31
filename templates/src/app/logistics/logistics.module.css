@@ -1,0 +1,120 @@
+.wrapper {
+  background-color: #f8fafc;
+  color: #0f172a;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.header {
+  padding: 20px 0;
+  background: #1e3a8a; /* Logistics Navy */
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 1.6rem;
+  letter-spacing: -1px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo span {
+  color: #f97316; /* Delivery Orange */
+}
+
+.actionBtn {
+  background: #f97316;
+  color: white;
+  padding: 12px 30px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  border-radius: 4px;
+}
+
+.hero {
+  padding: 140px 0;
+  background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.9)), url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1500') center/cover;
+  color: white;
+  text-align: left;
+}
+
+.hero h1 {
+  font-size: 4.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+.hero span {
+  display: block;
+  color: #f97316;
+}
+
+.hero p {
+  font-size: 1.4rem;
+  max-width: 650px;
+  margin-bottom: 50px;
+  opacity: 0.9;
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: -60px; /* Overlap hero */
+  position: relative;
+  z-index: 10;
+}
+
+.serviceCard {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border-bottom: 4px solid #f97316;
+}
+
+.serviceCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #1e3a8a;
+}
+
+.statsSection {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.statItem h3 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #1e3a8a;
+}
+
+.footer {
+  padding: 80px 0;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.8rem; }
+  .serviceGrid { margin-top: 40px; }
+}

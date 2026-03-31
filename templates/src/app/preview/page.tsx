@@ -5,7 +5,15 @@ import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Phone, CheckCircle, ShieldCheck, Clock, Star } from 'lucide-react';
 import MobileActions from '@/components/MobileActions';
+import { LeadMachineConfig as Config } from '@/configs/lead-machine';
+import { formatContent } from '@/lib/utils';
 import styles from './preview.module.css';
+
+const ICON_MAP = {
+  Clock: Clock,
+  ShieldCheck: ShieldCheck,
+  CheckCircle: CheckCircle
+};
 
 function PreviewContent() {
   const searchParams = useSearchParams();
@@ -15,6 +23,8 @@ function PreviewContent() {
   const rating = searchParams.get('rating') || '5.0';
   const niche = searchParams.get('niche') || 'Emergency Specialist';
   const location = searchParams.get('location') || 'Local Area';
+
+  const data = { name, phone, rating, niche, location };
 
   // Animation variants
   const fadeInUp = {
@@ -39,7 +49,7 @@ function PreviewContent() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "LocalBusiness",
+            "@type": Config.schemaType,
             "name": name,
             "telephone": phone,
             "address": {
@@ -87,17 +97,16 @@ function PreviewContent() {
             </motion.div>
             
             <motion.h1 variants={fadeInUp}>
-              Trusted {niche} <br/> in {location}
+              {formatContent(Config.hero.title, data)}
             </motion.h1>
             
             <motion.p variants={fadeInUp}>
-              Don't settle for less. We provide 24/7 priority {niche.toLowerCase()} support 
-              across {location}. Fast, professional, and fully insured.
+              {formatContent(Config.hero.subtitle, data)}
             </motion.p>
             
             <motion.div variants={fadeInUp} className={styles.ctaGroup}>
               <a href={`tel:${phone}`} className="btn" style={{ fontSize: '1.1rem', padding: '15px 40px' }}>
-                Get Immediate Help
+                {Config.hero.cta}
               </a>
             </motion.div>
           </motion.div>
@@ -122,23 +131,16 @@ function PreviewContent() {
             viewport={{ once: true }}
             className={styles.grid}
           >
-            <motion.div variants={fadeInUp} className={styles.card}>
-              <Clock className={styles.icon} size={32} color="var(--primary)" style={{ marginBottom: '15px' }} />
-              <h3>30-Min Response</h3>
-              <p>Available 24/7. We guarantee to have a {niche.toLowerCase()} expert at your door in {location} within 30 minutes.</p>
-            </motion.div>
-            
-            <motion.div variants={fadeInUp} className={styles.card}>
-              <ShieldCheck className={styles.icon} size={32} color="var(--primary)" style={{ marginBottom: '15px' }} />
-              <h3>Fully Certified</h3>
-              <p>Peace of mind guaranteed. All work is conducted by background-checked and CHAS-accredited specialists.</p>
-            </motion.div>
-            
-            <motion.div variants={fadeInUp} className={styles.card}>
-              <CheckCircle className={styles.icon} size={32} color="var(--primary)" style={{ marginBottom: '15px' }} />
-              <h3>Fixed Pricing</h3>
-              <p>No hidden surprises. We provide up-front, transparent quotes before any {niche.toLowerCase()} work begins.</p>
-            </motion.div>
+            {Config.features.map((feature, idx) => {
+              const Icon = ICON_MAP[feature.icon as keyof typeof ICON_MAP] || CheckCircle;
+              return (
+                <motion.div key={idx} variants={fadeInUp} className={styles.card}>
+                  <Icon className={styles.icon} size={32} color="var(--primary)" style={{ marginBottom: '15px' }} />
+                  <h3>{feature.title}</h3>
+                  <p>{formatContent(feature.desc, data)}</p>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -150,8 +152,8 @@ function PreviewContent() {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
           >
-            <h2>Emergency? Call Us Now</h2>
-            <p className="mb-40">Direct line to our on-call {niche.toLowerCase()} team in {location}.</p>
+            <h2>{formatContent(Config.ctaSection.title, data)}</h2>
+            <p className="mb-40">{formatContent(Config.ctaSection.subtitle, data)}</p>
             <a href={`tel:${phone}`} className="btn btn-secondary" style={{ fontSize: '1.2rem', padding: '20px 50px' }}>
               Call {phone}
             </a>

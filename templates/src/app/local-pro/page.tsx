@@ -2,99 +2,166 @@
 
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import { motion } from 'framer-motion';
+import { Check, Star, MapPin, Calendar, Heart, Shield, Award } from 'lucide-react';
+import { Reveal } from '@/components/Reveal';
+import MobileActions from '@/components/MobileActions';
+import { LocalProConfig as Config } from '@/configs/local-pro';
+import { formatContent } from '@/lib/utils';
 import styles from './local-pro.module.css';
 
 function LocalProContent() {
   const searchParams = useSearchParams();
   
-  // Dynamic Data
   const name = searchParams.get('name') || 'Your Local Service';
   const phone = searchParams.get('phone') || '0000 000 000';
   const niche = searchParams.get('niche') || 'Professional Expert';
   const location = searchParams.get('location') || 'Local Area';
 
+  const data = { name, phone, niche, location };
+
   return (
     <div className={styles.wrapper}>
-      {/* 1. Friendly Header */}
+      {/* Friendly SEO Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": Config.schemaType,
+            "name": name,
+            "telephone": phone,
+            "address": { "@type": "PostalAddress", "addressLocality": location }
+          })
+        }}
+      />
+
       <header className={styles.header}>
         <div className="container">
           <div className={styles.headerContent}>
-            <div className={styles.logo}>{name}</div>
-            <a href={`tel:${phone}`} className="btn" style={{backgroundColor: '#2563eb'}}>Call {phone}</a>
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className={styles.logo}
+            >
+              {name}
+            </motion.div>
+            <motion.a 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href={`tel:${phone}`} 
+              className="btn" 
+              style={{backgroundColor: '#2563eb', padding: '10px 25px'}}
+            >
+              {Config.hero.cta}
+            </motion.a>
           </div>
         </div>
       </header>
 
-      {/* 2. Hero with Local Badge */}
       <section className={styles.hero}>
         <div className="container">
-          <div className={styles.badge}>Now Serving {location}</div>
-          <h1 style={{fontSize: '3rem', color: '#1e3a8a', marginBottom: '20px'}}>
-            Your Trusted {niche} in {location}
-          </h1>
-          <p style={{fontSize: '1.25rem', color: '#475569', maxWidth: '800px', margin: '0 auto 30px'}}>
-            High-quality, reliable, and friendly {niche.toLowerCase()} services tailored to your needs. 
-            We take pride in our work and treat every home in {location} like our own.
-          </p>
-          <a href={`tel:${phone}`} className="btn btn-secondary" style={{backgroundColor: '#1e3a8a'}}>Check Availability</a>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className={styles.badge}>
+              <MapPin size={14} style={{ marginRight: 5 }} />
+              {formatContent(Config.hero.badge, data)}
+            </div>
+            <h1 style={{fontSize: '3.5rem', color: '#1e3a8a', marginBottom: '20px', fontWeight: 900}}>
+              {formatContent(Config.hero.title, data)}
+            </h1>
+            <p style={{fontSize: '1.3rem', color: '#475569', maxWidth: '800px', margin: '0 auto 40px'}}>
+              {formatContent(Config.hero.subtitle, data)}
+            </p>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 700, color: '#1e3a8a' }}>
+                <Shield size={20} color="#10b981" /> 100% Insured
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 700, color: '#1e3a8a' }}>
+                <Award size={20} color="#10b981" /> Certified Pro
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* 3. Service Packages */}
       <section className={styles.services}>
         <div className="container">
-          <h2 className="text-center" style={{fontSize: '2.5rem', color: '#1e3a8a'}}>Our {niche} Packages</h2>
+          <Reveal>
+            <h2 className="text-center" style={{fontSize: '2.8rem', color: '#1e3a8a', marginBottom: '60px'}}>Transparent Pricing</h2>
+          </Reveal>
+          
           <div className={styles.pricingGrid}>
-            <div className={styles.priceCard}>
-              <h3>Essential Care</h3>
-              <div className={styles.price}>£29<span style={{fontSize: '1rem', color: '#64748b'}}>/start</span></div>
-              <ul className={styles.featureList}>
-                <li>Standard {niche} check</li>
-                <li>Basic cleaning/maintenance</li>
-                <li>Local {location} service</li>
-              </ul>
-              <a href={`tel:${phone}`} className="btn" style={{width: '100%', backgroundColor: '#2563eb'}}>Choose Plan</a>
-            </div>
-            <div className={styles.priceCard} style={{borderColor: '#2563eb', background: '#eff6ff'}}>
-              <h3>Premium Pro</h3>
-              <div className={styles.price}>£59<span style={{fontSize: '1rem', color: '#64748b'}}>/start</span></div>
-              <ul className={styles.featureList}>
-                <li>Full deep {niche} service</li>
-                <li>Priority booking in {location}</li>
-                <li>Extended warranty included</li>
-              </ul>
-              <a href={`tel:${phone}`} className="btn" style={{width: '100%', backgroundColor: '#2563eb'}}>Most Popular</a>
-            </div>
-            <div className={styles.priceCard}>
-              <h3>Ultimate VIP</h3>
-              <div className={styles.price}>£99<span style={{fontSize: '1rem', color: '#64748b'}}>/start</span></div>
-              <ul className={styles.featureList}>
-                <li>All-inclusive package</li>
-                <li>Same-day response</li>
-                <li>Ongoing monthly support</li>
-              </ul>
-              <a href={`tel:${phone}`} className="btn" style={{width: '100%', backgroundColor: '#2563eb'}}>Get Ultimate</a>
-            </div>
+            {Config.pricing.map((p, i) => (
+              <Reveal key={i} delay={0.15 * i}>
+                <motion.div 
+                  whileHover={{ y: -10 }}
+                  className={styles.priceCard} 
+                  style={p.popular ? {borderColor: '#2563eb', background: '#eff6ff', position: 'relative'} : {}}
+                >
+                  {p.popular && <div style={{ position: 'absolute', top: -15, left: '50%', transform: 'translateX(-50%)', background: '#2563eb', color: 'white', padding: '5px 15px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 800 }}>MOST POPULAR</div>}
+                  <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>{p.level}</h3>
+                  <div className={styles.price}>{p.price}<span style={{fontSize: '1rem', color: '#64748b'}}>/session</span></div>
+                  <ul className={styles.featureList}>
+                    {p.features.map((f, j) => (
+                      <li key={j}><Check size={16} color="#10b981" /> {formatContent(f, data)}</li>
+                    ))}
+                  </ul>
+                  <motion.a 
+                    whileHover={{ scale: 1.02 }}
+                    href={`tel:${phone}`} 
+                    className="btn" 
+                    style={{width: '100%', backgroundColor: p.popular ? '#2563eb' : '#1e3a8a'}}
+                  >
+                    Select {p.level}
+                  </motion.a>
+                </motion.div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. Local Trust Footer */}
-      <footer style={{padding: '80px 0', background: '#1e3a8a', color: 'white', textAlign: 'center'}}>
+      <footer style={{padding: '100px 0', background: '#1e3a8a', color: 'white', textAlign: 'center'}}>
         <div className="container">
-          <h2>Support Your Local {location} {niche}</h2>
-          <p style={{margin: '20px 0 40px'}}>We're just a phone call away. No call-out fees for {location} residents.</p>
-          <a href={`tel:${phone}`} className="btn" style={{backgroundColor: '#10b981', padding: '20px 40px', fontSize: '1.25rem'}}>Call {name}: {phone}</a>
-          <p style={{marginTop: '60px', opacity: 0.6}}>© 2026 {name} - Friendly {niche} Experts.</p>
+          <Reveal>
+            <div>
+              <Heart size={48} style={{ margin: '0 auto 30px', color: '#60a5fa' }} />
+              <h2 style={{fontSize: '3rem', fontWeight: 900, marginBottom: '20px'}}>{formatContent(Config.footer.title, data)}</h2>
+              <p style={{fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8}}>{formatContent(Config.footer.subtitle, data)}</p>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '5px', color: '#fbbf24', marginBottom: '40px' }}>
+                <Star size={24} fill="currentColor" />
+                <Star size={24} fill="currentColor" />
+                <Star size={24} fill="currentColor" />
+                <Star size={24} fill="currentColor" />
+                <Star size={24} fill="currentColor" />
+              </div>
+              <motion.a 
+                animate={{ y: [0, -5, 0] }}
+                transition={{ repeat: Infinity, duration: 3 }}
+                href={`tel:${phone}`} 
+                className="btn" 
+                style={{backgroundColor: '#10b981', padding: '25px 60px', fontSize: '1.4rem', fontWeight: 900, borderRadius: '50px'}}
+              >
+                Call {name}: {phone}
+              </motion.a>
+            </div>
+          </Reveal>
+          <p style={{marginTop: '100px', opacity: 0.4, fontSize: '0.8rem', letterSpacing: '2px'}}>© 2026 {name.toUpperCase()} | YOUR NEIGHBORHOOD {niche.toUpperCase()} | {location.toUpperCase()}</p>
         </div>
       </footer>
+
+      <MobileActions phone={phone} name={name} />
     </div>
   );
 }
 
 export default function LocalProPage() {
   return (
-    <Suspense fallback={<div>Loading Local Pro...</div>}>
+    <Suspense fallback={<div>Connecting with neighbors...</div>}>
       <LocalProContent />
     </Suspense>
   );

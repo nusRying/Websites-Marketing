@@ -1,0 +1,138 @@
+.wrapper {
+  background-color: #fdfdfb; /* Ivory Linen */
+  color: #1a1a1a;
+  min-height: 100vh;
+  font-family: 'Playfair Display', serif;
+}
+
+.header {
+  padding: 40px 0;
+  background: transparent;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-size: 2.2rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+
+.logo span {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  margin-top: 10px;
+  opacity: 0.6;
+}
+
+.hero {
+  padding: 120px 0;
+  text-align: center;
+  background: linear-gradient(rgba(253, 253, 251, 0.7), rgba(253, 253, 251, 0.7)), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=1500') center/cover;
+}
+
+.hero h1 {
+  font-size: 5rem;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 30px;
+  color: #1a1a1a;
+}
+
+.hero p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin-bottom: 50px;
+}
+
+.bookAction {
+  font-family: 'Inter', sans-serif;
+  background: #1a1a1a;
+  color: white;
+  padding: 15px 45px;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: all 0.5s ease;
+}
+
+.bookAction:hover {
+  background: #d4af37; /* Wedding Gold */
+  letter-spacing: 5px;
+}
+
+.gallerySection {
+  padding: 120px 0;
+  background: white;
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 80px;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.storyContent h2 {
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
+.storyContent p {
+  font-family: 'Inter', sans-serif;
+  line-height: 2;
+  color: #4b5563;
+  margin-bottom: 30px;
+}
+
+.packageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 80px;
+}
+
+.packageCard {
+  padding: 60px 40px;
+  border: 1px solid #eee;
+  text-align: center;
+  background: #fdfdfb;
+  transition: all 0.4s ease;
+}
+
+.packageCard:hover {
+  border-color: #d4af37;
+  transform: translateY(-5px);
+}
+
+.packageCard h3 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.packagePrice {
+  font-size: 2.5rem;
+  color: #d4af37;
+  margin-bottom: 30px;
+}
+
+.footer {
+  padding: 120px 0;
+  background: #1a1a1a;
+  color: #fdfdfb;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 3rem; }
+  .storyGrid { grid-template-columns: 1fr; gap: 40px; }
+}

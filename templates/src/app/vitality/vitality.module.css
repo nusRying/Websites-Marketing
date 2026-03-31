@@ -1,0 +1,136 @@
+.wrapper {
+  background-color: #fdfbf7; /* Soft Sand */
+  color: #334155;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.header {
+  padding: 20px 0;
+  background: rgba(253, 251, 247, 0.8);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 300;
+  font-size: 1.6rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #1e293b;
+}
+
+.bookBtn {
+  background: #475569;
+  color: white;
+  padding: 10px 30px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-radius: 50px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bookBtn:hover {
+  background: #1e293b;
+  transform: scale(1.05);
+}
+
+.hero {
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 4.5rem;
+  font-weight: 200;
+  line-height: 1;
+  color: #0f172a;
+  margin-bottom: 30px;
+}
+
+.hero span {
+  font-style: italic;
+  color: #86efac; /* Sage accent */
+}
+
+.hero p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  opacity: 0.8;
+  line-height: 1.8;
+}
+
+.scheduleSection {
+  padding: 100px 0;
+  background: white;
+}
+
+.classGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.classCard {
+  padding: 40px;
+  background: #f8fafc;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.classCard:hover {
+  background: white;
+  border-color: #86efac;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+}
+
+.time {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #86efac;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.community {
+  padding: 100px 0;
+  background: #ecfdf5; /* Light Sage */
+}
+
+.imageCircle {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.footer {
+  padding: 80px 0;
+  background: #1e293b;
+  color: white;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.8rem; }
+}
