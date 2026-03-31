@@ -74,4 +74,5 @@ ALTER TABLE crm_history ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Users can view history of their leads" ON crm_history FOR SELECT 
 USING (EXISTS (SELECT 1 FROM leads WHERE leads.id = crm_history.lead_id AND leads.user_id = auth.uid()));
 
-CREATE POLICY "System can log history" ON crm_history FOR INSERT WITH CHECK (TRUE);
+CREATE POLICY "Users can log history for their own leads" ON crm_history FOR INSERT
+WITH CHECK (EXISTS (SELECT 1 FROM leads WHERE leads.id = crm_history.lead_id AND leads.user_id = auth.uid()));

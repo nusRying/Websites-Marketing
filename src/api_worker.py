@@ -1,9 +1,10 @@
 import logging
 import uuid
-from fastapi import FastAPI, BackgroundTasks, HTTPException
+from fastapi import FastAPI, BackgroundTasks, HTTPException, Header, Depends
 from pydantic import BaseModel
 from typing import Optional
 import os
+from supabase import create_client, Client
 
 # Import our pipeline components
 from src.scrapers.engine import ScraperEngine
@@ -15,6 +16,34 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger("APIWorker")
 
 app = FastAPI(title="Lead Engine SaaS Worker")
+
+# Supabase Client for Auth Verification
+supabase_url = os.getenv("NEXT_PUBLIC_SUPABASE_URL")
+supabase_anon_key = os.getenv("NEXT_PUBLIC_SUPABASE_ANON_KEY")
+supabase: Client = create_client(supabase_url, supabase_anon_key) if supabase_url and supabase_anon_key else None
+
+async def get_current_user(authorization: str = Header(None)):
+    """
+    Verifies the JWT token from Supabase Auth.
+    """
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing or invalid authorization header")
+    
+    token = authorization.split(" ")[1]
+    
+    if not supabase:
+        logger.error("Supabase client not initialized")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+    try:
+        # Verify token with Supabase
+        user_res = supabase.auth.get_user(token)
+        if not user_res.user:
+            raise HTTPException(status_code=401, detail="Invalid session")
+        return user_res.user
+    except Exception as e:
+        logger.error(f"Auth error: {e}")
+        raise HTTPException(status_code=401, detail="Authentication failed")
 
 class PipelineRequest(BaseModel):
     niche: str
@@ -52,11 +81,9 @@ def run_full_pipeline(job_id: str, request: PipelineRequest):
             return
 
         # 2. ENRICH, SCREENSHOT & CLOUD SYNC
-        # We'll save to a temp file first for the AI engine to process
         temp_dir = "exports/temp"
         os.makedirs(temp_dir, exist_ok=True)
         
-        # We need a dummy ExcelExporter to create the initial file
         from src.scrapers.export import ExcelExporter
         exporter = ExcelExporter(export_dir=temp_dir)
         temp_filename = f"job_{job_id}_raw"
@@ -90,10 +117,18 @@ async def root():
     return {"status": "Lead Engine Worker Active", "version": "1.0.0"}
 
 @app.post("/run-pipeline", response_model=JobStatus)
-async def trigger_pipeline(request: PipelineRequest, background_tasks: BackgroundTasks):
+async def trigger_pipeline(
+    request: PipelineRequest, 
+    background_tasks: BackgroundTasks,
+    user=Depends(get_current_user)
+):
     """
-    Starts a background pipeline job.
+    Starts a background pipeline job after verifying user identity.
     """
+    # Security: Ensure the user is only triggering jobs for their own ID
+    if request.user_id != user.id:
+        raise HTTPException(status_code=403, detail="Forbidden: User ID mismatch")
+
     job_id = str(uuid.uuid4())
     jobs[job_id] = "PENDING"
     

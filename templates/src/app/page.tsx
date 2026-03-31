@@ -41,6 +41,7 @@ export default function LeadCRM() {
   const [systemStatus, setSystemStatus] = useState<any>(null);
   const [selectedLeadIds, setSelectedLeadIds] = useState<Set<string>>(new Set());
   const [subscriptionStatus, setSubscriptionStatus] = useState<string>('inactive');
+  const [error, setAppError] = useState<string | null>(null);
 
   // Editable AI Fields
   const [editableAI, setEditableAI] = useState<Record<string, string>>({});
@@ -162,18 +163,24 @@ export default function LeadCRM() {
     setCrmData(data);
   };
 
-  const loadLeads = async (filename: string) => {
-    setSelectedFile(filename);
+  const loadLeads = async (batchId: string) => {
+    setSelectedFile(batchId);
     setLoading(true);
-    const res = await fetch(`/api/leads?file=${filename}`);
-    const data = await res.json();
-    setLeads(data.leads || []);
-    
-    // Auto-select template based on niche from filename
-    const niche = filename.split('_')[0] || 'Specialist';
-    setActiveTemplate(autoSelectTemplate(niche));
-    
-    setLoading(false);
+    setAppError(null);
+    try {
+      const res = await fetch(`/api/leads?batchId=${batchId}`);
+      if (!res.ok) throw new Error("Failed to load leads from cloud.");
+      const data = await res.json();
+      setLeads(data.leads || []);
+      
+      if (data.leads?.length > 0) {
+        setActiveTemplate(autoSelectTemplate(data.leads[0].category || 'Specialist'));
+      }
+    } catch (e: any) {
+      setAppError(e.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const updateCRM = async (leadId: string, status?: string, leadNotes?: string) => {
@@ -352,6 +359,21 @@ export default function LeadCRM() {
 
   return (
     <div style={{ padding: '40px', maxWidth: '1800px', margin: '0 auto', fontFamily: 'Inter, sans-serif' }}>
+      {/* ERROR DISPLAY */}
+      <AnimatePresence>
+        {error && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            style={{ background: '#fef2f2', color: '#ef4444', padding: '15px 30px', borderRadius: '12px', marginBottom: '30px', border: '1px solid #fee2e2', fontWeight: 700, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
+          >
+            <span>{error}</span>
+            <button onClick={() => setAppError(null)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer' }}><X size={18} /></button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ELITE HEADER */}
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px' }}>
         <div>
