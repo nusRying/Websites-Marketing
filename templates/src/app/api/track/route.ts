@@ -1,50 +1,56 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-
-const DATA_FILE = path.join(process.cwd(), 'src', 'data', 'crm_states.json');
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { cookies } from 'next/headers'
+import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
   try {
-    const { leadId, name, location } = await request.json();
-    const userAgent = request.headers.get('user-agent') || 'unknown';
+    const { leadId, name, location } = await request.json()
+    const userAgent = request.headers.get('user-agent') || 'unknown'
     
     if (!leadId) {
-      return NextResponse.json({ error: 'Lead ID required' }, { status: 400 });
+      return NextResponse.json({ error: 'Lead ID required' }, { status: 400 })
     }
 
-    // 1. Log to CRM Data
-    if (fs.existsSync(DATA_FILE)) {
-      const data = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
-      
-      if (!data[leadId]) {
-        data[leadId] = { status: 'NEW', notes: '', history: [] };
+    const cookieStore = await cookies()
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          get(name: string) {
+            return cookieStore.get(name)?.value
+          },
+        },
       }
-      
-      const visitEntry = {
+    )
+
+    // 1. Log to CRM History Table
+    const { error: historyError } = await supabase
+      .from('crm_history')
+      .insert({
+        lead_id: leadId,
         type: 'VIEW',
-        timestamp: new Date().toISOString(),
-        userAgent
-      };
-      
-      if (!data[leadId].history) data[leadId].history = [];
-      data[leadId].history.push(visitEntry);
-      
-      // Also update status if it was NEW or PITCH READY
-      if (data[leadId].status === 'NEW' || data[leadId].status === 'PITCH READY') {
-        data[leadId].status = 'INTERESTED';
-      }
+        metadata: { userAgent, name, location }
+      })
 
-      fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-    }
+    if (historyError) throw historyError
 
-    // 2. Trigger Slack Alert (Mocked for now, calling internal trigger)
-    console.log(`🔥 LEAD VIEWING: ${name} from ${location} is on their site!`);
-    // Future: trigger src/slack_alerts.py via a system call or webhook
+    // 2. Update Lead Status to 'INTERESTED'
+    const { error: leadError } = await supabase
+      .from('leads')
+      .update({ status: 'INTERESTED' })
+      .eq('id', leadId)
+      // Note: RLS will handle security if we had a user session, 
+      // but tracking is public. Our policy "System can log history" and public update needs care.
+      // For now, we allow the update if the leadId is valid.
+
+    if (leadError) throw leadError
+
+    console.log(`🔥 CLOUD TRACKING: ${name} from ${location} viewed their site.`);
 
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Tracking Error:', error);
-    return NextResponse.json({ error: 'Failed to track' }, { status: 500 });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.git/
+.env
+node_modules/
+exports/
+templates/.next/
+tests/
+.planning/
+.vscode/
+scraper.log

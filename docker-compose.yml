@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./exports:/app/exports
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
+      - PYTHONPATH=/app
+    restart: unless-stopped
+
+  # Optional: We could also run the Next.js frontend in Docker if desired
+  # frontend:
+  #   build: ./templates
+  #   ports:
+  #     - "3000:3000"
+  #   ...

@@ -2,3 +2,12 @@ scrapling==0.4.1
 pandas
 openpyxl
 tenacity
+openai
+playwright
+psutil
+supabase
+fastapi
+uvicorn
+requests
+watchdog
+python-multipart

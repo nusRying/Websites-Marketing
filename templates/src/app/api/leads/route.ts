@@ -1,47 +1,62 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
-import * as XLSX from 'xlsx';
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { cookies } from 'next/headers'
+import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const fileParam = searchParams.get('file');
+  const cookieStore = await cookies()
+  const { searchParams } = new URL(request.url)
+  const batchId = searchParams.get('batchId')
 
-  // Path to the exports directory at the root of the project
-  const exportsDir = path.join(process.cwd(), '..', 'exports');
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value
+        },
+      },
+    }
+  )
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
 
   try {
-    // 1. If no file requested, return list of available files
-    if (!fileParam) {
-      if (!fs.existsSync(exportsDir)) {
-        return NextResponse.json({ files: [] });
-      }
-      const files = fs.readdirSync(exportsDir)
-        .filter(f => f.endsWith('.xlsx') && !f.startsWith('target_business_niches'))
-        .map(f => ({
-          name: f,
-          date: fs.statSync(path.join(exportsDir, f)).mtime
-        }))
-        .sort((a, b) => b.date.getTime() - a.date.getTime());
+    if (!batchId) {
+      // 1. Fetch Batches for the user
+      const { data: batches, error: batchError } = await supabase
+        .from('batches')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false })
 
-      return NextResponse.json({ files });
+      if (batchError) throw batchError
+      
+      // Map to backward compatible format for the frontend
+      const files = batches.map(b => ({
+        id: b.id,
+        name: b.file_name || `${b.niche}_${b.location}`,
+        date: b.created_at
+      }))
+
+      return NextResponse.json({ files })
+    } else {
+      // 2. Fetch Leads for a specific batch
+      const { data: leads, error: leadError } = await supabase
+        .from('leads')
+        .select('*')
+        .eq('batch_id', batchId)
+        .eq('user_id', user.id)
+
+      if (leadError) throw leadError
+
+      return NextResponse.json({ leads })
     }
-
-    // 2. If specific file requested, parse and return data
-    const filePath = path.join(exportsDir, fileParam);
-    if (!fs.existsSync(filePath)) {
-      return NextResponse.json({ error: 'File not found' }, { status: 404 });
-    }
-
-    const workbook = XLSX.readFile(filePath);
-    const sheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[sheetName];
-    const data = XLSX.utils.sheet_to_json(worksheet);
-
-    return NextResponse.json({ leads: data });
-
-  } catch (error) {
-    console.error('API Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  } catch (error: any) {
+    console.error('API Error:', error)
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
