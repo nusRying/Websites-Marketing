@@ -38,9 +38,69 @@ export default function LeadCRM() {
   const [notes, setNotes] = useState('');
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [copiedPitch, setCopiedPitch] = useState(false);
+  const [systemStatus, setSystemStatus] = useState<any>(null);
+  const [selectedLeadIds, setSelectedLeadIds] = useState<Set<string>>(new Set());
+  const [subscriptionStatus, setSubscriptionStatus] = useState<string>('inactive');
 
   // Editable AI Fields
   const [editableAI, setEditableAI] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('subscription_status')
+          .eq('id', user.id)
+          .single();
+        if (profile) setSubscriptionStatus(profile.subscription_status || 'inactive');
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  const handleCheckout = async () => {
+    const res = await fetch('/api/billing/checkout', { method: 'POST' });
+    const data = await res.json();
+    if (data.url) window.location.href = data.url;
+  };
+
+  const toggleLeadSelection = (id: string) => {
+    const newSelection = new Set(selectedLeadIds);
+    if (newSelection.has(id)) newSelection.delete(id);
+    else newSelection.add(id);
+    setSelectedLeadIds(newSelection);
+  };
+
+  const toggleAllLeads = () => {
+    if (selectedLeadIds.size === filteredLeads.length) {
+      setSelectedLeadIds(new Set());
+    } else {
+      setSelectedLeadIds(new Set(filteredLeads.map(l => getLeadId(l))));
+    }
+  };
+
+  const bulkUpdateStatus = async (status: string) => {
+    const promises = Array.from(selectedLeadIds).map(id => updateCRM(id, status));
+    await Promise.all(promises);
+    setSelectedLeadIds(new Set());
+  };
+
+  useEffect(() => {
+    const fetchStatus = async () => {
+      try {
+        const res = await fetch('/api/status');
+        const data = await res.json();
+        setSystemStatus(data);
+      } catch (e) {
+        console.error("Status fetch failed", e);
+      }
+    };
+    fetchStatus();
+    const interval = setInterval(fetchStatus, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     if (selectedLead) {
@@ -185,11 +245,15 @@ export default function LeadCRM() {
   };
 
   const exportToOutreach = () => {
-    if (!filteredLeads.length) return;
+    const targets = selectedLeadIds.size > 0 
+      ? leads.filter(l => selectedLeadIds.has(getLeadId(l)))
+      : filteredLeads;
+
+    if (!targets.length) return;
 
     // We'll generate a CSV string here for simplicity
     const headers = ['first_name', 'company_name', 'email', 'phone', 'location', 'sample_site_url', 'custom_hero_title', 'custom_pain_point'];
-    const rows = filteredLeads.map(l => {
+    const rows = targets.map(l => {
       const niche = selectedFile?.split('_')[0] || 'Specialist';
       const template = autoSelectTemplate(niche);
       
@@ -229,6 +293,8 @@ export default function LeadCRM() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    
+    if (selectedLeadIds.size > 0) setSelectedLeadIds(new Set());
   };
 
   const generatePreviewUrl = (lead: any) => {
@@ -249,6 +315,40 @@ export default function LeadCRM() {
 
     return `${activeTemplate}?${params.toString()}`;
   };
+
+  if (subscriptionStatus !== 'active') {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0f172a', color: 'white', fontFamily: 'Inter, sans-serif' }}>
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} style={{ maxWidth: '500px', textAlign: 'center', padding: '60px', background: 'rgba(255,255,255,0.03)', borderRadius: '40px', border: '1px solid rgba(255,255,255,0.1)' }}>
+          <div style={{ background: '#3b82f6', width: '80px', height: '80px', borderRadius: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 30px', boxShadow: '0 20px 40px rgba(59, 130, 246, 0.3)' }}>
+            <Zap size={40} fill="white" />
+          </div>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 900, marginBottom: '20px', letterSpacing: '-1px' }}>Unlock Elite Intel</h1>
+          <p style={{ fontSize: '1.1rem', opacity: 0.7, lineHeight: '1.6', marginBottom: '40px' }}>
+            Get unlimited access to the stealth scraper, AI enrichment pipeline, and high-conversion site templates.
+          </p>
+          <div style={{ background: 'rgba(255,255,255,0.05)', padding: '30px', borderRadius: '24px', textAlign: 'left', marginBottom: '40px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
+              <CheckCircle2 size={20} color="#10b981" /> <span style={{ fontWeight: 600 }}>Unlimited Lead Discovery</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '15px' }}>
+              <CheckCircle2 size={20} color="#10b981" /> <span style={{ fontWeight: 600 }}>GPT-4o AI Personalization</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <CheckCircle2 size={20} color="#10b981" /> <span style={{ fontWeight: 600 }}>Visual Proof Automation</span>
+            </div>
+          </div>
+          <button 
+            onClick={handleCheckout}
+            style={{ width: '100%', padding: '20px', background: 'white', color: '#0f172a', border: 'none', borderRadius: '16px', fontWeight: 900, fontSize: '1.1rem', cursor: 'pointer', boxShadow: '0 10px 20px rgba(0,0,0,0.2)' }}
+          >
+            START 7-DAY FREE TRIAL
+          </button>
+          <p style={{ marginTop: '25px', fontSize: '0.85rem', opacity: 0.5 }}>Then $199/mo. Cancel anytime.</p>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ padding: '40px', maxWidth: '1800px', margin: '0 auto', fontFamily: 'Inter, sans-serif' }}>
@@ -405,7 +505,15 @@ export default function LeadCRM() {
               <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                 <thead>
                   <tr style={{ textAlign: 'left', color: '#94a3b8', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1.5px', background: '#fff' }}>
-                    <th style={{ padding: '20px 30px' }}>Lead Intelligence</th>
+                    <th style={{ padding: '20px 30px', width: '50px' }}>
+                      <input 
+                        type="checkbox" 
+                        checked={selectedLeadIds.size === filteredLeads.length && filteredLeads.length > 0} 
+                        onChange={toggleAllLeads}
+                        style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                      />
+                    </th>
+                    <th style={{ padding: '20px' }}>Lead Intelligence</th>
                     <th style={{ padding: '20px' }}>Quality</th>
                     <th style={{ padding: '20px' }}>Reputation</th>
                     <th style={{ padding: '20px' }}>Pipeline Stage</th>
@@ -418,16 +526,36 @@ export default function LeadCRM() {
                     const status = crmData[leadId]?.status || 'NEW';
                     const quality = getLeadQuality(l);
                     const previewUrl = generatePreviewUrl(l);
+                    const isSelected = selectedLeadIds.has(leadId);
                     return (
                       <motion.tr 
                         layout
                         key={i} 
                         onClick={() => { setSelectedLead(l); setNotes(crmData[leadId]?.notes || ''); }}
-                        style={{ borderTop: '1px solid #f1f5f9', cursor: 'pointer', transition: 'background 0.2s' }}
-                        whileHover={{ background: '#f8fafc' }}
+                        style={{ borderTop: '1px solid #f1f5f9', cursor: 'pointer', transition: 'background 0.2s', background: isSelected ? '#eff6ff' : 'transparent' }}
+                        whileHover={{ background: isSelected ? '#dbeafe' : '#f8fafc' }}
                       >
-                        <td style={{ padding: '25px 30px' }}>
-                          <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '1rem' }}>{l.Name || l.name}</div>
+                        <td style={{ padding: '25px 30px' }} onClick={(e) => e.stopPropagation()}>
+                          <input 
+                            type="checkbox" 
+                            checked={isSelected} 
+                            onChange={() => toggleLeadSelection(leadId)}
+                            style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                          />
+                        </td>
+                        <td style={{ padding: '25px 20px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '1rem' }}>{l.Name || l.name}</div>
+                            {crmData[leadId]?.history?.some((h: any) => h.type === 'VIEW') && (
+                              <motion.div 
+                                animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
+                                transition={{ repeat: Infinity, duration: 2 }}
+                                style={{ background: '#ef4444', color: 'white', fontSize: '0.6rem', fontWeight: 900, padding: '2px 6px', borderRadius: '4px', letterSpacing: '0.5px' }}
+                              >
+                                HOT
+                              </motion.div>
+                            )}
+                          </div>
                           <div style={{ fontSize: '0.85rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
                             <Phone size={14} color="#3b82f6" /> {l.Phone || 'No Contact Number'}
                           </div>
@@ -484,6 +612,48 @@ export default function LeadCRM() {
                   })}
                 </tbody>
               </table>
+
+              {/* BULK ACTION TOOLBAR */}
+              <AnimatePresence>
+                {selectedLeadIds.size > 0 && (
+                  <motion.div 
+                    initial={{ y: 100 }}
+                    animate={{ y: 0 }}
+                    exit={{ y: 100 }}
+                    style={{ position: 'fixed', bottom: '40px', left: '50%', transform: 'translateX(-50%)', background: '#0f172a', padding: '15px 30px', borderRadius: '20px', boxShadow: '0 20px 40px rgba(0,0,0,0.3)', display: 'flex', alignItems: 'center', gap: '25px', zBy: 1000, color: 'white' }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px', borderRight: '1px solid rgba(255,255,255,0.1)', paddingRight: '25px' }}>
+                      <span style={{ fontSize: '0.9rem', fontWeight: 800 }}>{selectedLeadIds.size} LEADS SELECTED</span>
+                      <button onClick={() => setSelectedLeadIds(new Set())} style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '0.75rem', fontWeight: 700 }}>DESELECT</button>
+                    </div>
+                    
+                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                      <span style={{ fontSize: '0.7rem', fontWeight: 900, color: '#94a3b8' }}>MOVE TO:</span>
+                      {Object.keys(STATUS_COLORS).map(status => (
+                        <button 
+                          key={status}
+                          onClick={() => bulkUpdateStatus(status)}
+                          style={{ padding: '8px 12px', borderRadius: '8px', border: 'none', background: 'rgba(255,255,255,0.05)', color: 'white', fontSize: '0.7rem', fontWeight: 800, cursor: 'pointer', transition: 'all 0.2s' }}
+                          onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}
+                          onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.05)'}
+                        >
+                          {status}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div style={{ borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '25px' }}>
+                      <button 
+                        onClick={exportToOutreach}
+                        style={{ padding: '10px 20px', borderRadius: '10px', border: 'none', background: '#3b82f6', color: 'white', fontSize: '0.85rem', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+                      >
+                        <FileSpreadsheet size={16} /> EXPORT SELECTED
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {filteredLeads.length === 0 && (
                 <div style={{ padding: '100px', textAlign: 'center', color: '#94a3b8' }}>
                   <Search size={48} style={{ margin: '0 auto 20px', opacity: 0.2 }} />
@@ -506,13 +676,14 @@ export default function LeadCRM() {
           )}
         </main>
 
-        {/* SIDEBAR: ELITE LEAD INTEL */}
-        <AnimatePresence>
-          {selectedLead && (
+        {/* SIDEBAR: ELITE LEAD INTEL / SYSTEM MONITOR */}
+        <AnimatePresence mode="wait">
+          {selectedLead ? (
             <motion.aside 
-              initial={{ x: 450, opacity: 0 }}
+              key="lead-intel"
+              initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 450, opacity: 0 }}
+              exit={{ x: 20, opacity: 0 }}
               style={{ background: '#fff', padding: '40px', borderRadius: '30px', border: '1px solid #e2e8f0', boxShadow: '-20px 0 50px rgba(0,0,0,0.08)', position: 'sticky', top: '40px', height: 'calc(100vh - 80px)', overflowY: 'auto' }}
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px' }}>
@@ -589,6 +760,30 @@ export default function LeadCRM() {
                 </div>
               </div>
 
+              {/* LEAD ENGAGEMENT HISTORY */}
+              <div style={{ marginBottom: '40px' }}>
+                <h4 style={{ fontSize: '0.8rem', fontWeight: 900, color: '#94a3b8', textTransform: 'uppercase', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <TrendingUp size={16} /> Engagement History
+                </h4>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                  {crmData[getLeadId(selectedLead)]?.history?.length > 0 ? (
+                    crmData[getLeadId(selectedLead)].history.slice().reverse().map((h: any, idx: number) => (
+                      <div key={idx} style={{ paddingLeft: '15px', borderLeft: '2px solid #e2e8f0', position: 'relative' }}>
+                        <div style={{ position: 'absolute', left: '-5px', top: '0', width: '8px', height: '8px', borderRadius: '50%', background: h.type === 'ESCALATION' ? '#3b82f6' : '#10b981' }} />
+                        <div style={{ fontSize: '0.8rem', fontWeight: 800, color: '#1e293b' }}>
+                          {h.type === 'ESCALATION' ? '🚀 Pushed to Hot Campaign' : '👀 Site Viewed'}
+                        </div>
+                        <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '4px' }}>
+                          {new Date(h.timestamp).toLocaleString()}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div style={{ fontSize: '0.85rem', color: '#94a3b8', fontStyle: 'italic' }}>No engagement recorded yet.</div>
+                  )}
+                </div>
+              </div>
+
               {/* PERSISTENT NOTES SYSTEM */}
               <div style={{ marginBottom: '40px' }}>
                 <h4 style={{ fontSize: '0.8rem', fontWeight: 900, color: '#94a3b8', textTransform: 'uppercase', marginBottom: '15px' }}>Internal Strategy Notes</h4>
@@ -609,6 +804,52 @@ export default function LeadCRM() {
                   {copiedPitch ? <CheckCircle2 size={20} /> : <Send size={20} />} 
                   {copiedPitch ? 'PITCH COPIED!' : 'COPY PERSONALIZED PITCH'}
                 </button>
+              </div>
+            </motion.aside>
+          ) : (
+            <motion.aside 
+              key="system-monitor"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{ background: 'white', padding: '30px', borderRadius: '24px', border: '1px solid #e2e8f0', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', height: 'fit-content' }}
+            >
+              <div style={{ marginBottom: '40px' }}>
+                <h2 style={{ fontSize: '0.9rem', fontWeight: 800, marginBottom: '25px', color: '#1e293b', textTransform: 'uppercase', letterSpacing: '1px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Zap size={18} color="#3b82f6" /> System Engine
+                </h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                  {systemStatus?.services ? Object.entries(systemStatus.services).map(([key, service]: [string, any]) => (
+                    <div key={key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 15px', background: '#f8fafc', borderRadius: '12px' }}>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#475569' }}>{service.label}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <motion.div 
+                          animate={service.status === 'RUNNING' || service.status === 'PROCESSING' || service.status === 'ACTIVE' ? { scale: [1, 1.5, 1], opacity: [1, 0.5, 1] } : {}}
+                          transition={{ repeat: Infinity, duration: 2 }}
+                          style={{ 
+                            width: '8px', height: '8px', borderRadius: '50%', 
+                            background: (service.status === 'RUNNING' || service.status === 'PROCESSING' || service.status === 'ACTIVE') ? '#10b981' : '#cbd5e1' 
+                          }} 
+                        />
+                        <span style={{ fontSize: '0.7rem', fontWeight: 900, color: (service.status === 'RUNNING' || service.status === 'PROCESSING' || service.status === 'ACTIVE') ? '#10b981' : '#94a3b8' }}>{service.status}</span>
+                      </div>
+                    </div>
+                  )) : (
+                    <div style={{ textAlign: 'center', padding: '20px 0' }}>
+                      <RefreshCcw size={24} className="animate-spin" style={{ color: '#cbd5e1', margin: '0 auto' }} />
+                      <p style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '10px' }}>Connecting to engine...</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              <div style={{ background: '#0f172a', padding: '25px', borderRadius: '20px', color: 'white' }}>
+                <h3 style={{ fontSize: '0.85rem', fontWeight: 800, marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <TrendingUp size={16} color="#3b82f6" /> Performance
+                </h3>
+                <p style={{ fontSize: '0.75rem', opacity: 0.7, lineHeight: '1.6' }}>
+                  Automated pipelines are currently healthy. Monitoring `exports/` for new leads to enrich.
+                </p>
               </div>
             </motion.aside>
           )}
