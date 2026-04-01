@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Wrench, Gauge, ShieldAlert, Zap, Settings, Star, Phone, CheckCircle2, ChevronRight } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { AutoConfig as Config } from '@/configs/auto';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './auto.module.css';
 
 function AutoContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Auto Armor Performance';
-  const niche = searchParams.get('niche') || 'Auto Specialist';
-  const location = searchParams.get('location') || 'Local Area';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.8';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Auto Armor Performance',
+    niche: 'Auto Specialist',
+    location: 'Local Area',
+    phone: '0000 000 000',
+    rating: '4.8'
+  });
 
   const icons = [<Gauge size={32} key="gauge" />, <ShieldAlert size={32} key="shield" />, <Zap size={32} key="zap" />];
 
@@ -71,14 +70,14 @@ function AutoContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#ea580c', marginBottom: '20px' }}>
               <Gauge size={24} /> <Wrench size={24} /> <Zap size={24} />
             </div>
-            <h1>{formatContent(Config.hero.title, data)}</h1>
+            <h1 dangerouslySetInnerHTML={{ __html: t(Config.hero.title) }} />
             <p>
-              {formatContent(Config.hero.subtitle, data)}
+              {t(Config.hero.subtitle)}
             </p>
             <motion.a 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href={`tel:${phone}`} 
+              href="#book" 
               className="btn" 
               style={{ backgroundColor: '#ea580c', padding: '20px 60px', fontWeight: 900, borderRadius: '0', fontSize: '1.2rem' }}
             >
@@ -89,7 +88,7 @@ function AutoContent() {
           <div className={styles.specBar}>
             {Config.specs.map((spec, i) => (
               <div key={i} className={styles.specItem}>
-                <CheckCircle2 size={18} /> {formatContent(spec, data)}
+                <CheckCircle2 size={18} /> {t(spec)}
               </div>
             ))}
           </div>
@@ -110,8 +109,8 @@ function AutoContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.serviceCard}>
                   <div style={{ color: '#ea580c', marginBottom: '20px' }}>{icons[i] || icons[0]}</div>
-                  <h3>{formatContent(s.title, data)}</h3>
-                  <p style={{ color: '#94a3b8', lineHeight: 1.7 }}>{formatContent(s.desc, data)}</p>
+                  <h3>{t(s.title)}</h3>
+                  <p style={{ color: '#94a3b8', lineHeight: 1.7 }}>{t(s.desc)}</p>
                   <motion.div whileHover={{ x: 5 }} style={{ marginTop: '20px', color: '#ea580c', fontWeight: 700, display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                     Learn More <ChevronRight size={16} />
                   </motion.div>
@@ -129,9 +128,9 @@ function AutoContent() {
               <div style={{ display: 'flex', justifyContent: 'center', gap: '5px', color: '#fff', marginBottom: '30px' }}>
                 {[1,2,3,4,5].map(i => <Star key={i} size={24} fill="currentColor" />)}
               </div>
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '20px', textTransform: 'uppercase' }}>{formatContent(Config.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '20px', textTransform: 'uppercase' }}>{t(Config.footer.title)}</h2>
               <p style={{ fontSize: '1.3rem', marginBottom: '50px', opacity: 0.9 }}>
-                {formatContent(Config.footer.subtitle, data)}
+                {t(Config.footer.subtitle)}
               </p>
               <motion.a 
                 animate={{ scale: [1, 1.05, 1] }}
@@ -158,6 +157,7 @@ function AutoContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

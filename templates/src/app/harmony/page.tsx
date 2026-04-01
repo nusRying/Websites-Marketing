@@ -1,25 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Palette, Ruler, Layout, Globe, Star, Phone, ArrowRight, Compass, Home } from 'lucide-react';
+import { Palette, Ruler, Star, ArrowRight, Compass, Home } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { HomeHarmonyConfig } from '@/configs/home-harmony';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './home-harmony.module.css';
 
 function HarmonyContent() {
-  const searchParams = useSearchParams();
-  
-  const data = {
-    name: searchParams.get('name') || 'Harmony Design Atelier',
-    niche: searchParams.get('niche') || 'Interior Architect',
-    location: searchParams.get('location') || 'Metropolitan Hub',
-    phone: searchParams.get('phone') || '0000 000 000',
-    rating: searchParams.get('rating') || '5.0'
-  };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Harmony Design Atelier',
+    niche: 'Interior Architect',
+    location: 'Metropolitan Hub',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -30,10 +28,10 @@ function HarmonyContent() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": HomeHarmonyConfig.schemaType,
-            "name": data.name,
-            "telephone": data.phone,
-            "areaServed": data.location,
-            "description": `Premier ${data.niche} and spatial curation in ${data.location}. Defining the art of modern living.`
+            "name": name,
+            "telephone": phone,
+            "areaServed": location,
+            "description": `Premier ${niche} and spatial curation in ${location}. Defining the art of modern living.`
           })
         }}
       />
@@ -47,11 +45,11 @@ function HarmonyContent() {
               transition={{ duration: 1 }}
               className={styles.logo}
             >
-              {data.name}
+              {name}
             </motion.div>
             <motion.a 
               whileHover={{ backgroundColor: '#000', color: '#fff' }}
-              href={`tel:${data.phone}`} 
+              href={`tel:${phone}`} 
               className={styles.ctaBtn}
             >
               Curate
@@ -70,11 +68,11 @@ function HarmonyContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', color: '#1a1a1a', marginBottom: '30px', opacity: 0.3 }}>
               <Compass size={24} /> <Ruler size={24} /> <Palette size={24} />
             </div>
-            <h1 dangerouslySetInnerHTML={{ __html: formatContent(HomeHarmonyConfig.hero.title, data) }} />
-            <p>{formatContent(HomeHarmonyConfig.hero.subtitle, data)}</p>
+            <h1 dangerouslySetInnerHTML={{ __html: t(HomeHarmonyConfig.hero.title) }} />
+            <p>{t(HomeHarmonyConfig.hero.subtitle)}</p>
             <motion.a 
               whileHover={{ letterSpacing: '4px' }}
-              href={`tel:${data.phone}`} 
+              href="#book" 
               className={styles.ctaBtn} 
               style={{ padding: '18px 60px', fontSize: '0.9rem' }}
             >
@@ -90,7 +88,7 @@ function HarmonyContent() {
             <div className="text-center">
               <h2 style={{ fontSize: '3rem', fontWeight: 200, letterSpacing: '-1px' }}>Design Disciplines</h2>
               <p style={{ opacity: 0.4, marginTop: '10px', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                AESTHETIC EXCELLENCE IN {data.location.toUpperCase()}
+                AESTHETIC EXCELLENCE IN {location.toUpperCase()}
               </p>
             </div>
           </Reveal>
@@ -100,7 +98,7 @@ function HarmonyContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.card}>
                   <h3 style={{ marginBottom: '20px' }}>{s.title}</h3>
-                  <p>{formatContent(s.desc, data)}</p>
+                  <p>{t(s.desc)}</p>
                   <motion.div 
                     whileHover={{ x: 10 }}
                     style={{ marginTop: '30px', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}
@@ -119,9 +117,9 @@ function HarmonyContent() {
           <Reveal>
             <div style={{ maxWidth: '800px', margin: '0 auto' }}>
               <Home size={48} style={{ margin: '0 auto 30px', opacity: 0.2 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 200, marginBottom: '30px' }}>{formatContent(HomeHarmonyConfig.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 200, marginBottom: '30px' }}>{t(HomeHarmonyConfig.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.6 }}>
-                {formatContent(HomeHarmonyConfig.footer.subtitle, data)}
+                {t(HomeHarmonyConfig.footer.subtitle)}
               </p>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', color: '#fff', marginBottom: '50px', opacity: 0.5 }}>
                 {[1,2,3,4,5].map(i => <Star key={i} size={16} fill="currentColor" />)}
@@ -129,21 +127,22 @@ function HarmonyContent() {
               <motion.a 
                 animate={{ opacity: [0.8, 1, 0.8] }}
                 transition={{ repeat: Infinity, duration: 3 }}
-                href={`tel:${data.phone}`} 
+                href={`tel:${phone}`} 
                 className={styles.ctaBtn} 
                 style={{ background: '#fff', color: '#000', padding: '25px 80px', fontSize: '1.2rem' }}
               >
-                Inquire: {data.phone}
+                Inquire: {phone}
               </motion.a>
             </div>
           </Reveal>
           <div style={{ marginTop: '100px', opacity: 0.2, fontSize: '0.7rem', letterSpacing: '5px' }}>
-            © 2026 {data.name.toUpperCase()} | CURATED IN {data.location.toUpperCase()}
+            © 2026 {name.toUpperCase()} | CURATED IN {location.toUpperCase()}
           </div>
         </div>
       </footer>
 
-      <MobileActions phone={data.phone} name={data.name} />
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
+      <MobileActions phone={phone} name={name} />
     </div>
   );
 }

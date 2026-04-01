@@ -5,6 +5,7 @@ import logging
 import subprocess
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+from src.slack_alerts import send_lead_alert
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -31,22 +32,25 @@ class LeadExportHandler(FileSystemEventHandler):
         Triggers the AI enrichment script for the newly created file.
         """
         logger.info(f"Triggering AI Enrichment for: {file_path}")
+        
+        # Proactive Alert
+        filename = os.path.basename(file_path)
+        send_lead_alert(f"Pipeline Action: {filename}", "System Backend", "http://localhost:3000")
+
         try:
             # We run it as a subprocess to keep the watcher alive
-            # Using -m src.ai_enrichment or direct python src/ai_enrichment.py
             cmd = [sys.executable, AI_ENRICH_SCRIPT, "--input", file_path]
-            
-            # If an API key is available in environment, the script will use it
             result = subprocess.run(cmd, capture_output=True, text=True)
             
             if result.returncode == 0:
                 logger.info("AI Enrichment completed successfully.")
-                logger.debug(result.stdout)
+                send_lead_alert(f"✅ Enrichment Success: {filename}", "System Backend")
             else:
                 logger.error(f"AI Enrichment failed with return code {result.returncode}")
-                logger.error(result.stderr)
+                send_lead_alert(f"❌ Enrichment FAILED: {filename}", "System Backend")
         except Exception as e:
             logger.error(f"Error during enrichment trigger: {e}")
+            send_lead_alert(f"⚠️ Critical Error: {str(e)}", "System Backend")
 
 def main():
     if not os.path.exists(EXPORTS_DIR):

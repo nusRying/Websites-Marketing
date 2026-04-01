@@ -5,7 +5,13 @@ import { NextResponse } from 'next/server'
 export async function GET(request: Request) {
   const cookieStore = await cookies()
   const { searchParams } = new URL(request.url)
+  
   const batchId = searchParams.get('batchId')
+  const query = searchParams.get('q')
+  const status = searchParams.get('status')
+  const quality = searchParams.get('quality')
+  const limit = parseInt(searchParams.get('limit') || '50')
+  const offset = parseInt(searchParams.get('offset') || '0')
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -25,8 +31,24 @@ export async function GET(request: Request) {
   }
 
   try {
+    // 1. Global Full-Text Search
+    if (query) {
+      const { data: leads, count, error: searchError } = await supabase
+        .from('leads')
+        .select('*', { count: 'exact' })
+        .eq('user_id', user.id)
+        .textSearch('search_vector', query, {
+          config: 'english',
+          type: 'websearch'
+        })
+        .range(offset, offset + limit - 1)
+
+      if (searchError) throw searchError
+      return NextResponse.json({ leads, total: count })
+    }
+
+    // 2. Fetch Batches (Sidebar)
     if (!batchId) {
-      // 1. Fetch Batches for the user
       const { data: batches, error: batchError } = await supabase
         .from('batches')
         .select('*')
@@ -35,7 +57,6 @@ export async function GET(request: Request) {
 
       if (batchError) throw batchError
       
-      // Map to backward compatible format for the frontend
       const files = batches.map(b => ({
         id: b.id,
         name: b.file_name || `${b.niche}_${b.location}`,
@@ -43,18 +64,26 @@ export async function GET(request: Request) {
       }))
 
       return NextResponse.json({ files })
-    } else {
-      // 2. Fetch Leads for a specific batch
-      const { data: leads, error: leadError } = await supabase
-        .from('leads')
-        .select('*')
-        .eq('batch_id', batchId)
-        .eq('user_id', user.id)
+    } 
+    
+    // 3. Fetch Leads for a specific batch with filters and pagination
+    let dbQuery = supabase
+      .from('leads')
+      .select('*', { count: 'exact' })
+      .eq('batch_id', batchId)
+      .eq('user_id', user.id)
 
-      if (leadError) throw leadError
+    if (status && status !== 'ALL') dbQuery = dbQuery.eq('status', status)
+    if (quality && quality !== 'ALL') dbQuery = dbQuery.eq('quality', quality)
 
-      return NextResponse.json({ leads })
-    }
+    const { data: leads, count, error: leadError } = await dbQuery
+      .range(offset, offset + limit - 1)
+      .order('name', { ascending: true })
+
+    if (leadError) throw leadError
+
+    return NextResponse.json({ leads, total: count })
+
   } catch (error: any) {
     console.error('API Error:', error)
     return NextResponse.json({ error: error.message }, { status: 500 })

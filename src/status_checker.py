@@ -8,10 +8,15 @@ STATUS_FILE = "templates/src/data/system_status.json"
 
 def check_system_health():
     """
-    Checks if the core pipeline scripts are running.
+    Checks if the core pipeline scripts are running and collects resource metrics.
     """
     status = {
         "last_updated": datetime.now().isoformat(),
+        "resources": {
+            "cpu_percent": psutil.cpu_percent(),
+            "memory_mb": psutil.virtual_memory().used / (1024 * 1024),
+            "load_avg": os.getloadavg() if hasattr(os, 'getloadavg') else [0,0,0]
+        },
         "services": {
             "scraper": {"status": "IDLE", "label": "G-Maps Scraper"},
             "watcher": {"status": "OFFLINE", "label": "Pipeline Watcher"},

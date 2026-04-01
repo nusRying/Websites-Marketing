@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Truck, Box, Globe, ShieldCheck, Clock, Phone, ArrowRight, Map, Package, Navigation } from 'lucide-react';
+import { Truck, Box, Globe, ShieldCheck, Clock, ArrowRight, Map, Package, Navigation } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { LogisticsConfig as config } from '@/configs/logistics';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './logistics.module.css';
 
 function LogisticsContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Logic Logistics Group';
-  const niche = searchParams.get('niche') || 'Delivery Specialist';
-  const location = searchParams.get('location') || 'Transport Hub';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.8';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Logic Logistics Group',
+    niche: 'Delivery Specialist',
+    location: 'Transport Hub',
+    phone: '0000 000 000',
+    rating: '4.8'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -69,9 +68,9 @@ function LogisticsContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#f97316', marginBottom: '30px' }}>
               <Navigation size={24} /> <Package size={24} /> <Globe size={24} />
             </div>
-            <h1>{formatContent(config.hero.title, data).split('Forward with')[0]} <br/> <span>Forward with {formatContent(config.hero.title, data).split('Forward with')[1]}</span></h1>
+            <h1>{t(config.hero.title).split('Forward with')[0]} <br/> <span>Forward with {t(config.hero.title).split('Forward with')[1]}</span></h1>
             <p>
-              {formatContent(config.hero.subtitle, data)}
+              {t(config.hero.subtitle)}
             </p>
             <motion.a 
               whileHover={{ gap: '15px', paddingRight: '45px' }}
@@ -95,7 +94,7 @@ function LogisticsContent() {
                     {i === 0 ? <Box size={32} /> : i === 1 ? <Clock size={32} /> : <ShieldCheck size={32} />}
                   </div>
                   <h3>{s.title}</h3>
-                  <p style={{ color: '#64748b', lineHeight: 1.7 }}>{formatContent(s.desc, data)}</p>
+                  <p style={{ color: '#64748b', lineHeight: 1.7 }}>{t(s.desc)}</p>
                 </div>
               </Reveal>
             ))}
@@ -123,9 +122,9 @@ function LogisticsContent() {
           <Reveal>
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
               <Map size={48} style={{ margin: '0 auto 30px', color: '#f97316' }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{formatContent(config.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{t(config.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.7 }}>
-                {formatContent(config.footer.subtitle, data)} Get your free, no-obligation quote in minutes.
+                {t(config.footer.subtitle)} Get your free, no-obligation quote in minutes.
               </p>
               <motion.a 
                 animate={{ boxShadow: ["0 0 20px rgba(249, 115, 22, 0.2)", "0 0 40px rgba(249, 115, 22, 0.5)", "0 0 20px rgba(249, 115, 22, 0.2)"] }}
@@ -144,6 +143,7 @@ function LogisticsContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

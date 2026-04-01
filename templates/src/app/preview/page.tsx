@@ -1,12 +1,12 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, CheckCircle, ShieldCheck, Clock, Star } from 'lucide-react';
+import { CheckCircle, ShieldCheck, Clock, Star } from 'lucide-react';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { LeadMachineConfig as Config } from '@/configs/lead-machine';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './preview.module.css';
 
 const ICON_MAP = {
@@ -16,13 +16,13 @@ const ICON_MAP = {
 };
 
 function PreviewContent() {
-  const searchParams = useSearchParams();
-  
-  const name = searchParams.get('name') || 'Your Business Name';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '5.0';
-  const niche = searchParams.get('niche') || 'Emergency Specialist';
-  const location = searchParams.get('location') || 'Local Area';
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Your Business Name',
+    niche: 'Emergency Specialist',
+    location: 'Local Area',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   const data = { name, phone, rating, niche, location };
 
@@ -71,7 +71,6 @@ function PreviewContent() {
               {name}
             </motion.div>
             <a href={`tel:${phone}`} className={styles.phoneLink}>
-              <Phone size={18} />
               <span>{phone}</span>
             </a>
           </div>
@@ -97,15 +96,15 @@ function PreviewContent() {
             </motion.div>
             
             <motion.h1 variants={fadeInUp}>
-              {formatContent(Config.hero.title, data)}
+              {t(Config.hero.title)}
             </motion.h1>
             
             <motion.p variants={fadeInUp}>
-              {formatContent(Config.hero.subtitle, data)}
+              {t(Config.hero.subtitle)}
             </motion.p>
             
             <motion.div variants={fadeInUp} className={styles.ctaGroup}>
-              <a href={`tel:${phone}`} className="btn" style={{ fontSize: '1.1rem', padding: '15px 40px' }}>
+              <a href="#book" className="btn" style={{ fontSize: '1.1rem', padding: '15px 40px' }}>
                 {Config.hero.cta}
               </a>
             </motion.div>
@@ -137,7 +136,7 @@ function PreviewContent() {
                 <motion.div key={idx} variants={fadeInUp} className={styles.card}>
                   <Icon className={styles.icon} size={32} color="var(--primary)" style={{ marginBottom: '15px' }} />
                   <h3>{feature.title}</h3>
-                  <p>{formatContent(feature.desc, data)}</p>
+                  <p>{t(feature.desc)}</p>
                 </motion.div>
               );
             })}
@@ -152,8 +151,8 @@ function PreviewContent() {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
           >
-            <h2>{formatContent(Config.ctaSection.title, data)}</h2>
-            <p className="mb-40">{formatContent(Config.ctaSection.subtitle, data)}</p>
+            <h2>{t(Config.ctaSection.title)}</h2>
+            <p className="mb-40">{t(Config.ctaSection.subtitle)}</p>
             <a href={`tel:${phone}`} className="btn btn-secondary" style={{ fontSize: '1.2rem', padding: '20px 50px' }}>
               Call {phone}
             </a>
@@ -165,6 +164,7 @@ function PreviewContent() {
         <p className="text-muted">© 2026 {name} - Professional {niche} in {location}.</p>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       {/* High-Effort Feature: Mobile Sticky Bar */}
       <MobileActions phone={phone} name={name} />
     </div>

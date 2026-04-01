@@ -1,25 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Sun, Leaf, Zap, ShieldCheck, Star, Phone, ArrowRight, Battery, Globe, CheckCircle2 } from 'lucide-react';
+import { Sun, Leaf, Zap, ShieldCheck, Star, ArrowRight, Battery, Globe, CheckCircle2 } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { GreenGrowthConfig } from '@/configs/green-growth';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './green-growth.module.css';
 
 function GreenContent() {
-  const searchParams = useSearchParams();
-  
-  const data = {
-    name: searchParams.get('name') || 'Green Growth Renewables',
-    niche: searchParams.get('niche') || 'Solar Specialist',
-    location: searchParams.get('location') || 'Sustainable District',
-    phone: searchParams.get('phone') || '0000 000 000',
-    rating: searchParams.get('rating') || '5.0'
-  };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Green Growth Renewables',
+    niche: 'Solar Specialist',
+    location: 'Sustainable District',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -30,10 +28,10 @@ function GreenContent() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": GreenGrowthConfig.schemaType,
-            "name": data.name,
-            "telephone": data.phone,
-            "areaServed": data.location,
-            "description": `Premier ${data.niche} and renewable energy solutions in ${data.location}. Powering energy independence.`
+            "name": name,
+            "telephone": phone,
+            "areaServed": location,
+            "description": `Premier ${niche} and renewable energy solutions in ${location}. Powering energy independence.`
           })
         }}
       />
@@ -47,11 +45,11 @@ function GreenContent() {
               className={styles.logo}
             >
               <Leaf size={28} />
-              {data.name.split(' ')[0]} <span>{data.name.split(' ').slice(1).join(' ')}</span>
+              {name.split(' ')[0]} <span>{name.split(' ').slice(1).join(' ')}</span>
             </motion.div>
             <motion.a 
               whileHover={{ scale: 1.05 }}
-              href={`tel:${data.phone}`} 
+              href={`tel:${phone}`} 
               className={styles.saveBtn}
             >
               Savings Report
@@ -70,12 +68,12 @@ function GreenContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#10b981', marginBottom: '30px' }}>
               <Sun size={24} /> <Zap size={24} /> <Globe size={24} />
             </div>
-            <h1 dangerouslySetInnerHTML={{ __html: formatContent(GreenGrowthConfig.hero.title, data) }} />
-            <p>{formatContent(GreenGrowthConfig.hero.subtitle, data)}</p>
+            <h1 dangerouslySetInnerHTML={{ __html: t(GreenGrowthConfig.hero.title) }} />
+            <p>{t(GreenGrowthConfig.hero.subtitle)}</p>
             <motion.a 
               whileHover={{ scale: 1.05, paddingRight: '50px' }}
               whileTap={{ scale: 0.95 }}
-              href={`tel:${data.phone}`} 
+              href="#book" 
               className={styles.saveBtn} 
               style={{ padding: '18px 45px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
             >
@@ -95,7 +93,7 @@ function GreenContent() {
               <CheckCircle2 size={24} color="#fff" /> OZEV APPROVED
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 800 }}>
-              <Globe size={24} color="#fff" /> {data.location.toUpperCase()} HUB
+              <Globe size={24} color="#fff" /> {location.toUpperCase()} HUB
             </div>
           </div>
         </div>
@@ -103,19 +101,19 @@ function GreenContent() {
 
       <section style={{ padding: '100px 0', background: 'white' }}>
         <div className="container">
-          <Reveal>
+          <reveal>
             <div className="text-center">
               <h2 style={{ fontSize: '3rem', fontWeight: 900, color: '#064e3b' }}>High-Efficiency Solutions</h2>
-              <p style={{ color: '#64748b', marginTop: '10px' }}>Future-proof energy for your {data.location} property</p>
+              <p style={{ color: '#64748b', marginTop: '10px' }}>Future-proof energy for your {location} property</p>
             </div>
-          </Reveal>
+          </reveal>
           
           <div className={styles.grid}>
             {GreenGrowthConfig.solutions.map((s, i) => (
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.card}>
                   <h3 style={{ marginBottom: '20px' }}>{s.title}</h3>
-                  <p>{formatContent(s.desc, data)}</p>
+                  <p>{t(s.desc)}</p>
                   <motion.div 
                     whileHover={{ x: 10, color: '#10b981' }}
                     style={{ marginTop: '30px', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', borderTop: '1px solid #f1f5f9', paddingTop: '20px' }}
@@ -134,9 +132,9 @@ function GreenContent() {
           <Reveal>
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
               <Sun size={48} style={{ margin: '0 auto 30px', color: '#10b981', opacity: 0.5 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px', color: '#064e3b' }}>{formatContent(GreenGrowthConfig.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px', color: '#064e3b' }}>{t(GreenGrowthConfig.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.7 }}>
-                {formatContent(GreenGrowthConfig.footer.subtitle, data)}
+                {t(GreenGrowthConfig.footer.subtitle)}
               </p>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', color: '#10b981', marginBottom: '50px' }}>
                 {[1,2,3,4,5].map(i => <Star key={i} size={20} fill="currentColor" />)}
@@ -144,21 +142,22 @@ function GreenContent() {
               <motion.a 
                 animate={{ boxShadow: ["0 0 20px rgba(16, 185, 129, 0.2)", "0 0 40px rgba(16, 185, 129, 0.5)", "0 0 20px rgba(16, 185, 129, 0.2)"] }}
                 transition={{ repeat: Infinity, duration: 3 }}
-                href={`tel:${data.phone}`} 
+                href={`tel:${phone}`} 
                 className={styles.saveBtn} 
                 style={{ padding: '25px 80px', fontSize: '1.4rem' }}
               >
-                CALL OPERATIONS: {data.phone}
+                CALL OPERATIONS: {phone}
               </motion.a>
             </div>
           </Reveal>
           <div style={{ marginTop: '100px', opacity: 0.3, fontSize: '0.8rem', letterSpacing: '4px' }}>
-            © 2026 {data.name.toUpperCase()} | CERTIFIED {data.niche.toUpperCase()} | {data.location.toUpperCase()} REGION
+            © 2026 {name.toUpperCase()} | CERTIFIED {niche.toUpperCase()} | {location.toUpperCase()} REGION
           </div>
         </div>
       </footer>
 
-      <MobileActions phone={data.phone} name={data.name} />
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
+      <MobileActions phone={phone} name={name} />
     </div>
   );
 }

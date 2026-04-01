@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Droplets, ShieldCheck, Waves, Zap, Settings, Star, Phone, CheckCircle2, ChevronRight, Thermometer, ArrowRight } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { AquaConfig as config } from '@/configs/aqua';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './aqua.module.css';
 
 function AquaContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Aqua Artisans Pool & Spa';
-  const niche = searchParams.get('niche') || 'Pool Specialist';
-  const location = searchParams.get('location') || 'Coastal Hub';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.9';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Aqua Artisans Pool & Spa',
+    niche: 'Pool Specialist',
+    location: 'Coastal Hub',
+    phone: '0000 000 000',
+    rating: '4.9'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -70,13 +69,13 @@ function AquaContent() {
               <div style={{ display: 'flex', gap: '15px', color: '#0891b2', marginBottom: '30px' }}>
                 <Waves size={24} /> <Thermometer size={24} /> <ShieldCheck size={24} />
               </div>
-              <h1>{formatContent(config.hero.title, data).split('in')[0]} <br/> <span>in {formatContent(config.hero.title, data).split('in')[1]}</span></h1>
+              <h1 dangerouslySetInnerHTML={{ __html: t(config.hero.title).split('in')[0] + '<br/> <span>in ' + t(config.hero.title).split('in')[1] + '</span>' }} />
               <p>
-                {formatContent(config.hero.subtitle, data)}
+                {t(config.hero.subtitle)}
               </p>
               <motion.a 
                 whileHover={{ gap: '15px', paddingRight: '45px' }}
-                href={`tel:${phone}`} 
+                href="#book" 
                 className={styles.actionBtn} 
                 style={{ padding: '18px 45px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
               >
@@ -104,7 +103,7 @@ function AquaContent() {
                     {i === 0 ? <Settings size={32} /> : i === 1 ? <Droplets size={32} /> : <ShieldCheck size={32} />}
                   </div>
                   <h3>{s.title}</h3>
-                  <p style={{ color: '#64748b', lineHeight: 1.7 }}>{formatContent(s.desc, data)}</p>
+                  <p style={{ color: '#64748b', lineHeight: 1.7 }}>{t(s.desc)}</p>
                 </div>
               </Reveal>
             ))}
@@ -116,9 +115,9 @@ function AquaContent() {
         <div className="container text-center">
           <Reveal>
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{formatContent(config.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{t(config.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.9 }}>
-                {formatContent(config.footer.subtitle, data)}
+                {t(config.footer.subtitle)}
               </p>
               <motion.a 
                 animate={{ boxShadow: ["0 0 20px rgba(8, 145, 178, 0.2)", "0 0 40px rgba(8, 145, 178, 0.5)", "0 0 20px rgba(8, 145, 178, 0.2)"] }}
@@ -145,6 +144,7 @@ function AquaContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

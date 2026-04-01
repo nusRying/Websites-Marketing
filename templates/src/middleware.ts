@@ -59,7 +59,15 @@ export async function middleware(request: NextRequest) {
   // Protect dashboard and internal API routes
   const isProtectedRoute = request.nextUrl.pathname === '/' || request.nextUrl.pathname.startsWith('/api/')
   const isAuthRoute = request.nextUrl.pathname.startsWith('/login')
-  const isPublicAsset = request.nextUrl.pathname.startsWith('/_next') || request.nextUrl.pathname.includes('.')
+  
+  // SECURITY HEADERS
+  response.headers.set('X-Frame-Options', 'DENY')
+  response.headers.set('X-Content-Type-Options', 'nosniff')
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
+  response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
+
+  // ... (isPublicTemplate checks kept)
 
   // Special case: Tracking and Site Templates are public
   const isPublicTemplate = [

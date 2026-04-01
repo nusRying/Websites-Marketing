@@ -1,25 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Utensils, Clock, MapPin, Star, Coffee, Wine } from 'lucide-react';
+import { Utensils, Coffee, Wine } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { GustoConfig } from '@/configs/gusto';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './gusto.module.css';
 
 function GustoContent() {
-  const searchParams = useSearchParams();
-  
-  const name = searchParams.get('name') || 'The Artisanal Kitchen';
-  const niche = searchParams.get('niche') || 'Modern Eatery';
-  const location = searchParams.get('location') || 'Local District';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.9';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'The Artisanal Kitchen',
+    niche: 'Modern Eatery',
+    location: 'Local District',
+    phone: '0000 000 000',
+    rating: '4.9'
+  });
 
   const stagger = {
     animate: {
@@ -80,15 +78,16 @@ function GustoContent() {
               <Utensils size={24} />
               <Wine size={24} />
             </div>
-            <h1>{formatContent(GustoConfig.hero.title, data)}</h1>
-            <p>{formatContent(GustoConfig.hero.subtitle, data)}</p>
-            <motion.button 
+            <h1>{t(GustoConfig.hero.title)}</h1>
+            <p>{t(GustoConfig.hero.subtitle)}</p>
+            <motion.a 
               whileHover={{ y: -5 }}
+              href="#book"
               className="btn" 
-              style={{backgroundColor: '#ff7e33', borderRadius: '0', padding: '18px 50px', fontSize: '1.1rem'}}
+              style={{backgroundColor: '#ff7e33', borderRadius: '0', padding: '18px 50px', fontSize: '1.1rem', color: 'white', display: 'inline-block'}}
             >
-              {formatContent(GustoConfig.hero.cta, data)}
-            </motion.button>
+              {t(GustoConfig.hero.cta)}
+            </motion.a>
           </motion.div>
         </div>
       </section>
@@ -118,11 +117,11 @@ function GustoContent() {
                 className={styles.dish}
               >
                 <div className={styles.dishHeader}>
-                  <span className={styles.dishName}>{formatContent(dish.name, data)}</span>
+                  <span className={styles.dishName}>{t(dish.name)}</span>
                   <div className={styles.dishDots}></div>
-                  <span className={styles.dishPrice}>{formatContent(dish.price, data)}</span>
+                  <span className={styles.dishPrice}>{t(dish.price)}</span>
                 </div>
-                <p className={styles.dishDesc}>{formatContent(dish.desc, data)}</p>
+                <p className={styles.dishDesc}>{t(dish.desc)}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -152,8 +151,8 @@ function GustoContent() {
         <div className="container">
           <Reveal>
             <div style={{ background: 'white', color: 'black', padding: '60px', borderRadius: '0' }}>
-              <h2 style={{fontFamily: 'serif', fontSize: '2.5rem', marginBottom: '20px'}}>{formatContent(GustoConfig.footer.title, data)}</h2>
-              <p style={{marginBottom: '40px', opacity: 0.7}}>{formatContent(GustoConfig.footer.subtitle, data)}</p>
+              <h2 style={{fontFamily: 'serif', fontSize: '2.5rem', marginBottom: '20px'}}>{t(GustoConfig.footer.title)}</h2>
+              <p style={{marginBottom: '40px', opacity: 0.7}}>{t(GustoConfig.footer.subtitle)}</p>
               
               <div style={{display: 'flex', justifyContent: 'center', gap: '40px', flexWrap: 'wrap', marginBottom: '40px'}}>
                 <div style={{textAlign: 'left'}}>
@@ -180,6 +179,7 @@ function GustoContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

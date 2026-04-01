@@ -10,8 +10,12 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Path is required' }, { status: 400 });
   }
 
-  // Security: Ensure path is within the project's exports directory
-  // imagePath will be something like "exports/screenshots/..."
+  // 1. Handle Cloud URLs (Redirect if it's already a full URL)
+  if (imagePath.startsWith('http')) {
+    return NextResponse.redirect(imagePath);
+  }
+
+  // 2. Handle Local Files (Security check as before)
   const fullPath = path.resolve(process.cwd(), '..', imagePath);
   const exportsRoot = path.resolve(process.cwd(), '..', 'exports');
 

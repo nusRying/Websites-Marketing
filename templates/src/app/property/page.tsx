@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, Home, Key, MapPin, Phone, ArrowUpRight, TrendingUp, Users, ShieldCheck } from 'lucide-react';
+import { Building2, MapPin, ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { PropertyConfig as Config } from '@/configs/property';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './property.module.css';
 
 function PropertyContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Prime Realty Group';
-  const niche = searchParams.get('niche') || 'Property Specialist';
-  const location = searchParams.get('location') || 'Metropolitan';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.9';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Prime Realty Group',
+    niche: 'Property Specialist',
+    location: 'Metropolitan',
+    phone: '0000 000 000',
+    rating: '4.9'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -67,14 +66,14 @@ function PropertyContent() {
             transition={{ duration: 1 }}
           >
             <h1>
-              {formatContent(Config.hero.title, data)}
+              {t(Config.hero.title)}
             </h1>
             <p>
-              {formatContent(Config.hero.subtitle, data)}
+              {t(Config.hero.subtitle)}
             </p>
             <motion.a 
               whileHover={{ gap: '20px' }}
-              href={`tel:${phone}`} 
+              href="#book" 
               className={styles.actionBtn} 
               style={{ padding: '20px 60px', display: 'inline-flex', alignItems: 'center', gap: '10px', fontSize: '1.1rem' }}
             >
@@ -97,8 +96,8 @@ function PropertyContent() {
             {Config.stats.map((s, i) => (
               <Reveal key={i} delay={0.1 * i}>
                 <div className={styles.statItem}>
-                  <h3>{formatContent(s.val, data)}</h3>
-                  <p>{formatContent(s.label, data)}</p>
+                  <h3>{t(s.val)}</h3>
+                  <p>{t(s.label)}</p>
                 </div>
               </Reveal>
             ))}
@@ -141,9 +140,9 @@ function PropertyContent() {
           <Reveal>
             <div>
               <ShieldCheck size={48} style={{ margin: '0 auto 30px', color: '#fff' }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{formatContent(Config.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{t(Config.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.7, maxWidth: '600px', margin: '0 auto 50px' }}>
-                {formatContent(Config.footer.subtitle, data)}
+                {t(Config.footer.subtitle)}
               </p>
               <motion.a 
                 whileHover={{ scale: 1.05 }}
@@ -169,6 +168,11 @@ function PropertyContent() {
 export default function PropertyPage() {
   return (
     <Suspense fallback={<div>Opening the vault...</div>}>
+      <PropertyContent />
+    </Suspense>
+  );
+}
+ing the vault...</div>}>
       <PropertyContent />
     </Suspense>
   );

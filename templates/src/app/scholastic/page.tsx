@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, GraduationCap, Users, Star, Award, Brain, Microscope, Music, Languages, Phone, ArrowRight } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { ScholasticConfig as Config } from '@/configs/scholastic';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './scholastic.module.css';
 
 function ScholasticContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Scholastic Academy';
-  const niche = searchParams.get('niche') || 'Private Tutor';
-  const location = searchParams.get('location') || 'Academic District';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '5.0';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Scholastic Academy',
+    niche: 'Private Tutor',
+    location: 'Academic District',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   const disciplineIcons = [
     <Microscope size={32} key="micro" />,
@@ -75,17 +74,17 @@ function ScholasticContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#0d9488', marginBottom: '20px' }}>
               <BookOpen size={24} /> <Brain size={24} /> <Star size={24} />
             </div>
-            <h1>{formatContent(Config.hero.title, data)}</h1>
+            <h1>{ai.heroTitle || t(Config.hero.title)}</h1>
             <p>
-              {formatContent(Config.hero.subtitle, data)}
+              {ai.heroSubtitle || t(Config.hero.subtitle)}
             </p>
             <motion.a 
               whileHover={{ gap: '15px', paddingRight: '45px' }}
-              href={`tel:${phone}`} 
+              href="#book" 
               className={styles.enrollBtn} 
               style={{ padding: '18px 45px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
             >
-              {Config.hero.cta} <ArrowRight size={20} />
+              {ai.heroCta || Config.hero.cta} <ArrowRight size={20} />
             </motion.a>
           </motion.div>
         </div>
@@ -105,8 +104,8 @@ function ScholasticContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.subjectCard}>
                   <div style={{ color: '#0d9488', marginBottom: '20px' }}>{disciplineIcons[i] || disciplineIcons[0]}</div>
-                  <h3 style={{ fontSize: '1.5rem', marginBottom: '15px', color: '#1e3a8a' }}>{formatContent(s.title, data)}</h3>
-                  <p style={{ color: '#64748b', lineHeight: 1.7 }}>{formatContent(s.desc, data)}</p>
+                  <h3 style={{ fontSize: '1.5rem', marginBottom: '15px', color: '#1e3a8a' }}>{t(s.title)}</h3>
+                  <p style={{ color: '#64748b', lineHeight: 1.7 }}>{t(s.desc)}</p>
                 </div>
               </Reveal>
             ))}
@@ -122,8 +121,8 @@ function ScholasticContent() {
           <div className={styles.statsGrid}>
             {Config.stats.map((item, i) => (
               <div key={i} className={styles.statItem}>
-                <div className={styles.statValue}>{formatContent(item.value, data)}</div>
-                <p>{formatContent(item.label, data)}</p>
+                <div className={styles.statValue}>{t(item.value)}</div>
+                <p>{t(item.label)}</p>
               </div>
             ))}
           </div>
@@ -135,9 +134,9 @@ function ScholasticContent() {
           <Reveal>
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
               <Award size={48} style={{ margin: '0 auto 30px', color: '#5eead4' }} />
-              <h2 style={{ fontSize: '3.5rem', fontFamily: 'serif', marginBottom: '30px' }}>{formatContent(Config.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontFamily: 'serif', marginBottom: '30px' }}>{ai.footerTitle || t(Config.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8 }}>
-                {formatContent(Config.footer.subtitle, data)}
+                {ai.footerSubtitle || t(Config.footer.subtitle)}
               </p>
               <motion.a 
                 animate={{ scale: [1, 1.05, 1] }}
@@ -164,6 +163,11 @@ function ScholasticContent() {
 export default function ScholasticPage() {
   return (
     <Suspense fallback={<div>Opening the classroom...</div>}>
+      <ScholasticContent />
+    </Suspense>
+  );
+}
+e classroom...</div>}>
       <ScholasticContent />
     </Suspense>
   );

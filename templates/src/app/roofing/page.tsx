@@ -1,25 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, HardHat, CloudRain, Star, Phone, ArrowRight, Hammer, Home, CheckCircle2, Zap } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { RoofingConfig } from '@/configs/roofing';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './roofing-royale.module.css';
 
 function RoofingContent() {
-  const searchParams = useSearchParams();
-  
-  const data = {
-    name: searchParams.get('name') || 'Royale Roofing Contractors',
-    niche: searchParams.get('niche') || 'Roofing Specialist',
-    location: searchParams.get('location') || 'Metropolitan Hub',
-    phone: searchParams.get('phone') || '0000 000 000',
-    rating: searchParams.get('rating') || '5.0'
-  };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Royale Roofing Contractors',
+    niche: 'Roofing Specialist',
+    location: 'Metropolitan Hub',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -30,10 +28,10 @@ function RoofingContent() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": RoofingConfig.schemaType,
-            "name": data.name,
-            "telephone": data.phone,
-            "areaServed": data.location,
-            "description": `Premier ${data.niche} and weather-proofing in ${data.location}. Lifetime protection and structural excellence.`
+            "name": name,
+            "telephone": phone,
+            "areaServed": location,
+            "description": `Premier ${niche} and weather-proofing in ${location}. Lifetime protection and structural excellence.`
           })
         }}
       />
@@ -47,11 +45,11 @@ function RoofingContent() {
               className={styles.logo}
             >
               <ShieldCheck size={28} />
-              {data.name.split(' ')[0]} <span>{data.name.split(' ').slice(1).join(' ')}</span>
+              {name.split(' ')[0]} <span>{name.split(' ').slice(1).join(' ')}</span>
             </motion.div>
             <motion.a 
               whileHover={{ scale: 1.05 }}
-              href={`tel:${data.phone}`} 
+              href={`tel:${phone}`} 
               className={styles.surveyBtn}
             >
               Free Survey
@@ -70,15 +68,15 @@ function RoofingContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#38bdf8', marginBottom: '30px' }}>
               <Hammer size={24} /> <CloudRain size={24} /> <ShieldCheck size={24} />
             </div>
-            <h1 dangerouslySetInnerHTML={{ __html: formatContent(RoofingConfig.hero.title, data) }} />
-            <p>{formatContent(RoofingConfig.hero.subtitle, data)}</p>
+            <h1 dangerouslySetInnerHTML={{ __html: ai.heroTitle || t(RoofingConfig.hero.title) }} />
+            <p>{ai.heroSubtitle || t(RoofingConfig.hero.subtitle)}</p>
             <motion.a 
               whileHover={{ gap: '15px', paddingRight: '45px' }}
-              href={`tel:${data.phone}`} 
+              href="#book" 
               className={styles.surveyBtn} 
               style={{ padding: '18px 45px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
             >
-              Request Assessment <ArrowRight size={20} />
+              {ai.heroCta || RoofingConfig.hero.cta} <ArrowRight size={20} />
             </motion.a>
           </motion.div>
         </div>
@@ -89,7 +87,7 @@ function RoofingContent() {
           <Reveal>
             <div className="text-center">
               <h2 style={{ fontSize: '3rem', fontWeight: 900, color: '#0f172a' }}>Structural Capabilities</h2>
-              <p style={{ color: '#64748b', marginTop: '10px' }}>High-performance protection for your {data.location} property</p>
+              <p style={{ color: '#64748b', marginTop: '10px' }}>High-performance protection for your {location} property</p>
             </div>
           </Reveal>
           
@@ -98,7 +96,7 @@ function RoofingContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.card}>
                   <h3 style={{ marginBottom: '20px' }}>{s.title}</h3>
-                  <p>{formatContent(s.desc, data)}</p>
+                  <p>{t(s.desc)}</p>
                   <motion.div 
                     whileHover={{ x: 10, color: '#38bdf8' }}
                     style={{ marginTop: '30px', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', borderTop: '1px solid #f1f5f9', paddingTop: '20px' }}
@@ -117,9 +115,9 @@ function RoofingContent() {
           <Reveal>
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
               <HardHat size={48} style={{ margin: '0 auto 30px', color: '#38bdf8', opacity: 0.5 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px', color: '#f8fafc' }}>{formatContent(RoofingConfig.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px', color: '#f8fafc' }}>{ai.footerTitle || t(RoofingConfig.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.7 }}>
-                {formatContent(RoofingConfig.footer.subtitle, data)}
+                {ai.footerSubtitle || t(RoofingConfig.footer.subtitle)}
               </p>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', color: '#38bdf8', marginBottom: '50px' }}>
                 {[1,2,3,4,5].map(i => <Star key={i} size={20} fill="currentColor" />)}
@@ -127,21 +125,21 @@ function RoofingContent() {
               <motion.a 
                 animate={{ boxShadow: ["0 0 20px rgba(56, 189, 248, 0.2)", "0 0 40px rgba(56, 189, 248, 0.5)", "0 0 20px rgba(56, 189, 248, 0.2)"] }}
                 transition={{ repeat: Infinity, duration: 3 }}
-                href={`tel:${data.phone}`} 
+                href={`tel:${phone}`} 
                 className={styles.surveyBtn} 
                 style={{ padding: '25px 80px', fontSize: '1.4rem' }}
               >
-                CALL OPERATIONS: {data.phone}
+                CALL OPERATIONS: {phone}
               </motion.a>
             </div>
           </Reveal>
           <div style={{ marginTop: '100px', opacity: 0.3, fontSize: '0.8rem', letterSpacing: '4px' }}>
-            © 2026 {data.name.toUpperCase()} | CERTIFIED {data.niche.toUpperCase()} | {data.location.toUpperCase()} REGION
+            © 2026 {name.toUpperCase()} | CERTIFIED {niche.toUpperCase()} | {location.toUpperCase()} REGION
           </div>
         </div>
       </footer>
 
-      <MobileActions phone={data.phone} name={data.name} />
+      <MobileActions phone={phone} name={name} />
     </div>
   );
 }
@@ -149,6 +147,11 @@ function RoofingContent() {
 export default function RoofingPage() {
   return (
     <Suspense fallback={<div>Assessing the structure...</div>}>
+      <RoofingContent />
+    </Suspense>
+  );
+}
+ the structure...</div>}>
       <RoofingContent />
     </Suspense>
   );

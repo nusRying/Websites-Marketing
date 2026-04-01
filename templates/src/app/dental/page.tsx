@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Star, MapPin, Calendar, Heart, Award, Sparkles, Phone, ArrowRight, Activity, Stethoscope } from 'lucide-react';
+import { ShieldCheck, Star, MapPin, Heart, Award, Sparkles, ArrowRight, Activity, Stethoscope } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { DentalConfig as Config } from '@/configs/dental';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './dental.module.css';
 
 function DentalContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Dental Deluxe Clinic';
-  const niche = searchParams.get('niche') || 'Dental Specialist';
-  const location = searchParams.get('location') || 'Medical District';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '5.0';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Dental Deluxe Clinic',
+    niche: 'Dental Specialist',
+    location: 'Medical District',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   const barIcons = [
     <Sparkles size={24} color="#5eead4" key="sparkles" />,
@@ -81,13 +80,13 @@ function DentalContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#0891b2', marginBottom: '20px' }}>
               <ShieldCheck size={24} /> <Award size={24} /> <Star size={24} />
             </div>
-            <h1>{formatContent(Config.hero.title, data)}</h1>
+            <h1>{t(Config.hero.title)}</h1>
             <p>
-              {formatContent(Config.hero.subtitle, data)}
+              {t(Config.hero.subtitle)}
             </p>
             <motion.a 
               whileHover={{ gap: '15px', paddingRight: '45px' }}
-              href={`tel:${phone}`} 
+              href="#book" 
               className={styles.actionBtn} 
               style={{ padding: '18px 45px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
             >
@@ -102,7 +101,7 @@ function DentalContent() {
           <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', flexWrap: 'wrap', alignItems: 'center' }}>
             {Config.emergencyBar.map((item, i) => (
               <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 700 }}>
-                {barIcons[i] || barIcons[0]} {formatContent(item, data)}
+                {barIcons[i] || barIcons[0]} {t(item)}
               </div>
             ))}
           </div>
@@ -123,8 +122,8 @@ function DentalContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.serviceCard}>
                   <div className={styles.iconBox}>{serviceIcons[i] || serviceIcons[0]}</div>
-                  <h3>{formatContent(s.title, data)}</h3>
-                  <p style={{ color: '#64748b', lineHeight: 1.7 }}>{formatContent(s.desc, data)}</p>
+                  <h3>{t(s.title)}</h3>
+                  <p style={{ color: '#64748b', lineHeight: 1.7 }}>{t(s.desc)}</p>
                 </div>
               </Reveal>
             ))}
@@ -137,9 +136,9 @@ function DentalContent() {
           <Reveal>
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
               <Activity size={48} style={{ margin: '0 auto 30px', color: '#0891b2', opacity: 0.5 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 800, color: '#164e63', marginBottom: '30px' }}>{formatContent(Config.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 800, color: '#164e63', marginBottom: '30px' }}>{t(Config.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.7 }}>
-                {formatContent(Config.footer.subtitle, data)}
+                {t(Config.footer.subtitle)}
               </p>
               <motion.a 
                 animate={{ boxShadow: ["0 0 20px rgba(8, 145, 178, 0.2)", "0 0 40px rgba(8, 145, 178, 0.5)", "0 0 20px rgba(8, 145, 178, 0.2)"] }}
@@ -158,6 +157,7 @@ function DentalContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

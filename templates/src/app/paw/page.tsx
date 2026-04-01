@@ -1,28 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion, Variants } from 'framer-motion';
-import { PawPrint, Heart, Bone, ShieldCheck, Star, Phone, Scissors, Stethoscope, Dog } from 'lucide-react';
+import { PawPrint, Heart, Bone, ShieldCheck, Star, Scissors, Stethoscope, Dog } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { PawConfig } from '@/configs/paw';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './paw.module.css';
 
 function PawContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Paw & Palace Pet Care';
-  const niche = searchParams.get('niche') || 'Pet Specialist';
-  const location = searchParams.get('location') || 'Local District';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.9';
-
-  const data = { name, niche, location, phone, rating };
-
-  const stagger: Variants = {
-    animate: { transition: { staggerChildren: 0.1 } }
-  };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Paw & Palace Pet Care',
+    niche: 'Pet Specialist',
+    location: 'Local District',
+    phone: '0000 000 000',
+    rating: '4.9'
+  });
 
   const bounce: Variants = {
     animate: {
@@ -80,13 +75,13 @@ function PawContent() {
             <motion.div variants={bounce} animate="animate" style={{ color: '#f59e0b', marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
               <Heart size={40} fill="currentColor" />
             </motion.div>
-            <h1>{formatContent(PawConfig.hero.title, data).split('Feels at Home').map((part, i, arr) => (
+            <h1>{t(PawConfig.hero.title).split('Feels at Home').map((part, i, arr) => (
               <span key={i}>
                 {part}
                 {i < arr.length - 1 && <span>Feels at Home</span>}
               </span>
             ))}</h1>
-            <p>{formatContent(PawConfig.hero.subtitle, data)}</p>
+            <p>{t(PawConfig.hero.subtitle)}</p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
               <motion.a 
                 whileHover={{ y: -5 }}
@@ -117,8 +112,8 @@ function PawContent() {
                 <Reveal key={i} delay={0.2 * i}>
                   <div className={styles.perkCard}>
                     <div className={styles.iconCircle}>{icons[i % icons.length]}</div>
-                    <h3>{formatContent(p.title, data)}</h3>
-                    <p style={{ color: '#64748b', lineHeight: 1.6 }}>{formatContent(p.desc, data)}</p>
+                    <h3>{t(p.title)}</h3>
+                    <p style={{ color: '#64748b', lineHeight: 1.6 }}>{t(p.desc)}</p>
                   </div>
                 </Reveal>
               );
@@ -136,14 +131,14 @@ function PawContent() {
           </Reveal>
           
           <div className={styles.treatmentList}>
-            {PawConfig.treatments.map((t, i) => {
+            {PawConfig.treatments.map((t_item, i) => {
               const icons = [<Scissors />, <Stethoscope />, <Dog />];
               return (
                 <Reveal key={i} delay={0.1 * i}>
                   <motion.div whileHover={{ x: 10 }} className={styles.treatmentItem}>
                     <div style={{ color: '#0ea5e9' }}>{icons[i % icons.length]}</div>
-                    <h3>{formatContent(t.name, data)}</h3>
-                    <div className={styles.priceTag}>{formatContent(t.price, data)}</div>
+                    <h3>{t(t_item.name)}</h3>
+                    <div className={styles.priceTag}>{t(t_item.price)}</div>
                   </motion.div>
                 </Reveal>
               );
@@ -157,8 +152,8 @@ function PawContent() {
           <Reveal>
             <div>
               <Dog size={64} style={{ margin: '0 auto 30px', opacity: 0.5 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '20px' }}>{formatContent(PawConfig.footer.title, data)}</h2>
-              <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8 }}>{formatContent(PawConfig.footer.subtitle, data)}</p>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '20px' }}>{t(PawConfig.footer.title)}</h2>
+              <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8 }}>{t(PawConfig.footer.subtitle)}</p>
               
               <div style={{ display: 'flex', justifyContent: 'center', gap: '5px', color: '#f59e0b', marginBottom: '40px' }}>
                 {[1,2,3,4,5].map(i => <Star key={i} size={24} fill="currentColor" />)}
@@ -181,6 +176,7 @@ function PawContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

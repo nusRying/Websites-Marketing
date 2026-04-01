@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Image as ImageIcon, Camera, Home, Trophy, Users, PhoneCall } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { ShowcaseConfig as Config } from '@/configs/showcase';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './showcase.module.css';
 
 function ShowcaseContent() {
-  const searchParams = useSearchParams();
-  
-  const name = searchParams.get('name') || 'Your Craftsmanship Co.';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const niche = searchParams.get('niche') || 'Professional Contractor';
-  const location = searchParams.get('location') || 'Local Area';
-
-  const data = { name, phone, niche, location };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Your Craftsmanship Co.',
+    niche: 'Professional Contractor',
+    location: 'Local Area',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -68,18 +67,18 @@ function ShowcaseContent() {
             <div style={{ display: 'flex', gap: '10px', color: '#059669', marginBottom: '20px' }}>
               <Home size={20} /> <ImageIcon size={20} /> <Trophy size={20} />
             </div>
-            <h1>{formatContent(Config.hero.title, data)}</h1>
+            <h1>{ai.heroTitle || t(Config.hero.title)}</h1>
             <p style={{fontSize: '1.4rem', color: '#065f46', marginBottom: '40px', maxWidth: '700px'}}>
-              {formatContent(Config.hero.subtitle, data)}
+              {ai.heroSubtitle || t(Config.hero.subtitle)}
             </p>
             <motion.a 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href={`tel:${phone}`} 
+              href="#book" 
               className="btn" 
               style={{backgroundColor: '#064e3b', padding: '20px 50px', fontSize: '1.1rem'}}
             >
-              {Config.hero.cta}
+              {ai.heroCta || Config.hero.cta}
             </motion.a>
           </motion.div>
         </div>
@@ -97,7 +96,7 @@ function ShowcaseContent() {
                 <div className={styles.step} style={{flex: '1 1 300px', background: 'white', padding: '40px', borderRadius: '15px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)'}}>
                   <div className={styles.stepNumber}>{s.step}</div>
                   <h3 style={{ fontSize: '1.5rem', marginBottom: '15px' }}>{s.title}</h3>
-                  <p style={{ color: '#666', lineHeight: 1.6 }}>{formatContent(s.desc, data)}</p>
+                  <p style={{ color: '#666', lineHeight: 1.6 }}>{t(s.desc)}</p>
                 </div>
               </Reveal>
             ))}
@@ -135,8 +134,8 @@ function ShowcaseContent() {
           <Reveal>
             <div>
               <Users size={48} style={{ margin: '0 auto 30px', opacity: 0.5 }} />
-              <h2 style={{fontSize: '3.5rem', fontWeight: 900, marginBottom: '20px'}}>{formatContent(Config.footer.title, data)}</h2>
-              <p style={{fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8}}>{formatContent(Config.footer.subtitle, data)}</p>
+              <h2 style={{fontSize: '3.5rem', fontWeight: 900, marginBottom: '20px'}}>{ai.footerTitle || t(Config.footer.title)}</h2>
+              <p style={{fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8}}>{ai.footerSubtitle || t(Config.footer.subtitle)}</p>
               <motion.a 
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ repeat: Infinity, duration: 2 }}
@@ -153,6 +152,7 @@ function ShowcaseContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

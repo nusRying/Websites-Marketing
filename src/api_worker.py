@@ -5,6 +5,17 @@ from pydantic import BaseModel
 from typing import Optional
 import os
 from supabase import create_client, Client
+import sentry_sdk
+
+# Initialize Sentry
+SENTRY_DSN = os.getenv("SENTRY_DSN")
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        traces_sample_rate=1.0,
+        profiles_sample_rate=1.0,
+    )
+    logging.info("Sentry initialized for Backend Worker")
 
 # Import our pipeline components
 from src.scrapers.engine import ScraperEngine

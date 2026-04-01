@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Camera, MapPin, Calendar, Heart, Star, Sparkles, Phone, ArrowRight } from 'lucide-react';
+import { Camera, Heart, Star, Sparkles, ArrowRight } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { EternalConfig } from '@/configs/eternal';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './eternal.module.css';
 
 function EternalContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Eternal Memories';
-  const niche = searchParams.get('niche') || 'Wedding Photographer';
-  const location = searchParams.get('location') || 'Country Estate';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.9';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Eternal Memories',
+    niche: 'Wedding Photographer',
+    location: 'Country Estate',
+    phone: '0000 000 000',
+    rating: '4.9'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -59,7 +58,7 @@ function EternalContent() {
             transition={{ duration: 1, delay: 0.3 }}
           >
             <p>Capturing the Soul of the Moment</p>
-            <h1>{formatContent(EternalConfig.hero.title, data).split('in').map((part, i, arr) => (
+            <h1>{t(EternalConfig.hero.title).split('in').map((part, i, arr) => (
               <span key={i}>
                 {part}
                 {i < arr.length - 1 && <span>in</span>}
@@ -67,10 +66,10 @@ function EternalContent() {
             ))}</h1>
             <motion.a 
               whileHover={{ scale: 1.05 }}
-              href={`tel:${phone}`} 
+              href="#book" 
               className={styles.bookAction}
             >
-              {formatContent(EternalConfig.hero.cta, data)}
+              {t(EternalConfig.hero.cta)}
             </motion.a>
           </motion.div>
         </div>
@@ -125,10 +124,10 @@ function EternalContent() {
             {EternalConfig.packages.map((pkg, i) => (
               <Reveal key={i} delay={0.1 * i}>
                 <div className={styles.packageCard}>
-                  <h3>{formatContent(pkg.title, data)}</h3>
-                  <div className={styles.packagePrice}>{formatContent(pkg.price, data)}</div>
+                  <h3>{t(pkg.title)}</h3>
+                  <div className={styles.packagePrice}>{t(pkg.price)}</div>
                   <ul style={{ listStyle: 'none', padding: 0, marginBottom: '40px', fontFamily: 'Inter', opacity: 0.7 }}>
-                    {pkg.features.map((f, j) => <li key={j} style={{ marginBottom: '10px' }}>{formatContent(f, data)}</li>)}
+                    {pkg.features.map((f, j) => <li key={j} style={{ marginBottom: '10px' }}>{t(f)}</li>)}
                   </ul>
                   <a href={`tel:${phone}`} className={styles.bookAction} style={{ background: 'transparent', border: '1px solid #1a1a1a', color: '#1a1a1a' }}>Check Availability</a>
                 </div>
@@ -143,8 +142,8 @@ function EternalContent() {
           <Reveal>
             <div>
               <Heart size={48} style={{ margin: '0 auto 30px', opacity: 0.3 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 400, marginBottom: '30px' }}>{formatContent(EternalConfig.footer.title, data)}</h2>
-              <p style={{ letterSpacing: '2px', marginBottom: '50px' }}>{formatContent(EternalConfig.footer.subtitle, data).toUpperCase()}</p>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 400, marginBottom: '30px' }}>{t(EternalConfig.footer.title)}</h2>
+              <p style={{ letterSpacing: '2px', marginBottom: '50px' }}>{t(EternalConfig.footer.subtitle).toUpperCase()}</p>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', color: '#d4af37', marginBottom: '40px' }}>
                 {[1,2,3,4,5].map(i => <Star key={i} size={20} fill="currentColor" />)}
               </div>
@@ -164,6 +163,7 @@ function EternalContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Star, MapPin, Calendar, Heart, Shield, Award } from 'lucide-react';
+import { Check, Star, MapPin, Heart, Shield, Award } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { LocalProConfig as Config } from '@/configs/local-pro';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './local-pro.module.css';
 
 function LocalProContent() {
-  const searchParams = useSearchParams();
-  
-  const name = searchParams.get('name') || 'Your Local Service';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const niche = searchParams.get('niche') || 'Professional Expert';
-  const location = searchParams.get('location') || 'Local Area';
-
-  const data = { name, phone, niche, location };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Your Local Service',
+    niche: 'Professional Expert',
+    location: 'Local Area',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -68,13 +67,13 @@ function LocalProContent() {
           >
             <div className={styles.badge}>
               <MapPin size={14} style={{ marginRight: 5 }} />
-              {formatContent(Config.hero.badge, data)}
+              {t(Config.hero.badge)}
             </div>
             <h1 style={{fontSize: '3.5rem', color: '#1e3a8a', marginBottom: '20px', fontWeight: 900}}>
-              {formatContent(Config.hero.title, data)}
+              {t(Config.hero.title)}
             </h1>
             <p style={{fontSize: '1.3rem', color: '#475569', maxWidth: '800px', margin: '0 auto 40px'}}>
-              {formatContent(Config.hero.subtitle, data)}
+              {t(Config.hero.subtitle)}
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 700, color: '#1e3a8a' }}>
@@ -107,7 +106,7 @@ function LocalProContent() {
                   <div className={styles.price}>{p.price}<span style={{fontSize: '1rem', color: '#64748b'}}>/session</span></div>
                   <ul className={styles.featureList}>
                     {p.features.map((f, j) => (
-                      <li key={j}><Check size={16} color="#10b981" /> {formatContent(f, data)}</li>
+                      <li key={j}><Check size={16} color="#10b981" /> {t(f)}</li>
                     ))}
                   </ul>
                   <motion.a 
@@ -130,8 +129,8 @@ function LocalProContent() {
           <Reveal>
             <div>
               <Heart size={48} style={{ margin: '0 auto 30px', color: '#60a5fa' }} />
-              <h2 style={{fontSize: '3rem', fontWeight: 900, marginBottom: '20px'}}>{formatContent(Config.footer.title, data)}</h2>
-              <p style={{fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8}}>{formatContent(Config.footer.subtitle, data)}</p>
+              <h2 style={{fontSize: '3rem', fontWeight: 900, marginBottom: '20px'}}>{t(Config.footer.title)}</h2>
+              <p style={{fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8}}>{t(Config.footer.subtitle)}</p>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '5px', color: '#fbbf24', marginBottom: '40px' }}>
                 <Star size={24} fill="currentColor" />
                 <Star size={24} fill="currentColor" />

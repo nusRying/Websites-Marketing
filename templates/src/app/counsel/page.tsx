@@ -1,13 +1,13 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Shield, Briefcase, TrendingUp, Scale, Users, Phone, ArrowRight, Gavel, Landmark } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { CounselConfig } from '@/configs/counsel';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './counsel.module.css';
 
 function Counter({ value }: { value: number }) {
@@ -29,14 +29,13 @@ function Counter({ value }: { value: number }) {
 }
 
 function CounselContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Elite Partners & Co';
-  const niche = searchParams.get('niche') || 'Chartered Accountant';
-  const location = searchParams.get('location') || 'Financial District';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.9';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Elite Partners & Co',
+    niche: 'Chartered Accountant',
+    location: 'Financial District',
+    phone: '0000 000 000',
+    rating: '4.9'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -88,15 +87,15 @@ function CounselContent() {
               <p style={{ color: '#3b82f6', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '20px' }}>
                 Precision. Strategy. Integrity.
               </p>
-              <h1>{formatContent(CounselConfig.hero.title, data)}</h1>
-              <p>{formatContent(CounselConfig.hero.subtitle, data)}</p>
+              <h1 dangerouslySetInnerHTML={{ __html: t(CounselConfig.hero.title) }} />
+              <p>{t(CounselConfig.hero.subtitle)}</p>
               <motion.a 
                 whileHover={{ gap: '15px', x: 5 }}
-                href={`tel:${phone}`} 
+                href="#book" 
                 className="btn" 
                 style={{ background: '#0f172a', padding: '20px 45px', display: 'inline-flex', alignItems: 'center', gap: '10px', fontSize: '1.1rem' }}
               >
-                {formatContent(CounselConfig.hero.cta, data)} <ArrowRight size={20} />
+                {t(CounselConfig.hero.cta)} <ArrowRight size={20} />
               </motion.a>
             </motion.div>
           </div>
@@ -113,7 +112,7 @@ function CounselContent() {
                   <Counter value={stat.value} />
                   {stat.label.includes('%') ? '%' : (stat.label.includes('£') ? 'M+' : '+')}
                 </h3>
-                <p>{formatContent(stat.label, data)}</p>
+                <p>{t(stat.label)}</p>
               </div>
             ))}
           </div>
@@ -138,8 +137,8 @@ function CounselContent() {
                 <Reveal key={i} delay={0.2 * i}>
                   <div className={styles.expertiseCard}>
                     <div style={{ color: '#3b82f6', marginBottom: '25px' }}>{icons[i % icons.length]}</div>
-                    <h3>{formatContent(item.title, data)}</h3>
-                    <p style={{ color: '#64748b', lineHeight: 1.7 }}>{formatContent(item.desc, data)}</p>
+                    <h3>{t(item.title)}</h3>
+                    <p style={{ color: '#64748b', lineHeight: 1.7 }}>{t(item.desc)}</p>
                   </div>
                 </Reveal>
               );
@@ -164,8 +163,8 @@ function CounselContent() {
             </Reveal>
             <Reveal delay={0.2}>
               <div>
-                <h4 style={{ color: '#3b82f6', marginBottom: '20px', letterSpacing: '1px' }}>{formatContent(CounselConfig.footer.title, data).toUpperCase()}</h4>
-                <p>{formatContent(CounselConfig.footer.subtitle, data)}</p>
+                <h4 style={{ color: '#3b82f6', marginBottom: '20px', letterSpacing: '1px' }}>{t(CounselConfig.footer.title).toUpperCase()}</h4>
+                <p>{t(CounselConfig.footer.subtitle)}</p>
                 <p style={{ marginTop: '20px', fontWeight: 700 }}>{phone}</p>
               </div>
             </Reveal>
@@ -176,6 +175,7 @@ function CounselContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

@@ -1,24 +1,22 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, Star, MapPin, Calendar, Heart } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { AuraConfig as Config } from '@/configs/aura';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './aura.module.css';
 
 function AuraContent() {
-  const searchParams = useSearchParams();
-  
-  const name = searchParams.get('name') || 'The Wellness Atelier';
-  const niche = searchParams.get('niche') || 'Skin & Beauty';
-  const location = searchParams.get('location') || 'Local Area';
-  const phone = searchParams.get('phone') || '0000 000 000';
-
-  const data = { name, niche, location, phone };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'The Wellness Atelier',
+    niche: 'Skin & Beauty',
+    location: 'Local Area',
+    phone: '0000 000 000'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -70,13 +68,13 @@ function AuraContent() {
               <Sparkles size={14} style={{ marginRight: 8 }} />
               Defining the Art of Self-Care
             </p>
-            <h1>{formatContent(Config.hero.title, data)}</h1>
+            <h1 dangerouslySetInnerHTML={{ __html: t(Config.hero.title) }} />
             <div className={styles.divider}></div>
             <motion.div
               whileHover={{ letterSpacing: "5px" }}
               transition={{ duration: 0.3 }}
             >
-              <a href={`tel:${phone}`} className={styles.navAction} style={{padding: '18px 60px', background: '#c5a059'}}>
+              <a href="#book" className={styles.navAction} style={{padding: '18px 60px', background: '#c5a059'}}>
                 {Config.hero.cta}
               </a>
             </motion.div>
@@ -101,8 +99,8 @@ function AuraContent() {
                   className={styles.menuItem}
                 >
                   <div>
-                    <h3>{formatContent(item.title, data)}</h3>
-                    <p style={{fontSize: '0.95rem', color: '#777', marginTop: '8px'}}>{formatContent(item.desc, data)}</p>
+                    <h3>{t(item.title)}</h3>
+                    <p style={{fontSize: '0.95rem', color: '#777', marginTop: '8px'}}>{t(item.desc)}</p>
                   </div>
                   <div className={styles.price}>{item.price}</div>
                 </motion.div>
@@ -128,7 +126,7 @@ function AuraContent() {
               <Star size={20} fill="currentColor" />
             </div>
             <div className={styles.quote}>
-              "{formatContent(Config.testimonial.quote, data)}"
+              "{t(Config.testimonial.quote)}"
             </div>
             <div className={styles.author}>— {Config.testimonial.author.toUpperCase()}, {location.toUpperCase()}</div>
           </motion.div>
@@ -140,9 +138,9 @@ function AuraContent() {
           <Reveal>
             <div className={styles.bookingCard}>
               <Heart size={40} color="#c5a059" style={{ marginBottom: '20px' }} />
-              <h2 style={{fontFamily: 'serif', fontSize: '2.5rem', marginBottom: '20px'}}>{formatContent(Config.booking.title, data)}</h2>
+              <h2 style={{fontFamily: 'serif', fontSize: '2.5rem', marginBottom: '20px'}}>{t(Config.booking.title)}</h2>
               <p style={{marginBottom: '40px', color: '#666', fontSize: '1.1rem'}}>
-                {formatContent(Config.booking.desc, data)}
+                {t(Config.booking.desc)}
               </p>
               <a href={`tel:${phone}`} className={styles.navAction} style={{display: 'block', background: '#1a1a1a', padding: '20px'}}>
                 Call {name}: {phone}
@@ -163,6 +161,7 @@ function AuraContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

@@ -1,25 +1,21 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Leaf, Users, Zap, MapPin, Calendar, Heart, ArrowRight } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { VitalityConfig } from '@/configs/vitality';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './vitality.module.css';
 
 function VitalityContent() {
-  const searchParams = useSearchParams();
-  
-  const name = searchParams.get('name') || 'Vitality Studio';
-  const niche = searchParams.get('niche') || 'Wellness Expert';
-  const location = searchParams.get('location') || 'Local District';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.9';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Vitality Studio',
+    niche: 'Wellness Expert',
+    location: 'Local District'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -68,20 +64,15 @@ function VitalityContent() {
             <div style={{ color: '#86efac', marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
               <Leaf size={32} />
             </div>
-            <h1>{formatContent(VitalityConfig.hero.title, data).split('Balance').map((part, i, arr) => (
-              <span key={i}>
-                {part}
-                {i < arr.length - 1 && <span>Balance</span>}
-              </span>
-            ))}</h1>
-            <p>{formatContent(VitalityConfig.hero.subtitle, data)}</p>
+            <h1 dangerouslySetInnerHTML={{ __html: t(VitalityConfig.hero.title).replace('Balance', '<span>Balance</span>') }} />
+            <p>{t(VitalityConfig.hero.subtitle)}</p>
             <motion.a 
               whileHover={{ gap: '15px' }}
-              href={`tel:${phone}`} 
+              href="#book" 
               className={styles.bookBtn} 
               style={{ padding: '18px 45px', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
             >
-              {formatContent(VitalityConfig.hero.cta, data)} <ArrowRight size={16} />
+              {ai.niche_cta || t(VitalityConfig.hero.cta)} <ArrowRight size={16} />
             </motion.a>
           </motion.div>
         </div>
@@ -102,10 +93,10 @@ function VitalityContent() {
               return (
                 <Reveal key={i} delay={0.1 * i}>
                   <div className={styles.classCard}>
-                    <span className={styles.time}>{formatContent(c.time, data)}</span>
+                    <span className={styles.time}>{t(c.time)}</span>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginTop: '10px' }}>
                       <div style={{ color: '#86efac' }}>{icons[i % icons.length]}</div>
-                      <h3 style={{ fontSize: '1.5rem', fontWeight: 400 }}>{formatContent(c.name, data)}</h3>
+                      <h3 style={{ fontSize: '1.5rem', fontWeight: 400 }}>{t(c.name)}</h3>
                     </div>
                     <p style={{ marginTop: '20px', color: '#64748b' }}>A signature {niche.toLowerCase()} session focused on sustainable movement and breath.</p>
                   </div>
@@ -154,8 +145,8 @@ function VitalityContent() {
         <div className="container">
           <Reveal>
             <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-              <h2 style={{ fontSize: '3rem', fontWeight: 200, marginBottom: '20px' }}>{formatContent(VitalityConfig.footer.title, data)}</h2>
-              <p style={{ opacity: 0.7, marginBottom: '40px' }}>{formatContent(VitalityConfig.footer.subtitle, data)}</p>
+              <h2 style={{ fontSize: '3rem', fontWeight: 200, marginBottom: '20px' }}>{t(VitalityConfig.footer.title)}</h2>
+              <p style={{ opacity: 0.7, marginBottom: '40px' }}>{t(VitalityConfig.footer.subtitle)}</p>
               <motion.a 
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ repeat: Infinity, duration: 4 }}
@@ -173,6 +164,7 @@ function VitalityContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

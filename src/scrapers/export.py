@@ -50,7 +50,7 @@ class ExcelExporter:
             rating = float(lead.get('rating', '0').split()[0] if isinstance(lead.get('rating'), str) else lead.get('rating', 0))
             quality = "ELITE" if rating >= 4.5 else "SOLID" if rating >= 3.5 else "POTENTIAL"
 
-            formatted_data.append({
+            entry = {
                 "Name": lead.get('name', 'Unknown'),
                 "Lead Quality": quality,
                 "No Website": "Yes",
@@ -64,12 +64,20 @@ class ExcelExporter:
                 "X / Twitter": tw,
                 "Phone": lead.get('phone', 'Not found'),
                 "Address": lead.get('address', 'Not found'),
+                "Screenshot Path": lead.get('Screenshot Path', ''),
                 "Photo URL": lead.get('photo_url', ''),
                 "Attributes": attributes_str,
                 "Business Hours": hours_str,
                 "Recent Reviews (All)": reviews_str.strip(),
                 "Google Maps URL": lead.get('url', '')
-            })
+            }
+
+            # Dynamically add all AI fields
+            for key, val in lead.items():
+                if key.startswith("ai_"):
+                    entry[key] = val
+
+            formatted_data.append(entry)
 
         df = pd.DataFrame(formatted_data)
         

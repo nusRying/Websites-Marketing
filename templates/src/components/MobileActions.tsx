@@ -19,7 +19,7 @@ export default function MobileActions({ phone, name }: Props) {
         <MessageSquare size={20} />
         <span>Text</span>
       </a>
-      <a href={`tel:${phone}`} className={styles.primaryAction}>
+      <a href="#book" className={styles.primaryAction}>
         <Calendar size={18} />
         <span>Book {name.split(' ')[0]}</span>
       </a>

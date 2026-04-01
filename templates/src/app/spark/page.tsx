@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, ShieldCheck, Sun, Lightbulb, Home, Phone, ArrowRight, Gauge, Cpu, CheckCircle2 } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { SparkConfig as config } from '@/configs/spark';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './spark.module.css';
 
 function SparkContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Volt Tech Solutions';
-  const niche = searchParams.get('niche') || 'Electrical Specialist';
-  const location = searchParams.get('location') || 'Energy Hub';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.9';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Volt Tech Solutions',
+    niche: 'Electrical Specialist',
+    location: 'Energy Hub',
+    phone: '0000 000 000',
+    rating: '4.9'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -69,17 +68,17 @@ function SparkContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#fbbf24', marginBottom: '30px' }}>
               <Gauge size={20} /> <Cpu size={20} /> <Lightbulb size={20} />
             </div>
-            <h1>{formatContent(config.hero.title, data).split('with')[0]} <br/> <span>with {formatContent(config.hero.title, data).split('with')[1]}</span></h1>
+            <h1 dangerouslySetInnerHTML={{ __html: ai.heroTitle || t(config.hero.title).split('with')[0] + '<br/> <span>with ' + t(config.hero.title).split('with')[1] + '</span>' }} />
             <p>
-              {formatContent(config.hero.subtitle, data)}
+              {ai.heroSubtitle || t(config.hero.subtitle)}
             </p>
             <motion.a 
               whileHover={{ gap: '15px', paddingRight: '45px' }}
-              href={`tel:${phone}`} 
+              href="#book" 
               className={styles.actionBtn} 
               style={{ padding: '18px 45px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
             >
-              {config.hero.cta} <ArrowRight size={20} />
+              {ai.heroCta || config.hero.cta} <ArrowRight size={20} />
             </motion.a>
           </motion.div>
         </div>
@@ -102,7 +101,7 @@ function SparkContent() {
                     {i === 0 ? <ShieldCheck size={32} /> : i === 1 ? <Sun size={32} /> : <Home size={32} />}
                   </div>
                   <h3>{s.title}</h3>
-                  <p style={{ color: '#94a3b8', lineHeight: 1.7 }}>{formatContent(s.desc, data)}</p>
+                  <p style={{ color: '#94a3b8', lineHeight: 1.7 }}>{t(s.desc)}</p>
                 </div>
               </Reveal>
             ))}
@@ -129,9 +128,9 @@ function SparkContent() {
         <div className="container text-center">
           <Reveal>
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{formatContent(config.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{ai.footerTitle || t(config.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.7 }}>
-                {formatContent(config.footer.subtitle, data)}
+                {ai.footerSubtitle || t(config.footer.subtitle)}
               </p>
               <motion.a 
                 animate={{ boxShadow: ["0 0 20px rgba(251, 191, 36, 0.3)", "0 0 40px rgba(251, 191, 36, 0.6)", "0 0 20px rgba(251, 191, 36, 0.3)"] }}
@@ -150,6 +149,7 @@ function SparkContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

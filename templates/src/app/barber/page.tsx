@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Scissors, Star, MapPin, Calendar, Clock, Phone, ChevronRight, Camera, UserCheck } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { BarberConfig as config } from '@/configs/barber';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './barber.module.css';
 
 function BarberContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'The Heritage Barbershop';
-  const niche = searchParams.get('niche') || 'Master Barber';
-  const location = searchParams.get('location') || 'Central District';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '5.0';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'The Heritage Barbershop',
+    niche: 'Master Barber',
+    location: 'Central District',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -69,13 +68,13 @@ function BarberContent() {
             <div style={{ color: '#d4af37', marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
               <Scissors size={32} />
             </div>
-            <h1>{formatContent(config.hero.title, data).split('In the Heart of')[0]} <br/> <span>In the Heart of {formatContent(config.hero.title, data).split('In the Heart of')[1]}</span></h1>
+            <h1 dangerouslySetInnerHTML={{ __html: t(config.hero.title).split('In the Heart of')[0] + '<br/> <span>In the Heart of ' + t(config.hero.title).split('In the Heart of')[1] + '</span>' }} />
             <p>
-              {formatContent(config.hero.subtitle, data)}
+              {t(config.hero.subtitle)}
             </p>
             <motion.a 
               whileHover={{ letterSpacing: '3px' }}
-              href={`tel:${phone}`} 
+              href="#book" 
               className={styles.bookBtn} 
               style={{ padding: '18px 50px', fontSize: '1.1rem' }}
             >
@@ -99,10 +98,10 @@ function BarberContent() {
               <Reveal key={i} delay={0.1 * i}>
                 <div style={{ marginBottom: '40px' }}>
                   <div className={styles.serviceItem}>
-                    <span className={styles.serviceName}>{formatContent(s.name, data)}</span>
+                    <span className={styles.serviceName}>{t(s.name)}</span>
                     <span className={styles.servicePrice}>{s.price}</span>
                   </div>
-                  <p className={styles.serviceDesc}>{formatContent(s.desc, data)}</p>
+                  <p className={styles.serviceDesc}>{t(s.desc)}</p>
                 </div>
               </Reveal>
             ))}
@@ -140,9 +139,9 @@ function BarberContent() {
           <Reveal>
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
               <UserCheck size={48} style={{ margin: '0 auto 30px', color: '#d4af37' }} />
-              <h2 style={{ fontSize: '3.5rem', fontFamily: 'serif', marginBottom: '30px' }}>{formatContent(config.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontFamily: 'serif', marginBottom: '30px' }}>{t(config.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.7 }}>
-                {formatContent(config.footer.subtitle, data)} Walk-ins welcome, but bookings are highly recommended.
+                {t(config.footer.subtitle)} Walk-ins welcome, but bookings are highly recommended.
               </p>
               
               <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', marginBottom: '50px', flexWrap: 'wrap' }}>
@@ -173,6 +172,7 @@ function BarberContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

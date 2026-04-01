@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, ShieldCheck, Cloud, Globe, Code, Terminal, Zap, Phone, ArrowRight, BarChart3, Lock } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { TitanConfig as Config } from '@/configs/titan';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './titan.module.css';
 
 function TitanContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Titan Systems Global';
-  const niche = searchParams.get('niche') || 'IT Specialist';
-  const location = searchParams.get('location') || 'Digital Hub';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '4.9';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Titan Systems Global',
+    niche: 'IT Specialist',
+    location: 'Digital Hub',
+    phone: '0000 000 000',
+    rating: '4.9'
+  });
 
   const techIcons = [
     <ShieldCheck size={18} color="#3b82f6" key="shield" />,
@@ -82,18 +81,18 @@ function TitanContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#3b82f6', marginBottom: '30px' }}>
               <Code size={20} /> <Globe size={20} /> <Cpu size={20} />
             </div>
-            <h1>{formatContent(Config.hero.title, data)}</h1>
+            <h1>{ai.heroTitle || t(Config.hero.title)}</h1>
             <p>
-              {formatContent(Config.hero.subtitle, data)}
+              {ai.heroSubtitle || t(Config.hero.subtitle)}
             </p>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
               <motion.a 
                 whileHover={{ gap: '15px', paddingRight: '45px' }}
-                href={`tel:${phone}`} 
+                href="#book" 
                 className={styles.btnTitan} 
                 style={{ padding: '18px 40px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
               >
-                {Config.hero.cta} <ArrowRight size={20} />
+                {ai.heroCta || Config.hero.cta} <ArrowRight size={20} />
               </motion.a>
             </div>
           </motion.div>
@@ -105,7 +104,7 @@ function TitanContent() {
           <div className={styles.techGrid}>
             {Config.techBar.map((tech, i) => (
               <div key={i} className={styles.techItem}>
-                {techIcons[i] || techIcons[0]} {formatContent(tech, data)}
+                {techIcons[i] || techIcons[0]} {t(tech)}
               </div>
             ))}
           </div>
@@ -128,8 +127,8 @@ function TitanContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.solutionCard}>
                   <div style={{ color: '#3b82f6', marginBottom: '25px' }}>{solutionIcons[i] || solutionIcons[0]}</div>
-                  <h3>{formatContent(s.title, data)}</h3>
-                  <p style={{ color: '#94a3b8', lineHeight: 1.8 }}>{formatContent(s.desc, data)}</p>
+                  <h3>{t(s.title)}</h3>
+                  <p style={{ color: '#94a3b8', lineHeight: 1.8 }}>{t(s.desc)}</p>
                 </div>
               </Reveal>
             ))}
@@ -142,9 +141,9 @@ function TitanContent() {
           <Reveal>
             <div>
               <Globe size={48} style={{ margin: '0 auto 30px', color: '#3b82f6', opacity: 0.5 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{formatContent(Config.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{ai.footerTitle || t(Config.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.7, maxWidth: '650px', margin: '0 auto 50px' }}>
-                {formatContent(Config.footer.subtitle, data)}
+                {ai.footerSubtitle || t(Config.footer.subtitle)}
               </p>
               <motion.a 
                 animate={{ boxShadow: ["0 0 20px rgba(59, 130, 246, 0.3)", "0 0 40px rgba(59, 130, 246, 0.6)", "0 0 20px rgba(59, 130, 246, 0.3)"] }}
@@ -163,6 +162,7 @@ function TitanContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

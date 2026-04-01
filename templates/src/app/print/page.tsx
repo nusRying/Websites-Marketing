@@ -1,25 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Printer, Image as ImageIcon, Package, Globe, Star, Phone, ArrowRight, PenTool, Sparkles } from 'lucide-react';
+import { Printer, Image as ImageIcon, Package, Globe, Star, ArrowRight, PenTool, Sparkles } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { PrimePrintConfig } from '@/configs/prime-print';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './prime-print.module.css';
 
 function PrintContent() {
-  const searchParams = useSearchParams();
-  
-  const data = {
-    name: searchParams.get('name') || 'Vivid Print Solutions',
-    niche: searchParams.get('niche') || 'Print Specialist',
-    location: searchParams.get('location') || 'Creative Hub',
-    phone: searchParams.get('phone') || '0000 000 000',
-    rating: searchParams.get('rating') || '5.0'
-  };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Vivid Print Solutions',
+    niche: 'Print Specialist',
+    location: 'Creative Hub',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -30,10 +28,10 @@ function PrintContent() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": PrimePrintConfig.schemaType,
-            "name": data.name,
-            "telephone": data.phone,
-            "areaServed": data.location,
-            "description": `Premier ${data.niche} and signage solutions in ${data.location}. Precision printing and vivid impact.`
+            "name": name,
+            "telephone": phone,
+            "areaServed": location,
+            "description": `Premier ${niche} and signage solutions in ${location}. Precision printing and vivid impact.`
           })
         }}
       />
@@ -47,11 +45,11 @@ function PrintContent() {
               className={styles.logo}
             >
               <Printer size={28} style={{ marginRight: 10, color: '#6366f1' }} />
-              {data.name.split(' ')[0]} <span>{data.name.split(' ').slice(1).join(' ')}</span>
+              {name.split(' ')[0]} <span>{name.split(' ').slice(1).join(' ')}</span>
             </motion.div>
             <motion.a 
               whileHover={{ scale: 1.05 }}
-              href={`tel:${data.phone}`} 
+              href={`tel:${phone}`} 
               className={styles.ctaBtn}
             >
               Consultation
@@ -70,11 +68,11 @@ function PrintContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#6366f1', marginBottom: '30px' }}>
               <PenTool size={24} /> <ImageIcon size={24} /> <Package size={24} />
             </div>
-            <h1 dangerouslySetInnerHTML={{ __html: formatContent(PrimePrintConfig.hero.title, data) }} />
-            <p>{formatContent(PrimePrintConfig.hero.subtitle, data)}</p>
+            <h1 dangerouslySetInnerHTML={{ __html: t(PrimePrintConfig.hero.title) }} />
+            <p>{t(PrimePrintConfig.hero.subtitle)}</p>
             <motion.a 
               whileHover={{ gap: '20px', paddingRight: '50px' }}
-              href={`tel:${data.phone}`} 
+              href={`tel:${phone}`} 
               className={styles.ctaBtn} 
               style={{ padding: '20px 60px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
             >
@@ -90,7 +88,7 @@ function PrintContent() {
             <div className="text-center">
               <h2 style={{ fontSize: '3rem', fontWeight: 900, textTransform: 'uppercase', color: '#1e1b4b' }}>Core Competencies</h2>
               <p style={{ color: '#64748b', marginTop: '10px', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                IMPACT REFINED IN {data.location.toUpperCase()}
+                IMPACT REFINED IN {location.toUpperCase()}
               </p>
             </div>
           </Reveal>
@@ -100,7 +98,7 @@ function PrintContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.card}>
                   <h3 style={{ marginBottom: '20px' }}>{s.title}</h3>
-                  <p>{formatContent(s.desc, data)}</p>
+                  <p>{t(s.desc)}</p>
                   <motion.div 
                     whileHover={{ x: 10, color: '#6366f1' }}
                     style={{ marginTop: '30px', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', borderTop: '1px solid #f1f5f9', paddingTop: '20px' }}
@@ -119,9 +117,9 @@ function PrintContent() {
           <Reveal>
             <div style={{ maxWidth: '800px', margin: '0 auto' }}>
               <Globe size={48} style={{ margin: '0 auto 30px', color: '#6366f1', opacity: 0.5 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{formatContent(PrimePrintConfig.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{t(PrimePrintConfig.footer.title)}</h2>
               <p style={{ fontSize: '1.25rem', marginBottom: '50px', opacity: 0.7 }}>
-                {formatContent(PrimePrintConfig.footer.subtitle, data)}
+                {t(PrimePrintConfig.footer.subtitle)}
               </p>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', color: '#fbbf24', marginBottom: '40px' }}>
                 {[1,2,3,4,5].map(i => <Star key={i} size={20} fill="currentColor" />)}
@@ -129,21 +127,22 @@ function PrintContent() {
               <motion.a 
                 animate={{ boxShadow: ["0 0 20px rgba(99, 102, 241, 0.2)", "0 0 40px rgba(99, 102, 241, 0.5)", "0 0 20px rgba(99, 102, 241, 0.2)"] }}
                 transition={{ repeat: Infinity, duration: 3 }}
-                href={`tel:${data.phone}`} 
+                href={`tel:${phone}`} 
                 className={styles.ctaBtn} 
                 style={{ padding: '25px 80px', fontSize: '1.4rem' }}
               >
-                CALL PRODUCTION: {data.phone}
+                CALL PRODUCTION: {phone}
               </motion.a>
             </div>
           </Reveal>
           <div style={{ marginTop: '100px', opacity: 0.3, fontSize: '0.8rem', letterSpacing: '4px' }}>
-            © 2026 {data.name.toUpperCase()} | CERTIFIED {data.niche.toUpperCase()} | {data.location.toUpperCase()} REGION
+            © 2026 {name.toUpperCase()} | CERTIFIED {niche.toUpperCase()} | {location.toUpperCase()} REGION
           </div>
         </div>
       </footer>
 
-      <MobileActions phone={data.phone} name={data.name} />
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
+      <MobileActions phone={phone} name={name} />
     </div>
   );
 }

@@ -10,6 +10,7 @@ export interface LeadData {
   phone?: string;
   rating?: string;
   reviews_count?: number;
+  booking_url?: string;
   [key: string]: any;
 }
 

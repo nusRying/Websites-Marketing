@@ -1,24 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Dumbbell, Zap, Trophy, Timer, Users, Target, Phone, ArrowRight, ShieldCheck, Flame } from 'lucide-react';
+import { Dumbbell, Zap, Trophy, Timer, Users, Target, ShieldCheck, Flame } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { FitConfig as config } from '@/configs/fit';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './fit.module.css';
 
 function FitContent() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get('name') || 'Fit Focus Elite';
-  const niche = searchParams.get('niche') || 'Fitness Specialist';
-  const location = searchParams.get('location') || 'Performance Zone';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const rating = searchParams.get('rating') || '5.0';
-
-  const data = { name, niche, location, phone, rating };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Fit Focus Elite',
+    niche: 'Fitness Specialist',
+    location: 'Performance Zone',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -69,14 +68,14 @@ function FitContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#adff2f', marginBottom: '20px' }}>
               <Zap size={24} /> <Flame size={24} /> <Trophy size={24} />
             </div>
-            <h1>{formatContent(config.hero.title, data).split('Built in')[0]} <br/> <span>Built in {formatContent(config.hero.title, data).split('Built in')[1]}</span></h1>
+            <h1>{t(config.hero.title).split('Built in')[0]} <br/> <span>Built in {t(config.hero.title).split('Built in')[1]}</span></h1>
             <p>
-              {formatContent(config.hero.subtitle, data)}
+              {t(config.hero.subtitle)}
             </p>
             <motion.a 
               whileHover={{ skewX: -10, scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href={`tel:${phone}`} 
+              href="#book" 
               className={styles.actionBtn} 
               style={{ padding: '20px 60px', fontSize: '1.25rem' }}
             >
@@ -103,7 +102,7 @@ function FitContent() {
                     {i === 0 ? <Target size={32} /> : i === 1 ? <Users size={32} /> : <Timer size={32} />}
                   </div>
                   <h3>{s.title}</h3>
-                  <p style={{ color: '#a3a3a3', lineHeight: 1.8 }}>{formatContent(s.desc, data)}</p>
+                  <p style={{ color: '#a3a3a3', lineHeight: 1.8 }}>{t(s.desc)}</p>
                 </div>
               </Reveal>
             ))}
@@ -133,9 +132,9 @@ function FitContent() {
         <div className="container text-center">
           <Reveal>
             <div style={{ maxWidth: '750px', margin: '0 auto' }}>
-              <h2 style={{ fontSize: '4rem', fontWeight: 900, marginBottom: '30px', fontStyle: 'italic' }}>{formatContent(config.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '4rem', fontWeight: 900, marginBottom: '30px', fontStyle: 'italic' }}>{t(config.footer.title)}</h2>
               <p style={{ fontSize: '1.3rem', marginBottom: '50px', opacity: 0.7 }}>
-                {formatContent(config.footer.subtitle, data)}
+                {t(config.footer.subtitle)}
               </p>
               <motion.a 
                 animate={{ boxShadow: ["0 0 20px rgba(173, 255, 47, 0.2)", "0 0 50px rgba(173, 255, 47, 0.5)", "0 0 20px rgba(173, 255, 47, 0.2)"] }}
@@ -154,6 +153,7 @@ function FitContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

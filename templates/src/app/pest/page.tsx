@@ -1,25 +1,23 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, ShieldAlert, Zap, Search, Star, Phone, ArrowRight, Bug, Ghost, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, ShieldAlert, Search, Star, ArrowRight, Bug, Ghost } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { PrimePestConfig } from '@/configs/prime-pest';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './prime-pest.module.css';
 
 function PestContent() {
-  const searchParams = useSearchParams();
-  
-  const data = {
-    name: searchParams.get('name') || 'Prime Pest Defense',
-    niche: searchParams.get('niche') || 'Pest Specialist',
-    location: searchParams.get('location') || 'Local Area',
-    phone: searchParams.get('phone') || '0000 000 000',
-    rating: searchParams.get('rating') || '5.0'
-  };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Prime Pest Defense',
+    niche: 'Pest Specialist',
+    location: 'Local Area',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -30,10 +28,10 @@ function PestContent() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": PrimePestConfig.schemaType,
-            "name": data.name,
-            "telephone": data.phone,
-            "areaServed": data.location,
-            "description": `Premier ${data.niche} and eradication services in ${data.location}. Professional, discreet, and effective protection.`
+            "name": name,
+            "telephone": phone,
+            "areaServed": location,
+            "description": `Premier ${niche} and eradication services in ${location}. Professional, discreet, and effective protection.`
           })
         }}
       />
@@ -47,11 +45,11 @@ function PestContent() {
               className={styles.logo}
             >
               <ShieldAlert size={28} style={{ marginRight: 10, color: '#f59e0b' }} />
-              {data.name.split(' ')[0]} <span>{data.name.split(' ').slice(1).join(' ')}</span>
+              {name.split(' ')[0]} <span>{name.split(' ').slice(1).join(' ')}</span>
             </motion.div>
             <motion.a 
               whileHover={{ scale: 1.05 }}
-              href={`tel:${data.phone}`} 
+              href={`tel:${phone}`} 
               className={styles.actionBtn}
             >
               Emergency Call
@@ -70,11 +68,11 @@ function PestContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#f59e0b', marginBottom: '30px' }}>
               <Bug size={24} /> <Ghost size={24} /> <ShieldCheck size={24} />
             </div>
-            <h1 dangerouslySetInnerHTML={{ __html: formatContent(PrimePestConfig.hero.title, data) }} />
-            <p>{formatContent(PrimePestConfig.hero.subtitle, data)}</p>
+            <h1 dangerouslySetInnerHTML={{ __html: t(PrimePestConfig.hero.title) }} />
+            <p>{t(PrimePestConfig.hero.subtitle)}</p>
             <motion.a 
               whileHover={{ gap: '20px', paddingRight: '50px' }}
-              href={`tel:${data.phone}`} 
+              href={`tel:${phone}`} 
               className={styles.actionBtn} 
               style={{ padding: '20px 60px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
             >
@@ -90,7 +88,7 @@ function PestContent() {
             <div className="text-center">
               <h2 style={{ fontSize: '3rem', fontWeight: 900, textTransform: 'uppercase' }}>Defense Strategies</h2>
               <p style={{ color: '#64748b', marginTop: '10px', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                PROTECTING THE {data.location.toUpperCase()} REGION
+                PROTECTING THE {location.toUpperCase()} REGION
               </p>
             </div>
           </Reveal>
@@ -100,7 +98,7 @@ function PestContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.card}>
                   <h3 style={{ marginBottom: '20px' }}>{s.title}</h3>
-                  <p>{formatContent(s.desc, data)}</p>
+                  <p>{t(s.desc)}</p>
                   <motion.div 
                     whileHover={{ x: 10, color: '#f59e0b' }}
                     style={{ marginTop: '30px', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', borderTop: '1px solid #eee', paddingTop: '20px' }}
@@ -119,9 +117,9 @@ function PestContent() {
           <Reveal>
             <div style={{ maxWidth: '800px', margin: '0 auto' }}>
               <ShieldCheck size={48} style={{ margin: '0 auto 30px', color: '#f59e0b', opacity: 0.5 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{formatContent(PrimePestConfig.footer.title, data)}</h2>
+              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{t(PrimePestConfig.footer.title)}</h2>
               <p style={{ fontSize: '1.25rem', marginBottom: '50px', opacity: 0.7 }}>
-                {formatContent(PrimePestConfig.footer.subtitle, data)}
+                {t(PrimePestConfig.footer.subtitle)}
               </p>
               <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', color: '#f59e0b', marginBottom: '50px' }}>
                 {[1,2,3,4,5].map(i => <Star key={i} size={20} fill="currentColor" />)}
@@ -129,21 +127,22 @@ function PestContent() {
               <motion.a 
                 animate={{ boxShadow: ["0 0 20px rgba(245, 158, 11, 0.1)", "0 0 40px rgba(245, 158, 11, 0.3)", "0 0 20px rgba(245, 158, 11, 0.1)"] }}
                 transition={{ repeat: Infinity, duration: 3 }}
-                href={`tel:${data.phone}`} 
+                href={`tel:${phone}`} 
                 className={styles.actionBtn} 
                 style={{ padding: '25px 80px', fontSize: '1.4rem' }}
               >
-                CALL DISPATCH: {data.phone}
+                CALL DISPATCH: {phone}
               </motion.a>
             </div>
           </Reveal>
           <div style={{ marginTop: '100px', opacity: 0.3, fontSize: '0.8rem', letterSpacing: '4px' }}>
-            © 2026 {data.name.toUpperCase()} | BPCA CERTIFIED {data.niche.toUpperCase()} | {data.location.toUpperCase()} REGION
+            © 2026 {name.toUpperCase()} | BPCA CERTIFIED {niche.toUpperCase()} | {location.toUpperCase()} REGION
           </div>
         </div>
       </footer>
 
-      <MobileActions phone={data.phone} name={data.name} />
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
+      <MobileActions phone={phone} name={name} />
     </div>
   );
 }

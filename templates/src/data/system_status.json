@@ -1,0 +1,26 @@
+{
+  "last_updated": "2026-04-01T19:17:00.524952",
+  "resources": {
+    "cpu_percent": 13.4,
+    "memory_mb": 14357.515625,
+    "load_avg": [
+      0,
+      0,
+      0
+    ]
+  },
+  "services": {
+    "scraper": {
+      "status": "IDLE",
+      "label": "G-Maps Scraper"
+    },
+    "watcher": {
+      "status": "OFFLINE",
+      "label": "Pipeline Watcher"
+    },
+    "enrichment": {
+      "status": "IDLE",
+      "label": "AI Enrichment"
+    }
+  }
+}

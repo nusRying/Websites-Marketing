@@ -1,13 +1,13 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { ShieldAlert, Award, FileCheck, Map, PhoneCall, HardHat, Construction } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
+import BookingWidget from '@/components/BookingWidget';
 import { IndustrialConfig as Config } from '@/configs/industrial';
-import { formatContent } from '@/lib/utils';
+import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './industrial.module.css';
 
 const ICON_MAP = {
@@ -17,14 +17,13 @@ const ICON_MAP = {
 };
 
 function IndustrialContent() {
-  const searchParams = useSearchParams();
-  
-  const name = searchParams.get('name') || 'Industrial Solutions Ltd';
-  const phone = searchParams.get('phone') || '0000 000 000';
-  const niche = searchParams.get('niche') || 'Industrial Specialist';
-  const location = searchParams.get('location') || 'Local Area';
-
-  const data = { name, phone, niche, location };
+  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
+    name: 'Industrial Solutions Ltd',
+    niche: 'Industrial Specialist',
+    location: 'Local Area',
+    phone: '0000 000 000',
+    rating: '5.0'
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -79,9 +78,9 @@ function IndustrialContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#facc15', marginBottom: '30px' }}>
               <HardHat size={24} /> <Construction size={24} /> <ShieldAlert size={24} />
             </div>
-            <h1>{formatContent(Config.hero.title, data)}</h1>
+            <h1>{t(Config.hero.title)}</h1>
             <p style={{fontSize: '1.3rem', maxWidth: '650px', marginBottom: '50px', opacity: 0.9, lineHeight: 1.6}}>
-              {formatContent(Config.hero.subtitle, data)}
+              {t(Config.hero.subtitle)}
             </p>
             <motion.a 
               whileHover={{ x: 10 }}
@@ -120,7 +119,7 @@ function IndustrialContent() {
                   <div className={styles.industrialCard} style={{ transition: 'all 0.3s ease' }}>
                     <div style={{ color: '#facc15', marginBottom: '20px' }}><Icon /></div>
                     <h3>{s.title}</h3>
-                    <p style={{ color: '#475569', lineHeight: 1.7 }}>{formatContent(s.desc, data)}</p>
+                    <p style={{ color: '#475569', lineHeight: 1.7 }}>{t(s.desc)}</p>
                   </div>
                 </Reveal>
               );
@@ -134,8 +133,8 @@ function IndustrialContent() {
           <Reveal>
             <div>
               <Map size={48} style={{ margin: '0 auto 30px' }} />
-              <h2>{formatContent(Config.footer.title, data)}</h2>
-              <p style={{fontSize: '1.3rem', marginBottom: '50px', opacity: 0.9}}>{formatContent(Config.footer.subtitle, data)}</p>
+              <h2>{t(Config.footer.title)}</h2>
+              <p style={{fontSize: '1.3rem', marginBottom: '50px', opacity: 0.9}}>{t(Config.footer.subtitle)}</p>
               <motion.a 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -158,6 +157,7 @@ function IndustrialContent() {
         </div>
       </footer>
 
+      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );

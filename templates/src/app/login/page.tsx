@@ -13,25 +13,44 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Key validation check
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    if (!supabaseKey || !supabaseKey.startsWith('eyJ')) {
+      setError("CRITICAL: Your Supabase API Key is invalid. It should start with 'eyJ' (Yours looks like a Stripe key). Please update .env.local with the 'anon' key from Supabase Settings > API.");
+      return;
+    }
+
     setLoading(true);
     setError(null);
-
-    const { error } = await supabase.auth.signInWithPassword({
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
-      setError(error.message);
+      console.error("Login error:", error.message);
+      if (error.message.toLowerCase().includes("confirm")) {
+        setError("Please confirm your email address. Check your inbox (and spam).");
+      } else {
+        setError(error.message);
+      }
       setLoading(false);
     } else {
+
+      console.log("Login successful, user:", data.user?.id);
       router.push('/');
       router.refresh();
     }
+  } catch (err: any) {
+    console.error("Unexpected error during login:", err);
+    setError("An unexpected error occurred.");
+    setLoading(false);
+  }
   };
-
   return (
     <div style={{ 
       minHeight: '100vh', 
