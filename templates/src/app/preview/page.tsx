@@ -96,15 +96,15 @@ function PreviewContent() {
             </motion.div>
             
             <motion.h1 variants={fadeInUp}>
-              {t(Config.hero.title)}
+              {ai.hero_title || t(Config.hero.title)}
             </motion.h1>
             
             <motion.p variants={fadeInUp}>
-              {t(Config.hero.subtitle)}
+              {ai.pain_point || t(Config.hero.subtitle)}
             </motion.p>
             
             <motion.div variants={fadeInUp} className={styles.ctaGroup}>
-              <a href="#book" className="btn" style={{ fontSize: '1.1rem', padding: '15px 40px' }}>
+              <a href="#book" className="btn" style={{ fontSize: '1.1rem', padding: '16px 45px', fontWeight: 800, borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-md)', transition: 'all 0.2s', fontFamily: 'var(--font-outfit), sans-serif' }}>
                 {Config.hero.cta}
               </a>
             </motion.div>
@@ -115,10 +115,11 @@ function PreviewContent() {
       <section className={styles.features}>
         <div className="container">
           <motion.h2 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center"
+            style={{ fontWeight: 900, fontFamily: 'var(--font-outfit), sans-serif', color: 'var(--secondary)', letterSpacing: '-0.5px' }}
           >
             The {name} Guarantee
           </motion.h2>
@@ -147,13 +148,14 @@ function PreviewContent() {
       <section className={styles.ctaSection}>
         <div className="container">
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.95, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
+            style={{ padding: '60px 20px' }}
           >
-            <h2>{t(Config.ctaSection.title)}</h2>
-            <p className="mb-40">{t(Config.ctaSection.subtitle)}</p>
-            <a href={`tel:${phone}`} className="btn btn-secondary" style={{ fontSize: '1.2rem', padding: '20px 50px' }}>
+            <h2>{ai.niche_cta || t(Config.ctaSection.title)}</h2>
+            <p className="mb-40" style={{ fontSize: '1.15rem', opacity: 0.9 }}>{t(Config.ctaSection.subtitle)}</p>
+            <a href={`tel:${phone}`} className="btn btn-secondary" style={{ fontSize: '1.2rem', padding: '20px 50px', background: 'var(--white)', color: 'var(--secondary)', fontWeight: 900, borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-lg)' }}>
               Call {phone}
             </a>
           </motion.div>
@@ -161,7 +163,7 @@ function PreviewContent() {
       </section>
 
       <footer className="text-center mt-20 mb-40">
-        <p className="text-muted">© 2026 {name} - Professional {niche} in {location}.</p>
+        <p className="text-muted" style={{ fontWeight: 600 }}>© {new Date().getFullYear()} {name} - Professional {niche} in {location}.</p>
       </footer>
 
       <BookingWidget bookingUrl={booking_url} businessName={name} />
