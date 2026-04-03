@@ -152,6 +152,13 @@ export default function LoginPage() {
           >
             {loading ? <Loader2 className="animate-spin" size={20} /> : 'SIGN IN TO COMMAND CENTER'}
           </button>
+          
+          <div style={{ textAlign: 'center', marginTop: '15px' }}>
+            <p style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 500 }}>
+              Don't have an account?{' '}
+              <a href="/signup" style={{ color: '#3b82f6', fontWeight: 700, textDecoration: 'none' }}>Sign Up</a>
+            </p>
+          </div>
         </form>
 
         <p style={{ textAlign: 'center', marginTop: '30px', fontSize: '0.85rem', color: '#94a3b8', fontWeight: 500 }}>
