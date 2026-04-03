@@ -37,7 +37,7 @@ class AIEnrichmentEngine:
         name = lead.get("Name", "this business")
         niche = lead.get("Category", "Specialist")
         location = lead.get("Address", "your local area")
-        reviews = lead.get("Recent Reviews (All)", "")
+        reviews = str(lead.get("Recent Reviews (All)", ""))
 
         prompt = f"""
         You are an expert conversion copywriter for a high-end web design agency.
@@ -82,8 +82,17 @@ class AIEnrichmentEngine:
         logger.info(f"Loading leads from: {input_path}")
         df = pd.read_excel(input_path)
         
-        # Only process leads with "No Website" = "Yes"
-        leads_to_process = df[df["No Website"] == "Yes"].to_dict('records')
+        # Robust filtering: Handle missing 'No Website' column by checking 'Website'
+        if "No Website" in df.columns:
+            leads_to_process = df[df["No Website"] == "Yes"].to_dict('records')
+        elif "Website" in df.columns:
+            # If No Website column is missing, infer it from an empty Website field
+            logger.warning("'No Website' column missing. Inferring from 'Website' column.")
+            leads_to_process = df[df["Website"].isna() | (df["Website"] == "") | (df["Website"] == "None")].to_dict('records')
+        else:
+            logger.warning("'No Website' and 'Website' columns both missing. Processing all leads.")
+            leads_to_process = df.to_dict('records')
+
         logger.info(f"Found {len(leads_to_process)} leads to enrich with AI copy.")
 
         enriched_leads = []

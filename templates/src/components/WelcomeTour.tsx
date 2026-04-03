@@ -1,7 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Joyride, { Step, CallBackProps, STATUS } from 'react-joyride';
+import dynamic from 'next/dynamic';
+
+// Import Joyride dynamically to avoid SSR and build-time export issues
+const Joyride = dynamic(() => import('react-joyride'), { ssr: false });
+import { Step, CallBackProps, STATUS } from 'react-joyride';
 
 export default function WelcomeTour() {
   const [run, setRun] = useState(false);

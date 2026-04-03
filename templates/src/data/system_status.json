@@ -1,8 +1,8 @@
 {
-  "last_updated": "2026-04-01T19:17:00.524952",
+  "last_updated": "2026-04-01T20:36:41.395213",
   "resources": {
-    "cpu_percent": 13.4,
-    "memory_mb": 14357.515625,
+    "cpu_percent": 93.1,
+    "memory_mb": 15954.16796875,
     "load_avg": [
       0,
       0,

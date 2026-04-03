@@ -59,10 +59,23 @@ export default function LeadCRM() {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      console.log("Dashboard mount: fetchProfile started");
+      const timeout = setTimeout(() => {
+        if (profileLoading) {
+          console.warn("fetchProfile: Hanging detected. Forcing profileLoading to false.");
+          setProfileLoading(false);
+          setAppError("Profile synchronization is taking longer than expected.");
+        }
+      }, 5000);
+
       try {
         console.log("Checking Auth & Profile...");
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
+        
+        if (authError) {
+          console.error("Supabase getUser error:", authError.message);
+          setAppError("Authentication error: " + authError.message);
+        } else if (user) {
           console.log("User authenticated:", user.id);
           const { data: profile, error: pError } = await supabase
             .from('profiles')
@@ -70,20 +83,28 @@ export default function LeadCRM() {
             .eq('id', user.id)
             .single();
           
-          if (pError) console.error("Profile fetch error:", pError.message);
+          if (pError) {
+            console.error("Profile fetch error:", pError.message);
+            // Don't block the UI if profile table isn't accessible yet
+          }
+          
           if (profile) {
             console.log("Profile found, status:", profile.subscription_status);
             setSubscriptionStatus(profile.subscription_status || 'inactive');
           } else {
-            // If no profile entry exists yet, we assume inactive SaaS but still authenticated
+            console.warn("No profile found for user. Defaulting to inactive.");
             setSubscriptionStatus('inactive');
           }
+        } else {
+          console.warn("No user found in session. Redirecting likely handled by middleware.");
         }
       } catch (e) {
         console.error("Global Auth/Profile Error", e);
         setAppError("Failed to synchronize your session. Please refresh.");
       } finally {
+        clearTimeout(timeout);
         setProfileLoading(false);
+        console.log("fetchProfile: Completed");
       }
     };
     fetchProfile();

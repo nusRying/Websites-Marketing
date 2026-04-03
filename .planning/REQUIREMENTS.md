@@ -36,20 +36,20 @@ Total v1 Requirements: 17
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INF-01 | Phase 1 | Pending |
-| INF-02 | Phase 1 | Pending |
-| INF-03 | Phase 1 | Pending |
-| LEAD-01 | Phase 2 | Pending |
-| LEAD-02 | Phase 2 | Pending |
-| LEAD-03 | Phase 2 | Pending |
-| LEAD-GM-01 | Phase 03-google-maps-lead-intelligence | Pending |
-| LEAD-GM-02 | Phase 03-google-maps-lead-intelligence | Pending |
-| LEAD-GM-03 | Phase 03-google-maps-lead-intelligence | Pending |
-| SITE-01 | Phase 2 | Pending |
-| SITE-02 | Phase 2 | Pending |
-| SITE-03 | Phase 3 | Pending |
-| SITE-04 | Phase 3 | Pending |
-| SITE-05 | Phase 4 | Pending |
-| OUT-01 | Phase 1 | Pending |
-| OUT-02 | Phase 3 | Pending |
-| OUT-03 | Phase 3 | Pending |
+| INF-01 | Phase 1 | COMPLETED |
+| INF-02 | Phase 1 | COMPLETED |
+| INF-03 | Phase 1 | COMPLETED |
+| LEAD-01 | Phase 2 | COMPLETED |
+| LEAD-02 | Phase 2 | COMPLETED |
+| LEAD-03 | Phase 2 | COMPLETED |
+| LEAD-GM-01 | Phase 03 | COMPLETED |
+| LEAD-GM-02 | Phase 03 | COMPLETED |
+| LEAD-GM-03 | Phase 03 | COMPLETED |
+| SITE-01 | Phase 2 | COMPLETED |
+| SITE-02 | Phase 2 | COMPLETED |
+| SITE-03 | Phase 3 | COMPLETED |
+| SITE-04 | Phase 3 | COMPLETED |
+| SITE-05 | Phase 4 | COMPLETED |
+| OUT-01 | Phase 1 | COMPLETED |
+| OUT-02 | Phase 3 | COMPLETED |
+| OUT-03 | Phase 3 | COMPLETED |

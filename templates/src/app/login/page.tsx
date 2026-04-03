@@ -15,24 +15,29 @@ export default function LoginPage() {
 
     const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Login attempt started for:", email);
     
     // Key validation check
     const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-    if (!supabaseKey || !supabaseKey.startsWith('eyJ')) {
-      setError("CRITICAL: Your Supabase API Key is invalid. It should start with 'eyJ' (Yours looks like a Stripe key). Please update .env.local with the 'anon' key from Supabase Settings > API.");
+    console.log("Supabase Key Check:", supabaseKey ? "Present" : "MISSING");
+
+    if (!supabaseKey || (!supabaseKey.startsWith('eyJ') && !supabaseKey.startsWith('sb_'))) {
+      console.error("Invalid Supabase Key format detected.");
+      setError("CRITICAL: Your Supabase API Key is invalid. Please update .env.local with the correct 'anon' key from Supabase Settings > API.");
       return;
     }
 
     setLoading(true);
     setError(null);
   try {
+    console.log("Calling supabase.auth.signInWithPassword...");
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
-      console.error("Login error:", error.message);
+      console.error("Supabase Auth Error:", error.message);
       if (error.message.toLowerCase().includes("confirm")) {
         setError("Please confirm your email address. Check your inbox (and spam).");
       } else {
@@ -40,13 +45,13 @@ export default function LoginPage() {
       }
       setLoading(false);
     } else {
-
-      console.log("Login successful, user:", data.user?.id);
+      console.log("Login successful! User ID:", data.user?.id);
+      console.log("Redirecting to dashboard...");
       router.push('/');
       router.refresh();
     }
   } catch (err: any) {
-    console.error("Unexpected error during login:", err);
+    console.error("UNEXPECTED ERROR during login flow:", err);
     setError("An unexpected error occurred.");
     setLoading(false);
   }

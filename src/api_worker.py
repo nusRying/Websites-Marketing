@@ -1,6 +1,7 @@
 import logging
 import uuid
 from fastapi import FastAPI, BackgroundTasks, HTTPException, Header, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
 import os
@@ -27,6 +28,15 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(me
 logger = logging.getLogger("APIWorker")
 
 app = FastAPI(title="Lead Engine SaaS Worker")
+
+# Add CORS Middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Supabase Client for Auth Verification
 supabase_url = os.getenv("NEXT_PUBLIC_SUPABASE_URL")

@@ -172,8 +172,3 @@ export default function PropertyPage() {
     </Suspense>
   );
 }
-ing the vault...</div>}>
-      <PropertyContent />
-    </Suspense>
-  );
-}

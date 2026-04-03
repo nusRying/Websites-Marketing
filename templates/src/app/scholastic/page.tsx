@@ -167,8 +167,3 @@ export default function ScholasticPage() {
     </Suspense>
   );
 }
-e classroom...</div>}>
-      <ScholasticContent />
-    </Suspense>
-  );
-}

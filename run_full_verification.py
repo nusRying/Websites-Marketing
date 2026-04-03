@@ -16,8 +16,8 @@ def run_verification():
 
     # 2. Search for leads
     # Using a niche/location that's likely to have results
-    niche = "Barbers"
-    location = "Manchester, UK"
+    niche = "Hand Car Wash"
+    location = "Leeds, UK"
     print(f"Searching for {niche} in {location}...")
     
     leads = discovery.search(niche, location, max_results=10)

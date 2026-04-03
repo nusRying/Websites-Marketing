@@ -78,7 +78,7 @@ export async function middleware(request: NextRequest) {
     '/spark', '/titan', '/vitality'
   ].some(p => request.nextUrl.pathname.startsWith(p))
   
-  const isPublicApi = request.nextUrl.pathname === '/api/track' || request.nextUrl.pathname === '/api/proxy-image'
+  const isPublicApi = request.nextUrl.pathname === '/api/status' || request.nextUrl.pathname === '/api/track' || request.nextUrl.pathname === '/api/proxy-image'
 
   if (isProtectedRoute && !isPublicApi && !user && !isPublicTemplate) {
     return NextResponse.redirect(new URL('/login', request.url))

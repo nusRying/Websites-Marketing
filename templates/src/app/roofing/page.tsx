@@ -151,8 +151,3 @@ export default function RoofingPage() {
     </Suspense>
   );
 }
- the structure...</div>}>
-      <RoofingContent />
-    </Suspense>
-  );
-}
