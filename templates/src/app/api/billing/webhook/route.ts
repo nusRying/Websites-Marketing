@@ -4,7 +4,7 @@ import Stripe from 'stripe'
 import { headers } from 'next/headers'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-11-preview',
+  apiVersion: '2026-03-25.dahlia' as any,
 })
 
 // Use Service Role Key for backend updates (bypasses RLS)

@@ -4,8 +4,19 @@ import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 
 // Import Joyride dynamically to avoid SSR and build-time export issues
-const Joyride = dynamic(() => import('react-joyride'), { ssr: false });
-import { Step, CallBackProps, STATUS } from 'react-joyride';
+const Joyride = dynamic(() => import('react-joyride').then((mod: any) => {
+  // react-joyride 3.0.1+ uses named export Joyride
+  return mod.Joyride || mod.default || mod;
+}), { 
+  ssr: false,
+  loading: () => null 
+});
+
+// STATUS constants from react-joyride
+const JOYRIDE_STATUS = {
+  FINISHED: 'finished',
+  SKIPPED: 'skipped',
+};
 
 export default function WelcomeTour() {
   const [run, setRun] = useState(false);
@@ -18,7 +29,7 @@ export default function WelcomeTour() {
     }
   }, []);
 
-  const steps: Step[] = [
+  const steps: any[] = [
     {
       target: 'body',
       content: 'Welcome to the Lead Intelligence Command Center! Let’s get you started with your first high-conversion campaign.',
@@ -51,16 +62,18 @@ export default function WelcomeTour() {
     }
   ];
 
-  const handleJoyrideCallback = (data: CallBackProps) => {
+  const handleJoyrideCallback = (data: any) => {
     const { status } = data;
-    if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status as any)) {
+    if ([JOYRIDE_STATUS.FINISHED, JOYRIDE_STATUS.SKIPPED].includes(status as any)) {
       setRun(false);
       localStorage.setItem('onboarding_complete', 'true');
     }
   };
 
+  const JoyrideComponent = Joyride as any;
+
   return (
-    <Joyride
+    <JoyrideComponent
       callback={handleJoyrideCallback}
       continuous
       hideCloseButton
@@ -73,7 +86,17 @@ export default function WelcomeTour() {
         options: {
           primaryColor: '#3b82f6',
           zIndex: 10000,
+          backgroundColor: '#ffffff',
+          textColor: '#0f172a',
         },
+        tooltipContainer: {
+          fontFamily: 'var(--font-inter), sans-serif',
+          textAlign: 'left'
+        },
+        buttonNext: {
+          fontFamily: 'var(--font-outfit), sans-serif',
+          fontWeight: 700
+        }
       }}
     />
   );

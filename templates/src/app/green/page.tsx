@@ -101,12 +101,12 @@ function GreenContent() {
 
       <section style={{ padding: '100px 0', background: 'white' }}>
         <div className="container">
-          <reveal>
+          <Reveal>
             <div className="text-center">
-              <h2 style={{ fontSize: '3rem', fontWeight: 900, color: '#064e3b' }}>High-Efficiency Solutions</h2>
-              <p style={{ color: '#64748b', marginTop: '10px' }}>Future-proof energy for your {location} property</p>
+              <h2 style={{ fontSize: '3rem', fontWeight: 900, color: '#064e3b' }}>High-Efficiency Infrastructure</h2>
+              <p style={{ color: '#64748b', marginTop: '10px' }}>Future-proof energy for {location} property owners</p>
             </div>
-          </reveal>
+          </Reveal>
           
           <div className={styles.grid}>
             {GreenGrowthConfig.solutions.map((s, i) => (

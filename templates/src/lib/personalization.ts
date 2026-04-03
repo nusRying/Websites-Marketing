@@ -7,10 +7,10 @@ export interface LeadData {
   name: string;
   niche: string;
   location: string;
-  phone?: string;
-  rating?: string;
+  phone: string;
+  rating: string;
   reviews_count?: number;
-  booking_url?: string;
+  booking_url: string;
   [key: string]: any;
 }
 

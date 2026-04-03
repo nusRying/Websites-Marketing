@@ -1,7 +1,9 @@
 .header {
   padding: 15px 0;
-  border-bottom: 1px solid #eee;
-  background: white;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -14,29 +16,56 @@
 }
 
 .logo {
-  font-weight: 800;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 900;
   font-size: 1.5rem;
   color: var(--secondary);
+  letter-spacing: -0.5px;
 }
 
 .phoneLink {
   color: var(--primary);
-  font-weight: 700;
+  font-weight: 800;
   display: flex;
   align-items: center;
   gap: 8px;
+  background: var(--bg-light);
+  padding: 8px 16px;
+  border-radius: var(--radius-lg);
+  transition: all 0.2s;
+}
+
+.phoneLink:hover {
+  background: #eff6ff;
+  transform: translateY(-1px);
 }
 
 .hero {
-  padding: 80px 0;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   margin-bottom: 20px;
   color: var(--secondary);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -1px;
 }
 
 .hero p {
@@ -44,6 +73,7 @@
   color: var(--text-muted);
   max-width: 700px;
   margin: 0 auto 30px;
+  line-height: 1.6;
 }
 
 .ratingBar {
@@ -71,15 +101,24 @@
 }
 
 .card {
-  padding: 30px;
-  border-radius: var(--radius);
-  background: var(--bg-light);
+  padding: 40px 30px;
+  border-radius: var(--radius-lg);
+  background: var(--white);
   border: 1px solid #e2e8f0;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: #cbd5e1;
 }
 
 .card h3 {
   margin-bottom: 15px;
   color: var(--secondary);
+  font-weight: 800;
 }
 
 .ctaSection {
@@ -92,6 +131,8 @@
 .ctaSection h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
 }
 
 @media (max-width: 768px) {

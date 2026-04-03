@@ -25,13 +25,46 @@ interface ScrapedFile {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-  'NEW': '#64748b',
-  'PITCH READY': '#3b82f6',
-  'CONTACTED': '#f59e0b',
-  'NEGOTIATING': '#8b5cf6',
-  'CLOSED': '#10b981',
-  'INTERESTED': '#ef4444'
+  'NEW': '#64748b', /* Slate 500 */
+  'PITCH READY': '#3b82f6', /* Blue 500 */
+  'CONTACTED': '#f59e0b', /* Amber 500 */
+  'NEGOTIATING': '#8b5cf6', /* Violet 500 */
+  'CLOSED': '#10b981', /* Emerald 500 */
+  'INTERESTED': '#059669' /* Emerald 600 - Fixed from Red */
 };
+
+const templates = [
+  { id: '/preview', label: 'Lead Machine (Default)' },
+  { id: '/aqua', label: 'Aqua Artisans (Pools)' },
+  { id: '/aura', label: 'Aura Beauty (Salon)' },
+  { id: '/auto', label: 'Auto Mastery (Mechanic)' },
+  { id: '/barber', label: 'Barber Elite' },
+  { id: '/cleaning', label: 'Sparkle Clean' },
+  { id: '/counsel', label: 'Counsel Care' },
+  { id: '/dental', label: 'Dental Bright' },
+  { id: '/eternal', label: 'Eternal Memories' },
+  { id: '/event', label: 'Event Pro' },
+  { id: '/fit', label: 'Fit Logic (Gym)' },
+  { id: '/green', label: 'Green Growth (Solar)' },
+  { id: '/gusto', label: 'Gusto Gastronomy' },
+  { id: '/harmony', label: 'Harmony Interiors' },
+  { id: '/industrial', label: 'Industrial Titan' },
+  { id: '/law', label: 'Legal Eagle' },
+  { id: '/local-pro', label: 'Local Pro (Handyman)' },
+  { id: '/logistics', label: 'Logistics Prime' },
+  { id: '/paw', label: 'Paw Pals (Pets)' },
+  { id: '/pest', label: 'Pest Guard' },
+  { id: '/print', label: 'Print Master' },
+  { id: '/property', label: 'Property Prime' },
+  { id: '/roofing', label: 'Roofing Pro' },
+  { id: '/scholastic', label: 'Scholastic Academy' },
+  { id: '/security', label: 'Security Shield' },
+  { id: '/showcase', label: 'Showcase Portfolio' },
+  { id: '/smart-living', label: 'Smart Living' },
+  { id: '/spark', label: 'Spark Electrical' },
+  { id: '/titan', label: 'Titan Heavy' },
+  { id: '/vitality', label: 'Vitality Health' }
+];
 
 export default function LeadCRM() {
   const [files, setFiles] = useState<ScrapedFile[]>([]);
@@ -338,12 +371,12 @@ export default function LeadCRM() {
     });
 
     Object.keys(lead).forEach(key => {
-      if (key.startsWith('ai_') && lead[key]) {
+      if (key.startsWith('ai_') && lead[key] && key !== 'ai_copy') {
         params.append(key, String(lead[key]));
       }
     });
     
-    if (lead.ai_copy) {
+    if (lead.ai_copy && typeof lead.ai_copy === 'object') {
       Object.entries(lead.ai_copy).forEach(([k, v]) => {
         params.append(k, String(v));
       });
@@ -422,17 +455,20 @@ export default function LeadCRM() {
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px' }}>
           <div>
             <h1 style={{ fontSize: '2.5rem', fontWeight: 900, letterSpacing: '-1px', display: 'flex', alignItems: 'center', gap: '15px' }}>
-              Lead Pro CRM <span style={{ fontSize: '0.8rem', background: '#0f172a', color: 'white', padding: '4px 12px', borderRadius: '20px', letterSpacing: '1px' }}>V2 ELITE</span>
+              Lead Pro CRM <span style={{ fontSize: '0.8rem', background: 'var(--bg-dark)', color: 'var(--white)', padding: '4px 12px', borderRadius: '20px', letterSpacing: '1px' }}>v2 ELITE</span>
             </h1>
-            <p style={{ color: '#64748b', marginTop: '5px' }}>High-performance lead management and sales acceleration.</p>
+            <p style={{ color: 'var(--text-muted)', marginTop: '5px' }}>High-performance lead management and sales acceleration.</p>
           </div>
           <div style={{ display: 'flex', gap: '15px' }}>
             {selectedFile && (
-              <button onClick={exportToOutreach} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '12px', border: 'none', cursor: 'pointer', background: '#0f172a', color: 'white', fontWeight: 700, boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }}>
+              <button className="btn" onClick={exportToOutreach} style={{ boxShadow: 'var(--shadow-md)' }}>
                 <FileSpreadsheet size={18} /> Export Outreach CSV
               </button>
             )}
-            <button onClick={() => { fetchFiles(); fetchCRMData(); }} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: '12px', border: '1px solid #e2e8f0', cursor: 'pointer', background: 'white', fontWeight: 700, boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
+            <button onClick={() => { fetchFiles(); fetchCRMData(); }} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '12px 24px', borderRadius: 'var(--radius-md)', border: '1px solid #e2e8f0', cursor: 'pointer', background: 'var(--white)', fontWeight: 700, boxShadow: 'var(--shadow-sm)', transition: 'all 0.2s', fontFamily: 'var(--font-outfit), sans-serif' }}
+              onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-1px)'; e.currentTarget.style.boxShadow = 'var(--shadow-md)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; }}
+            >
               <RefreshCcw size={18} /> Sync Pipeline
             </button>
           </div>
@@ -443,12 +479,12 @@ export default function LeadCRM() {
           <div style={{ marginBottom: '40px' }} data-tour="stats">
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '20px' }}>
               {[
-                { label: 'Identified Leads', val: stats.TOTAL, icon: <Target color="#3b82f6" />, color: '#eff6ff' },
-                { label: 'Untouched', val: stats.NEW, icon: <Clock color="#64748b" />, color: '#f8fafc' },
-                { label: 'Active Outreach', val: stats.CONTACTED, icon: <TrendingUp color="#f59e0b" />, color: '#fffbeb' },
-                { label: 'Deals Closed', val: stats.CLOSED, icon: <Award color="#10b981" />, color: '#f0fdf4' }
+                { label: 'Identified Leads', val: stats.TOTAL, icon: <Target color="var(--primary)" />, color: '#eff6ff', border: '#bfdbfe' },
+                { label: 'Untouched', val: stats.NEW, icon: <Clock color="var(--text-muted)" />, color: '#f8fafc', border: '#e2e8f0' },
+                { label: 'Active Outreach', val: stats.CONTACTED, icon: <TrendingUp color="#f59e0b" />, color: '#fffbeb', border: '#fde68a' },
+                { label: 'Deals Closed', val: stats.CLOSED, icon: <Award color="var(--accent)" />, color: '#f0fdf4', border: '#bbf7d0' }
               ].map((s, i) => (
-                <div key={i} style={{ background: s.color, padding: '25px', borderRadius: '20px', border: '1px solid rgba(0,0,0,0.05)' }}>
+                <div key={i} style={{ background: s.color, padding: '25px', borderRadius: 'var(--radius-lg)', border: `1px solid ${s.border}`, boxShadow: 'inset 0 2px 4px rgba(255,255,255,0.5)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#64748b', textTransform: 'uppercase' }}>{s.label}</span>
                     {s.icon}
@@ -486,9 +522,10 @@ export default function LeadCRM() {
           {/* SIDEBAR: File Browser */}
           <aside 
             data-tour="batches"
-            style={{ background: 'white', padding: '25px', borderRadius: '24px', border: '1px solid #e2e8f0', height: 'fit-content', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}
+            className="glass"
+            style={{ padding: '25px', borderRadius: 'var(--radius-lg)', height: 'fit-content', boxShadow: 'var(--shadow-lg)' }}
           >
-            <h2 style={{ fontSize: '0.9rem', fontWeight: 800, marginBottom: '25px', color: '#1e293b', textTransform: 'uppercase', letterSpacing: '1px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <h2 style={{ fontSize: '0.9rem', fontWeight: 800, marginBottom: '25px', color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '1px', display: 'flex', alignItems: 'center', gap: '10px', fontFamily: 'var(--font-outfit), sans-serif' }}>
               <div style={{ background: '#eff6ff', padding: '8px', borderRadius: '10px', color: '#3b82f6' }}>
                 <FileSpreadsheet size={16} />
               </div>
@@ -532,13 +569,13 @@ export default function LeadCRM() {
           {/* MAIN: Pipeline Table with Filters */}
           <main data-tour="lead-table">
             {selectedFile ? (
-              <div style={{ background: 'white', borderRadius: '24px', border: '1px solid #e2e8f0', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
-                <div style={{ padding: '30px', borderBottom: '1px solid #f1f5f9', background: '#f8fafc' }}>
+              <div className="glass" style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)' }}>
+                <div style={{ padding: '30px', borderBottom: '1px solid rgba(0,0,0,0.05)', background: 'rgba(248, 250, 252, 0.5)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px' }}>
-                    <h3 style={{ fontWeight: 900, fontSize: '1.4rem' }}>{files.find(f => f.id === selectedFile)?.name.replace('.xlsx', '').replace(/_/g, ' ') || 'Active Batch'}</h3>
+                    <h3 style={{ fontWeight: 900, fontSize: '1.4rem', fontFamily: 'var(--font-outfit), sans-serif' }}>{files.find(f => f.id === selectedFile)?.name.replace('.xlsx', '').replace(/_/g, ' ') || 'Active Batch'}</h3>
                     <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#64748b' }}>TEMPLATE:</span>
-                      <select value={activeTemplate} onChange={(e) => setActiveTemplate(e.target.value)} style={{ padding: '10px 20px', borderRadius: '12px', border: '1px solid #cbd5e1', fontWeight: 700, background: 'white' }}>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--text-muted)' }}>TEMPLATE:</span>
+                      <select value={activeTemplate} onChange={(e) => setActiveTemplate(e.target.value)} style={{ padding: '10px 20px', borderRadius: 'var(--radius-md)', border: '1px solid #cbd5e1', fontWeight: 700, background: 'var(--white)', fontFamily: 'var(--font-inter), sans-serif', boxShadow: 'var(--shadow-sm)' }}>
                         {templates.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
                       </select>
                     </div>
@@ -578,7 +615,7 @@ export default function LeadCRM() {
 
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
-                    <tr style={{ textAlign: 'left', color: '#94a3b8', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1.5px', background: '#fff' }}>
+                    <tr style={{ textAlign: 'left', color: 'var(--text-muted)', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '1.5px', background: 'rgba(255,255,255,0.8)', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
                       <th style={{ padding: '20px 30px', width: '50px' }}>
                         <input 
                           type="checkbox" 
@@ -614,12 +651,12 @@ export default function LeadCRM() {
                               type="checkbox" 
                               checked={isSelected} 
                               onChange={() => toggleLeadSelection(leadId)}
-                              style={{ cursor: 'pointer', width: '18px', height: '18px' }}
+                              style={{ cursor: 'pointer', width: '18px', height: '18px', accentColor: 'var(--primary)' }}
                             />
                           </td>
                           <td style={{ padding: '25px 20px' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                              <div style={{ fontWeight: 800, color: '#1e293b', fontSize: '1rem' }}>{l.name || l.Name}</div>
+                              <div style={{ fontWeight: 800, color: 'var(--text-main)', fontSize: '1.1rem', fontFamily: 'var(--font-outfit), sans-serif' }}>{l.name || l.Name}</div>
                               {(crmData[leadId]?.history?.some((h: any) => h.type === 'VIEW') || l.history?.some((h: any) => h.type === 'VIEW')) && (
                                 <motion.div 
                                   animate={{ scale: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
@@ -630,8 +667,9 @@ export default function LeadCRM() {
                                 </motion.div>
                               )}
                             </div>
-                            <div style={{ fontSize: '0.85rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
-                              <Phone size={14} color="#3b82f6" /> {l.phone || l.Phone || 'No Contact Number'}
+                            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '12px', marginTop: '8px' }}>
+                              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><MapPin size={14} color="var(--primary)" /> {l.address?.split(',')[0] || 'Local'}</span>
+                              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Phone size={14} color="var(--accent)" /> {l.phone || l.Phone || 'No Contact Number'}</span>
                             </div>
                           </td>
                           <td style={{ padding: '25px 20px' }}>
@@ -666,27 +704,32 @@ export default function LeadCRM() {
                             </select>
                           </td>
                           <td style={{ padding: '25px 30px' }} data-tour="actions">
-                            <div style={{ display: 'flex', gap: '8px' }}>
+                            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                               <Link href={previewUrl} target="_blank" onClick={(e) => e.stopPropagation()} style={{ 
-                                padding: '10px 16px', background: '#0f172a', color: 'white', 
+                                padding: '10px 16px', background: 'var(--secondary)', color: 'var(--white)', 
                                 borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '8px', transition: 'all 0.2s',
-                                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                                boxShadow: 'var(--shadow-sm)', fontFamily: 'var(--font-outfit), sans-serif'
                               }}
-                              onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                              onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                              onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = 'var(--shadow-md)'; }}
+                              onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; }}
                               >
-                                <Zap size={14} /> SHOW
+                                <Zap size={14} color="#fbbf24" /> PREVIEW
                               </Link>
-                              <button 
-                                onClick={(e) => { e.stopPropagation(); copyToClipboard(previewUrl, leadId); }}
-                                style={{ 
-                                  padding: '10px', background: copiedId === leadId ? '#10b981' : '#f1f5f9', color: copiedId === leadId ? 'white' : '#475569', 
-                                  border: 'none', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center'
-                                }}
-                                title="Copy personalized link"
-                              >
-                                {copiedId === leadId ? <CheckCircle2 size={16} /> : <Copy size={16} />}
-                              </button>
+                              
+                              <div style={{ display: 'flex', gap: '4px', borderLeft: '1px solid #e2e8f0', paddingLeft: '8px', marginLeft: '4px' }}>
+                                <a href={`tel:${l.phone || l.Phone}`} onClick={(e) => e.stopPropagation()} title="Call" style={{ padding: '8px', borderRadius: '8px', background: '#f8fafc', color: '#475569', display: 'flex', transition: '0.2s' }} onMouseOver={(e) => { e.currentTarget.style.background = '#eff6ff'; e.currentTarget.style.color = 'var(--primary)'; }} onMouseOut={(e) => { e.currentTarget.style.background = '#f8fafc'; e.currentTarget.style.color = '#475569'; }}><Phone size={16} /></a>
+                                <a href={`mailto:${l.email || l.Email}`} onClick={(e) => e.stopPropagation()} title="Email" style={{ padding: '8px', borderRadius: '8px', background: '#f8fafc', color: '#475569', display: 'flex', transition: '0.2s' }} onMouseOver={(e) => { e.currentTarget.style.background = '#eff6ff'; e.currentTarget.style.color = 'var(--primary)'; }} onMouseOut={(e) => { e.currentTarget.style.background = '#f8fafc'; e.currentTarget.style.color = '#475569'; }}><MessageSquare size={16} /></a>
+                                <button 
+                                  onClick={(e) => { e.stopPropagation(); copyToClipboard(previewUrl, leadId); }}
+                                  style={{ 
+                                    padding: '8px', background: copiedId === leadId ? 'var(--accent)' : '#f8fafc', color: copiedId === leadId ? 'var(--white)' : '#475569', 
+                                    border: 'none', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                                  }}
+                                  title="Copy personalized link"
+                                >
+                                  {copiedId === leadId ? <CheckCircle2 size={16} /> : <Copy size={16} />}
+                                </button>
+                              </div>
                             </div>
                           </td>
                         </motion.tr>
@@ -766,11 +809,12 @@ export default function LeadCRM() {
                 initial={{ x: 20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 20, opacity: 0 }}
-                style={{ background: '#fff', padding: '40px', borderRadius: '30px', border: '1px solid #e2e8f0', boxShadow: '-20px 0 50px rgba(0,0,0,0.08)', position: 'sticky', top: '40px', height: 'calc(100vh - 80px)', overflowY: 'auto' }}
+                className="glass"
+                style={{ padding: '40px', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-lg)', position: 'sticky', top: '40px', height: 'calc(100vh - 80px)', overflowY: 'auto' }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '40px' }}>
                   <div>
-                    <h2 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-1px' }}>Lead Intel</h2>
+                    <h2 style={{ fontSize: '1.8rem', fontWeight: 900, letterSpacing: '-1px', fontFamily: 'var(--font-outfit), sans-serif' }}>Lead Intel</h2>
                     <div style={{ color: STATUS_COLORS[crmData[getLeadId(selectedLead)]?.status || selectedLead.status || 'NEW'], fontWeight: 800, fontSize: '0.75rem', textTransform: 'uppercase', marginTop: '5px' }}>
                       {crmData[getLeadId(selectedLead)]?.status || selectedLead.status || 'NEW'}
                     </div>
@@ -895,11 +939,12 @@ export default function LeadCRM() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                style={{ background: 'white', padding: '30px', borderRadius: '24px', border: '1px solid #e2e8f0', boxShadow: '0 4px 20px rgba(0,0,0,0.03)', height: 'fit-content' }}
+                className="glass"
+                style={{ padding: '30px', borderRadius: 'var(--radius-lg)', boxShadow: 'var(--shadow-lg)', height: 'fit-content' }}
               >
                 <div style={{ marginBottom: '40px' }}>
-                  <h2 style={{ fontSize: '0.9rem', fontWeight: 800, marginBottom: '25px', color: '#1e293b', textTransform: 'uppercase', letterSpacing: '1px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <Zap size={18} color="#3b82f6" /> System Engine
+                  <h2 style={{ fontSize: '0.9rem', fontWeight: 800, marginBottom: '25px', color: 'var(--text-main)', textTransform: 'uppercase', letterSpacing: '1px', display: 'flex', alignItems: 'center', gap: '10px', fontFamily: 'var(--font-outfit), sans-serif' }}>
+                    <Zap size={18} color="var(--primary)" /> System Engine
                   </h2>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
                     {systemStatus?.services ? Object.entries(systemStatus.services).map(([key, service]: [string, any]) => (
@@ -911,7 +956,8 @@ export default function LeadCRM() {
                             transition={{ repeat: Infinity, duration: 2 }}
                             style={{ 
                               width: '8px', height: '8px', borderRadius: '50%', 
-                              background: (service.status === 'RUNNING' || service.status === 'PROCESSING' || service.status === 'ACTIVE') ? '#10b981' : '#cbd5e1' 
+                              background: (service.status === 'RUNNING' || service.status === 'PROCESSING' || service.status === 'ACTIVE') ? 'var(--accent)' : '#cbd5e1',
+                              boxShadow: (service.status === 'RUNNING' || service.status === 'PROCESSING' || service.status === 'ACTIVE') ? '0 0 10px var(--accent)' : 'none' 
                             }} 
                           />
                           <span style={{ fontSize: '0.7rem', fontWeight: 900, color: (service.status === 'RUNNING' || service.status === 'PROCESSING' || service.status === 'ACTIVE') ? '#10b981' : '#94a3b8' }}>{service.status}</span>
@@ -926,9 +972,9 @@ export default function LeadCRM() {
                   </div>
                 </div>
                 
-                <div style={{ background: '#0f172a', padding: '25px', borderRadius: '20px', color: 'white' }}>
-                  <h3 style={{ fontSize: '0.85rem', fontWeight: 800, marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <TrendingUp size={16} color="#3b82f6" /> Performance
+                <div className="glass-dark" style={{ padding: '25px', borderRadius: 'var(--radius-md)' }}>
+                  <h3 style={{ fontSize: '0.85rem', fontWeight: 800, marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '8px', fontFamily: 'var(--font-outfit), sans-serif' }}>
+                    <TrendingUp size={16} color="var(--primary)" /> Performance
                   </h3>
                   <p style={{ fontSize: '0.75rem', opacity: 0.7, lineHeight: '1.6', marginBottom: '20px' }}>
                     Automated pipelines are currently healthy. Monitoring `exports/` for new leads to enrich.
