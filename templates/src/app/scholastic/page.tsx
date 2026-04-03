@@ -6,10 +6,20 @@ import { BookOpen, GraduationCap, Users, Star, Award, Brain, Microscope, Music, 
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { ScholasticConfig as Config } from '@/configs/scholastic';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './scholastic.module.css';
 
+
+const ACCENT = '#7c3aed';
+const TESTIMONIALS = [
+  { name: 'Olivia P.', location: 'A Level Student', text: 'My grades went from Cs to As. The tutors are incredibly skilled at making complex topics completely understandable.', stars: 5 },
+  { name: 'Tom H.', location: 'Parent', text: 'Son is now confident and motivated in subjects he used to dread. We only wish we had found them sooner.', stars: 5 },
+  { name: 'Emma J.', location: 'University Prep', text: 'Got into my first-choice university thanks to the support here. The guidance on personal statements was outstanding.', stars: 5 },
+];
 function ScholasticContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Scholastic Academy',
@@ -88,6 +98,9 @@ function ScholasticContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section style={{ padding: '100px 0' }}>
@@ -111,6 +124,9 @@ function ScholasticContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.resultsSection}>
@@ -128,6 +144,9 @@ function ScholasticContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

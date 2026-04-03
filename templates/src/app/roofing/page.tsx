@@ -6,10 +6,20 @@ import { ShieldCheck, HardHat, CloudRain, Star, Phone, ArrowRight, Hammer, Home,
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { RoofingConfig } from '@/configs/roofing';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './roofing-royale.module.css';
 
+
+const ACCENT = '#dc2626';
+const TESTIMONIALS = [
+  { name: 'Brian T.', location: 'Homeowner', text: 'Replaced our entire roof in three days. Tidy, professional, and the quality of the work is absolutely excellent.', stars: 5 },
+  { name: 'Carol F.', location: 'Insurance Claim', text: 'Handled storm damage with full insurance support. Documented everything, communicated clearly with insurers. Stress-free.', stars: 5 },
+  { name: 'Dave M.', location: 'Extension Project', text: 'New extension roof was completed perfectly, matching the original exactly. Brilliant craftsmanship and a competitive quote.', stars: 5 },
+];
 function RoofingContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Royale Roofing Contractors',
@@ -80,6 +90,9 @@ function RoofingContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section style={{ padding: '100px 0', background: '#f1f5f9' }}>
@@ -109,6 +122,9 @@ function RoofingContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container text-center">

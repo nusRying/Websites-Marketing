@@ -6,10 +6,20 @@ import { Image as ImageIcon, Camera, Home, Trophy, Users, PhoneCall } from 'luci
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { ShowcaseConfig as Config } from '@/configs/showcase';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './showcase.module.css';
 
+
+const ACCENT = '#10b981';
+const TESTIMONIALS = [
+  { name: 'Rachel M.', location: 'Gallery Client', text: 'Our exhibition was rendered beautifully. Lighting, layout and curation advice were all exceptional. Truly world-class venue.', stars: 5 },
+  { name: 'James T.', location: 'Artist', text: 'The space itself elevates the work. Professional team, incredible attention to detail and superb communication throughout.', stars: 5 },
+  { name: 'Diana K.', location: 'Corporate Event', text: 'Used the showcase venue for a product launch and it was genuinely stunning. Every guest was completely impressed.', stars: 5 },
+];
 function ShowcaseContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Your Craftsmanship Co.',
@@ -82,6 +92,9 @@ function ShowcaseContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.process}>
@@ -102,6 +115,9 @@ function ShowcaseContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.gallery}>

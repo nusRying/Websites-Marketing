@@ -6,10 +6,20 @@ import { Presentation, Users, Trophy, Globe, Star, ArrowRight, Sparkles, Layout 
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { EliteEventConfig } from '@/configs/elite-event';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './elite-event.module.css';
 
+
+const ACCENT = '#4f46e5';
+const TESTIMONIALS = [
+  { name: 'Charlotte B.', location: 'Wedding Client', text: 'Our wedding was absolutely perfect. Every detail was handled with such care and creativity. Truly the best decision we made.', stars: 5 },
+  { name: 'Alex D.', location: 'Corporate Event', text: 'Organised a 200-person conference and it ran flawlessly. Professionalism at every stage. Will use again without question.', stars: 5 },
+  { name: 'Natalie F.', location: 'Birthday Party', text: 'Turned my vision into reality and exceeded every expectation. The guests are still talking about it weeks later.', stars: 5 },
+];
 function EventContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Elite Event Productions',
@@ -80,6 +90,9 @@ function EventContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>
@@ -111,6 +124,9 @@ function EventContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

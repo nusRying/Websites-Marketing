@@ -6,10 +6,20 @@ import { Zap, ShieldCheck, Sun, Lightbulb, Home, Phone, ArrowRight, Gauge, Cpu, 
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { SparkConfig as config } from '@/configs/spark';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './spark.module.css';
 
+
+const ACCENT = '#fbbf24';
+const TESTIMONIALS = [
+  { name: 'Neil H.', location: 'Homeowner', text: 'Had a complex rewiring job done and it was handled perfectly. Clean, efficient and passed all safety inspections first time.', stars: 5 },
+  { name: 'Sue M.', location: 'Business Owner', text: 'Emergency call-out at 9pm and they arrived within the hour. Fixed the issue and gave clear advice. Absolute lifesavers.', stars: 5 },
+  { name: 'Ian T.', location: 'Extension Project', text: 'Full electrical fit-out for our extension. Quality of work and attention to detail was outstanding throughout.', stars: 5 },
+];
 function SparkContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Volt Tech Solutions',
@@ -82,6 +92,9 @@ function SparkContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section style={{ padding: '100px 0', background: '#111' }}>
@@ -107,6 +120,9 @@ function SparkContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.safetySection}>
@@ -123,6 +139,9 @@ function SparkContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container text-center">

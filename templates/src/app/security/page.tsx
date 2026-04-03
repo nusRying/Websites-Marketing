@@ -6,10 +6,20 @@ import { ShieldCheck, Video, Bell, Lock, Smartphone, Star, Phone, ArrowRight, Ey
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { SmartSecurityConfig } from '@/configs/smart-security';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './smart-security.module.css';
 
+
+const ACCENT = '#22d3ee';
+const TESTIMONIALS = [
+  { name: 'Richard B.', location: 'Business Owner', text: 'Installed a complete security solution for our premises. Professional, thorough and the system is genuinely first class.', stars: 5 },
+  { name: 'Helen C.', location: 'Homeowner', text: 'Smart cameras and alarm system installed seamlessly. The app is intuitive and we feel completely secure now.', stars: 5 },
+  { name: 'Alex P.', location: 'Property Manager', text: 'Looking after security across three commercial properties. Monitoring is excellent and response times are consistently fast.', stars: 5 },
+];
 function SecurityContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Fortress Smart Systems',
@@ -80,6 +90,9 @@ function SecurityContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>
@@ -111,6 +124,9 @@ function SecurityContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

@@ -6,10 +6,20 @@ import { Printer, Image as ImageIcon, Package, Globe, Star, ArrowRight, PenTool,
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { PrimePrintConfig } from '@/configs/prime-print';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './prime-print.module.css';
 
+
+const ACCENT = '#6366f1';
+const TESTIMONIALS = [
+  { name: 'Anna K.', location: 'Marketing Manager', text: 'The quality of the brochures was stunning. Colours were vibrant, the finish was premium and delivered ahead of schedule.', stars: 5 },
+  { name: 'Mark D.', location: 'Event Organiser', text: 'Ordered 5000 flyers with a tight deadline and they delivered perfectly. Outstanding print quality and packaging.', stars: 5 },
+  { name: 'Fiona B.', location: 'Small Business', text: 'As a small business they treated my order with the same care as a large corporate. Exceptional quality and service.', stars: 5 },
+];
 function PrintContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Vivid Print Solutions',
@@ -80,6 +90,9 @@ function PrintContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>
@@ -111,6 +124,9 @@ function PrintContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

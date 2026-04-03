@@ -6,10 +6,20 @@ import { Utensils, Coffee, Wine } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { GustoConfig } from '@/configs/gusto';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './gusto.module.css';
 
+
+const ACCENT = '#f97316';
+const TESTIMONIALS = [
+  { name: 'Maria T.', location: 'Regular Diner', text: 'Every single dish is exceptional. The flavours, the presentation, the service - this restaurant is simply world class.', stars: 5 },
+  { name: 'John P.', location: 'Anniversary Dinner', text: 'Celebrated our anniversary here and it was magical. The tasting menu was extraordinary. Cannot wait to return.', stars: 5 },
+  { name: 'Kate R.', location: 'Food Blogger', text: 'Reviewed over 200 restaurants and this is genuinely in my top three. The passion in every plate is extraordinary.', stars: 5 },
+];
 function GustoContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'The Artisanal Kitchen',
@@ -90,6 +100,9 @@ function GustoContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.menuSection}>
@@ -126,6 +139,9 @@ function GustoContent() {
             ))}
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.ambiance}>

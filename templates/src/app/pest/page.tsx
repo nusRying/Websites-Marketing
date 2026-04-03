@@ -6,10 +6,20 @@ import { ShieldCheck, ShieldAlert, Search, Star, ArrowRight, Bug, Ghost } from '
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { PrimePestConfig } from '@/configs/prime-pest';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './prime-pest.module.css';
 
+
+const ACCENT = '#f59e0b';
+const TESTIMONIALS = [
+  { name: 'Kevin M.', location: 'Homeowner', text: 'Had a serious rodent problem and they resolved it completely within one visit. Professional, discreet and highly effective.', stars: 5 },
+  { name: 'Rachel T.', location: 'Restaurant Owner', text: 'Provide monthly pest prevention for our kitchen and we have passed every inspection with perfect scores. Essential service.', stars: 5 },
+  { name: 'Brian S.', location: 'Property Manager', text: 'Use them across all our properties. Rapid response, thorough treatment and always explain what they find and why.', stars: 5 },
+];
 function PestContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Prime Pest Defense',
@@ -80,6 +90,9 @@ function PestContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>
@@ -111,6 +124,9 @@ function PestContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

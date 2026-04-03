@@ -6,10 +6,20 @@ import { Leaf, Users, Zap, MapPin, Calendar, Heart, ArrowRight } from 'lucide-re
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { VitalityConfig } from '@/configs/vitality';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './vitality.module.css';
 
+
+const ACCENT = '#84cc16';
+const TESTIMONIALS = [
+  { name: 'Anna M.', location: 'Health Client', text: "My energy levels and overall wellbeing have improved dramatically. Genuinely holistic approach and excellent practitioners.", stars: 5 },
+  { name: 'Karen B.', location: 'Nutrition Plan', text: "The personalised nutrition programme was transformative. Evidence-based, sustainable and actually enjoyable to follow.", stars: 5 },
+  { name: 'Paul S.', location: 'Wellness Journey', text: "Three months in and I feel like a completely different person. The team's support and expertise have been incredible.", stars: 5 },
+];
 function VitalityContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Vitality Studio',
@@ -76,6 +86,9 @@ function VitalityContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.scheduleSection}>
@@ -105,6 +118,9 @@ function VitalityContent() {
             })}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.community}>
@@ -140,6 +156,9 @@ function VitalityContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

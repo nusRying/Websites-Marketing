@@ -6,10 +6,20 @@ import { Truck, Box, Globe, ShieldCheck, Clock, ArrowRight, Map, Package, Naviga
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { LogisticsConfig as config } from '@/configs/logistics';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './logistics.module.css';
 
+
+const ACCENT = '#f97316';
+const TESTIMONIALS = [
+  { name: 'Carl B.', location: 'Supply Chain Director', text: 'Has completely transformed our distribution efficiency. On-time delivery rates are up 40 percent and the tracking is superb.', stars: 5 },
+  { name: 'Helen A.', location: 'Operations Manager', text: 'Partnership has been seamless from day one. The account management team is responsive and deeply reliable.', stars: 5 },
+  { name: 'John M.', location: 'Retail Client', text: 'Handling our peak season volumes was flawless. Communicated proactively throughout and delivered without a single delay.', stars: 5 },
+];
 function LogisticsContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Logic Logistics Group',
@@ -82,6 +92,9 @@ function LogisticsContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section style={{ padding: '0 0 100px' }}>
@@ -100,6 +113,9 @@ function LogisticsContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.statsSection}>
@@ -116,6 +132,9 @@ function LogisticsContent() {
           </Reveal>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container text-center">

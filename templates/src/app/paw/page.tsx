@@ -6,10 +6,20 @@ import { PawPrint, Heart, Bone, ShieldCheck, Star, Scissors, Stethoscope, Dog } 
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { PawConfig } from '@/configs/paw';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './paw.module.css';
 
+
+const ACCENT = '#0ea5e9';
+const TESTIMONIALS = [
+  { name: 'Lucy V.', location: 'Dog Owner', text: 'My dog absolutely loves going there. Comes home perfectly groomed and clearly so happy. Wonderful caring team.', stars: 5 },
+  { name: 'Sam H.', location: 'Cat Owner', text: 'Took my very anxious cat and they handled her beautifully. Calm, patient and the results were amazing.', stars: 5 },
+  { name: 'Jane P.', location: 'Regular Client', text: 'Been using their grooming service for 2 years. Always consistent, always kind to my pets, always great quality.', stars: 5 },
+];
 function PawContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Paw & Palace Pet Care',
@@ -94,6 +104,9 @@ function PawContent() {
             </div>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.perksSection}>
@@ -120,6 +133,9 @@ function PawContent() {
             })}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.treatments}>
@@ -146,6 +162,9 @@ function PawContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

@@ -6,10 +6,20 @@ import { Wrench, Gauge, ShieldAlert, Zap, Settings, Star, Phone, CheckCircle2, C
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { AutoConfig as Config } from '@/configs/auto';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './auto.module.css';
 
+
+const ACCENT = '#ef4444';
+const TESTIMONIALS = [
+  { name: 'Mike D.', location: 'Car Owner', text: 'Trusted them with my classic car restoration and they delivered beyond imagination. True craftsmen who genuinely care.', stars: 5 },
+  { name: 'Steve G.', location: 'Fleet Manager', text: 'Manage our entire company fleet efficiently and cost-effectively. Have never had a single complaint from drivers.', stars: 5 },
+  { name: 'Phil T.', location: 'Diagnostics Customer', text: 'Diagnosed an issue three other garages missed. Fixed it first time, fairly priced and really took the time to explain.', stars: 5 },
+];
 function AutoContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Auto Armor Performance',
@@ -93,6 +103,9 @@ function AutoContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>
@@ -119,6 +132,9 @@ function AutoContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.bookingSection}>
@@ -145,6 +161,9 @@ function AutoContent() {
           </Reveal>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

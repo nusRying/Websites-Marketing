@@ -6,10 +6,20 @@ import { Sun, Leaf, Zap, ShieldCheck, Star, ArrowRight, Battery, Globe, CheckCir
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { GreenGrowthConfig } from '@/configs/green-growth';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './green-growth.module.css';
 
+
+const ACCENT = '#16a34a';
+const TESTIMONIALS = [
+  { name: 'Helen G.', location: 'Garden Owner', text: 'They transformed my garden completely. Professional team, stunning results and incredibly tidy throughout the whole process.', stars: 5 },
+  { name: 'Robert T.', location: 'Commercial Client', text: 'Maintain our office grounds and they consistently deliver exceptional results every single time. Reliable and thorough.', stars: 5 },
+  { name: 'Claire B.', location: 'Returning Client', text: 'Annual lawn care program is brilliant. The grass has never looked so lush and healthy. Highly professional service.', stars: 5 },
+];
 function GreenContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Green Growth Renewables',
@@ -81,6 +91,9 @@ function GreenContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.impactSection}>
@@ -97,6 +110,9 @@ function GreenContent() {
             </div>
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section style={{ padding: '100px 0', background: 'white' }}>
@@ -126,6 +142,9 @@ function GreenContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container text-center">

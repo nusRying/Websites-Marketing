@@ -6,10 +6,20 @@ import { Sparkles, ShieldCheck, Heart, Star, Phone, ArrowRight, Brush, Home, Che
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { CleaningConfig } from '@/configs/cleaning';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './sparkle-shine.module.css';
 
+
+const ACCENT = '#0ea5e9';
+const TESTIMONIALS = [
+  { name: 'Sarah J.', location: 'Homeowner', text: "Our home has never felt this clean. Every corner was spotless and they even took care of things I didn't ask for. Truly exceptional.", stars: 5 },
+  { name: 'Mark T.', location: 'Business Owner', text: "We hired them for our office and the results were incredible. Professional, efficient and the standards are genuinely clinical.", stars: 5 },
+  { name: 'Lisa R.', location: 'Returning Client', text: "Third time using them and they get better every visit. Our carpets look brand new - couldn't recommend more highly.", stars: 5 },
+];
 function CleaningContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Elite Sparkle Cleaners',
@@ -68,6 +78,9 @@ function CleaningContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.purityBanner}>
@@ -84,6 +97,9 @@ function CleaningContent() {
             </div>
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section style={{ padding: '100px 0', background: 'white' }}>
@@ -113,6 +129,9 @@ function CleaningContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container text-center">

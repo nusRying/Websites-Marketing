@@ -6,10 +6,20 @@ import { Check, Star, MapPin, Heart, Shield, Award } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { LocalProConfig as Config } from '@/configs/local-pro';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './local-pro.module.css';
 
+
+const ACCENT = '#2563eb';
+const TESTIMONIALS = [
+  { name: 'Neil C.', location: 'Home Owner', text: 'Called in the morning and they arrived by noon. Fixed the problem in under an hour. Honest, skilled and great value.', stars: 5 },
+  { name: 'Emma S.', location: 'Regular Customer', text: 'Used them three times now for different jobs. Always reliable, always tidy, and always exactly as quoted. Brilliant.', stars: 5 },
+  { name: 'Tony G.', location: 'Landlord', text: 'Use them for all my rental properties. Never let me down once. Tenants love them and so do I. Simply the best.', stars: 5 },
+];
 function LocalProContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Your Local Service',
@@ -85,6 +95,9 @@ function LocalProContent() {
             </div>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>

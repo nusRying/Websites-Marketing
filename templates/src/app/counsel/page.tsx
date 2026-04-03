@@ -6,6 +6,9 @@ import { Shield, Briefcase, TrendingUp, Scale, Users, Phone, ArrowRight, Gavel, 
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { CounselConfig } from '@/configs/counsel';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './counsel.module.css';
@@ -28,6 +31,13 @@ function Counter({ value }: { value: number }) {
   return <span>{count}</span>;
 }
 
+
+const ACCENT = '#1e40af';
+const TESTIMONIALS = [
+  { name: 'Michael H.', location: 'Business Client', text: 'Responded quickly, explained everything clearly, and achieved a brilliant result. Truly outstanding legal representation.', stars: 5 },
+  { name: 'Priya S.', location: 'Family Law', text: 'During a very difficult time they handled everything with professionalism and genuine care. Forever grateful.', stars: 5 },
+  { name: 'David W.', location: 'Contract Review', text: 'Sharp, thorough, and highly strategic. The advice saved our business from a costly dispute. Worth every penny.', stars: 5 },
+];
 function CounselContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Elite Partners & Co',
@@ -100,6 +110,9 @@ function CounselContent() {
             </motion.div>
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.statsBar}>
@@ -117,6 +130,9 @@ function CounselContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.expertise}>
@@ -146,6 +162,9 @@ function CounselContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

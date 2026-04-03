@@ -6,10 +6,20 @@ import { Dumbbell, Zap, Trophy, Timer, Users, Target, ShieldCheck, Flame } from 
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { FitConfig as config } from '@/configs/fit';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './fit.module.css';
 
+
+const ACCENT = '#84cc16';
+const TESTIMONIALS = [
+  { name: 'Jake S.', location: 'Member', text: "Joined 6 months ago and the transformation has been unreal. The coaches genuinely care about your progress. Best gym ever.", stars: 5 },
+  { name: 'Amy K.', location: 'PT Client', text: "My personal trainer is outstanding - challenging but supportive. I've smashed every goal I set when I started.", stars: 5 },
+  { name: 'Chris M.', location: 'Class Regular', text: "The group training classes are intense in the best way. Community here is incredible. I actually look forward to 6am sessions.", stars: 5 },
+];
 function FitContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Fit Focus Elite',
@@ -83,6 +93,9 @@ function FitContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.trainingSection}>
@@ -108,6 +121,9 @@ function FitContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.transformSection}>
@@ -127,6 +143,9 @@ function FitContent() {
           </Reveal>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container text-center">

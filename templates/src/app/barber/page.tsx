@@ -6,10 +6,20 @@ import { Scissors, Star, MapPin, Calendar, Clock, Phone, ChevronRight, Camera, U
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { BarberConfig as config } from '@/configs/barber';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './barber.module.css';
 
+
+const ACCENT = '#d4af37';
+const TESTIMONIALS = [
+  { name: 'James K.', location: 'Regular Client', text: "Best barber in town. The attention to detail is unmatched and the atmosphere is genuinely welcoming every single time.", stars: 5 },
+  { name: 'Ryan M.', location: 'New Client', text: "Walked in without a booking and they still made time. Incredible cut, great conversation. Won't go anywhere else now.", stars: 5 },
+  { name: 'Tom B.', location: 'Loyal Customer', text: "Been coming here for 3 years. The signature ritual treatment is worth every penny - proper old-school craftsmanship.", stars: 5 },
+];
 function BarberContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'The Heritage Barbershop',
@@ -82,6 +92,9 @@ function BarberContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>
@@ -107,6 +120,9 @@ function BarberContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.gallery}>
@@ -133,6 +149,9 @@ function BarberContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

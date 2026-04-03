@@ -6,10 +6,20 @@ import { Palette, Ruler, Star, ArrowRight, Compass, Home } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { HomeHarmonyConfig } from '@/configs/home-harmony';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './home-harmony.module.css';
 
+
+const ACCENT = '#7c3aed';
+const TESTIMONIALS = [
+  { name: 'Lucy M.', location: 'Client', text: "The most relaxing experience I've ever had. Left feeling completely renewed and genuinely recharged for the week ahead.", stars: 5 },
+  { name: 'Diana K.', location: 'Regular', text: "Monthly sessions here have transformed my wellbeing completely. Skilled practitioners and a beautifully calming environment.", stars: 5 },
+  { name: 'Paul H.', location: 'First Visit', text: "Came sceptical, left converted. The deep tissue work resolved my back pain in ways physiotherapy couldn't. Outstanding.", stars: 5 },
+];
 function HarmonyContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Harmony Design Atelier',
@@ -80,6 +90,9 @@ function HarmonyContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>
@@ -111,6 +124,9 @@ function HarmonyContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

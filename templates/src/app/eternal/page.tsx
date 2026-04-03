@@ -6,10 +6,20 @@ import { Camera, Heart, Star, Sparkles, ArrowRight } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { EternalConfig } from '@/configs/eternal';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './eternal.module.css';
 
+
+const ACCENT = '#d97706';
+const TESTIMONIALS = [
+  { name: 'Claire H.', location: 'Ceremony Client', text: 'Made the most difficult time in our lives bearable with their compassion and total professionalism. Forever grateful.', stars: 5 },
+  { name: 'Robert M.', location: 'Memorial Service', text: 'Every detail was handled with such dignity and care. The service was beautiful and exactly what we wanted.', stars: 5 },
+  { name: 'Susan P.', location: 'Pre-planning Client', text: 'Pre-planning gave us complete peace of mind. Sensitive, clear and thorough. A genuinely important service.', stars: 5 },
+];
 function EternalContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Eternal Memories',
@@ -73,6 +83,9 @@ function EternalContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.gallerySection}>
@@ -108,6 +121,9 @@ function EternalContent() {
             </div>
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section style={{ padding: '100px 0', background: '#fdfdfb' }}>
@@ -136,6 +152,9 @@ function EternalContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

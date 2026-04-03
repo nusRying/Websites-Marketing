@@ -6,10 +6,20 @@ import { Sparkles, Star, MapPin, Calendar, Heart } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { AuraConfig as Config } from '@/configs/aura';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './aura.module.css';
 
+
+const ACCENT = '#ec4899';
+const TESTIMONIALS = [
+  { name: 'Bella K.', location: 'Beauty Client', text: 'The treatments here are absolutely divine. Always leave feeling refreshed, pampered and completely glowing.', stars: 5 },
+  { name: 'Sophie T.', location: 'Regular', text: 'My go-to beauty destination. The team are skilled, attentive and the results always exceed my expectations.', stars: 5 },
+  { name: 'Grace P.', location: 'Special Occasion', text: 'Got a full beauty treatment before my wedding and looked and felt stunning. Cannot thank the team enough.', stars: 5 },
+];
 function AuraContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'The Wellness Atelier',
@@ -80,6 +90,9 @@ function AuraContent() {
             </motion.div>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.serviceMenu}>
@@ -108,6 +121,9 @@ function AuraContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.testimonialSection}>
@@ -131,6 +147,9 @@ function AuraContent() {
             <div className={styles.author}>— {Config.testimonial.author.toUpperCase()}, {location.toUpperCase()}</div>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.bookingSection}>

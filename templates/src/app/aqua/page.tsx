@@ -6,9 +6,19 @@ import { Droplets, ShieldCheck, Waves, Zap, Settings, Star, Phone, CheckCircle2,
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { AquaConfig as config } from '@/configs/aqua';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './aqua.module.css';
+
+const ACCENT = '#0891b2';
+const TESTIMONIALS = [
+  { name: 'David H.', location: 'Pool Owner', text: 'My pool has never looked cleaner. They showed up on time, explained everything clearly, and the results were absolutely flawless.', stars: 5 },
+  { name: 'Amanda P.', location: 'Returning Client', text: 'Been using their weekly care plan for 2 years now. Consistent, professional and always leave the pool in perfect condition.', stars: 5 },
+  { name: 'Marcus L.', location: 'New Client', text: 'Called them for a chemical balance issue and they fixed it same day. Incredible response time and genuine expertise.', stars: 5 },
+];
 
 function AquaContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
@@ -86,6 +96,8 @@ function AquaContent() {
         </div>
       </section>
 
+      <SocialProofBar accentColor={ACCENT} />
+
       <section style={{ padding: '100px 0', background: 'white' }}>
         <div className="container">
           <Reveal>
@@ -111,9 +123,13 @@ function AquaContent() {
         </div>
       </section>
 
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
+
       <section className={styles.ctaSection}>
         <div className="container text-center">
           <Reveal>
+
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
               <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{t(config.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.9 }}>

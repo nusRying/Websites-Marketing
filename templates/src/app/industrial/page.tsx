@@ -6,6 +6,9 @@ import { ShieldAlert, Award, FileCheck, Map, PhoneCall, HardHat, Construction } 
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { IndustrialConfig as Config } from '@/configs/industrial';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './industrial.module.css';
@@ -16,6 +19,13 @@ const ICON_MAP = {
   FileCheck: FileCheck
 };
 
+
+const ACCENT = '#f59e0b';
+const TESTIMONIALS = [
+  { name: 'Steve B.', location: 'Factory Manager', text: 'Our entire production floor was handled professionally with zero downtime. Real expertise, brilliant communication throughout.', stars: 5 },
+  { name: 'Phil D.', location: 'Project Manager', text: 'Contracted them for a complex installation job - delivered on time, on budget and to an exceptional standard.', stars: 5 },
+  { name: 'Gary C.', location: 'Warehouse Owner', text: 'Responsive, knowledgeable and genuinely reliable. Exactly what we needed for our large commercial maintenance contract.', stars: 5 },
+];
 function IndustrialContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Industrial Solutions Ltd',
@@ -92,6 +102,9 @@ function IndustrialContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.credentials}>
@@ -103,6 +116,9 @@ function IndustrialContent() {
             <motion.span whileHover={{ y: -3 }}>✓ 24/7 TECHNICAL SUPPORT</motion.span>
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>
@@ -126,6 +142,9 @@ function IndustrialContent() {
             })}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.quoteSection}>

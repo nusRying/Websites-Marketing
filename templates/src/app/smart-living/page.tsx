@@ -6,10 +6,20 @@ import { Smartphone, ShieldCheck, Video, Zap, Settings, Star, Phone, ArrowRight,
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { SmartLivingConfig } from '@/configs/smart-living';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './smart-living.module.css';
 
+
+const ACCENT = '#8b5cf6';
+const TESTIMONIALS = [
+  { name: 'Ben A.', location: 'Home Owner', text: 'The smart home system they installed is incredible. Everything works seamlessly and the energy savings have been significant.', stars: 5 },
+  { name: 'Karen T.', location: 'Renovation Client', text: 'Transformed our entire home into a smart space during our renovation. The integration is flawless and intuitive.', stars: 5 },
+  { name: 'Chris P.', location: 'Tech Enthusiast', text: 'As someone who knows tech, I am genuinely impressed by the quality of their installation and system design.', stars: 5 },
+];
 function SmartContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Intelligent Living Co.',
@@ -80,6 +90,9 @@ function SmartContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>
@@ -111,6 +124,9 @@ function SmartContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container text-center">

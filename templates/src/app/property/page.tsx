@@ -6,10 +6,20 @@ import { Building2, MapPin, ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { PropertyConfig as Config } from '@/configs/property';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './property.module.css';
 
+
+const ACCENT = '#1e293b';
+const TESTIMONIALS = [
+  { name: 'Louise M.', location: 'Property Seller', text: 'Sold in two weeks above asking price. The marketing was exceptional and they handled every negotiation perfectly.', stars: 5 },
+  { name: 'Paul K.', location: 'Property Buyer', text: 'Found us exactly what we wanted in a competitive area. Knowledgeable, honest and worked incredibly hard on our behalf.', stars: 5 },
+  { name: 'Helen S.', location: 'Landlord', text: 'Managing our portfolio for three years with zero issues. Tenant communications, maintenance and compliance are all handled brilliantly.', stars: 5 },
+];
 function PropertyContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Prime Realty Group',
@@ -81,6 +91,9 @@ function PropertyContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.marketSection}>
@@ -103,6 +116,9 @@ function PropertyContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section style={{ padding: '100px 0', background: '#000', color: '#fff' }}>
@@ -134,6 +150,9 @@ function PropertyContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container text-center">

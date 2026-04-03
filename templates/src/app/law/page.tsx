@@ -6,10 +6,20 @@ import { Scale, ShieldCheck, Gavel, Landmark, Star, ArrowRight, Briefcase } from
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { LawLibertyConfig } from '@/configs/law-liberty';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './law-liberty.module.css';
 
+
+const ACCENT = '#92400e';
+const TESTIMONIALS = [
+  { name: 'Andrew H.', location: 'Business Client', text: "Handled a complex commercial dispute with total professionalism and achieved an outcome beyond what I hoped for.", stars: 5 },
+  { name: 'Susan T.', location: 'Estate Client', text: "Navigated an incredibly sensitive estate matter with compassion and complete competence. Couldn't have asked for more.", stars: 5 },
+  { name: 'James R.', location: 'Contract Review', text: "Reviewed our entire commercial contract portfolio and found issues no one else had spotted. Invaluable expertise.", stars: 5 },
+];
 function LawContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Heritage Legal Counsel',
@@ -80,6 +90,9 @@ function LawContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.practiceAreas}>
@@ -111,6 +124,9 @@ function LawContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container">

@@ -6,10 +6,20 @@ import { Cpu, ShieldCheck, Cloud, Globe, Code, Terminal, Zap, Phone, ArrowRight,
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { TitanConfig as Config } from '@/configs/titan';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './titan.module.css';
 
+
+const ACCENT = '#64748b';
+const TESTIMONIALS = [
+  { name: 'Marcus B.', location: 'Project Director', text: 'Delivered on a massive scope without a single compromise on quality. The team are brilliantly skilled and highly professional.', stars: 5 },
+  { name: 'Liz P.', location: 'Site Manager', text: 'Best contractors we have worked with in 15 years. Communication was exemplary and every milestone was hit on time.', stars: 5 },
+  { name: 'Derek K.', location: 'Client', text: 'A genuinely reliable, high-quality operation. Costs were transparent, workers were skilled and the result was exceptional.', stars: 5 },
+];
 function TitanContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Titan Systems Global',
@@ -97,6 +107,9 @@ function TitanContent() {
             </div>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.techBar}>
@@ -109,6 +122,9 @@ function TitanContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.services}>
@@ -135,6 +151,9 @@ function TitanContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container text-center">

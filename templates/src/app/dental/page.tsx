@@ -6,10 +6,20 @@ import { ShieldCheck, Star, MapPin, Heart, Award, Sparkles, ArrowRight, Activity
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
+import SocialProofBar from '@/components/SocialProofBar';
+import HowItWorks from '@/components/HowItWorks';
+import TestimonialsSection from '@/components/TestimonialsSection';
 import { DentalConfig as Config } from '@/configs/dental';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './dental.module.css';
 
+
+const ACCENT = '#0891b2';
+const TESTIMONIALS = [
+  { name: 'Emma C.', location: 'New Patient', text: "I was nervous but they made me feel completely at ease. The treatment was painless and my smile has completely transformed.", stars: 5 },
+  { name: 'Oliver P.', location: 'Regular Patient', text: "Best dental practice I've ever been to. Modern equipment, gentle team, and they actually listen to what you want.", stars: 5 },
+  { name: 'Sophie L.', location: 'Cosmetic Patient', text: "The whitening treatment was fantastic. Clear results in one session and the team explained every step perfectly.", stars: 5 },
+];
 function DentalContent() {
   const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
     name: 'Dental Deluxe Clinic',
@@ -94,6 +104,9 @@ function DentalContent() {
             </motion.a>
           </motion.div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.emergencyBanner}>
@@ -106,6 +119,9 @@ function DentalContent() {
             ))}
           </div>
         </div>
+
+      <SocialProofBar accentColor={ACCENT} />
+
       </section>
 
       <section className={styles.serviceSection}>
@@ -130,6 +146,9 @@ function DentalContent() {
           </div>
         </div>
       </section>
+
+      <HowItWorks accentColor={ACCENT} />
+      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
       <footer className={styles.footer}>
         <div className="container text-center">
