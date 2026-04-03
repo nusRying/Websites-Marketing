@@ -20,7 +20,7 @@ MAPS_SELECTORS = {
     "review_more_btn": "button[aria-label*='See more'], button.w8Bnu",
     "review_scroller": "div[role='main'], div.m67q60, div.dS8AEf",
     "social_links": "a[href*='facebook.com'], a[href*='instagram.com'], a[href*='linkedin.com'], a[href*='twitter.com'], a[href*='x.com'], a[href*='youtube.com'], a[href*='tiktok.com']",
-    "feed_container": "div[role='feed']"
+    "feed_container": "div[role='feed']",
 }
 
 # Scraping Settings
@@ -28,11 +28,11 @@ SCRAPE_SETTINGS = {
     "max_results_per_search": 20,
     "max_reviews_per_lead": 150,
     "default_timeout": 30000,  # 30 seconds
-    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
 }
 
 # Email Discovery
 DISCOVERY_SETTINGS = {
     "email_regex": r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}",
-    "excluded_domains": ["sentry.io", "example.com", "placeholder.com"]
+    "excluded_domains": ["sentry.io", "example.com", "placeholder.com"],
 }

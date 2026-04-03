@@ -1,8 +1,9 @@
 import pandas as pd
-import sys
 
 try:
-    df = pd.read_excel(r'c:\Users\umair\Videos\Websites Marketing\exports\Cafes_Bradford_20260328_225610.xlsx')
+    df = pd.read_excel(
+        r"c:\Users\umair\Videos\Websites Marketing\exports\Cafes_Bradford_20260328_225610.xlsx"
+    )
     print(f"Total Leads: {len(df)}")
     print("Columns:", df.columns.tolist())
     if len(df) > 0:

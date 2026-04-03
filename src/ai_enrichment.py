@@ -3,7 +3,7 @@ import json
 import os
 import argparse
 import logging
-from typing import List, Dict
+from typing import Dict
 from openai import OpenAI
 from datetime import datetime
 from src.screenshot_worker import ScreenshotWorker
@@ -11,8 +11,11 @@ from src.outreach_orchestrator import OutreachOrchestrator
 from src.cloud_sync import CloudSync
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s"
+)
 logger = logging.getLogger("AIEnrichment")
+
 
 class AIEnrichmentEngine:
     """
@@ -23,8 +26,10 @@ class AIEnrichmentEngine:
         # Prefer API key from env or provided argument
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         if not self.api_key:
-            logger.warning("OPENAI_API_KEY not found in environment. AI features will be limited.")
-        
+            logger.warning(
+                "OPENAI_API_KEY not found in environment. AI features will be limited."
+            )
+
         self.client = OpenAI(api_key=self.api_key) if self.api_key else None
 
     def generate_copy(self, lead: Dict) -> Dict:
@@ -62,14 +67,20 @@ class AIEnrichmentEngine:
             response = self.client.chat.completions.create(
                 model="gpt-4o",
                 messages=[{"role": "user", "content": prompt}],
-                response_format={"type": "json_object"}
+                response_format={"type": "json_object"},
             )
             return json.loads(response.choices[0].message.content)
         except Exception as e:
             logger.error(f"AI Generation failed for {name}: {e}")
             return {}
 
-    def process_file(self, input_path: str, output_path: str = None, generate_screenshots: bool = True, user_id: str = None):
+    def process_file(
+        self,
+        input_path: str,
+        output_path: str = None,
+        generate_screenshots: bool = True,
+        user_id: str = None,
+    ):
         """
         Reads an Excel lead list, generates AI copy, saves results,
         triggers screenshots, and generates outreach campaign file.
@@ -81,29 +92,37 @@ class AIEnrichmentEngine:
 
         logger.info(f"Loading leads from: {input_path}")
         df = pd.read_excel(input_path)
-        
+
         # Robust filtering: Handle missing 'No Website' column by checking 'Website'
         if "No Website" in df.columns:
-            leads_to_process = df[df["No Website"] == "Yes"].to_dict('records')
+            leads_to_process = df[df["No Website"] == "Yes"].to_dict("records")
         elif "Website" in df.columns:
             # If No Website column is missing, infer it from an empty Website field
-            logger.warning("'No Website' column missing. Inferring from 'Website' column.")
-            leads_to_process = df[df["Website"].isna() | (df["Website"] == "") | (df["Website"] == "None")].to_dict('records')
+            logger.warning(
+                "'No Website' column missing. Inferring from 'Website' column."
+            )
+            leads_to_process = df[
+                df["Website"].isna() | (df["Website"] == "") | (df["Website"] == "None")
+            ].to_dict("records")
         else:
-            logger.warning("'No Website' and 'Website' columns both missing. Processing all leads.")
-            leads_to_process = df.to_dict('records')
+            logger.warning(
+                "'No Website' and 'Website' columns both missing. Processing all leads."
+            )
+            leads_to_process = df.to_dict("records")
 
         logger.info(f"Found {len(leads_to_process)} leads to enrich with AI copy.")
 
         enriched_leads = []
         for i, lead in enumerate(leads_to_process):
-            logger.info(f"[{i+1}/{len(leads_to_process)}] Enriching: {lead.get('Name')}")
+            logger.info(
+                f"[{i + 1}/{len(leads_to_process)}] Enriching: {lead.get('Name')}"
+            )
             ai_copy = self.generate_copy(lead)
-            
+
             # Merge AI copy into lead data (flattened with 'ai_' prefix)
             for key, val in ai_copy.items():
                 lead[f"ai_{key}"] = val
-            
+
             enriched_leads.append(lead)
 
         # 1. Trigger Screenshots
@@ -138,14 +157,24 @@ class AIEnrichmentEngine:
 
         return output_path
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="AI Lead Enrichment Tool")
-    parser.add_argument("--input", type=str, required=True, help="Path to the Excel lead list")
+    parser.add_argument(
+        "--input", type=str, required=True, help="Path to the Excel lead list"
+    )
     parser.add_argument("--output", type=str, help="Custom output path")
     parser.add_argument("--api-key", type=str, help="OpenAI API Key")
     parser.add_argument("--user-id", type=str, help="Supabase User ID for cloud sync")
-    parser.add_argument("--no-screenshots", action="store_true", help="Disable screenshot generation")
+    parser.add_argument(
+        "--no-screenshots", action="store_true", help="Disable screenshot generation"
+    )
     args = parser.parse_args()
 
     engine = AIEnrichmentEngine(api_key=args.api_key)
-    engine.process_file(args.input, args.output, generate_screenshots=not args.no_screenshots, user_id=args.user_id)
+    engine.process_file(
+        args.input,
+        args.output,
+        generate_screenshots=not args.no_screenshots,
+        user_id=args.user_id,
+    )

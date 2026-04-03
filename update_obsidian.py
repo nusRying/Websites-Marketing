@@ -1,10 +1,9 @@
 import requests
-import json
 
 url = "http://127.0.0.1:27123/vault/Research Logs/Google Maps Scraper Refactor.md"
 headers = {
     "Authorization": "Bearer 6973bcc18656efcfd413918352af6c5f3712b9f4d8e508cc9b9d7281e10c8710",
-    "Content-Type": "text/markdown"
+    "Content-Type": "text/markdown",
 }
 content = """# Google Maps Scraper Refactor Log - 2026-03-29
 
@@ -28,10 +27,12 @@ Refactored the Google Maps lead scraper to a modular, stealth-focused architectu
 """
 
 try:
-    response = requests.post(url, headers=headers, data=content.encode('utf-8'))
+    response = requests.post(url, headers=headers, data=content.encode("utf-8"))
     if response.status_code == 200:
         print("Obsidian log updated successfully.")
     else:
-        print(f"Failed to update Obsidian log: {response.status_code} - {response.text}")
+        print(
+            f"Failed to update Obsidian log: {response.status_code} - {response.text}"
+        )
 except Exception as e:
     print(f"Error: {e}")

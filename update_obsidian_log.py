@@ -1,5 +1,4 @@
 import requests
-import json
 import datetime
 
 # Configuration
@@ -7,7 +6,7 @@ vault_path = "Vault/Research Logs/Websites Marketing Project Log.md"
 api_url = f"http://127.0.0.1:27123/vault/{vault_path}"
 headers = {
     "Authorization": "Bearer 6973bcc18656efcfd413918352af6c5f3712b9f4d8e508cc9b9d7281e10c8710",
-    "Content-Type": "text/markdown"
+    "Content-Type": "text/markdown",
 }
 
 # Content for the final project summary
@@ -44,21 +43,31 @@ Status: **MISSION ACCOMPLISHED**
 
 try:
     # First, try to get the existing content to append
-    get_response = requests.get(api_url, headers={"Authorization": headers["Authorization"]})
+    get_response = requests.get(
+        api_url, headers={"Authorization": headers["Authorization"]}
+    )
     if get_response.status_code == 200:
         existing_content = get_response.text
         updated_content = existing_content + "\n" + new_entry
-        put_response = requests.put(api_url, headers=headers, data=updated_content.encode('utf-8'))
+        put_response = requests.put(
+            api_url, headers=headers, data=updated_content.encode("utf-8")
+        )
         if put_response.status_code == 204:
             print("Final Obsidian log appended successfully.")
         else:
-            print(f"Failed to append to Obsidian log: {put_response.status_code} - {put_response.text}")
+            print(
+                f"Failed to append to Obsidian log: {put_response.status_code} - {put_response.text}"
+            )
     else:
         # If file doesn't exist, create it
-        post_response = requests.post(api_url, headers=headers, data=new_entry.encode('utf-8'))
+        post_response = requests.post(
+            api_url, headers=headers, data=new_entry.encode("utf-8")
+        )
         if post_response.status_code == 200:
             print("Final Obsidian log created successfully.")
         else:
-            print(f"Failed to create Obsidian log: {post_response.status_code} - {post_response.text}")
+            print(
+                f"Failed to create Obsidian log: {post_response.status_code} - {post_response.text}"
+            )
 except Exception as e:
     print(f"Error updating Obsidian: {e}")
