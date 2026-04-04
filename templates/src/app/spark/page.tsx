@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Zap, ShieldCheck, Sun, Lightbulb, Home, Phone, Gauge, Cpu } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Zap, ShieldCheck, Sun, Lightbulb, Home, Phone, ArrowRight, Gauge, Cpu, CheckCircle2 } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { SparkConfig as config } from '@/configs/spark';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './spark.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#fbbf24';
 const TESTIMONIALS = [
@@ -78,6 +80,7 @@ function SparkContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#fbbf24', marginBottom: '30px' }}>
               <Gauge size={20} /> <Cpu size={20} /> <Lightbulb size={20} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1 dangerouslySetInnerHTML={{ __html: ai.heroTitle || t(config.hero.title).split('with')[0] + '<br/> <span>with ' + t(config.hero.title).split('with')[1] + '</span>' }} />
             <p>
               {ai.heroSubtitle || t(config.hero.subtitle)}
@@ -93,6 +96,11 @@ function SparkContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -114,7 +122,14 @@ function SparkContent() {
                     {i === 0 ? <ShieldCheck size={32} /> : i === 1 ? <Sun size={32} /> : <Home size={32} />}
                   </div>
                   <h3>{s.title}</h3>
-                  <p style={{ color: '#94a3b8', lineHeight: 1.7 }}>{t(s.desc)}</p>
+                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
@@ -140,6 +155,7 @@ function SparkContent() {
         </div>
       </section>
 
+      <FAQSection faqs={config.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

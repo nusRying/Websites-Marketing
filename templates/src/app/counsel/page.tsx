@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Shield, Briefcase, TrendingUp, Scale, Users, Phone, Gavel, Landmark } from 'lucide-react';
 import { Suspense, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Shield, Briefcase, TrendingUp, Scale, Users, Phone, ArrowRight, Gavel, Landmark } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,6 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { CounselConfig } from '@/configs/counsel';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './counsel.module.css';
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 function Counter({ value }: { value: number }) {
   const [count, setCount] = useState(0);
@@ -97,7 +100,8 @@ function CounselContent() {
               <p style={{ color: '#3b82f6', fontWeight: 800, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '20px' }}>
                 Precision. Strategy. Integrity.
               </p>
-              <h1 dangerouslySetInnerHTML={{ __html: t(CounselConfig.hero.title) }} />
+              <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
+            <h1 dangerouslySetInnerHTML={{ __html: t(CounselConfig.hero.title) }} />
               <p>{t(CounselConfig.hero.subtitle)}</p>
               <motion.a 
                 whileHover={{ gap: '15px', x: 5 }}
@@ -111,6 +115,11 @@ function CounselContent() {
           </div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -163,6 +172,7 @@ function CounselContent() {
         </div>
       </section>
 
+      <FAQSection faqs={CounselConfig.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Scissors, MapPin, Calendar, Clock, Phone, ChevronRight, Camera, UserCheck } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Scissors, Star, MapPin, Calendar, Clock, Phone, ChevronRight, Camera, UserCheck } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { BarberConfig as config } from '@/configs/barber';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './barber.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#d4af37';
 const TESTIMONIALS = [
@@ -78,6 +80,7 @@ function BarberContent() {
             <div style={{ color: '#d4af37', marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
               <Scissors size={32} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1 dangerouslySetInnerHTML={{ __html: t(config.hero.title).split('In the Heart of')[0] + '<br/> <span>In the Heart of ' + t(config.hero.title).split('In the Heart of')[1] + '</span>' }} />
             <p>
               {t(config.hero.subtitle)}
@@ -93,9 +96,16 @@ function BarberContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
+
+      <TrustBadgeStrip />
 
       <section className={styles.services}>
         <div className="container">
@@ -114,7 +124,14 @@ function BarberContent() {
                     <span className={styles.serviceName}>{t(s.name)}</span>
                     <span className={styles.servicePrice}>{s.price}</span>
                   </div>
-                  <p className={styles.serviceDesc}>{t(s.desc)}</p>
+                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
@@ -150,6 +167,7 @@ function BarberContent() {
         </div>
       </section>
 
+      <FAQSection faqs={config.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

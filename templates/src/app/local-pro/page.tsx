@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Check, MapPin, Heart, Shield, Award } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Star, MapPin, Heart, Shield, Award } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { LocalProConfig as Config } from '@/configs/local-pro';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './local-pro.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#2563eb';
 const TESTIMONIALS = [
@@ -79,6 +81,7 @@ function LocalProContent() {
               <MapPin size={14} style={{ marginRight: 5 }} />
               {t(Config.hero.badge)}
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1 style={{fontSize: '3.5rem', color: '#1e3a8a', marginBottom: '20px', fontWeight: 900}}>
               {t(Config.hero.title)}
             </h1>
@@ -96,9 +99,16 @@ function LocalProContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
+
+      <TrustBadgeStrip />
 
       <section className={styles.services}>
         <div className="container">

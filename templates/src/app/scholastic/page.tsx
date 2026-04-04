@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, BookOpen, GraduationCap, Users, Award, Brain, Microscope, Music, Languages, Phone } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, GraduationCap, Users, Star, Award, Brain, Microscope, Music, Languages, Phone, ArrowRight } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { ScholasticConfig as Config } from '@/configs/scholastic';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './scholastic.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#7c3aed';
 const TESTIMONIALS = [
@@ -84,6 +86,7 @@ function ScholasticContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#0d9488', marginBottom: '20px' }}>
               <BookOpen size={24} /> <Brain size={24} /> <Star size={24} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1>{ai.heroTitle || t(Config.hero.title)}</h1>
             <p>
               {ai.heroSubtitle || t(Config.hero.subtitle)}
@@ -99,6 +102,11 @@ function ScholasticContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -118,7 +126,14 @@ function ScholasticContent() {
                 <div className={styles.subjectCard}>
                   <div style={{ color: '#0d9488', marginBottom: '20px' }}>{disciplineIcons[i] || disciplineIcons[0]}</div>
                   <h3 style={{ fontSize: '1.5rem', marginBottom: '15px', color: '#1e3a8a' }}>{t(s.title)}</h3>
-                  <p style={{ color: '#64748b', lineHeight: 1.7 }}>{t(s.desc)}</p>
+                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
@@ -145,6 +160,7 @@ function ScholasticContent() {
         </div>
       </section>
 
+      <FAQSection faqs={Config.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

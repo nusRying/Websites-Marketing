@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Sparkles, MapPin, Calendar, Heart } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Star, MapPin, Calendar, Heart } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { AuraConfig as Config } from '@/configs/aura';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './aura.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#ec4899';
 const TESTIMONIALS = [
@@ -78,6 +80,7 @@ function AuraContent() {
               <Sparkles size={14} style={{ marginRight: 8 }} />
               Defining the Art of Self-Care
             </p>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1 dangerouslySetInnerHTML={{ __html: t(Config.hero.title) }} />
             <div className={styles.divider}></div>
             <motion.div
@@ -91,6 +94,11 @@ function AuraContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>

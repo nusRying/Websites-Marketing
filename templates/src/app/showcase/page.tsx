@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Image as ImageIcon, Camera, Home, Trophy, Users, PhoneCall } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Image as ImageIcon, Camera, Home, Trophy, Users, PhoneCall } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { ShowcaseConfig as Config } from '@/configs/showcase';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './showcase.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#10b981';
 const TESTIMONIALS = [
@@ -77,6 +79,7 @@ function ShowcaseContent() {
             <div style={{ display: 'flex', gap: '10px', color: '#059669', marginBottom: '20px' }}>
               <Home size={20} /> <ImageIcon size={20} /> <Trophy size={20} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1>{ai.heroTitle || t(Config.hero.title)}</h1>
             <p style={{fontSize: '1.4rem', color: '#065f46', marginBottom: '40px', maxWidth: '700px'}}>
               {ai.heroSubtitle || t(Config.hero.subtitle)}
@@ -93,6 +96,11 @@ function ShowcaseContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -109,7 +117,14 @@ function ShowcaseContent() {
                 <div className={styles.step} style={{flex: '1 1 300px', background: 'white', padding: '40px', borderRadius: '15px', boxShadow: '0 4px 20px rgba(0,0,0,0.05)'}}>
                   <div className={styles.stepNumber}>{s.step}</div>
                   <h3 style={{ fontSize: '1.5rem', marginBottom: '15px' }}>{s.title}</h3>
-                  <p style={{ color: '#666', lineHeight: 1.6 }}>{t(s.desc)}</p>
+                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}

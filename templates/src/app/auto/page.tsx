@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Wrench, Gauge, ShieldAlert, Zap, Settings, Phone, ChevronRight } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Wrench, Gauge, ShieldAlert, Zap, Settings, Star, Phone, CheckCircle2, ChevronRight } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { AutoConfig as Config } from '@/configs/auto';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './auto.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#ef4444';
 const TESTIMONIALS = [
@@ -80,6 +82,7 @@ function AutoContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#ea580c', marginBottom: '20px' }}>
               <Gauge size={24} /> <Wrench size={24} /> <Zap size={24} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1 dangerouslySetInnerHTML={{ __html: t(Config.hero.title) }} />
             <p>
               {t(Config.hero.subtitle)}
@@ -104,9 +107,16 @@ function AutoContent() {
           </div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
+
+      <TrustBadgeStrip />
 
       <section className={styles.services}>
         <div className="container">
@@ -123,7 +133,14 @@ function AutoContent() {
                 <div className={styles.serviceCard}>
                   <div style={{ color: '#ea580c', marginBottom: '20px' }}>{icons[i] || icons[0]}</div>
                   <h3>{t(s.title)}</h3>
-                  <p style={{ color: '#94a3b8', lineHeight: 1.7 }}>{t(s.desc)}</p>
+                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                   <motion.div whileHover={{ x: 5 }} style={{ marginTop: '20px', color: '#ea580c', fontWeight: 700, display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                     Learn More <ChevronRight size={16} />
                   </motion.div>
@@ -162,6 +179,7 @@ function AutoContent() {
         </div>
       </section>
 
+      <FAQSection faqs={Config.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

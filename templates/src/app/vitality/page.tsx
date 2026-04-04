@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Leaf, Users, Zap, MapPin, Calendar, Heart } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Leaf, Users, Zap, MapPin, Calendar, Heart, ArrowRight } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { VitalityConfig } from '@/configs/vitality';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './vitality.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#84cc16';
 const TESTIMONIALS = [
@@ -74,6 +76,7 @@ function VitalityContent() {
             <div style={{ color: '#86efac', marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
               <Leaf size={32} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1 dangerouslySetInnerHTML={{ __html: t(VitalityConfig.hero.title).replace('Balance', '<span>Balance</span>') }} />
             <p>{t(VitalityConfig.hero.subtitle)}</p>
             <motion.a 
@@ -87,6 +90,11 @@ function VitalityContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1545208393-216ece761b85?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -157,6 +165,7 @@ function VitalityContent() {
         </div>
       </section>
 
+      <FAQSection faqs={VitalityConfig.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

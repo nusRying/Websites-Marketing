@@ -1,13 +1,17 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, CheckCircle, ShieldCheck, Clock } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, ShieldCheck, Clock, Star } from 'lucide-react';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
 import { LeadMachineConfig as Config } from '@/configs/lead-machine';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './preview.module.css';
+import { Reveal } from '@/components/Reveal';
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ICON_MAP = {
   Clock: Clock,

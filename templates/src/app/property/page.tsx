@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Building2, MapPin, ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, MapPin, ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { PropertyConfig as Config } from '@/configs/property';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './property.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#1e293b';
 const TESTIMONIALS = [
@@ -75,6 +77,7 @@ function PropertyContent() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1>
               {t(Config.hero.title)}
             </h1>
@@ -92,6 +95,11 @@ function PropertyContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -151,6 +159,7 @@ function PropertyContent() {
         </div>
       </section>
 
+      <FAQSection faqs={Config.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

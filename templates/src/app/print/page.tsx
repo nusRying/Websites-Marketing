@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Printer, Image as ImageIcon, Package, Globe, PenTool, Sparkles } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Printer, Image as ImageIcon, Package, Globe, Star, ArrowRight, PenTool, Sparkles } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { PrimePrintConfig } from '@/configs/prime-print';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './prime-print.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#6366f1';
 const TESTIMONIALS = [
@@ -78,6 +80,7 @@ function PrintContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#6366f1', marginBottom: '30px' }}>
               <PenTool size={24} /> <ImageIcon size={24} /> <Package size={24} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1 dangerouslySetInnerHTML={{ __html: t(PrimePrintConfig.hero.title) }} />
             <p>{t(PrimePrintConfig.hero.subtitle)}</p>
             <motion.a 
@@ -91,9 +94,16 @@ function PrintContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
+
+      <TrustBadgeStrip />
 
       <section className={styles.services}>
         <div className="container">
@@ -111,7 +121,14 @@ function PrintContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.card}>
                   <h3 style={{ marginBottom: '20px' }}>{s.title}</h3>
-                  <p>{t(s.desc)}</p>
+                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                   <motion.div 
                     whileHover={{ x: 10, color: '#6366f1' }}
                     style={{ marginTop: '30px', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', borderTop: '1px solid #f1f5f9', paddingTop: '20px' }}
@@ -125,6 +142,7 @@ function PrintContent() {
         </div>
       </section>
 
+      <FAQSection faqs={PrimePrintConfig.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

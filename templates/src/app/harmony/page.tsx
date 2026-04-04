@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Palette, Ruler, Compass, Home } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Palette, Ruler, Star, ArrowRight, Compass, Home } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { HomeHarmonyConfig } from '@/configs/home-harmony';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './home-harmony.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#7c3aed';
 const TESTIMONIALS = [
@@ -78,6 +80,7 @@ function HarmonyContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', color: '#1a1a1a', marginBottom: '30px', opacity: 0.3 }}>
               <Compass size={24} /> <Ruler size={24} /> <Palette size={24} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1 dangerouslySetInnerHTML={{ __html: t(HomeHarmonyConfig.hero.title) }} />
             <p>{t(HomeHarmonyConfig.hero.subtitle)}</p>
             <motion.a 
@@ -91,9 +94,16 @@ function HarmonyContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
+
+      <TrustBadgeStrip />
 
       <section className={styles.services}>
         <div className="container">
@@ -111,7 +121,14 @@ function HarmonyContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.card}>
                   <h3 style={{ marginBottom: '20px' }}>{s.title}</h3>
-                  <p>{t(s.desc)}</p>
+                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                   <motion.div 
                     whileHover={{ x: 10 }}
                     style={{ marginTop: '30px', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}
@@ -125,6 +142,7 @@ function HarmonyContent() {
         </div>
       </section>
 
+      <FAQSection faqs={HomeHarmonyConfig.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

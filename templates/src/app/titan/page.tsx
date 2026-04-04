@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Cpu, ShieldCheck, Cloud, Globe, Code, Terminal, Zap, Phone, BarChart3, Lock } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Cpu, ShieldCheck, Cloud, Globe, Code, Terminal, Zap, Phone, ArrowRight, BarChart3, Lock } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { TitanConfig as Config } from '@/configs/titan';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './titan.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#64748b';
 const TESTIMONIALS = [
@@ -91,6 +93,7 @@ function TitanContent() {
             <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#3b82f6', marginBottom: '30px' }}>
               <Code size={20} /> <Globe size={20} /> <Cpu size={20} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1>{ai.heroTitle || t(Config.hero.title)}</h1>
             <p>
               {ai.heroSubtitle || t(Config.hero.subtitle)}
@@ -108,6 +111,11 @@ function TitanContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1541888946425-d81bb19480c5?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -127,6 +135,8 @@ function TitanContent() {
 
       </section>
 
+      <TrustBadgeStrip />
+
       <section className={styles.services}>
         <div className="container">
           <Reveal>
@@ -144,7 +154,14 @@ function TitanContent() {
                 <div className={styles.solutionCard}>
                   <div style={{ color: '#3b82f6', marginBottom: '25px' }}>{solutionIcons[i] || solutionIcons[0]}</div>
                   <h3>{t(s.title)}</h3>
-                  <p style={{ color: '#94a3b8', lineHeight: 1.8 }}>{t(s.desc)}</p>
+                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
@@ -152,6 +169,7 @@ function TitanContent() {
         </div>
       </section>
 
+      <FAQSection faqs={Config.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

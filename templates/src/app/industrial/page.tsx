@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, ShieldAlert, Award, FileCheck, Map, PhoneCall, HardHat, Construction } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { ShieldAlert, Award, FileCheck, Map, PhoneCall, HardHat, Construction } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,6 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { IndustrialConfig as Config } from '@/configs/industrial';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './industrial.module.css';
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ICON_MAP = {
   Award: Award,
@@ -88,6 +91,7 @@ function IndustrialContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#facc15', marginBottom: '30px' }}>
               <HardHat size={24} /> <Construction size={24} /> <ShieldAlert size={24} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1>{t(Config.hero.title)}</h1>
             <p style={{fontSize: '1.3rem', maxWidth: '650px', marginBottom: '50px', opacity: 0.9, lineHeight: 1.6}}>
               {t(Config.hero.subtitle)}
@@ -103,6 +107,11 @@ function IndustrialContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -121,6 +130,8 @@ function IndustrialContent() {
 
       </section>
 
+      <TrustBadgeStrip />
+
       <section className={styles.services}>
         <div className="container">
           <Reveal>
@@ -135,7 +146,14 @@ function IndustrialContent() {
                   <div className={styles.industrialCard} style={{ transition: 'all 0.3s ease' }}>
                     <div style={{ color: '#facc15', marginBottom: '20px' }}><Icon /></div>
                     <h3>{s.title}</h3>
-                    <p style={{ color: '#475569', lineHeight: 1.7 }}>{t(s.desc)}</p>
+                    <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                   </div>
                 </Reveal>
               );

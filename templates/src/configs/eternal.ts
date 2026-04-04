@@ -13,5 +13,11 @@ export const EternalConfig = {
   footer: {
     title: "Let's Create Magic",
     subtitle: "Established in {location}."
-  }
+  },
+  
+  faqs: [
+    { q: 'How do I get started?', a: 'Getting started is simple. Just contact us to arrange a free initial consultation where we will assess your needs and provide a tailored plan.' },
+    { q: 'Do you offer a satisfaction guarantee?', a: 'Yes, we pride ourselves on exceptional service. If you are not fully satisfied with our work, we will make it right at no extra cost.' },
+    { q: 'What areas do you cover?', a: 'We serve clients across the local and surrounding regions. Please contact us to confirm if we can assist at your specific location.' }
+  ]
 };

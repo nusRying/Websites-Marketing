@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, PawPrint, Heart, Bone, ShieldCheck, Scissors, Stethoscope, Dog } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion, Variants } from 'framer-motion';
-import { PawPrint, Heart, Bone, ShieldCheck, Star, Scissors, Stethoscope, Dog } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { PawConfig } from '@/configs/paw';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './paw.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#0ea5e9';
 const TESTIMONIALS = [
@@ -85,6 +87,7 @@ function PawContent() {
             <motion.div variants={bounce} animate="animate" style={{ color: '#f59e0b', marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
               <Heart size={40} fill="currentColor" />
             </motion.div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1>{t(PawConfig.hero.title).split('Feels at Home').map((part, i, arr) => (
               <span key={i}>
                 {part}
@@ -105,6 +108,11 @@ function PawContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -163,6 +171,7 @@ function PawContent() {
         </div>
       </section>
 
+      <FAQSection faqs={PawConfig.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

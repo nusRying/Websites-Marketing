@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Scale, ShieldCheck, Gavel, Landmark, Briefcase } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Scale, ShieldCheck, Gavel, Landmark, Star, ArrowRight, Briefcase } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { LawLibertyConfig } from '@/configs/law-liberty';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './law-liberty.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#92400e';
 const TESTIMONIALS = [
@@ -78,6 +80,7 @@ function LawContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#c5a059', marginBottom: '30px' }}>
               <Landmark size={24} /> <Gavel size={24} /> <ShieldCheck size={24} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1 dangerouslySetInnerHTML={{ __html: t(LawLibertyConfig.hero.title) }} />
             <p>{t(LawLibertyConfig.hero.subtitle)}</p>
             <motion.a 
@@ -91,6 +94,11 @@ function LawContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -111,7 +119,14 @@ function LawContent() {
               <Reveal key={i} delay={0.2 * i}>
                 <div className={styles.card}>
                   <h3>{s.title}</h3>
-                  <p>{t(s.desc)}</p>
+                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                   <motion.div 
                     whileHover={{ x: 10, color: '#c5a059' }}
                     style={{ marginTop: '30px', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', borderTop: '1px solid #eee', paddingTop: '20px' }}
@@ -125,6 +140,7 @@ function LawContent() {
         </div>
       </section>
 
+      <FAQSection faqs={LawLibertyConfig.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 

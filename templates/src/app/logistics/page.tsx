@@ -1,8 +1,7 @@
 'use client';
-
+import { CheckCircle2, Star, ArrowRight, Truck, Box, Globe, ShieldCheck, Clock, Map, Package, Navigation } from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Truck, Box, Globe, ShieldCheck, Clock, ArrowRight, Map, Package, Navigation } from 'lucide-react';
 import { Reveal } from '@/components/Reveal';
 import MobileActions from '@/components/MobileActions';
 import BookingWidget from '@/components/BookingWidget';
@@ -12,7 +11,10 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import { LogisticsConfig as config } from '@/configs/logistics';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './logistics.module.css';
-
+import PrestigeBadge from '@/components/PrestigeBadge';
+import TrustBadgeStrip from '@/components/TrustBadgeStrip';
+import FAQSection from '@/components/FAQSection';
+import Image from 'next/image';
 
 const ACCENT = '#f97316';
 const TESTIMONIALS = [
@@ -78,6 +80,7 @@ function LogisticsContent() {
             <div style={{ display: 'flex', gap: '15px', color: '#f97316', marginBottom: '30px' }}>
               <Navigation size={24} /> <Package size={24} /> <Globe size={24} />
             </div>
+            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
             <h1>{t(config.hero.title).split('Forward with')[0]} <br/> <span>Forward with {t(config.hero.title).split('Forward with')[1]}</span></h1>
             <p>
               {t(config.hero.subtitle)}
@@ -93,6 +96,11 @@ function LogisticsContent() {
           </motion.div>
         </div>
 
+      
+        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
+          <Image src="https://images.unsplash.com/photo-1586528116311-ad86d72af65c?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
+        </div>
+    
       <SocialProofBar accentColor={ACCENT} />
 
       </section>
@@ -107,7 +115,14 @@ function LogisticsContent() {
                     {i === 0 ? <Box size={32} /> : i === 1 ? <Clock size={32} /> : <ShieldCheck size={32} />}
                   </div>
                   <h3>{s.title}</h3>
-                  <p style={{ color: '#64748b', lineHeight: 1.7 }}>{t(s.desc)}</p>
+                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                    {s.includes?.map((item: string, idx: number) => (
+                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                        <CheckCircle2 size={14} color={ACCENT} /> {item}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </Reveal>
             ))}
@@ -133,6 +148,7 @@ function LogisticsContent() {
         </div>
       </section>
 
+      <FAQSection faqs={config.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
       <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
 
