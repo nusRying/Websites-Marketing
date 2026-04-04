@@ -1,4 +1,4 @@
-scrapling==0.4.1
+scrapling==0.4.3
 pandas
 openpyxl
 tenacity
@@ -18,3 +18,4 @@ pytest-mock
 httpx
 ruff
 curl_cffi
+patchright

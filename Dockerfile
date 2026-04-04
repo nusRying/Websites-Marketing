@@ -36,6 +36,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN playwright install chromium
 RUN playwright install-deps chromium
 
+# Install Patchright browsers (required by Scrapling)
+RUN python -m patchright install chromium
+RUN python -m patchright install-deps chromium
+
 # Copy the rest of the application code
 COPY src/ /app/src/
 COPY templates/src/lib/personalization.ts /app/templates/src/lib/ 

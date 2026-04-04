@@ -83,9 +83,9 @@ function AquaContent() {
                 <Waves size={24} /> <Thermometer size={24} /> <ShieldCheck size={24} />
               </div>
               <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
-            <h1 dangerouslySetInnerHTML={{ __html: t(config.hero.title).split('in')[0] + '<br/> <span>in ' + t(config.hero.title).split('in')[1] + '</span>' }} />
+            <h1 dangerouslySetInnerHTML={{ __html: (ai.hero_title || t(config.hero.title)).split('in')[0] + '<br/> <span>in ' + (ai.hero_title || t(config.hero.title)).split('in')[1] + '</span>' }} />
               <p>
-                {t(config.hero.subtitle)}
+                {ai.hero_subtitle || t(config.hero.subtitle)}
               </p>
               <motion.a 
                 whileHover={{ gap: '15px', paddingRight: '45px' }}
@@ -93,7 +93,7 @@ function AquaContent() {
                 className={styles.actionBtn} 
                 style={{ padding: '18px 45px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
               >
-                {config.hero.cta} <ArrowRight size={20} />
+                {ai.niche_cta || config.hero.cta} <ArrowRight size={20} />
               </motion.a>
             </motion.div>
           </div>
@@ -117,36 +117,44 @@ function AquaContent() {
           </Reveal>
           
           <div className={styles.serviceGrid}>
-            {config.services.map((s, i) => (
-              <Reveal key={i} delay={0.2 * i}>
-                <div className={styles.card}>
-                  <div style={{ color: '#0891b2', marginBottom: '20px' }}>
-                    {i === 0 ? <Settings size={32} /> : i === 1 ? <Droplets size={32} /> : <ShieldCheck size={32} />}
+            {config.services.map((s, i) => {
+              const aiOverride = i === 0 ? ai.service_1 : i === 1 ? ai.service_2 : i === 2 ? ai.service_3 : null;
+              return (
+                <Reveal key={i} delay={0.2 * i}>
+                  <div className={styles.card}>
+                    <div style={{ color: '#0891b2', marginBottom: '20px' }}>
+                      {i === 0 ? <Settings size={32} /> : i === 1 ? <Droplets size={32} /> : <ShieldCheck size={32} />}
+                    </div>
+                    <h3>{aiOverride || s.title}</h3>
+                    <p style={{ flex: 1 }}>{t(s.desc)}</p>
+                    <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
+                      {s.includes?.map((item: string, idx: number) => (
+                        <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
+                          <CheckCircle2 size={14} color={ACCENT} /> {item}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3>{s.title}</h3>
-                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
-                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
-                    {s.includes?.map((item: string, idx: number) => (
-                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
-                        <CheckCircle2 size={14} color={ACCENT} /> {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
 
       <FAQSection faqs={config.faqs} accentColor={ACCENT} />
       <HowItWorks accentColor={ACCENT} />
-      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
+      <TestimonialsSection 
+        testimonials={ai.testimonial_1 ? [
+          { name: 'Featured Client', location: 'Local Area', text: ai.testimonial_1, stars: 5 },
+          ...TESTIMONIALS.slice(1)
+        ] : TESTIMONIALS} 
+        accentColor={ACCENT} 
+      />
 
       <section className={styles.ctaSection}>
         <div className="container text-center">
           <Reveal>
-
             <div style={{ maxWidth: '700px', margin: '0 auto' }}>
               <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{t(config.footer.title)}</h2>
               <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.9 }}>

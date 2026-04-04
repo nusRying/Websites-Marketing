@@ -19,6 +19,12 @@ export interface AICopy {
   hero_subtitle?: string;
   pain_point?: string;
   solution?: string;
+  niche_cta?: string;
+  service_1?: string;
+  service_2?: string;
+  service_3?: string;
+  testimonial_1?: string;
+  testimonial_2?: string;
   [key: string]: any;
 }
 

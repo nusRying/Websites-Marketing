@@ -26,6 +26,11 @@ export function usePersonalization(defaultData: Partial<LeadData> = {}) {
       pain_point: searchParams.get('ai_pain_point') || undefined,
       solution: searchParams.get('ai_solution') || undefined,
       niche_cta: searchParams.get('ai_niche_cta') || undefined,
+      service_1: searchParams.get('ai_service_1') || undefined,
+      service_2: searchParams.get('ai_service_2') || undefined,
+      service_3: searchParams.get('ai_service_3') || undefined,
+      testimonial_1: searchParams.get('ai_testimonial_1') || undefined,
+      testimonial_2: searchParams.get('ai_testimonial_2') || undefined,
     };
 
     return { leadData, aiCopy };
