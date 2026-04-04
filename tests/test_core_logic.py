@@ -5,8 +5,11 @@ from src.ai_enrichment import AIEnrichmentEngine
 from src.scrapers.export import ExcelExporter
 
 
-def test_excel_exporter_logic():
-    exporter = ExcelExporter(export_dir="exports/test_cleanup")
+def test_excel_exporter_logic(tmp_path):
+    # Use a temporary directory provided by pytest
+    d = tmp_path / "exports"
+    d.mkdir()
+    exporter = ExcelExporter(export_dir=str(d))
     mock_leads = [
         {
             "name": "Elite Plumbers",
@@ -24,9 +27,8 @@ def test_excel_exporter_logic():
     assert df.iloc[0]["Lead Quality"] == "ELITE"
     assert df.iloc[0]["No Website"] == "Yes"
 
-    # Cleanup
-    os.remove(path)
-    os.rmdir("exports/test_cleanup")
+    # Cleanup is handled by pytest's tmp_path fixture automatically
+
 
 
 @patch("src.ai_enrichment.OpenAI")

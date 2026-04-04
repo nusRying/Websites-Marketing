@@ -94,6 +94,7 @@ export default function LeadCRM() {
   const [selectedTemplate, setSelectedTemplate] = useState<typeof templates[0] | null>(null);
   const [isEditorMode, setIsEditorMode] = useState(false);
   const [activeSection, setActiveSection] = useState('site');
+  const [isIframeLoading, setIsIframeLoading] = useState(true);
   const [templateParams, setTemplateParams] = useState({ 
     name: 'Acme Services', 
     niche: 'Specialist', 
@@ -104,7 +105,12 @@ export default function LeadCRM() {
     ai_hero_subtitle: '',
     ai_pain_point: '',
     ai_solution: '',
-    ai_niche_cta: ''
+    ai_niche_cta: '',
+    ai_service_1: '',
+    ai_service_2: '',
+    ai_service_3: '',
+    ai_testimonial_1: '',
+    ai_testimonial_2: ''
   });
 
   // Editable AI Fields
@@ -1035,7 +1041,8 @@ export default function LeadCRM() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '16px' }}>
                   {templates.map((tmpl) => {
                     const isActive = selectedTemplate?.id === tmpl.id;
-                    const previewUrl = `${tmpl.id}?${new URLSearchParams(templateParams).toString()}`;
+                    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+                    const previewUrl = `${origin}${tmpl.id}?${new URLSearchParams(templateParams).toString()}`;
                     return (
                       <motion.div
                         key={tmpl.id}
@@ -1077,7 +1084,7 @@ export default function LeadCRM() {
                   <div style={{ position: 'relative', width: '100%', height: '260px', overflow: 'hidden', background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
                     <iframe
                       key={JSON.stringify(templateParams) + selectedTemplate.id}
-                      src={`${selectedTemplate.id}?${new URLSearchParams(templateParams).toString()}`}
+                      src={`${typeof window !== 'undefined' ? window.location.origin : ''}${selectedTemplate.id}?${new URLSearchParams(templateParams).toString()}`}
                       style={{ width: '1024px', height: '768px', border: 'none', transform: 'scale(0.4)', transformOrigin: 'top left', pointerEvents: 'none' }}
                       title="Live Preview"
                     />
@@ -1182,14 +1189,27 @@ export default function LeadCRM() {
               </div>
 
               {/* CENTER: CANVAS */}
-              <div style={{ flex: 1, background: '#f1f5f9', position: 'relative', display: 'flex', justifyContent: 'center', paddingTop: '40px', paddingBottom: '40px', overflowY: 'auto' }}>
-                 <div style={{ width: '1280px', minHeight: '100%', background: 'white', boxShadow: '0 20px 50px rgba(0,0,0,0.1)', borderRadius: '12px', overflow: 'hidden' }}>
+              <div style={{ flex: 1, background: '#f1f5f9', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', paddingTop: '40px', paddingBottom: '40px', overflowY: 'auto' }}>
+                 <div style={{ width: '1280px', minHeight: '800px', background: 'white', boxShadow: '0 20px 50px rgba(0,0,0,0.1)', borderRadius: '12px', overflow: 'hidden', position: 'relative' }}>
+                    {isIframeLoading && (
+                      <div style={{ position: 'absolute', inset: 0, background: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
+                        <div style={{ width: '40px', height: '40px', border: '3px solid #f1f5f9', borderTop: '3px solid #3b82f6', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+                        <p style={{ marginTop: '16px', fontSize: '0.75rem', fontWeight: 700, color: '#94a3b8', letterSpacing: '1px' }}>SYNCHRONIZING CANVAS...</p>
+                      </div>
+                    )}
                     <iframe
                       key={JSON.stringify(templateParams) + selectedTemplate.id}
-                      src={`${selectedTemplate.id}?${new URLSearchParams(templateParams).toString()}`}
+                      src={`${typeof window !== 'undefined' ? window.location.origin : ''}${selectedTemplate.id}?${new URLSearchParams(templateParams).toString()}`}
                       style={{ width: '100%', height: 'calc(100vh - 140px)', border: 'none' }}
                       title="Editor Canvas"
+                      onLoad={() => setIsIframeLoading(false)}
                     />
+                 </div>
+                 <div style={{ marginTop: '20px', display: 'flex', gap: '20px' }}>
+                    <button onClick={() => setIsIframeLoading(true)} style={{ background: '#334155', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <RefreshCcw size={14} /> Force Sync Canvas
+                    </button>
+                    <div style={{ padding: '8px 16px', background: 'rgba(59,130,246,0.1)', color: '#3b82f6', borderRadius: '8px', fontSize: '0.7rem', fontWeight: 800 }}>LIVE SYNC ACTIVE</div>
                  </div>
               </div>
 
@@ -1237,7 +1257,35 @@ export default function LeadCRM() {
                     </div>
                   )}
 
-                  {['services', 'testimonials', 'footer'].includes(activeSection) && (
+                  {activeSection === 'services' && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <div>
+                        <label style={{ fontSize: '0.65rem', fontWeight: 900, color: '#94a3b8', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>Main Service Area</label>
+                        <input value={templateParams.ai_service_1} onChange={(e) => setTemplateParams({...templateParams, ai_service_1: e.target.value})} placeholder="e.g. Precision Maintenance" style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid #e2e8f0', fontSize: '0.85rem', fontWeight: 700, outline: 'none' }} />
+                      </div>
+                      <div>
+                        <label style={{ fontSize: '0.65rem', fontWeight: 900, color: '#94a3b8', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>Secondary Offering</label>
+                        <input value={templateParams.ai_service_2} onChange={(e) => setTemplateParams({...templateParams, ai_service_2: e.target.value})} placeholder="e.g. Crisis Response" style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid #e2e8f0', fontSize: '0.85rem', fontWeight: 700, outline: 'none' }} />
+                      </div>
+                      <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '10px' }}>
+                         <p style={{ fontSize: '0.65rem', color: '#64748b', fontWeight: 600 }}>These values are dynamically mapped to the template's service grid.</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {activeSection === 'testimonials' && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <div>
+                        <label style={{ fontSize: '0.65rem', fontWeight: 900, color: '#94a3b8', textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>Featured Testimonial</label>
+                        <textarea value={templateParams.ai_testimonial_1} onChange={(e) => setTemplateParams({...templateParams, ai_testimonial_1: e.target.value})} rows={4} style={{ width: '100%', padding: '12px', borderRadius: '10px', border: '1px solid #e2e8f0', fontSize: '0.85rem', fontWeight: 700, outline: 'none', resize: 'none' }} />
+                      </div>
+                      <div style={{ background: '#fff7ed', padding: '12px', borderRadius: '10px', border: '1px solid #ffedd5' }}>
+                         <p style={{ fontSize: '0.65rem', color: '#9a3412', fontWeight: 700 }}>PRO TIP: Real customer voices increase conversion by 40%.</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {['footer'].includes(activeSection) && (
                     <div style={{ textAlign: 'center', padding: '40px 0' }}>
                       <div style={{ background: '#f8fafc', padding: '20px', borderRadius: '16px', display: 'inline-block', marginBottom: '16px' }}>
                          <Settings size={32} color="#cbd5e1" />
