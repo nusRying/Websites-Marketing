@@ -17,3 +17,4 @@ pytest-asyncio
 pytest-mock
 httpx
 ruff
+curl_cffi
