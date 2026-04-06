@@ -1,48 +1,104 @@
 'use client';
-import { CheckCircle2, Star, ArrowRight, Check, MapPin, Heart, Shield, Award } from 'lucide-react';
+
+import {
+  ArrowUpRight,
+  CalendarDays,
+  CheckCircle2,
+  Clock3,
+  HeartHandshake,
+  Home,
+  MapPin,
+  PhoneCall,
+  ShieldCheck
+} from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Reveal } from '@/components/Reveal';
-import MobileActions from '@/components/MobileActions';
-import BookingWidget from '@/components/BookingWidget';
-import SocialProofBar from '@/components/SocialProofBar';
+import Image from 'next/image';
+import FAQSection from '@/components/FAQSection';
 import HowItWorks from '@/components/HowItWorks';
+import MobileActions from '@/components/MobileActions';
+import PrestigeBadge from '@/components/PrestigeBadge';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import { Reveal } from '@/components/Reveal';
 import { LocalProConfig as Config } from '@/configs/local-pro';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './local-pro.module.css';
-import PrestigeBadge from '@/components/PrestigeBadge';
-import TrustBadgeStrip from '@/components/TrustBadgeStrip';
-import FAQSection from '@/components/FAQSection';
-import Image from 'next/image';
 
 const ACCENT = '#2563eb';
+
+const SERVICE_ICONS = [Home, ShieldCheck, HeartHandshake];
+
 const TESTIMONIALS = [
-  { name: 'Neil C.', location: 'Home Owner', text: 'Called in the morning and they arrived by noon. Fixed the problem in under an hour. Honest, skilled and great value.', stars: 5 },
-  { name: 'Emma S.', location: 'Regular Customer', text: 'Used them three times now for different jobs. Always reliable, always tidy, and always exactly as quoted. Brilliant.', stars: 5 },
-  { name: 'Tony G.', location: 'Landlord', text: 'Use them for all my rental properties. Never let me down once. Tenants love them and so do I. Simply the best.', stars: 5 },
+  {
+    name: 'Neil C.',
+    location: 'Homeowner',
+    text: 'We called in the morning, got a clear time window, and the job was handled without fuss. Straightforward, tidy, and easy to deal with.',
+    stars: 5
+  },
+  {
+    name: 'Emma S.',
+    location: 'Repeat customer',
+    text: 'What keeps us using them is the consistency. They explain the work properly, show up when they say they will, and charge fairly.',
+    stars: 5
+  },
+  {
+    name: 'Tony G.',
+    location: 'Landlord',
+    text: 'For rentals and smaller property jobs, they have been reliable and practical. That matters more than polished marketing.',
+    stars: 5
+  }
 ];
+
+const TRUST_POINTS = [
+  'Built for homeowners, landlords, and small businesses who want reliable local help.',
+  'Clearer visit types make it easier to choose between a quick fix, standard booking, or ongoing property support.',
+  'The service feels more trustworthy because it explains timing, pricing style, and follow-through more clearly.'
+];
+
+const SUPPORT_POINTS = [
+  {
+    title: 'Fast local response',
+    text: 'A strong local service business wins on speed and reliability, so availability and area coverage are made easier to understand.'
+  },
+  {
+    title: 'Clear quotes and scope',
+    text: 'Clients want to know what they are booking, what the visit covers, and whether more work is likely before they commit.'
+  },
+  {
+    title: 'Ongoing property help',
+    text: 'Recurring service relationships are supported too, which makes the offer more useful for landlords and repeat maintenance clients.'
+  }
+];
+
 function LocalProContent() {
-  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
-    name: 'Your Local Service',
-    niche: 'Professional Expert',
-    location: 'Local Area',
-    phone: '0000 000 000',
-    rating: '5.0'
-  });
+  const { name, niche, location, phone, rating, ai, t, booking_url } =
+    usePersonalization({
+      name: 'Your Local Service',
+      niche: 'Professional Expert',
+      location: 'Local Area',
+      phone: '0000 000 000',
+      rating: '4.9'
+    });
 
   return (
     <div className={styles.wrapper}>
-      {/* Friendly SEO Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": Config.schemaType,
-            "name": name,
-            "telephone": phone,
-            "address": { "@type": "PostalAddress", "addressLocality": location }
+            '@context': 'https://schema.org',
+            '@type': Config.schemaType,
+            name,
+            telephone: phone,
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: location
+            },
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: rating,
+              reviewCount: '132'
+            }
           })
         }}
       />
@@ -50,129 +106,392 @@ function LocalProContent() {
       <header className={styles.header}>
         <div className="container">
           <div className={styles.headerContent}>
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className={styles.logo}
-            >
-              {name}
-            </motion.div>
-            <motion.a 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={`tel:${phone}`} 
-              className="btn" 
-              style={{backgroundColor: '#2563eb', padding: '10px 25px'}}
-            >
-              {Config.hero.cta}
-            </motion.a>
+            <div className={styles.brandBlock}>
+              <div className={styles.logoMark}>
+                <Home size={18} />
+              </div>
+              <div>
+                <div className={styles.logo}>{name}</div>
+                <p className={styles.logoMeta}>
+                  Trusted {niche.toLowerCase()} in {location}
+                </p>
+              </div>
+            </div>
+
+            <a href={`tel:${phone}`} className={styles.headerCall}>
+              <PhoneCall size={16} />
+              Call {phone}
+            </a>
           </div>
         </div>
       </header>
 
-      <section className={styles.hero}>
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className={styles.badge}>
-              <MapPin size={14} style={{ marginRight: 5 }} />
-              {t(Config.hero.badge)}
-            </div>
-            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
-            <h1 style={{fontSize: '3.5rem', color: '#1e3a8a', marginBottom: '20px', fontWeight: 900}}>
-              {t(Config.hero.title)}
-            </h1>
-            <p style={{fontSize: '1.3rem', color: '#475569', maxWidth: '800px', margin: '0 auto 40px'}}>
-              {t(Config.hero.subtitle)}
-            </p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 700, color: '#1e3a8a' }}>
-                <Shield size={20} color="#10b981" /> 100% Insured
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 700, color: '#1e3a8a' }}>
-                <Award size={20} color="#10b981" /> Certified Pro
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-      
-        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
-          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
-        </div>
-    
-      <SocialProofBar accentColor={ACCENT} />
-
-      </section>
-
-      <TrustBadgeStrip />
-
-      <section className={styles.services}>
-        <div className="container">
-          <Reveal>
-            <h2 className="text-center" style={{fontSize: '2.8rem', color: '#1e3a8a', marginBottom: '60px'}}>Transparent Pricing</h2>
-          </Reveal>
-          
-          <div className={styles.pricingGrid}>
-            {Config.pricing.map((p, i) => (
-              <Reveal key={i} delay={0.15 * i}>
-                <motion.div 
-                  whileHover={{ y: -10 }}
-                  className={styles.priceCard} 
-                  style={p.popular ? {borderColor: '#2563eb', background: '#eff6ff', position: 'relative'} : {}}
-                >
-                  {p.popular && <div style={{ position: 'absolute', top: -15, left: '50%', transform: 'translateX(-50%)', background: '#2563eb', color: 'white', padding: '5px 15px', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 800 }}>MOST POPULAR</div>}
-                  <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>{p.level}</h3>
-                  <div className={styles.price}>{p.price}<span style={{fontSize: '1rem', color: '#64748b'}}>/session</span></div>
-                  <ul className={styles.featureList}>
-                    {p.features.map((f, j) => (
-                      <li key={j}><Check size={16} color="#10b981" /> {t(f)}</li>
-                    ))}
-                  </ul>
-                  <motion.a 
-                    whileHover={{ scale: 1.02 }}
-                    href={`tel:${phone}`} 
-                    className="btn" 
-                    style={{width: '100%', backgroundColor: p.popular ? '#2563eb' : '#1e3a8a'}}
-                  >
-                    Select {p.level}
-                  </motion.a>
-                </motion.div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <footer style={{padding: '100px 0', background: '#1e3a8a', color: 'white', textAlign: 'center'}}>
-        <div className="container">
-          <Reveal>
-            <div>
-              <Heart size={48} style={{ margin: '0 auto 30px', color: '#60a5fa' }} />
-              <h2 style={{fontSize: '3rem', fontWeight: 900, marginBottom: '20px'}}>{t(Config.footer.title)}</h2>
-              <p style={{fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8}}>{t(Config.footer.subtitle)}</p>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '5px', color: '#fbbf24', marginBottom: '40px' }}>
-                <Star size={24} fill="currentColor" />
-                <Star size={24} fill="currentColor" />
-                <Star size={24} fill="currentColor" />
-                <Star size={24} fill="currentColor" />
-                <Star size={24} fill="currentColor" />
-              </div>
-              <motion.a 
-                animate={{ y: [0, -5, 0] }}
-                transition={{ repeat: Infinity, duration: 3 }}
-                href={`tel:${phone}`} 
-                className="btn" 
-                style={{backgroundColor: '#10b981', padding: '25px 60px', fontSize: '1.4rem', fontWeight: 900, borderRadius: '50px'}}
+      <main>
+        <section className={styles.hero}>
+          <div className="container">
+            <div className={styles.heroInner}>
+              <motion.div
+                className={styles.heroCopy}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
               >
-                Call {name}: {phone}
-              </motion.a>
+                <p className={styles.eyebrow}>{t(Config.hero.badge)}</p>
+                <PrestigeBadge
+                  niche={niche}
+                  location={location}
+                  accentColor={ACCENT}
+                />
+
+                <h1 className={styles.heroTitle}>
+                  {ai.hero_title || t(Config.hero.title)}
+                </h1>
+
+                <p className={styles.heroDescription}>
+                  {ai.hero_subtitle || t(Config.hero.subtitle)}
+                </p>
+
+                <div className={styles.heroActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    {ai.niche_cta || Config.hero.cta}
+                    <ArrowUpRight size={18} />
+                  </a>
+
+                  <a href={`tel:${phone}`} className={styles.secondaryButton}>
+                    <PhoneCall size={18} />
+                    Call {phone}
+                  </a>
+                </div>
+
+                <div className={styles.heroSignals}>
+                  {[
+                    'Same-day and scheduled appointments where available',
+                    'Clear quotes, tidy work, and dependable follow-through',
+                    `${rating}/5 rated by local customers`
+                  ].map((item) => (
+                    <div key={item} className={styles.signalItem}>
+                      <CheckCircle2 size={16} />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                className={styles.heroVisual}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
+              >
+                <div className={styles.heroImageShell}>
+                  <Image
+                    src="https://images.unsplash.com/photo-1556155092-490a1ba16284?auto=format&fit=crop&w=1400&q=80"
+                    alt={`${name} service visit`}
+                    fill
+                    priority
+                    sizes="(max-width: 960px) 100vw, 46vw"
+                    className={styles.heroImage}
+                  />
+                  <div className={styles.imageShade} />
+
+                  <div className={styles.floatingCard}>
+                    <span className={styles.floatingLabel}>Why people book</span>
+                    <strong>They want the problem handled quickly and properly without chasing, delays, or vague pricing.</strong>
+                    <span className={styles.floatingMeta}>
+                      A better local-service page makes speed, trust, and clear
+                      communication feel obvious from the first click.
+                    </span>
+                  </div>
+
+                  <div className={styles.floatingPanel}>
+                    <div className={styles.panelHeader}>
+                      <CalendarDays size={16} />
+                      Typical booking flow
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Quick call or online request</span>
+                      <strong>First step</strong>
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Time window confirmed</span>
+                      <strong>Before visit</strong>
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Quote or fix on site</span>
+                      <strong>As needed</strong>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </Reveal>
-          <p style={{marginTop: '100px', opacity: 0.4, fontSize: '0.8rem', letterSpacing: '2px'}}>© 2026 {name.toUpperCase()} | YOUR NEIGHBORHOOD {niche.toUpperCase()} | {location.toUpperCase()}</p>
+          </div>
+        </section>
+
+        <section className={styles.metricStrip}>
+          <div className="container">
+            <div className={styles.metricGrid}>
+              {Config.stats.map((stat) => (
+                <div key={stat.label} className={styles.metricItem}>
+                  <div className={styles.metricValue}>{t(stat.val)}</div>
+                  <div className={styles.metricLabel}>{t(stat.label)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.reassuranceSection}>
+          <div className="container">
+            <div className={styles.reassuranceGrid}>
+              {Config.promisesBar.map((item) => (
+                <div key={item} className={styles.reassuranceItem}>
+                  <CheckCircle2 size={18} />
+                  <span>{t(item)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.servicesSection}>
+          <div className="container">
+            <div className={styles.sectionIntro}>
+              <p className={styles.sectionEyebrow}>Service categories</p>
+              <h2 className={styles.sectionTitle}>
+                A local service offer organised around what people actually need
+                help with.
+              </h2>
+              <p className={styles.sectionDescription}>
+                Urgent visits, planned work, and longer-term property support
+                are separated more clearly so the customer can quickly see where
+                they fit.
+              </p>
+            </div>
+
+            <div className={styles.serviceGrid}>
+              {Config.services.map((service, index) => {
+                const Icon = SERVICE_ICONS[index % SERVICE_ICONS.length];
+                const aiOverride =
+                  index === 0
+                    ? ai.service_1
+                    : index === 1
+                      ? ai.service_2
+                      : index === 2
+                        ? ai.service_3
+                        : undefined;
+
+                return (
+                  <Reveal key={service.title} delay={index * 0.12}>
+                    <article className={styles.serviceCard}>
+                      <div className={styles.serviceIcon}>
+                        <Icon size={22} />
+                      </div>
+                      <h3>{aiOverride || t(service.title)}</h3>
+                      <p>{t(service.desc)}</p>
+
+                      <div className={styles.serviceList}>
+                        {service.includes.map((item) => (
+                          <div key={item} className={styles.serviceListItem}>
+                            <CheckCircle2 size={15} />
+                            <span>{t(item)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.pricingSection}>
+          <div className="container">
+            <div className={styles.sectionIntroDark}>
+              <p className={styles.sectionEyebrowDark}>Booking options</p>
+              <h2 className={styles.sectionTitleDark}>
+                Clear visit types for one-off jobs, standard appointments, and
+                repeat support.
+              </h2>
+              <p className={styles.sectionDescriptionDark}>
+                Customers can easily understand the difference between a quick
+                appointment, a longer service visit, and ongoing help for homes
+                or managed properties.
+              </p>
+            </div>
+
+            <div className={styles.pricingGrid}>
+              {Config.pricing.map((plan, index) => (
+                <Reveal key={plan.level} delay={index * 0.12}>
+                  <article
+                    className={`${styles.priceCard} ${
+                      plan.popular ? styles.priceFeatured : ''
+                    }`}
+                  >
+                    {plan.popular ? (
+                      <div className={styles.popularTag}>Most booked</div>
+                    ) : null}
+
+                    <div className={styles.priceHeader}>
+                      <div>
+                        <h3>{t(plan.level)}</h3>
+                        <p className={styles.priceIdeal}>{t(plan.idealFor)}</p>
+                      </div>
+                      <div className={styles.priceValue}>{t(plan.price)}</div>
+                    </div>
+
+                    <div className={styles.featureList}>
+                      {plan.features.map((feature) => (
+                        <div key={feature} className={styles.featureItem}>
+                          <CheckCircle2 size={16} />
+                          <span>{t(feature)}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <a href={`tel:${phone}`} className={styles.priceButton}>
+                      Book this option
+                    </a>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.trustSection}>
+          <div className="container">
+            <div className={styles.trustGrid}>
+              <Reveal>
+                <div className={styles.trustCopy}>
+                  <p className={styles.sectionEyebrow}>Why this works</p>
+              <h2 className={styles.sectionTitle}>
+                Local service businesses win on reliability, clarity, and
+                how easy they are to deal with.
+              </h2>
+              <p className={styles.sectionDescription}>
+                Good local service pages reduce friction around booking. Here,
+                timing, pricing style, and service scope are much easier for
+                customers to trust.
+              </p>
+
+                  <div className={styles.trustPoints}>
+                    {TRUST_POINTS.map((point) => (
+                      <div key={point} className={styles.trustPoint}>
+                        <CheckCircle2 size={17} />
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.14}>
+                <div className={styles.sideCard}>
+                  <div className={styles.sideCardMedia}>
+                    <Image
+                      src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80"
+                      alt="Local service consultation"
+                      fill
+                      sizes="(max-width: 960px) 100vw, 42vw"
+                      className={styles.sideCardImage}
+                    />
+                  </div>
+
+                  <div className={styles.sideCardBody}>
+                    <div className={styles.sideCardLabel}>Customer expectation</div>
+                    <h3>People want a dependable local expert, not a complicated sales process.</h3>
+                    <p>
+                      The offer is positioned for busy households, landlords,
+                      and small businesses who want the issue sorted with less
+                      back-and-forth.
+                    </p>
+
+                    <div className={styles.sideMeta}>
+                      {SUPPORT_POINTS.map((item) => (
+                        <div key={item.title} className={styles.sideMetaItem}>
+                          <strong>{item.title}</strong>
+                          <span>{item.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        <HowItWorks
+          steps={Config.process}
+          accentColor={ACCENT}
+          heading="How the local booking process works"
+        />
+
+        <TestimonialsSection
+          testimonials={TESTIMONIALS}
+          accentColor={ACCENT}
+          heading="What local customers say"
+        />
+
+        <FAQSection faqs={Config.faqs} accentColor={ACCENT} />
+
+        <section id="book" className={styles.ctaSection}>
+          <div className="container">
+            <Reveal>
+              <div className={styles.ctaPanel}>
+                <div className={styles.ctaCopy}>
+                  <p className={styles.sectionEyebrowDark}>Book your slot</p>
+                  <h2 className={styles.sectionTitleDark}>
+                    {t(Config.footer.title)}
+                  </h2>
+                  <p className={styles.sectionDescriptionDark}>
+                    {t(Config.footer.subtitle)}
+                  </p>
+                </div>
+
+                <div className={styles.ctaActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    Check availability
+                    <ArrowUpRight size={18} />
+                  </a>
+                  <a href={`tel:${phone}`} className={styles.ctaCall}>
+                    Call {phone}
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
+
+      <footer className={styles.footer}>
+        <div className="container">
+          <div className={styles.footerInner}>
+            <div>
+              <div className={styles.footerBrand}>{name}</div>
+              <p className={styles.footerNote}>
+                Reliable local {niche.toLowerCase()} for homes and small
+                businesses in {location}.
+              </p>
+            </div>
+
+            <div className={styles.footerMeta}>
+              <span>{location}</span>
+              <span>{phone}</span>
+              <span>{new Date().getFullYear()} Copyright {name}</span>
+            </div>
+          </div>
         </div>
       </footer>
 
@@ -183,7 +502,7 @@ function LocalProContent() {
 
 export default function LocalProPage() {
   return (
-    <Suspense fallback={<div>Connecting with neighbors...</div>}>
+    <Suspense fallback={<div>Preparing the local preview...</div>}>
       <LocalProContent />
     </Suspense>
   );

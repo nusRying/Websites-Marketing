@@ -1,55 +1,102 @@
 'use client';
-import { CheckCircle2, Star, ArrowRight, BookOpen, GraduationCap, Users, Award, Brain, Microscope, Music, Languages, Phone } from 'lucide-react';
+
+import {
+  ArrowUpRight,
+  BookOpen,
+  Brain,
+  CheckCircle2,
+  GraduationCap,
+  PhoneCall,
+  School,
+  Users,
+  Waypoints
+} from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Reveal } from '@/components/Reveal';
-import MobileActions from '@/components/MobileActions';
-import BookingWidget from '@/components/BookingWidget';
-import SocialProofBar from '@/components/SocialProofBar';
+import Image from 'next/image';
+import FAQSection from '@/components/FAQSection';
 import HowItWorks from '@/components/HowItWorks';
+import MobileActions from '@/components/MobileActions';
+import PrestigeBadge from '@/components/PrestigeBadge';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import { Reveal } from '@/components/Reveal';
 import { ScholasticConfig as Config } from '@/configs/scholastic';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './scholastic.module.css';
-import PrestigeBadge from '@/components/PrestigeBadge';
-import TrustBadgeStrip from '@/components/TrustBadgeStrip';
-import FAQSection from '@/components/FAQSection';
-import Image from 'next/image';
 
-const ACCENT = '#7c3aed';
+const ACCENT = '#0f766e';
+
+const SERVICE_ICONS = [BookOpen, Brain, GraduationCap];
+
 const TESTIMONIALS = [
-  { name: 'Olivia P.', location: 'A Level Student', text: 'My grades went from Cs to As. The tutors are incredibly skilled at making complex topics completely understandable.', stars: 5 },
-  { name: 'Tom H.', location: 'Parent', text: 'Son is now confident and motivated in subjects he used to dread. We only wish we had found them sooner.', stars: 5 },
-  { name: 'Emma J.', location: 'University Prep', text: 'Got into my first-choice university thanks to the support here. The guidance on personal statements was outstanding.', stars: 5 },
+  {
+    name: 'Olivia P.',
+    location: 'A-level student',
+    text: 'The sessions were structured properly from the first assessment. I knew what I was improving each week instead of just doing more worksheets.',
+    stars: 5
+  },
+  {
+    name: 'Tom H.',
+    location: 'Parent',
+    text: 'What stood out was the communication. We got clear progress updates, honest advice, and a plan that actually matched our son\'s gaps.',
+    stars: 5
+  },
+  {
+    name: 'Emma J.',
+    location: 'University applicant',
+    text: 'They helped with subject tutoring and admissions support at the same time, which made the whole process feel much more joined up.',
+    stars: 5
+  }
 ];
-function ScholasticContent() {
-  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
-    name: 'Scholastic Academy',
-    niche: 'Private Tutor',
-    location: 'Academic District',
-    phone: '0000 000 000',
-    rating: '5.0'
-  });
 
-  const disciplineIcons = [
-    <Microscope size={32} key="micro" />,
-    <Languages size={32} key="lang" />,
-    <Music size={32} key="music" />
-  ];
+const TRUST_POINTS = [
+  'Assessment-led tutoring makes it clear what the student needs before a long-term plan is agreed.',
+  'Parents and students get regular updates on confidence, progress, and the next learning focus.',
+  'The offer covers core academic support, exam preparation, and higher-level progression planning.'
+];
+
+const FAMILY_POINTS = [
+  {
+    title: 'Primary to sixth form',
+    text: 'Useful for students who need stronger subject foundations, steadier study habits, or support as academic demands increase.'
+  },
+  {
+    title: 'Exam-year preparation',
+    text: 'Suitable for GCSE and A-level students who need revision structure, technique work, and support under real deadlines.'
+  },
+  {
+    title: 'Future pathways',
+    text: 'Helpful for families looking at university applications, competitive entry, or a more ambitious academic target.'
+  }
+];
+
+function ScholasticContent() {
+  const { name, niche, location, phone, rating, ai, t, booking_url } =
+    usePersonalization({
+      name: 'Scholastic Academy',
+      niche: 'Private Tutoring Academy',
+      location: 'Academic District',
+      phone: '0000 000 000',
+      rating: '4.9'
+    });
 
   return (
     <div className={styles.wrapper}>
-      {/* Education SEO Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": Config.schemaType,
-            "name": name,
-            "telephone": phone,
-            "areaServed": location,
-            "description": `Expert ${niche} services in ${location}. Personalized learning for academic excellence.`
+            '@context': 'https://schema.org',
+            '@type': Config.schemaType,
+            name,
+            telephone: phone,
+            areaServed: location,
+            description: `${name} provides ${niche.toLowerCase()} in ${location} including subject tutoring, exam preparation, and academic planning support.`,
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: rating,
+              reviewCount: '141'
+            }
           })
         }}
       />
@@ -57,136 +104,395 @@ function ScholasticContent() {
       <header className={styles.header}>
         <div className="container">
           <div className={styles.headerContent}>
-            <motion.div 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={styles.logo}
-            >
-              <GraduationCap size={32} />
-              {name}
-            </motion.div>
-            <motion.a 
-              whileHover={{ scale: 1.05 }}
-              href={`tel:${phone}`} 
-              className={styles.enrollBtn}
-            >
-              Book Assessment
-            </motion.a>
+            <div className={styles.brandBlock}>
+              <div className={styles.logoMark}>
+                <School size={18} />
+              </div>
+              <div>
+                <div className={styles.logo}>{name}</div>
+                <p className={styles.logoMeta}>
+                  Tutoring, exam preparation, and academic planning in {location}
+                </p>
+              </div>
+            </div>
+
+            <a href={`tel:${phone}`} className={styles.headerCall}>
+              <PhoneCall size={16} />
+              Call {phone}
+            </a>
           </div>
         </div>
       </header>
 
-      <section className={styles.hero}>
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#0d9488', marginBottom: '20px' }}>
-              <BookOpen size={24} /> <Brain size={24} /> <Star size={24} />
+      <main>
+        <section className={styles.hero}>
+          <div className="container">
+            <div className={styles.heroInner}>
+              <motion.div
+                className={styles.heroCopy}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+              >
+                <p className={styles.eyebrow}>
+                  Assessment first. Personal plan. Measurable progress.
+                </p>
+                <PrestigeBadge
+                  niche={niche}
+                  location={location}
+                  accentColor={ACCENT}
+                />
+
+                <h1 className={styles.heroTitle}>
+                  {ai.hero_title || t(Config.hero.title)}
+                </h1>
+
+                <p className={styles.heroDescription}>
+                  {ai.hero_subtitle || t(Config.hero.subtitle)}
+                </p>
+
+                <div className={styles.heroActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    {ai.niche_cta || Config.hero.cta}
+                    <ArrowUpRight size={18} />
+                  </a>
+
+                  <a href={`tel:${phone}`} className={styles.secondaryButton}>
+                    <PhoneCall size={18} />
+                    Call {phone}
+                  </a>
+                </div>
+
+                <div className={styles.heroSignals}>
+                  {[
+                    '1:1 tutoring, exam support, and academic mentoring',
+                    'Clear plans for confidence, grades, and progression',
+                    `${rating}/5 rated by local families and students`
+                  ].map((item) => (
+                    <div key={item} className={styles.signalItem}>
+                      <CheckCircle2 size={16} />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                className={styles.heroVisual}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
+              >
+                <div className={styles.heroImageShell}>
+                  <Image
+                    src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80"
+                    alt={`${name} tutoring session`}
+                    fill
+                    priority
+                    sizes="(max-width: 960px) 100vw, 46vw"
+                    className={styles.heroImage}
+                  />
+                  <div className={styles.imageShade} />
+
+                  <div className={styles.floatingCard}>
+                    <span className={styles.floatingLabel}>Parent priority</span>
+                    <strong>
+                      Families usually want to know why a student is struggling,
+                      how progress will be tracked, and what improvement should look like.
+                    </strong>
+                    <span className={styles.floatingMeta}>
+                      A proper assessment and learning plan make tutoring feel
+                      focused instead of generic.
+                    </span>
+                  </div>
+
+                  <div className={styles.floatingPanel}>
+                    <div className={styles.panelHeader}>
+                      <Waypoints size={16} />
+                      Typical pathway
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Initial assessment</span>
+                      <strong>First step</strong>
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Weekly sessions</span>
+                      <strong>Matched to goals</strong>
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Progress review</span>
+                      <strong>Built in</strong>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
-            <h1>{ai.heroTitle || t(Config.hero.title)}</h1>
-            <p>
-              {ai.heroSubtitle || t(Config.hero.subtitle)}
-            </p>
-            <motion.a 
-              whileHover={{ gap: '15px', paddingRight: '45px' }}
-              href="#book" 
-              className={styles.enrollBtn} 
-              style={{ padding: '18px 45px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
-            >
-              {ai.heroCta || Config.hero.cta} <ArrowRight size={20} />
-            </motion.a>
-          </motion.div>
-        </div>
+          </div>
+        </section>
 
-      
-        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
-          <Image src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
-        </div>
-    
-      <SocialProofBar accentColor={ACCENT} />
-
-      </section>
-
-      <section style={{ padding: '100px 0' }}>
-        <div className="container">
-          <Reveal>
-            <div className="text-center">
-              <h2 style={{ fontSize: '3rem', fontFamily: 'serif', color: '#1e3a8a' }}>Learning Disciplines</h2>
-              <p style={{ opacity: 0.6, marginTop: '10px' }}>Expert guidance across core subjects in {location}</p>
+        <section className={styles.metricStrip}>
+          <div className="container">
+            <div className={styles.metricGrid}>
+              {Config.stats.map((stat) => (
+                <div key={stat.label} className={styles.metricItem}>
+                  <div className={styles.metricValue}>{t(stat.val)}</div>
+                  <div className={styles.metricLabel}>{t(stat.label)}</div>
+                </div>
+              ))}
             </div>
-          </Reveal>
-          
-          <div className={styles.subjectGrid}>
-            {Config.disciplines.map((s, i) => (
-              <Reveal key={i} delay={0.2 * i}>
-                <div className={styles.subjectCard}>
-                  <div style={{ color: '#0d9488', marginBottom: '20px' }}>{disciplineIcons[i] || disciplineIcons[0]}</div>
-                  <h3 style={{ fontSize: '1.5rem', marginBottom: '15px', color: '#1e3a8a' }}>{t(s.title)}</h3>
-                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
-                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
-                    {s.includes?.map((item: string, idx: number) => (
-                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
-                        <CheckCircle2 size={14} color={ACCENT} /> {item}
-                      </li>
+          </div>
+        </section>
+
+        <section className={styles.reassuranceSection}>
+          <div className="container">
+            <div className={styles.reassuranceGrid}>
+              {Config.promisesBar.map((item) => (
+                <div key={item} className={styles.reassuranceItem}>
+                  <CheckCircle2 size={18} />
+                  <span>{t(item)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.servicesSection}>
+          <div className="container">
+            <div className={styles.sectionIntro}>
+              <p className={styles.sectionEyebrow}>Learning programmes</p>
+              <h2 className={styles.sectionTitle}>
+                Clear support for foundation building, exam preparation, and ambitious next steps.
+              </h2>
+              <p className={styles.sectionDescription}>
+                Students do better when the tutoring offer is clear from the
+                start, with the right level of subject support and a realistic
+                plan for where the learning should lead.
+              </p>
+            </div>
+
+            <div className={styles.serviceGrid}>
+              {Config.services.map((service, index) => {
+                const Icon = SERVICE_ICONS[index % SERVICE_ICONS.length];
+                const aiOverride =
+                  index === 0
+                    ? ai.service_1
+                    : index === 1
+                      ? ai.service_2
+                      : index === 2
+                        ? ai.service_3
+                        : undefined;
+
+                return (
+                  <Reveal key={service.title} delay={index * 0.12}>
+                    <article className={styles.serviceCard}>
+                      <div className={styles.serviceIcon}>
+                        <Icon size={22} />
+                      </div>
+                      <h3>{aiOverride || t(service.title)}</h3>
+                      <p>{t(service.desc)}</p>
+
+                      <div className={styles.serviceList}>
+                        {service.includes.map((item) => (
+                          <div key={item} className={styles.serviceListItem}>
+                            <CheckCircle2 size={15} />
+                            <span>{t(item)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.packagesSection}>
+          <div className="container">
+            <div className={styles.sectionIntroDark}>
+              <p className={styles.sectionEyebrowDark}>Popular routes</p>
+              <h2 className={styles.sectionTitleDark}>
+                Clear options for an initial assessment, ongoing tutoring, or focused exam support.
+              </h2>
+              <p className={styles.sectionDescriptionDark}>
+                These options make it easier for families to understand whether
+                the student needs a first diagnostic step, steady weekly support,
+                or a shorter-term academic push.
+              </p>
+            </div>
+
+            <div className={styles.packageGrid}>
+              {Config.packages.map((pkg, index) => (
+                <Reveal key={pkg.name} delay={index * 0.12}>
+                  <article
+                    className={`${styles.packageCard} ${
+                      pkg.featured ? styles.packageFeatured : ''
+                    }`}
+                  >
+                    {pkg.tag ? (
+                      <div className={styles.packageTag}>{t(pkg.tag)}</div>
+                    ) : null}
+
+                    <div className={styles.packageHeader}>
+                      <div>
+                        <h3>{t(pkg.name)}</h3>
+                        <p className={styles.packageIdeal}>{t(pkg.idealFor)}</p>
+                      </div>
+                      <div className={styles.packagePrice}>{t(pkg.price)}</div>
+                    </div>
+
+                    <div className={styles.packageList}>
+                      {pkg.features.map((feature) => (
+                        <div key={feature} className={styles.packageListItem}>
+                          <CheckCircle2 size={16} />
+                          <span>{t(feature)}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <a href={`tel:${phone}`} className={styles.packageButton}>
+                      Discuss this route
+                    </a>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.trustSection}>
+          <div className="container">
+            <div className={styles.trustGrid}>
+              <Reveal>
+                <div className={styles.trustCopy}>
+                  <p className={styles.sectionEyebrow}>Why families trust it</p>
+                  <h2 className={styles.sectionTitle}>
+                    Tutoring feels more dependable when the student has a clear
+                    starting point, regular progress checks, and a realistic academic target.
+                  </h2>
+                  <p className={styles.sectionDescription}>
+                    Parents and students want the tutoring to feel organised,
+                    measurable, and properly matched to the stage the learner is at.
+                  </p>
+
+                  <div className={styles.trustPoints}>
+                    {TRUST_POINTS.map((point) => (
+                      <div key={point} className={styles.trustPoint}>
+                        <CheckCircle2 size={17} />
+                        <span>{point}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </Reveal>
-            ))}
+
+              <Reveal delay={0.14}>
+                <div className={styles.sideCard}>
+                  <div className={styles.sideCardMedia}>
+                    <Image
+                      src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
+                      alt="Tutoring and study planning"
+                      fill
+                      sizes="(max-width: 960px) 100vw, 42vw"
+                      className={styles.sideCardImage}
+                    />
+                  </div>
+
+                  <div className={styles.sideCardBody}>
+                    <div className={styles.sideCardLabel}>Student fit</div>
+                    <h3>
+                      Built for students who need stronger subject confidence,
+                      better exam structure, or a clearer pathway forward.
+                    </h3>
+                    <p>
+                      Families usually need honest assessment, consistent tutoring,
+                      and a plan that connects each session to a larger academic goal.
+                    </p>
+
+                    <div className={styles.sideMeta}>
+                      {FAMILY_POINTS.map((item) => (
+                        <div key={item.title} className={styles.sideMetaItem}>
+                          <strong>{item.title}</strong>
+                          <span>{item.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
           </div>
-        </div>
+        </section>
 
-      <SocialProofBar accentColor={ACCENT} />
+        <HowItWorks
+          steps={Config.process}
+          accentColor={ACCENT}
+          heading="How the tutoring process works"
+        />
 
-      </section>
+        <TestimonialsSection
+          testimonials={TESTIMONIALS}
+          accentColor={ACCENT}
+          heading="What local families say"
+        />
 
-      <section className={styles.resultsSection}>
-        <div className="container">
-          <Reveal>
-            <h2 style={{ fontSize: '3rem', fontWeight: 200 }}>Proven Student Impact</h2>
-          </Reveal>
-          <div className={styles.statsGrid}>
-            {Config.stats.map((item, i) => (
-              <div key={i} className={styles.statItem}>
-                <div className={styles.statValue}>{t(item.value)}</div>
-                <p>{t(item.label)}</p>
+        <FAQSection faqs={Config.faqs} accentColor={ACCENT} />
+
+        <section id="quote" className={styles.ctaSection}>
+          <div className="container">
+            <Reveal>
+              <div className={styles.ctaPanel}>
+                <div className={styles.ctaCopy}>
+                  <p className={styles.sectionEyebrowDark}>Book an assessment</p>
+                  <h2 className={styles.sectionTitleDark}>
+                    {t(Config.footer.title)}
+                  </h2>
+                  <p className={styles.sectionDescriptionDark}>
+                    {t(Config.footer.subtitle)}
+                  </p>
+                </div>
+
+                <div className={styles.ctaActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    Request consultation
+                    <ArrowUpRight size={18} />
+                  </a>
+                  <a href={`tel:${phone}`} className={styles.ctaCall}>
+                    Call {phone}
+                  </a>
+                </div>
               </div>
-            ))}
+            </Reveal>
           </div>
-        </div>
-      </section>
-
-      <FAQSection faqs={Config.faqs} accentColor={ACCENT} />
-      <HowItWorks accentColor={ACCENT} />
-      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
+        </section>
+      </main>
 
       <footer className={styles.footer}>
         <div className="container">
-          <Reveal>
-            <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-              <Award size={48} style={{ margin: '0 auto 30px', color: '#5eead4' }} />
-              <h2 style={{ fontSize: '3.5rem', fontFamily: 'serif', marginBottom: '30px' }}>{ai.footerTitle || t(Config.footer.title)}</h2>
-              <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8 }}>
-                {ai.footerSubtitle || t(Config.footer.subtitle)}
+          <div className={styles.footerInner}>
+            <div>
+              <div className={styles.footerBrand}>{name}</div>
+              <p className={styles.footerNote}>
+                Subject tutoring, exam preparation, and academic planning support across {location}.
               </p>
-              <motion.a 
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ repeat: Infinity, duration: 3 }}
-                href={`tel:${phone}`} 
-                className={styles.enrollBtn} 
-                style={{ background: '#5eead4', color: '#0f172a', padding: '25px 80px', fontSize: '1.4rem' }}
-              >
-                CALL {name.toUpperCase()}: {phone}
-              </motion.a>
             </div>
-          </Reveal>
-          <p style={{ marginTop: '100px', opacity: 0.3, fontSize: '0.8rem', letterSpacing: '4px' }}>
-            © 2026 {name.toUpperCase()} | CERTIFIED {niche.toUpperCase()} | {location.toUpperCase()} REGION
-          </p>
+
+            <div className={styles.footerMeta}>
+              <span>{location}</span>
+              <span>{phone}</span>
+              <span>{new Date().getFullYear()} Copyright {name}</span>
+            </div>
+          </div>
         </div>
       </footer>
 
@@ -197,7 +503,7 @@ function ScholasticContent() {
 
 export default function ScholasticPage() {
   return (
-    <Suspense fallback={<div>Opening the classroom...</div>}>
+    <Suspense fallback={<div>Preparing the academic preview...</div>}>
       <ScholasticContent />
     </Suspense>
   );

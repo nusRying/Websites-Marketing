@@ -1,197 +1,520 @@
 'use client';
-import { CheckCircle2, Star, ArrowRight, Camera, Heart, Sparkles } from 'lucide-react';
+
+import {
+  ArrowUpRight,
+  Camera,
+  CheckCircle2,
+  Clock3,
+  Heart,
+  MapPin,
+  PhoneCall,
+  Sparkles
+} from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Reveal } from '@/components/Reveal';
-import MobileActions from '@/components/MobileActions';
-import BookingWidget from '@/components/BookingWidget';
-import SocialProofBar from '@/components/SocialProofBar';
+import Image from 'next/image';
+import FAQSection from '@/components/FAQSection';
 import HowItWorks from '@/components/HowItWorks';
+import MobileActions from '@/components/MobileActions';
+import PrestigeBadge from '@/components/PrestigeBadge';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import { EternalConfig } from '@/configs/eternal';
+import { Reveal } from '@/components/Reveal';
+import { EternalConfig as Config } from '@/configs/eternal';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './eternal.module.css';
-import PrestigeBadge from '@/components/PrestigeBadge';
-import TrustBadgeStrip from '@/components/TrustBadgeStrip';
-import FAQSection from '@/components/FAQSection';
-import Image from 'next/image';
 
-const ACCENT = '#d97706';
+const ACCENT = '#b16452';
+
+const SERVICE_ICONS = [Camera, Heart, Sparkles];
+
 const TESTIMONIALS = [
-  { name: 'Claire H.', location: 'Ceremony Client', text: 'Made the most difficult time in our lives bearable with their compassion and total professionalism. Forever grateful.', stars: 5 },
-  { name: 'Robert M.', location: 'Memorial Service', text: 'Every detail was handled with such dignity and care. The service was beautiful and exactly what we wanted.', stars: 5 },
-  { name: 'Susan P.', location: 'Pre-planning Client', text: 'Pre-planning gave us complete peace of mind. Sensitive, clear and thorough. A genuinely important service.', stars: 5 },
+  {
+    name: 'Charlotte and James',
+    location: 'Country house wedding',
+    text: 'The photographs feel refined but still completely us. Nothing felt forced, and we stayed present all day because the direction was calm and clear.',
+    stars: 5
+  },
+  {
+    name: 'Amelia and Yusuf',
+    location: 'City ceremony',
+    text: 'We wanted modern, elegant coverage without spending hours posing. The gallery delivered exactly that and captured our families beautifully.',
+    stars: 5
+  },
+  {
+    name: 'Sophie and Daniel',
+    location: 'Weekend celebration',
+    text: 'From planning calls to album design, the whole process felt organised and thoughtful. The images look editorial without losing the warmth of the day.',
+    stars: 5
+  }
 ];
+
+const STORY_POINTS = [
+  'Timeline guidance before the day so portraits, family photographs, and speeches flow cleanly.',
+  'Natural direction for couples who want polished photographs without turning the wedding into a long shoot.',
+  'Editing that keeps atmosphere, skin tones, and venue detail elegant and true to life.'
+];
+
+const EXPERIENCE_POINTS = [
+  {
+    title: 'Planning support',
+    text: 'Pre-wedding calls help shape timings, light windows, family groupings, and the calmest way to fit photography into the day.'
+  },
+  {
+    title: 'Calm coverage',
+    text: 'Most of the day is documented naturally, with short guided portrait moments that feel efficient and comfortable.'
+  },
+  {
+    title: 'Gallery delivery',
+    text: 'A quick preview arrives first, followed by a polished final gallery and optional album design for long-term keepsakes.'
+  }
+];
+
 function EternalContent() {
-  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
-    name: 'Eternal Memories',
-    niche: 'Wedding Photographer',
-    location: 'Country Estate',
-    phone: '0000 000 000',
-    rating: '4.9'
-  });
+  const { name, niche, location, phone, rating, ai, t, booking_url } =
+    usePersonalization({
+      name: 'Eternal Memories',
+      niche: 'Wedding Photographer',
+      location: 'Country Estate',
+      phone: '0000 000 000',
+      rating: '4.9'
+    });
+
+  const heroSignals = [
+    `${rating}/5 rated by recent couples`,
+    'Editorial images with natural direction',
+    `${location} weddings, intimate ceremonies, and destination travel`
+  ];
 
   return (
     <div className={styles.wrapper}>
-      {/* Luxury Event SEO Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": EternalConfig.schemaType,
-            "name": name,
-            "telephone": phone,
-            "areaServed": location,
-            "description": `Premier ${niche} services in ${location}. Capturing timeless moments with elegance.`
+            '@context': 'https://schema.org',
+            '@type': Config.schemaType,
+            name,
+            telephone: phone,
+            areaServed: location,
+            description: `${name} provides ${niche.toLowerCase()} in ${location} with editorial storytelling and a calm client experience.`,
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: rating,
+              reviewCount: '96'
+            }
           })
         }}
       />
 
       <header className={styles.header}>
         <div className="container">
-          <motion.div 
-            initial={{ opacity: 0, letterSpacing: '10px' }}
-            animate={{ opacity: 1, letterSpacing: '6px' }}
-            transition={{ duration: 1.2 }}
-            className={styles.logo}
-          >
-            {name}
-            <span>ESTABLISHED IN {location.toUpperCase()}</span>
-          </motion.div>
+          <div className={styles.headerContent}>
+            <div className={styles.brandBlock}>
+              <div className={styles.logoMark}>
+                <Heart size={16} />
+              </div>
+              <div>
+                <div className={styles.logo}>{name}</div>
+                <p className={styles.logoMeta}>
+                  Editorial wedding storytelling in {location}
+                </p>
+              </div>
+            </div>
+
+            <a href={`tel:${phone}`} className={styles.headerCall}>
+              <PhoneCall size={16} />
+              Call {phone}
+            </a>
+          </div>
         </div>
       </header>
 
-      <section className={styles.hero}>
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            <p>Capturing the Soul of the Moment</p>
-            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
-            <h1>{t(EternalConfig.hero.title).split('in').map((part, i, arr) => (
-              <span key={i}>
-                {part}
-                {i < arr.length - 1 && <span>in</span>}
-              </span>
-            ))}</h1>
-            <motion.a 
-              whileHover={{ scale: 1.05 }}
-              href="#book" 
-              className={styles.bookAction}
-            >
-              {t(EternalConfig.hero.cta)}
-            </motion.a>
-          </motion.div>
-        </div>
+      <main>
+        <section className={styles.hero}>
+          <div className="container">
+            <div className={styles.heroInner}>
+              <motion.div
+                className={styles.heroCopy}
+                initial={{ opacity: 0, y: 26 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+              >
+                <p className={styles.eyebrow}>Refined wedding photography</p>
+                <PrestigeBadge
+                  niche={niche}
+                  location={location}
+                  accentColor={ACCENT}
+                />
 
-      
-        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
-          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
-        </div>
-    
-      <SocialProofBar accentColor={ACCENT} />
+                <h1 className={styles.heroTitle}>
+                  {ai.hero_title || t(Config.hero.title)}
+                </h1>
 
-      </section>
+                <p className={styles.heroDescription}>
+                  {ai.hero_subtitle || t(Config.hero.subtitle)}
+                </p>
 
-      <section className={styles.gallerySection}>
-        <div className="container">
-          <div className={styles.storyGrid}>
+                <div className={styles.heroActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    {ai.niche_cta || Config.hero.cta}
+                    <ArrowUpRight size={18} />
+                  </a>
+
+                  <a href={`tel:${phone}`} className={styles.secondaryButton}>
+                    <PhoneCall size={18} />
+                    Call {phone}
+                  </a>
+                </div>
+
+                <div className={styles.heroSignals}>
+                  {heroSignals.map((item) => (
+                    <div key={item} className={styles.signalItem}>
+                      <CheckCircle2 size={16} />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                className={styles.heroVisual}
+                initial={{ opacity: 0, y: 34 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
+              >
+                <div className={styles.heroImageShell}>
+                  <Image
+                    src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1400&q=80"
+                    alt={`${name} wedding photography`}
+                    fill
+                    priority
+                    sizes="(max-width: 960px) 100vw, 46vw"
+                    className={styles.heroImage}
+                  />
+                  <div className={styles.imageShade} />
+
+                  <div className={styles.floatingCard}>
+                    <span className={styles.floatingLabel}>Signature approach</span>
+                    <strong>Editorial polish without the stiff, over-directed feel.</strong>
+                    <span className={styles.floatingMeta}>
+                      Calm guidance, clean composition, and photographs that still
+                      feel like your day.
+                    </span>
+                  </div>
+
+                  <div className={styles.floatingStrip}>
+                    <div className={styles.stripItem}>
+                      <Clock3 size={15} />
+                      <span>Preview gallery within 48 hours</span>
+                    </div>
+                    <div className={styles.stripItem}>
+                      <MapPin size={15} />
+                      <span>{location} and destination coverage</span>
+                    </div>
+                    <div className={styles.stripItem}>
+                      <Sparkles size={15} />
+                      <span>Fine art albums available</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.metricStrip}>
+          <div className="container">
+            <div className={styles.metricGrid}>
+              {Config.stats.map((stat) => (
+                <div key={stat.label} className={styles.metricItem}>
+                  <div className={styles.metricValue}>{t(stat.val)}</div>
+                  <div className={styles.metricLabel}>{t(stat.label)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.reassuranceSection}>
+          <div className="container">
+            <div className={styles.reassuranceGrid}>
+              {Config.promisesBar.map((item) => (
+                <div key={item} className={styles.reassuranceItem}>
+                  <CheckCircle2 size={18} />
+                  <span>{t(item)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.storySection}>
+          <div className="container">
+            <div className={styles.storyGrid}>
+              <Reveal>
+                <div className={styles.storyMedia}>
+                  <div className={styles.storyImagePanel}>
+                    <Image
+                      src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80"
+                      alt="Couple portrait session"
+                      fill
+                      sizes="(max-width: 960px) 100vw, 42vw"
+                      className={styles.storyImage}
+                    />
+                  </div>
+
+                  <div className={styles.storyCard}>
+                    <span className={styles.storyCardLabel}>What couples want</span>
+                    <h3>Beautiful photographs without losing the pace of the day.</h3>
+                    <p>
+                      The experience is shaped for modern weddings where the
+                      couple wants strong portraits, genuine candids, and enough
+                      structure to keep the timeline feeling easy.
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.14}>
+                <div className={styles.storyCopy}>
+                  <p className={styles.sectionEyebrow}>Signature style</p>
+                  <h2 className={styles.sectionTitle}>
+                    Story-led coverage with a cleaner, more premium visual finish.
+                  </h2>
+                  <p className={styles.sectionDescription}>
+                    For couples who love polished, magazine-style imagery but
+                    still want the wedding to feel relaxed, warm, and natural
+                    while it is happening.
+                  </p>
+
+                  <div className={styles.storyPoints}>
+                    {STORY_POINTS.map((point) => (
+                      <div key={point} className={styles.storyPoint}>
+                        <CheckCircle2 size={17} />
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.servicesSection}>
+          <div className="container">
+            <div className={styles.sectionIntro}>
+              <p className={styles.sectionEyebrow}>Services</p>
+              <h2 className={styles.sectionTitle}>
+                Coverage built for full wedding days, intimate celebrations, and
+                keepsakes that last beyond the gallery.
+              </h2>
+              <p className={styles.sectionDescription}>
+                Choose a coverage style that fits the scale of the celebration,
+                from a short city ceremony to a full wedding day or a larger
+                weekend of events.
+              </p>
+            </div>
+
+            <div className={styles.servicesGrid}>
+              {Config.services.map((service, index) => {
+                const Icon = SERVICE_ICONS[index % SERVICE_ICONS.length];
+                const aiOverride =
+                  index === 0
+                    ? ai.service_1
+                    : index === 1
+                      ? ai.service_2
+                      : index === 2
+                        ? ai.service_3
+                        : undefined;
+
+                return (
+                  <Reveal key={service.title} delay={index * 0.12}>
+                    <article className={styles.serviceCard}>
+                      <div className={styles.serviceIcon}>
+                        <Icon size={22} />
+                      </div>
+                      <h3>{aiOverride || t(service.title)}</h3>
+                      <p>{t(service.desc)}</p>
+                      <div className={styles.serviceList}>
+                        {service.includes.map((item) => (
+                          <div key={item} className={styles.serviceListItem}>
+                            <CheckCircle2 size={15} />
+                            <span>{t(item)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.collectionsSection}>
+          <div className="container">
+            <div className={styles.sectionIntroDark}>
+              <p className={styles.sectionEyebrowDark}>Collections</p>
+              <h2 className={styles.sectionTitleDark}>
+                Clear pricing lanes for couples comparing style, time coverage,
+                and deliverables.
+              </h2>
+              <p className={styles.sectionDescriptionDark}>
+                Each collection is framed around a type of wedding day, so the
+                client can understand the difference between shorter coverage, a
+                full narrative, and a larger celebration weekend.
+              </p>
+            </div>
+
+            <div className={styles.collectionsGrid}>
+              {Config.collections.map((collection, index) => (
+                <Reveal key={collection.title} delay={index * 0.12}>
+                  <article
+                    className={`${styles.collectionCard} ${
+                      collection.featured ? styles.collectionFeatured : ''
+                    }`}
+                  >
+                    {collection.tag ? (
+                      <div className={styles.collectionTag}>
+                        {t(collection.tag)}
+                      </div>
+                    ) : null}
+
+                    <div className={styles.collectionHeader}>
+                      <div>
+                        <h3>{t(collection.title)}</h3>
+                        <p className={styles.collectionIdeal}>
+                          {t(collection.idealFor)}
+                        </p>
+                      </div>
+                      <div className={styles.collectionPrice}>
+                        {t(collection.price)}
+                      </div>
+                    </div>
+
+                    <div className={styles.collectionList}>
+                      {collection.features.map((item) => (
+                        <div key={item} className={styles.collectionListItem}>
+                          <CheckCircle2 size={16} />
+                          <span>{t(item)}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <a href={`tel:${phone}`} className={styles.collectionButton}>
+                      Ask about this collection
+                    </a>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.experienceSection}>
+          <div className="container">
+            <div className={styles.sectionIntro}>
+              <p className={styles.sectionEyebrow}>Experience</p>
+              <h2 className={styles.sectionTitle}>
+                The process is designed to feel organised before the wedding and
+                unobtrusive during it.
+              </h2>
+              <p className={styles.sectionDescription}>
+                From timeline advice to final delivery, every step is built to
+                keep the experience clear, calm, and easy to enjoy.
+              </p>
+            </div>
+
+            <div className={styles.experienceGrid}>
+              {EXPERIENCE_POINTS.map((item, index) => (
+                <Reveal key={item.title} delay={index * 0.12}>
+                  <article className={styles.experienceCard}>
+                    <div className={styles.experienceStep}>
+                      0{index + 1}
+                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <HowItWorks
+          steps={Config.process}
+          accentColor={ACCENT}
+          heading="How the wedding photography process works"
+        />
+
+        <TestimonialsSection
+          testimonials={TESTIMONIALS}
+          accentColor={ACCENT}
+          heading="What recent couples say"
+        />
+
+        <FAQSection faqs={Config.faqs} accentColor={ACCENT} />
+
+        <section id="book" className={styles.ctaSection}>
+          <div className="container">
             <Reveal>
-              <div className={styles.storyImage} style={{ background: '#f1f5f9', aspectRatio: '3/4', position: 'relative', overflow: 'hidden' }}>
-                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', opacity: 0.2 }}>
-                  <Camera size={80} />
+              <div className={styles.ctaPanel}>
+                <div className={styles.ctaCopy}>
+                  <p className={styles.sectionEyebrowDark}>Check availability</p>
+                  <h2 className={styles.sectionTitleDark}>
+                    {t(Config.footer.title)}
+                  </h2>
+                  <p className={styles.sectionDescriptionDark}>
+                    {t(Config.footer.subtitle)}
+                  </p>
+                </div>
+
+                <div className={styles.ctaActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    Check your date
+                    <ArrowUpRight size={18} />
+                  </a>
+                  <a href={`tel:${phone}`} className={styles.ctaCall}>
+                    Call {phone}
+                  </a>
                 </div>
               </div>
             </Reveal>
-            <div className={styles.storyContent}>
-              <Reveal delay={0.2}>
-                <p style={{ letterSpacing: '3px', color: '#d4af37', fontWeight: 700, marginBottom: '20px' }}>THE ART OF {niche.toUpperCase()}</p>
-                <h2>Every Story is <br/> <span>Uniquely Yours</span></h2>
-                <p>
-                  In the heart of {location}, we believe that every event is a masterpiece waiting to be captured. 
-                  Our approach to {niche.toLowerCase()} is rooted in authentic connection and timeless aesthetic.
-                </p>
-                <p>
-                  We don't just provide a service; we preserve a legacy. Join the most exclusive clients in {location} 
-                  who trust {name} with their most precious memories.
-                </p>
-                <motion.a 
-                  whileHover={{ x: 10 }}
-                  href={`tel:${phone}`} 
-                  style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#1a1a1a', fontWeight: 700, textDecoration: 'underline' }}
-                >
-                  View Full Portfolio <ArrowRight size={18} />
-                </motion.a>
-              </Reveal>
-            </div>
           </div>
-        </div>
-
-      <SocialProofBar accentColor={ACCENT} />
-
-      </section>
-
-      <section style={{ padding: '100px 0', background: '#fdfdfb' }}>
-        <div className="container">
-          <Reveal>
-            <div className="text-center">
-              <Sparkles size={32} color="#d4af37" style={{ margin: '0 auto 20px' }} />
-              <h2 style={{ fontSize: '3rem', fontWeight: 400 }}>Curated Experiences</h2>
-              <p style={{ letterSpacing: '2px', opacity: 0.5, marginTop: '10px' }}>SELECT YOUR {niche.toUpperCase()} LEVEL</p>
-            </div>
-          </Reveal>
-          
-          <div className={styles.packageGrid}>
-            {EternalConfig.packages.map((pkg, i) => (
-              <Reveal key={i} delay={0.1 * i}>
-                <div className={styles.packageCard}>
-                  <h3>{t(pkg.title)}</h3>
-                  <div className={styles.packagePrice}>{t(pkg.price)}</div>
-                  <ul style={{ listStyle: 'none', padding: 0, marginBottom: '40px', fontFamily: 'Inter', opacity: 0.7 }}>
-                    {pkg.features.map((f, j) => <li key={j} style={{ marginBottom: '10px' }}>{t(f)}</li>)}
-                  </ul>
-                  <a href={`tel:${phone}`} className={styles.bookAction} style={{ background: 'transparent', border: '1px solid #1a1a1a', color: '#1a1a1a' }}>Check Availability</a>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <FAQSection faqs={EternalConfig.faqs} accentColor={ACCENT} />
-      <HowItWorks accentColor={ACCENT} />
-      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
+        </section>
+      </main>
 
       <footer className={styles.footer}>
         <div className="container">
-          <Reveal>
+          <div className={styles.footerInner}>
             <div>
-              <Heart size={48} style={{ margin: '0 auto 30px', opacity: 0.3 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 400, marginBottom: '30px' }}>{t(EternalConfig.footer.title)}</h2>
-              <p style={{ letterSpacing: '2px', marginBottom: '50px' }}>{t(EternalConfig.footer.subtitle).toUpperCase()}</p>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', color: '#d4af37', marginBottom: '40px' }}>
-                {[1,2,3,4,5].map(i => <Star key={i} size={20} fill="currentColor" />)}
-              </div>
-              <motion.a 
-                whileHover={{ scale: 1.05 }}
-                href={`tel:${phone}`} 
-                className={styles.bookAction} 
-                style={{ background: '#d4af37', padding: '25px 80px', fontSize: '1.2rem' }}
-              >
-                Call {name}: {phone}
-              </motion.a>
+              <div className={styles.footerBrand}>{name}</div>
+              <p className={styles.footerNote}>
+                Editorial, story-led {niche.toLowerCase()} for couples in{' '}
+                {location} and beyond.
+              </p>
             </div>
-          </Reveal>
-          <div style={{ marginTop: '100px', opacity: 0.3, fontSize: '0.75rem', letterSpacing: '4px' }}>
-            © 2026 {name.toUpperCase()} | PREMIER {niche.toUpperCase()} | {location.toUpperCase()}
+
+            <div className={styles.footerMeta}>
+              <span>{location}</span>
+              <span>{phone}</span>
+              <span>{new Date().getFullYear()} Copyright {name}</span>
+            </div>
           </div>
         </div>
       </footer>
 
-      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );
@@ -199,7 +522,7 @@ function EternalContent() {
 
 export default function EternalPage() {
   return (
-    <Suspense fallback={<div>Setting the scene...</div>}>
+    <Suspense fallback={<div>Preparing the gallery preview...</div>}>
       <EternalContent />
     </Suspense>
   );

@@ -1,124 +1,793 @@
 .wrapper {
-  background-color: #f8fafc;
-  color: #334155;
+  --dental-bg: #f3fbfc;
+  --dental-surface: rgba(255, 255, 255, 0.86);
+  --dental-panel: rgba(248, 253, 255, 0.9);
+  --dental-deep: #0f3f4d;
+  --dental-copy: #355f69;
+  --dental-muted: #6d8b93;
+  --dental-line: rgba(15, 63, 77, 0.1);
+  --dental-accent: #0891b2;
+  --dental-accent-soft: rgba(8, 145, 178, 0.12);
+  background:
+    radial-gradient(circle at top left, rgba(8, 145, 178, 0.14), transparent 28%),
+    radial-gradient(circle at top right, rgba(94, 234, 212, 0.2), transparent 24%),
+    linear-gradient(180deg, #f8fdff 0%, #f1fbfc 42%, #e6f8fb 100%);
+  color: var(--dental-copy);
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
 }
 
 .header {
-  padding: 20px 0;
-  background: white;
-  border-bottom: 1px solid #e2e8f0;
   position: sticky;
   top: 0;
   z-index: 100;
+  padding: 18px 0;
+  background: rgba(248, 253, 255, 0.86);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(15, 63, 77, 0.08);
 }
 
 .headerContent {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brandBlock {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logoMark {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  color: white;
+  background: linear-gradient(135deg, #22c1dc, #0f8fb0);
+  box-shadow: 0 14px 28px rgba(8, 145, 178, 0.22);
 }
 
 .logo {
+  color: var(--dental-deep);
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 1.05rem;
   font-weight: 800;
-  font-size: 1.6rem;
-  color: #0891b2; /* Clinical Cyan */
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.actionBtn {
-  background: #0891b2;
+.logoMeta {
+  color: var(--dental-muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.headerCall {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: var(--dental-deep);
   color: white;
-  padding: 12px 30px;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 0.9rem;
   font-weight: 700;
-  border-radius: 8px;
-  box-shadow: 0 4px 14px rgba(8, 145, 178, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 16px 30px rgba(15, 63, 77, 0.18);
+}
+
+.headerCall:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 36px rgba(15, 63, 77, 0.24);
 }
 
 .hero {
-  padding: 120px 0;
-  background: radial-gradient(circle at 80% 20%, #ecfeff 0%, #f8fafc 100%);
-  text-align: left;
-  position: relative;
+  padding: 74px 0 54px;
 }
 
-.hero h1 {
-  font-size: 4rem;
-  font-weight: 800;
-  color: #164e63;
-  line-height: 1.1;
-  margin-bottom: 25px;
-}
-
-.hero span {
-  color: #0891b2;
-}
-
-.hero p {
-  font-size: 1.3rem;
-  max-width: 600px;
-  margin-bottom: 40px;
-  color: #475569;
-  line-height: 1.6;
-}
-
-.serviceSection {
-  padding: 100px 0;
-  background: white;
-}
-
-.serviceGrid {
+.heroInner {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 60px;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+  gap: 38px;
+  align-items: center;
 }
 
-.serviceCard {
-  padding: 40px;
-  background: #f8fafc;
-  border-radius: 20px;
-  border: 1px solid #f1f5f9;
-  transition: all 0.3s ease;
+.heroCopy {
+  max-width: 670px;
 }
 
-.serviceCard:hover {
-  background: white;
-  border-color: #0891b2;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  transform: translateY(-5px);
+.eyebrow,
+.floatingLabel,
+.sectionEyebrow,
+.sectionEyebrowDark,
+.sideCardLabel,
+.scheduleHeader {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
-.iconBox {
-  width: 60px;
-  height: 60px;
-  background: #cffafe;
-  color: #0891b2;
-  border-radius: 12px;
+.eyebrow,
+.floatingLabel,
+.sectionEyebrow,
+.sideCardLabel {
+  color: var(--dental-accent);
+}
+
+.heroTitle {
+  color: var(--dental-deep);
+  font-size: clamp(3.05rem, 4.7vw, 5.2rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.94;
+  max-width: 11ch;
+}
+
+.heroDescription {
+  color: var(--dental-copy);
+  font-size: 1.14rem;
+  line-height: 1.84;
+  max-width: 58ch;
+  margin-top: 22px;
+}
+
+.heroActions,
+.ctaActions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 25px;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 30px;
 }
 
-.emergencyBanner {
-  padding: 40px 0;
-  background: #164e63;
+.primaryButton,
+.secondaryButton,
+.ctaCall {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 24px;
+  border-radius: 16px;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
+    border-color 0.2s ease, color 0.2s ease;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #22c1dc, #0f8fb0);
   color: white;
-  text-align: center;
+  box-shadow: 0 18px 34px rgba(8, 145, 178, 0.24);
+}
+
+.primaryButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 40px rgba(8, 145, 178, 0.3);
+}
+
+.secondaryButton,
+.ctaCall {
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--dental-deep);
+  border: 1px solid rgba(15, 63, 77, 0.12);
+}
+
+.secondaryButton:hover,
+.ctaCall:hover {
+  transform: translateY(-2px);
+  border-color: rgba(8, 145, 178, 0.38);
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.signalGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.signalItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(15, 63, 77, 0.08);
+  box-shadow: 0 16px 28px rgba(15, 63, 77, 0.06);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.signalItem svg,
+.reassuranceItem svg,
+.serviceListItem svg,
+.noteItem svg,
+.sideMeta svg {
+  color: var(--dental-accent);
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.heroVisual {
+  min-width: 0;
+}
+
+.heroImageShell {
+  position: relative;
+  min-height: 650px;
+  border-radius: 30px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.46);
+  background: #d7f4f9;
+  box-shadow: 0 34px 70px rgba(15, 63, 77, 0.18);
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+.imageShade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(12, 55, 68, 0.08) 0%, rgba(12, 55, 68, 0.18) 42%, rgba(12, 55, 68, 0.68) 100%);
+}
+
+.floatingCard {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 290px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.46);
+  backdrop-filter: blur(12px);
+  color: var(--dental-deep);
+  box-shadow: 0 18px 36px rgba(15, 63, 77, 0.14);
+}
+
+.floatingCard strong {
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.floatingMeta {
+  color: var(--dental-copy);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.floatingSchedule {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  padding: 22px;
+  border-radius: 22px;
+  background: rgba(12, 55, 68, 0.68);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: white;
+  backdrop-filter: blur(16px);
+}
+
+.scheduleHeader {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #ccfbf1;
+  margin-bottom: 14px;
+}
+
+.scheduleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.92rem;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.scheduleRow strong {
+  color: white;
+  font-family: var(--font-outfit), sans-serif;
+  font-weight: 700;
+}
+
+.metricStrip {
+  padding: 0 0 42px;
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.metricItem {
+  padding: 28px 24px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(15, 63, 77, 0.08);
+  box-shadow: 0 16px 30px rgba(15, 63, 77, 0.06);
+}
+
+.metricValue {
+  color: var(--dental-deep);
+  font-family: var(--font-outfit), sans-serif;
+  font-size: clamp(1.7rem, 2vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.metricLabel {
+  margin-top: 10px;
+  color: var(--dental-muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.reassuranceSection {
+  padding: 0 0 42px;
+}
+
+.reassuranceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.reassuranceItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(15, 63, 77, 0.08);
+  box-shadow: 0 16px 28px rgba(15, 63, 77, 0.06);
+  font-weight: 700;
+  color: var(--dental-deep);
+}
+
+.servicesSection,
+.patientSection,
+.ctaSection {
+  padding: 96px 0;
+}
+
+.sectionIntro,
+.sectionIntroDark {
+  max-width: 760px;
+  margin-bottom: 42px;
+}
+
+.sectionEyebrowDark {
+  color: #ccfbf1;
+}
+
+.sectionTitle,
+.sectionTitleDark {
+  font-size: clamp(2.2rem, 3vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-top: 14px;
+}
+
+.sectionTitle {
+  color: var(--dental-deep);
+}
+
+.sectionTitleDark {
+  color: white;
+}
+
+.sectionDescription,
+.sectionDescriptionDark {
+  font-size: 1.04rem;
+  line-height: 1.85;
+  margin-top: 16px;
+  max-width: 62ch;
+}
+
+.sectionDescription {
+  color: var(--dental-copy);
+}
+
+.sectionDescriptionDark {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.serviceCard,
+.treatmentCard {
+  height: 100%;
+  padding: 28px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(15, 63, 77, 0.08);
+  box-shadow: 0 18px 35px rgba(15, 63, 77, 0.06);
+}
+
+.serviceIcon {
+  width: 52px;
+  height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  color: var(--dental-accent);
+  background: var(--dental-accent-soft);
+  border: 1px solid rgba(8, 145, 178, 0.22);
+}
+
+.serviceCard h3,
+.treatmentCard h3,
+.sideCardBody h3 {
+  color: var(--dental-deep);
+  font-size: 1.55rem;
+  font-weight: 800;
+  margin-top: 24px;
+}
+
+.serviceCard p,
+.treatmentCard p,
+.sideCardBody p {
+  color: var(--dental-copy);
+  line-height: 1.78;
+  margin-top: 12px;
+}
+
+.serviceList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(15, 63, 77, 0.08);
+}
+
+.serviceListItem {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.94rem;
+}
+
+.treatmentsSection {
+  padding: 110px 0;
+  background:
+    linear-gradient(180deg, rgba(11, 70, 84, 0.98), rgba(10, 56, 66, 0.98)),
+    radial-gradient(circle at top right, rgba(94, 234, 212, 0.18), transparent 28%);
+}
+
+.treatmentsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.treatmentCard {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.16);
+}
+
+.treatmentCard h3,
+.treatmentCard p,
+.treatmentMeta,
+.treatmentPrice {
+  color: white;
+}
+
+.treatmentTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.treatmentMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  font-size: 0.86rem;
+}
+
+.treatmentMeta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.treatmentPrice {
+  white-space: nowrap;
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #ccfbf1;
+}
+
+.patientGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.noteList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.noteItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(15, 63, 77, 0.08);
+}
+
+.sideCard {
+  overflow: hidden;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(15, 63, 77, 0.08);
+  box-shadow: 0 30px 60px rgba(15, 63, 77, 0.12);
+}
+
+.sideCardMedia {
+  position: relative;
+  min-height: 260px;
+}
+
+.sideCardImage {
+  object-fit: cover;
+}
+
+.sideCardBody {
+  padding: 28px;
+}
+
+.sideMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+  color: var(--dental-muted);
+  font-size: 0.9rem;
+}
+
+.sideMeta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ctaSection {
+  padding-top: 84px;
+}
+
+.ctaPanel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 34px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #0891b2, #0f5060);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 60px rgba(15, 63, 77, 0.2);
+}
+
+.ctaCopy {
+  max-width: 720px;
 }
 
 .footer {
-  padding: 80px 0;
-  background: #f8fafc;
-  text-align: center;
-  border-top: 1px solid #e2e8f0;
+  padding: 0 0 110px;
+}
+
+.footerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(15, 63, 77, 0.08);
+}
+
+.footerBrand {
+  color: var(--dental-deep);
+  font-family: var(--font-outfit), sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.footerNote {
+  max-width: 52ch;
+  color: var(--dental-muted);
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+.footerMeta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 14px;
+  color: var(--dental-muted);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 1100px) {
+  .heroInner,
+  .patientGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCopy {
+    max-width: none;
+  }
+
+  .signalGrid,
+  .metricGrid,
+  .reassuranceGrid,
+  .servicesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ctaPanel,
+  .footerInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footerMeta {
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 768px) {
-  .hero h1 { font-size: 2.8rem; }
+  .header {
+    padding: 14px 0;
+  }
+
+  .headerContent {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .headerCall {
+    width: 100%;
+  }
+
+  .hero {
+    padding: 54px 0 40px;
+  }
+
+  .heroImageShell {
+    min-height: 520px;
+  }
+
+  .signalGrid,
+  .metricGrid,
+  .reassuranceGrid,
+  .servicesGrid,
+  .treatmentsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroActions,
+  .ctaActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .primaryButton,
+  .secondaryButton,
+  .ctaCall {
+    width: 100%;
+  }
+
+  .servicesSection,
+  .patientSection,
+  .treatmentsSection,
+  .ctaSection {
+    padding: 78px 0;
+  }
+
+  .floatingCard,
+  .floatingSchedule,
+  .serviceCard,
+  .treatmentCard,
+  .sideCard,
+  .ctaPanel {
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 560px) {
+  .brandBlock {
+    align-items: flex-start;
+  }
+
+  .heroTitle {
+    max-width: none;
+  }
+
+  .heroDescription,
+  .sectionDescription,
+  .sectionDescriptionDark {
+    font-size: 1rem;
+  }
+
+  .heroImageShell {
+    min-height: 450px;
+  }
+
+  .floatingCard {
+    top: 18px;
+    left: 18px;
+    right: 18px;
+    max-width: none;
+  }
+
+  .floatingSchedule {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+    padding: 18px;
+  }
+
+  .scheduleRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .metricItem,
+  .reassuranceItem,
+  .serviceCard,
+  .treatmentCard,
+  .sideCardBody,
+  .ctaPanel {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }

@@ -1,56 +1,103 @@
 'use client';
-import { CheckCircle2, Star, ArrowRight, PawPrint, Heart, Bone, ShieldCheck, Scissors, Stethoscope, Dog } from 'lucide-react';
+
+import {
+  ArrowUpRight,
+  CalendarDays,
+  CheckCircle2,
+  Clock3,
+  Dog,
+  Heart,
+  PawPrint,
+  PhoneCall,
+  Scissors,
+  ShieldCheck
+} from 'lucide-react';
 import { Suspense } from 'react';
-import { motion, Variants } from 'framer-motion';
-import { Reveal } from '@/components/Reveal';
-import MobileActions from '@/components/MobileActions';
-import BookingWidget from '@/components/BookingWidget';
-import SocialProofBar from '@/components/SocialProofBar';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import FAQSection from '@/components/FAQSection';
 import HowItWorks from '@/components/HowItWorks';
+import MobileActions from '@/components/MobileActions';
+import PrestigeBadge from '@/components/PrestigeBadge';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import { PawConfig } from '@/configs/paw';
+import { Reveal } from '@/components/Reveal';
+import { PawConfig as Config } from '@/configs/paw';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './paw.module.css';
-import PrestigeBadge from '@/components/PrestigeBadge';
-import TrustBadgeStrip from '@/components/TrustBadgeStrip';
-import FAQSection from '@/components/FAQSection';
-import Image from 'next/image';
 
 const ACCENT = '#0ea5e9';
-const TESTIMONIALS = [
-  { name: 'Lucy V.', location: 'Dog Owner', text: 'My dog absolutely loves going there. Comes home perfectly groomed and clearly so happy. Wonderful caring team.', stars: 5 },
-  { name: 'Sam H.', location: 'Cat Owner', text: 'Took my very anxious cat and they handled her beautifully. Calm, patient and the results were amazing.', stars: 5 },
-  { name: 'Jane P.', location: 'Regular Client', text: 'Been using their grooming service for 2 years. Always consistent, always kind to my pets, always great quality.', stars: 5 },
-];
-function PawContent() {
-  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
-    name: 'Paw & Palace Pet Care',
-    niche: 'Pet Specialist',
-    location: 'Local District',
-    phone: '0000 000 000',
-    rating: '4.9'
-  });
 
-  const bounce: Variants = {
-    animate: {
-      y: [0, -10, 0],
-      transition: { repeat: Infinity, duration: 2, ease: "easeInOut" }
-    }
-  };
+const SERVICE_ICONS = [Scissors, Dog, ShieldCheck];
+
+const TESTIMONIALS = [
+  {
+    name: 'Lucy V.',
+    location: 'Dog owner',
+    text: 'Our dog can be nervous, but the team handled him gently and kept us updated. He came back clean, calm, and clearly well looked after.',
+    stars: 5
+  },
+  {
+    name: 'Sam H.',
+    location: 'Cat owner',
+    text: 'They were patient, practical, and realistic about what my cat would tolerate. That honesty made the whole appointment feel much more trustworthy.',
+    stars: 5
+  },
+  {
+    name: 'Jane P.',
+    location: 'Regular client',
+    text: 'We use them for grooming and occasional daycare. The consistency is what matters: kind handling, tidy work, and a team that clearly knows pets well.',
+    stars: 5
+  }
+];
+
+const CARE_POINTS = [
+  'Calm handling, clean facilities, and clear owner communication are treated as standard.',
+  'Grooming, daycare, and routine maintenance visits are explained clearly before booking.',
+  'The visit flow supports anxious pets, first appointments, and regular care plans without confusion.'
+];
+
+const OWNER_POINTS = [
+  {
+    title: 'Gentle first visits',
+    text: 'New pets often need a calmer introduction, so the first visit is built around trust and handling rather than rushing straight into treatment.'
+  },
+  {
+    title: 'Clear care updates',
+    text: 'Owners want to know how the appointment went, what was done, and whether anything should be watched or booked again later.'
+  },
+  {
+    title: 'Repeat care support',
+    text: 'Repeat grooming and daycare visits are structured to feel dependable for loyal local pet owners.'
+  }
+];
+
+function PawContent() {
+  const { name, niche, location, phone, rating, ai, t, booking_url } =
+    usePersonalization({
+      name: 'Paw & Palace Pet Care',
+      niche: 'Pet Care Studio',
+      location: 'Local District',
+      phone: '0000 000 000',
+      rating: '4.9'
+    });
 
   return (
     <div className={styles.wrapper}>
-      {/* Pet Industry SEO Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": PawConfig.schemaType,
-            "name": name,
-            "telephone": phone,
-            "areaServed": location,
-            "description": `Premium ${niche} services in ${location}. Where every pet is treated like royalty.`
+            '@context': 'https://schema.org',
+            '@type': Config.schemaType,
+            name,
+            telephone: phone,
+            areaServed: location,
+            description: `${name} provides ${niche.toLowerCase()} services in ${location} including grooming, daycare, and routine pet support.`,
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: rating,
+              reviewCount: '109'
+            }
           })
         }}
       />
@@ -58,153 +105,392 @@ function PawContent() {
       <header className={styles.header}>
         <div className="container">
           <div className={styles.headerContent}>
-            <motion.div 
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              className={styles.logo}
-            >
-              <PawPrint size={28} /> {name}
-            </motion.div>
-            <motion.a 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href={`tel:${phone}`} 
-              className={styles.bookBtn}
-            >
-              Book Appointment
-            </motion.a>
+            <div className={styles.brandBlock}>
+              <div className={styles.logoMark}>
+                <PawPrint size={18} />
+              </div>
+              <div>
+                <div className={styles.logo}>{name}</div>
+                <p className={styles.logoMeta}>
+                  Grooming, daycare, and gentle pet care in {location}
+                </p>
+              </div>
+            </div>
+
+            <a href={`tel:${phone}`} className={styles.headerCall}>
+              <PhoneCall size={16} />
+              Call {phone}
+            </a>
           </div>
         </div>
       </header>
 
-      <section className={styles.hero}>
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.div variants={bounce} animate="animate" style={{ color: '#f59e0b', marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
-              <Heart size={40} fill="currentColor" />
-            </motion.div>
-            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
-            <h1>{t(PawConfig.hero.title).split('Feels at Home').map((part, i, arr) => (
-              <span key={i}>
-                {part}
-                {i < arr.length - 1 && <span>Feels at Home</span>}
-              </span>
-            ))}</h1>
-            <p>{t(PawConfig.hero.subtitle)}</p>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
-              <motion.a 
-                whileHover={{ y: -5 }}
-                href={`tel:${phone}`} 
-                className={styles.bookBtn} 
-                style={{ padding: '18px 50px', fontSize: '1.1rem' }}
+      <main>
+        <section className={styles.hero}>
+          <div className="container">
+            <div className={styles.heroInner}>
+              <motion.div
+                className={styles.heroCopy}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
               >
-                Schedule a Meet & Greet
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
+                <p className={styles.eyebrow}>Kind, calm pet care</p>
+                <PrestigeBadge
+                  niche={niche}
+                  location={location}
+                  accentColor={ACCENT}
+                />
 
-      
-        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
-          <Image src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
-        </div>
-    
-      <SocialProofBar accentColor={ACCENT} />
+                <h1 className={styles.heroTitle}>
+                  {ai.hero_title || t(Config.hero.title)}
+                </h1>
 
-      </section>
+                <p className={styles.heroDescription}>
+                  {ai.hero_subtitle || t(Config.hero.subtitle)}
+                </p>
 
-      <section className={styles.perksSection}>
-        <div className="container">
-          <Reveal>
-            <div className="text-center">
-              <h2 style={{ fontSize: '3rem', fontWeight: 900, color: '#1e293b' }}>The {name} Standard</h2>
-              <p style={{ opacity: 0.6, marginTop: '10px' }}>Excellence in pet care for {location} residents</p>
-            </div>
-          </Reveal>
-          
-          <div className={styles.perkGrid}>
-            {PawConfig.perks.map((p, i) => {
-              const icons = [<ShieldCheck size={32} />, <Bone size={32} />, <Dog size={32} />];
-              return (
-                <Reveal key={i} delay={0.2 * i}>
-                  <div className={styles.perkCard}>
-                    <div className={styles.iconCircle}>{icons[i % icons.length]}</div>
-                    <h3>{t(p.title)}</h3>
-                    <p style={{ color: '#64748b', lineHeight: 1.6 }}>{t(p.desc)}</p>
+                <div className={styles.heroActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    {ai.niche_cta || Config.hero.cta}
+                    <ArrowUpRight size={18} />
+                  </a>
+
+                  <a href={`tel:${phone}`} className={styles.secondaryButton}>
+                    <PhoneCall size={18} />
+                    Call {phone}
+                  </a>
+                </div>
+
+                <div className={styles.heroSignals}>
+                  {[
+                    'Grooming, daycare, and routine pet support',
+                    'Calm handling for first-time and nervous pets',
+                    `${rating}/5 rated by local pet owners`
+                  ].map((item) => (
+                    <div key={item} className={styles.signalItem}>
+                      <CheckCircle2 size={16} />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                className={styles.heroVisual}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
+              >
+                <div className={styles.heroImageShell}>
+                  <Image
+                    src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1400&q=80"
+                    alt={`${name} pet care`}
+                    fill
+                    priority
+                    sizes="(max-width: 960px) 100vw, 46vw"
+                    className={styles.heroImage}
+                  />
+                  <div className={styles.imageShade} />
+
+                  <div className={styles.floatingCard}>
+                    <span className={styles.floatingLabel}>Owner priority</span>
+                    <strong>They want their pet handled gently, kept calm, and returned looking and feeling well cared for.</strong>
+                    <span className={styles.floatingMeta}>
+                      Clear expectations and calm presentation reduce owner
+                      anxiety before the appointment even begins.
+                    </span>
                   </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
 
-      <SocialProofBar accentColor={ACCENT} />
-
-      </section>
-
-      <section className={styles.treatments}>
-        <div className="container">
-          <Reveal>
-            <div className="text-center">
-              <h2 style={{ fontSize: '3rem', fontWeight: 900 }}>Curated {niche} Menu</h2>
+                  <div className={styles.floatingPanel}>
+                    <div className={styles.panelHeader}>
+                      <CalendarDays size={16} />
+                      Typical booking flow
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Meet and greet</span>
+                      <strong>Optional first step</strong>
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Appointment confirmed</span>
+                      <strong>By service type</strong>
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Care notes after visit</span>
+                      <strong>Included</strong>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </Reveal>
-          
-          <div className={styles.treatmentList}>
-            {PawConfig.treatments.map((t_item, i) => {
-              const icons = [<Scissors />, <Stethoscope />, <Dog />];
-              return (
-                <Reveal key={i} delay={0.1 * i}>
-                  <motion.div whileHover={{ x: 10 }} className={styles.treatmentItem}>
-                    <div style={{ color: '#0ea5e9' }}>{icons[i % icons.length]}</div>
-                    <h3>{t(t_item.name)}</h3>
-                    <div className={styles.priceTag}>{t(t_item.price)}</div>
-                  </motion.div>
-                </Reveal>
-              );
-            })}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <FAQSection faqs={PawConfig.faqs} accentColor={ACCENT} />
-      <HowItWorks accentColor={ACCENT} />
-      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
+        <section className={styles.metricStrip}>
+          <div className="container">
+            <div className={styles.metricGrid}>
+              {Config.stats.map((stat) => (
+                <div key={stat.label} className={styles.metricItem}>
+                  <div className={styles.metricValue}>{t(stat.val)}</div>
+                  <div className={styles.metricLabel}>{t(stat.label)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.reassuranceSection}>
+          <div className="container">
+            <div className={styles.reassuranceGrid}>
+              {Config.promisesBar.map((item) => (
+                <div key={item} className={styles.reassuranceItem}>
+                  <CheckCircle2 size={18} />
+                  <span>{t(item)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.servicesSection}>
+          <div className="container">
+            <div className={styles.sectionIntro}>
+              <p className={styles.sectionEyebrow}>Pet care services</p>
+              <h2 className={styles.sectionTitle}>
+                A clearer service menu for grooming, supervised care, and repeat
+                maintenance.
+              </h2>
+              <p className={styles.sectionDescription}>
+                Owners can now understand the difference between a grooming
+                booking, a daycare visit, and a more routine pet-care service
+                without guessing what each includes.
+              </p>
+            </div>
+
+            <div className={styles.serviceGrid}>
+              {Config.services.map((service, index) => {
+                const Icon = SERVICE_ICONS[index % SERVICE_ICONS.length];
+                const aiOverride =
+                  index === 0
+                    ? ai.service_1
+                    : index === 1
+                      ? ai.service_2
+                      : index === 2
+                        ? ai.service_3
+                        : undefined;
+
+                return (
+                  <Reveal key={service.title} delay={index * 0.12}>
+                    <article className={styles.serviceCard}>
+                      <div className={styles.serviceIcon}>
+                        <Icon size={22} />
+                      </div>
+                      <h3>{aiOverride || t(service.title)}</h3>
+                      <p>{t(service.desc)}</p>
+
+                      <div className={styles.serviceList}>
+                        {service.includes.map((item) => (
+                          <div key={item} className={styles.serviceListItem}>
+                            <CheckCircle2 size={15} />
+                            <span>{t(item)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.packagesSection}>
+          <div className="container">
+            <div className={styles.sectionIntroDark}>
+              <p className={styles.sectionEyebrowDark}>Visit options</p>
+              <h2 className={styles.sectionTitleDark}>
+                Clear choices for a tidy-up, a full groom, or a day of supervised care.
+              </h2>
+              <p className={styles.sectionDescriptionDark}>
+                These booking options make the offer easier to understand for
+                first-time owners while still working for regular grooming and
+                repeat care clients.
+              </p>
+            </div>
+
+            <div className={styles.packageGrid}>
+              {Config.packages.map((pkg, index) => (
+                <Reveal key={pkg.name} delay={index * 0.12}>
+                  <article
+                    className={`${styles.packageCard} ${
+                      pkg.featured ? styles.packageFeatured : ''
+                    }`}
+                  >
+                    {pkg.tag ? (
+                      <div className={styles.packageTag}>{t(pkg.tag)}</div>
+                    ) : null}
+
+                    <div className={styles.packageHeader}>
+                      <div>
+                        <h3>{t(pkg.name)}</h3>
+                        <p className={styles.packageIdeal}>{t(pkg.idealFor)}</p>
+                      </div>
+                      <div className={styles.packagePrice}>{t(pkg.price)}</div>
+                    </div>
+
+                    <div className={styles.packageList}>
+                      {pkg.features.map((feature) => (
+                        <div key={feature} className={styles.packageListItem}>
+                          <CheckCircle2 size={16} />
+                          <span>{t(feature)}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <a href={`tel:${phone}`} className={styles.packageButton}>
+                      Book this visit
+                    </a>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.trustSection}>
+          <div className="container">
+            <div className={styles.trustGrid}>
+              <Reveal>
+                <div className={styles.trustCopy}>
+                  <p className={styles.sectionEyebrow}>Why owners trust it</p>
+                  <h2 className={styles.sectionTitle}>
+                    Pet owners usually book on calm handling, clear communication,
+                    and whether the team feels genuinely safe.
+                  </h2>
+                  <p className={styles.sectionDescription}>
+                    The studio is presented around reassurance first, so owners
+                    can understand the standard of care before they commit to a
+                    first or repeat visit.
+                  </p>
+
+                  <div className={styles.trustPoints}>
+                    {CARE_POINTS.map((point) => (
+                      <div key={point} className={styles.trustPoint}>
+                        <CheckCircle2 size={17} />
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.14}>
+                <div className={styles.sideCard}>
+                  <div className={styles.sideCardMedia}>
+                    <Image
+                      src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80"
+                      alt="Pet care consultation"
+                      fill
+                      sizes="(max-width: 960px) 100vw, 42vw"
+                      className={styles.sideCardImage}
+                    />
+                  </div>
+
+                  <div className={styles.sideCardBody}>
+                    <div className={styles.sideCardLabel}>Owner expectations</div>
+                    <h3>Built for first visits, nervous pets, and repeat care that feels dependable.</h3>
+                    <p>
+                      Local owners want practical care, kinder handling, and a
+                      team that keeps them informed throughout the visit.
+                    </p>
+
+                    <div className={styles.sideMeta}>
+                      {OWNER_POINTS.map((item) => (
+                        <div key={item.title} className={styles.sideMetaItem}>
+                          <strong>{item.title}</strong>
+                          <span>{item.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        <HowItWorks
+          steps={Config.process}
+          accentColor={ACCENT}
+          heading="How the pet-care booking process works"
+        />
+
+        <TestimonialsSection
+          testimonials={TESTIMONIALS}
+          accentColor={ACCENT}
+          heading="What local pet owners say"
+        />
+
+        <FAQSection faqs={Config.faqs} accentColor={ACCENT} />
+
+        <section id="book" className={styles.ctaSection}>
+          <div className="container">
+            <Reveal>
+              <div className={styles.ctaPanel}>
+                <div className={styles.ctaCopy}>
+                  <p className={styles.sectionEyebrowDark}>Book a visit</p>
+                  <h2 className={styles.sectionTitleDark}>
+                    {t(Config.footer.title)}
+                  </h2>
+                  <p className={styles.sectionDescriptionDark}>
+                    {t(Config.footer.subtitle)}
+                  </p>
+                </div>
+
+                <div className={styles.ctaActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    Schedule appointment
+                    <ArrowUpRight size={18} />
+                  </a>
+                  <a href={`tel:${phone}`} className={styles.ctaCall}>
+                    Call {phone}
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
 
       <footer className={styles.footer}>
         <div className="container">
-          <Reveal>
+          <div className={styles.footerInner}>
             <div>
-              <Dog size={64} style={{ margin: '0 auto 30px', opacity: 0.5 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '20px' }}>{t(PawConfig.footer.title)}</h2>
-              <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.8 }}>{t(PawConfig.footer.subtitle)}</p>
-              
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '5px', color: '#f59e0b', marginBottom: '40px' }}>
-                {[1,2,3,4,5].map(i => <Star key={i} size={24} fill="currentColor" />)}
-              </div>
-
-              <motion.a 
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ repeat: Infinity, duration: 3 }}
-                href={`tel:${phone}`} 
-                className={styles.bookBtn} 
-                style={{ background: '#f59e0b', padding: '25px 80px', fontSize: '1.4rem', borderRadius: '15px' }}
-              >
-                Call {name}: {phone}
-              </motion.a>
+              <div className={styles.footerBrand}>{name}</div>
+              <p className={styles.footerNote}>
+                Grooming, daycare, and gentle pet support for owners in {location}.
+              </p>
             </div>
-          </Reveal>
-          <p style={{ marginTop: '100px', opacity: 0.3, fontSize: '0.8rem', letterSpacing: '2px' }}>
-            © 2026 {name.toUpperCase()} | PREMIER {niche.toUpperCase()} | {location.toUpperCase()}
-          </p>
+
+            <div className={styles.footerMeta}>
+              <span>{location}</span>
+              <span>{phone}</span>
+              <span>{new Date().getFullYear()} Copyright {name}</span>
+            </div>
+          </div>
         </div>
       </footer>
 
-      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );
@@ -212,7 +498,7 @@ function PawContent() {
 
 export default function PawPage() {
   return (
-    <Suspense fallback={<div>Welcoming your best friend...</div>}>
+    <Suspense fallback={<div>Preparing the pet-care preview...</div>}>
       <PawContent />
     </Suspense>
   );
