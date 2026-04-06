@@ -1,26 +1,119 @@
 export const SmartLivingConfig = {
-  schemaType: "HomeAndConstructionBusiness",
+  schemaType: 'HomeAndConstructionBusiness',
   hero: {
-    title: "Intelligence Refined, <span>Effortless Control</span> in {location}",
-    subtitle: "Premium home automation and intelligent lifestyle solutions. We transform {location} residences into fully integrated, future-ready environments with cutting-edge technology.",
-    cta: "Design Your Smart Home"
+    title: 'Smart-home systems that make life easier in {location}',
+    subtitle:
+      'Automation, lighting, security, media, and whole-home control designed around how you actually live in {location}, not around unnecessary complexity.',
+    cta: 'Book a Smart-Home Audit'
   },
+  stats: [
+    { val: '4.9/5', label: 'Average homeowner rating' },
+    { val: 'Whole-Home Control', label: 'Lighting, comfort, security, and media' },
+    { val: 'Renovation Ready', label: 'Suitable for upgrades and new installs' },
+    { val: 'App + Handover', label: 'Setup support included after install' }
+  ],
+  promisesBar: [
+    'Home audits before the system is specified',
+    'Lighting, comfort, security, and entertainment integration',
+    'Clear user setup, app access, and handover guidance'
+  ],
   solutions: [
-    { title: "Bespoke Automation", desc: "Centralized control of lighting, climate, and entertainment for {location} luxury homes. Seamless, one-touch living.",
-    includes: ["Expert consultation","Tailored solutions","Guaranteed satisfaction"], },
-    { title: "Intelligent Security", desc: "AI-integrated surveillance and advanced perimeter defense for your {location} property. Stay secure from anywhere.",
-    includes: ["Expert consultation","Tailored solutions","Guaranteed satisfaction"], },
-    { title: "Audio Visual Artistry", desc: "Immersive home cinema and multi-room audio systems designed for the ultimate {location} entertainment experience.",
-    includes: ["Expert consultation","Tailored solutions","Guaranteed satisfaction"], }
+    {
+      title: 'Home automation and comfort control',
+      desc: 'Lighting, heating, blinds, and daily routines designed to make the home easier to run without turning basic tasks into a technical burden.',
+      includes: [
+        'Lighting scenes and timed routines',
+        'Climate and comfort control',
+        'Simple app and wall-control options'
+      ]
+    },
+    {
+      title: 'Integrated smart security',
+      desc: 'Home-aware security that connects alarms, cameras, entry points, and alerts into one cleaner system.',
+      includes: [
+        'Smart cameras and alerts',
+        'Entry and perimeter awareness',
+        'Useful for occupied or empty properties'
+      ]
+    },
+    {
+      title: 'Media and connected living',
+      desc: 'Entertainment, audio, and room-to-room control planned so the system feels polished and practical rather than pieced together.',
+      includes: [
+        'TV and audio integration',
+        'Multi-room control options',
+        'Clean, everyday usability'
+      ]
+    }
+  ],
+  plans: [
+    {
+      name: 'Focused Upgrade',
+      price: 'From GBP 795',
+      idealFor: 'Ideal for clients starting with lighting, comfort control, or one joined-up smart zone',
+      features: [
+        'Audit and room-by-room planning',
+        'Core automation setup',
+        'App guidance after install'
+      ]
+    },
+    {
+      name: 'Whole-Home System',
+      price: 'Custom quote',
+      idealFor: 'Best for homeowners wanting a more complete control, security, and media experience',
+      features: [
+        'Integrated design across core systems',
+        'Planned around everyday use, not feature overload',
+        'Suitable for premium home projects'
+      ],
+      featured: true,
+      tag: 'Most requested'
+    },
+    {
+      name: 'Renovation Integration',
+      price: 'Project-based',
+      idealFor: 'For clients upgrading or renovating and needing the smart-home system coordinated early',
+      features: [
+        'Works alongside wider renovation planning',
+        'Better fit for structured property upgrades',
+        'Helps avoid retrofitting compromises later'
+      ]
+    }
+  ],
+  process: [
+    {
+      number: '01',
+      title: 'Start with the home audit',
+      desc: 'Review the property, the daily routines, and what the client actually wants to control, automate, or improve.'
+    },
+    {
+      number: '02',
+      title: 'Design the right setup',
+      desc: 'Plan the system around lifestyle, room use, budget, and whether the work is a focused upgrade or a larger integration.'
+    },
+    {
+      number: '03',
+      title: 'Install and hand over',
+      desc: 'The system is fitted, tested, and explained clearly so the client can use it with confidence from the first day.'
+    }
   ],
   footer: {
-    title: "The Future of Living",
-    subtitle: "CEDIA Member and Certified Integrated. Providing the premier technology shield for the {location} community."
-  },
-  
+    title: 'Book a smart-home consultation in {location}',
+    subtitle:
+      'Speak to the team about automation, lighting, home security, media integration, or a full smart-home upgrade built around your lifestyle.'
+  },
   faqs: [
-    { q: 'How do I get started?', a: 'Getting started is simple. Just contact us to arrange a free initial consultation where we will assess your needs and provide a tailored plan.' },
-    { q: 'Do you offer a satisfaction guarantee?', a: 'Yes, we pride ourselves on exceptional service. If you are not fully satisfied with our work, we will make it right at no extra cost.' },
-    { q: 'What areas do you cover?', a: 'We serve clients across the local and surrounding regions. Please contact us to confirm if we can assist at your specific location.' }
+    {
+      q: 'Do I need a full renovation to add smart-home features?',
+      a: 'No. Some projects are part of a wider renovation, but others start with focused upgrades such as lighting, control, security, or media integration.'
+    },
+    {
+      q: 'Will the system be hard to use every day?',
+      a: 'It should not be. The goal is a setup that feels simple in daily use, with clear controls, app access, and routines that fit the household.'
+    },
+    {
+      q: 'Can security and automation be combined in one system?',
+      a: 'Yes. Many clients combine comfort control, smart lighting, alerts, cameras, and access features so everything works together more cleanly.'
+    }
   ]
 };
