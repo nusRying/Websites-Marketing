@@ -19,3 +19,4 @@ httpx
 ruff
 curl_cffi
 patchright
+msgspec
