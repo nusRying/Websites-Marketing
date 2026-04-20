@@ -23,9 +23,11 @@ jobs:
         ruff check .
         
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: './templates/package-lock.json'
         
     - name: Install Frontend Deps
       working-directory: ./templates
@@ -52,21 +54,25 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install -r requirements.txt
-        python -m playwright install chromium
-        python -m patchright install chromium
-        python -m patchright install-deps chromium
+        # Install patchright browser and its system dependencies
+        python -m patchright install --with-deps chromium
         
-    - name: Verify Imports
+    - name: Verify Environment
       run: |
-        python -c "import curl_cffi; print(f'curl_cffi version: {curl_cffi.__version__}')"
+        node -v
+        python --version
         python -c "import patchright; print('patchright imported successfully')"
         python -c "from scrapling import StealthyFetcher; print('scrapling imported successfully')"
         
     - name: Run Core Logic Tests
+      env:
+        PYTHONPATH: .
       run: |
         python -m pytest tests/test_core_logic.py
         
     - name: Run API Worker Tests
+      env:
+        PYTHONPATH: .
       run: |
         python -m pytest tests/test_api_worker.py
 
@@ -77,9 +83,11 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: './templates/package-lock.json'
         
     - name: Build Next.js
       working-directory: ./templates
