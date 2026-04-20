@@ -70,8 +70,9 @@ jobs:
         python --version
         python -c "import patchright; print('patchright imported successfully')"
         python -c "import msgspec; print('msgspec imported successfully')"
+        python -c "import browserforge; print('browserforge imported successfully')"
         python -c "import scrapling; print('scrapling imported successfully')"
-        pip list | grep -E "patchright|scrapling|msgspec"
+        pip list | grep -E "patchright|scrapling|msgspec|browserforge"
         
     - name: Run Core Logic Tests
       env:
