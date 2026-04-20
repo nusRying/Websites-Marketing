@@ -1,49 +1,101 @@
 'use client';
-import { CheckCircle2, Star, ArrowRight, Printer, Image as ImageIcon, Package, Globe, PenTool, Sparkles } from 'lucide-react';
+
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  Clock3,
+  Package2,
+  Palette,
+  PhoneCall,
+  Printer,
+  Store
+} from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Reveal } from '@/components/Reveal';
-import MobileActions from '@/components/MobileActions';
-import BookingWidget from '@/components/BookingWidget';
-import SocialProofBar from '@/components/SocialProofBar';
+import Image from 'next/image';
+import FAQSection from '@/components/FAQSection';
 import HowItWorks from '@/components/HowItWorks';
+import MobileActions from '@/components/MobileActions';
+import PrestigeBadge from '@/components/PrestigeBadge';
 import TestimonialsSection from '@/components/TestimonialsSection';
-import { PrimePrintConfig } from '@/configs/prime-print';
+import { Reveal } from '@/components/Reveal';
+import { PrimePrintConfig as Config } from '@/configs/prime-print';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './prime-print.module.css';
-import PrestigeBadge from '@/components/PrestigeBadge';
-import TrustBadgeStrip from '@/components/TrustBadgeStrip';
-import FAQSection from '@/components/FAQSection';
-import Image from 'next/image';
 
-const ACCENT = '#6366f1';
+const ACCENT = '#4f46e5';
+
+const SERVICE_ICONS = [Printer, Store, Package2];
+
 const TESTIMONIALS = [
-  { name: 'Anna K.', location: 'Marketing Manager', text: 'The quality of the brochures was stunning. Colours were vibrant, the finish was premium and delivered ahead of schedule.', stars: 5 },
-  { name: 'Mark D.', location: 'Event Organiser', text: 'Ordered 5000 flyers with a tight deadline and they delivered perfectly. Outstanding print quality and packaging.', stars: 5 },
-  { name: 'Fiona B.', location: 'Small Business', text: 'As a small business they treated my order with the same care as a large corporate. Exceptional quality and service.', stars: 5 },
+  {
+    name: 'Anna K.',
+    location: 'Marketing manager',
+    text: 'They handled the artwork cleanly, sent proofs quickly, and delivered a brochure run that looked sharp from the first copy to the last.',
+    stars: 5
+  },
+  {
+    name: 'Mark D.',
+    location: 'Event organiser',
+    text: 'We needed flyers, pull-up banners, and last-minute signage on a short deadline. They gave us a clear production plan and hit it.',
+    stars: 5
+  },
+  {
+    name: 'Fiona B.',
+    location: 'Retail owner',
+    text: 'The packaging and in-store print finally felt consistent with the brand. Good communication, sensible advice, and no confusion over finishes.',
+    stars: 5
+  }
 ];
+
+const TRUST_POINTS = [
+  'Artwork checks and proofing reduce print errors before production begins.',
+  'Turnaround options are explained clearly for urgent jobs and planned campaigns.',
+  'Brands can order stationery, signage, packaging, and promo print from one studio.'
+];
+
+const CLIENT_POINTS = [
+  {
+    title: 'Brand and campaign work',
+    text: 'Useful for launches, events, seasonal campaigns, and recurring printed marketing materials.'
+  },
+  {
+    title: 'Retail and hospitality',
+    text: 'Suitable for menus, POS materials, signage, window graphics, and short-run promotional pieces.'
+  },
+  {
+    title: 'Packaging and presentation',
+    text: 'Ideal when the job needs both production quality and guidance on stock, finish, and how the item will actually be used.'
+  }
+];
+
 function PrintContent() {
-  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
-    name: 'Vivid Print Solutions',
-    niche: 'Print Specialist',
-    location: 'Creative Hub',
-    phone: '0000 000 000',
-    rating: '5.0'
-  });
+  const { name, niche, location, phone, rating, ai, t, booking_url } =
+    usePersonalization({
+      name: 'Vivid Print Studio',
+      niche: 'Print and Signage Studio',
+      location: 'Creative District',
+      phone: '0000 000 000',
+      rating: '4.9'
+    });
 
   return (
     <div className={styles.wrapper}>
-      {/* Print SEO Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": PrimePrintConfig.schemaType,
-            "name": name,
-            "telephone": phone,
-            "areaServed": location,
-            "description": `Premier ${niche} and signage solutions in ${location}. Precision printing and vivid impact.`
+            '@context': 'https://schema.org',
+            '@type': Config.schemaType,
+            name,
+            telephone: phone,
+            areaServed: location,
+            description: `${name} provides ${niche.toLowerCase()} in ${location} including print production, signage, and packaging support.`,
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: rating,
+              reviewCount: '118'
+            }
           })
         }}
       />
@@ -51,131 +103,400 @@ function PrintContent() {
       <header className={styles.header}>
         <div className="container">
           <div className={styles.headerContent}>
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className={styles.logo}
-            >
-              <Printer size={28} style={{ marginRight: 10, color: '#6366f1' }} />
-              {name.split(' ')[0]} <span>{name.split(' ').slice(1).join(' ')}</span>
-            </motion.div>
-            <motion.a 
-              whileHover={{ scale: 1.05 }}
-              href={`tel:${phone}`} 
-              className={styles.ctaBtn}
-            >
-              Consultation
-            </motion.a>
+            <div className={styles.brandBlock}>
+              <div className={styles.logoMark}>
+                <Printer size={18} />
+              </div>
+              <div>
+                <div className={styles.logo}>{name}</div>
+                <p className={styles.logoMeta}>
+                  Print, signage, and packaging in {location}
+                </p>
+              </div>
+            </div>
+
+            <a href={`tel:${phone}`} className={styles.headerCall}>
+              <PhoneCall size={16} />
+              Call {phone}
+            </a>
           </div>
         </div>
       </header>
 
-      <section className={styles.hero}>
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', color: '#6366f1', marginBottom: '30px' }}>
-              <PenTool size={24} /> <ImageIcon size={24} /> <Package size={24} />
+      <main>
+        <section className={styles.hero}>
+          <div className="container">
+            <div className={styles.heroInner}>
+              <motion.div
+                className={styles.heroCopy}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+              >
+                <p className={styles.eyebrow}>
+                  Print production with clear proofing and delivery
+                </p>
+                <PrestigeBadge
+                  niche={niche}
+                  location={location}
+                  accentColor={ACCENT}
+                />
+
+                <h1 className={styles.heroTitle}>
+                  {ai.hero_title || t(Config.hero.title)}
+                </h1>
+
+                <p className={styles.heroDescription}>
+                  {ai.hero_subtitle || t(Config.hero.subtitle)}
+                </p>
+
+                <div className={styles.heroActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    {ai.niche_cta || Config.hero.cta}
+                    <ArrowUpRight size={18} />
+                  </a>
+
+                  <a href={`tel:${phone}`} className={styles.secondaryButton}>
+                    <PhoneCall size={18} />
+                    Call {phone}
+                  </a>
+                </div>
+
+                <div className={styles.heroSignals}>
+                  {[
+                    'Print, signage, packaging, and campaign materials',
+                    'Proofs, finish advice, and production guidance included',
+                    `${rating}/5 rated by local brands and businesses`
+                  ].map((item) => (
+                    <div key={item} className={styles.signalItem}>
+                      <CheckCircle2 size={16} />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                className={styles.heroVisual}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
+              >
+                <div className={styles.heroImageShell}>
+                  <Image
+                    src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&q=80"
+                    alt={`${name} print production`}
+                    fill
+                    priority
+                    sizes="(max-width: 960px) 100vw, 46vw"
+                    className={styles.heroImage}
+                  />
+                  <div className={styles.imageShade} />
+
+                  <div className={styles.floatingCard}>
+                    <span className={styles.floatingLabel}>Production focus</span>
+                    <strong>
+                      Most clients need artwork checked, the right finish
+                      recommended, and a delivery timeline they can trust.
+                    </strong>
+                    <span className={styles.floatingMeta}>
+                      That matters just as much as the print itself when the job
+                      supports a launch, event, or branded environment.
+                    </span>
+                  </div>
+
+                  <div className={styles.floatingPanel}>
+                    <div className={styles.panelHeader}>
+                      <Clock3 size={16} />
+                      Typical workflow
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Artwork review</span>
+                      <strong>Before production</strong>
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Proof approval</span>
+                      <strong>Included</strong>
+                    </div>
+                    <div className={styles.panelRow}>
+                      <span>Delivery or collection</span>
+                      <strong>Planned by deadline</strong>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-            <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
-            <h1 dangerouslySetInnerHTML={{ __html: t(PrimePrintConfig.hero.title) }} />
-            <p>{t(PrimePrintConfig.hero.subtitle)}</p>
-            <motion.a 
-              whileHover={{ gap: '20px', paddingRight: '50px' }}
-              href={`tel:${phone}`} 
-              className={styles.ctaBtn} 
-              style={{ padding: '20px 60px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
-            >
-              Start Your Project <ArrowRight size={20} />
-            </motion.a>
-          </motion.div>
-        </div>
+          </div>
+        </section>
 
-      
-        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
-          <Image src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
-        </div>
-    
-      <SocialProofBar accentColor={ACCENT} />
+        <section className={styles.metricStrip}>
+          <div className="container">
+            <div className={styles.metricGrid}>
+              {Config.stats.map((stat) => (
+                <div key={stat.label} className={styles.metricItem}>
+                  <div className={styles.metricValue}>{t(stat.val)}</div>
+                  <div className={styles.metricLabel}>{t(stat.label)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      </section>
+        <section className={styles.reassuranceSection}>
+          <div className="container">
+            <div className={styles.reassuranceGrid}>
+              {Config.promisesBar.map((item) => (
+                <div key={item} className={styles.reassuranceItem}>
+                  <CheckCircle2 size={18} />
+                  <span>{t(item)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      <TrustBadgeStrip />
-
-      <section className={styles.services}>
-        <div className="container">
-          <Reveal>
-            <div className="text-center">
-              <h2 style={{ fontSize: '3rem', fontWeight: 900, textTransform: 'uppercase', color: '#1e1b4b' }}>Core Competencies</h2>
-              <p style={{ color: '#64748b', marginTop: '10px', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.8rem' }}>
-                IMPACT REFINED IN {location.toUpperCase()}
+        <section className={styles.servicesSection}>
+          <div className="container">
+            <div className={styles.sectionIntro}>
+              <p className={styles.sectionEyebrow}>Studio services</p>
+              <h2 className={styles.sectionTitle}>
+                Print support that covers branded materials, signage, and
+                packaging without splitting the project across suppliers.
+              </h2>
+              <p className={styles.sectionDescription}>
+                Whether the job is for a campaign launch, a retail location, or
+                everyday branded collateral, the scope is clear before anything
+                goes to print.
               </p>
             </div>
-          </Reveal>
-          
-          <div className={styles.grid}>
-            {PrimePrintConfig.services.map((s, i) => (
-              <Reveal key={i} delay={0.2 * i}>
-                <div className={styles.card}>
-                  <h3 style={{ marginBottom: '20px' }}>{s.title}</h3>
-                  <p style={{ flex: 1 }}>{t(s.desc)}</p>
-                  <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
-                    {s.includes?.map((item: string, idx: number) => (
-                      <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
-                        <CheckCircle2 size={14} color={ACCENT} /> {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <motion.div 
-                    whileHover={{ x: 10, color: '#6366f1' }}
-                    style={{ marginTop: '30px', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer', borderTop: '1px solid #f1f5f9', paddingTop: '20px' }}
+
+            <div className={styles.serviceGrid}>
+              {Config.services.map((service, index) => {
+                const Icon = SERVICE_ICONS[index % SERVICE_ICONS.length];
+                const aiOverride =
+                  index === 0
+                    ? ai.service_1
+                    : index === 1
+                      ? ai.service_2
+                      : index === 2
+                        ? ai.service_3
+                        : undefined;
+
+                return (
+                  <Reveal key={service.title} delay={index * 0.12}>
+                    <article className={styles.serviceCard}>
+                      <div className={styles.serviceIcon}>
+                        <Icon size={22} />
+                      </div>
+                      <h3>{aiOverride || t(service.title)}</h3>
+                      <p>{t(service.desc)}</p>
+
+                      <div className={styles.serviceList}>
+                        {service.includes.map((item) => (
+                          <div key={item} className={styles.serviceListItem}>
+                            <CheckCircle2 size={15} />
+                            <span>{t(item)}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.packagesSection}>
+          <div className="container">
+            <div className={styles.sectionIntroDark}>
+              <p className={styles.sectionEyebrowDark}>Popular jobs</p>
+              <h2 className={styles.sectionTitleDark}>
+                Clear options for campaign print, signage runs, and branded packaging.
+              </h2>
+              <p className={styles.sectionDescriptionDark}>
+                These packages help a client understand what sort of project
+                support they need before the artwork, quantities, and finish are
+                finalised.
+              </p>
+            </div>
+
+            <div className={styles.packageGrid}>
+              {Config.packages.map((pkg, index) => (
+                <Reveal key={pkg.name} delay={index * 0.12}>
+                  <article
+                    className={`${styles.packageCard} ${
+                      pkg.featured ? styles.packageFeatured : ''
+                    }`}
                   >
-                    CAPABILITIES <Sparkles size={14} />
-                  </motion.div>
+                    {pkg.tag ? (
+                      <div className={styles.packageTag}>{t(pkg.tag)}</div>
+                    ) : null}
+
+                    <div className={styles.packageHeader}>
+                      <div>
+                        <h3>{t(pkg.name)}</h3>
+                        <p className={styles.packageIdeal}>{t(pkg.idealFor)}</p>
+                      </div>
+                      <div className={styles.packagePrice}>{t(pkg.price)}</div>
+                    </div>
+
+                    <div className={styles.packageList}>
+                      {pkg.features.map((feature) => (
+                        <div key={feature} className={styles.packageListItem}>
+                          <CheckCircle2 size={16} />
+                          <span>{t(feature)}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <a href={`tel:${phone}`} className={styles.packageButton}>
+                      Discuss this project
+                    </a>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.trustSection}>
+          <div className="container">
+            <div className={styles.trustGrid}>
+              <Reveal>
+                <div className={styles.trustCopy}>
+                  <p className={styles.sectionEyebrow}>Why clients trust it</p>
+                  <h2 className={styles.sectionTitle}>
+                    Print work usually goes wrong when artwork, timing, and
+                    finish choices are unclear before production starts.
+                  </h2>
+                  <p className={styles.sectionDescription}>
+                    Clients want reassurance on proofing, quality control, and
+                    delivery expectations before they ask for a quote.
+                  </p>
+
+                  <div className={styles.trustPoints}>
+                    {TRUST_POINTS.map((point) => (
+                      <div key={point} className={styles.trustPoint}>
+                        <CheckCircle2 size={17} />
+                        <span>{point}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <FAQSection faqs={PrimePrintConfig.faqs} accentColor={ACCENT} />
-      <HowItWorks accentColor={ACCENT} />
-      <TestimonialsSection testimonials={TESTIMONIALS} accentColor={ACCENT} />
+              <Reveal delay={0.14}>
+                <div className={styles.sideCard}>
+                  <div className={styles.sideCardMedia}>
+                    <Image
+                      src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80"
+                      alt="Print samples and packaging"
+                      fill
+                      sizes="(max-width: 960px) 100vw, 42vw"
+                      className={styles.sideCardImage}
+                    />
+                  </div>
+
+                  <div className={styles.sideCardBody}>
+                    <div className={styles.sideCardLabel}>Client fit</div>
+                    <h3>
+                      Built for brands, venues, retailers, and teams that need
+                      printed work to show up clean and on time.
+                    </h3>
+                    <p>
+                      Clients usually need practical guidance on stock, finish,
+                      size, quantity, and deadline planning before they commit to
+                      a production run.
+                    </p>
+
+                    <div className={styles.sideMeta}>
+                      {CLIENT_POINTS.map((item) => (
+                        <div key={item.title} className={styles.sideMetaItem}>
+                          <strong>{item.title}</strong>
+                          <span>{item.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        <HowItWorks
+          steps={Config.process}
+          accentColor={ACCENT}
+          heading="How the print project process works"
+        />
+
+        <TestimonialsSection
+          testimonials={TESTIMONIALS}
+          accentColor={ACCENT}
+          heading="What local clients say"
+        />
+
+        <FAQSection faqs={Config.faqs} accentColor={ACCENT} />
+
+        <section id="quote" className={styles.ctaSection}>
+          <div className="container">
+            <Reveal>
+              <div className={styles.ctaPanel}>
+                <div className={styles.ctaCopy}>
+                  <p className={styles.sectionEyebrowDark}>Start a project</p>
+                  <h2 className={styles.sectionTitleDark}>
+                    {t(Config.footer.title)}
+                  </h2>
+                  <p className={styles.sectionDescriptionDark}>
+                    {t(Config.footer.subtitle)}
+                  </p>
+                </div>
+
+                <div className={styles.ctaActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    Request quote
+                    <ArrowUpRight size={18} />
+                  </a>
+                  <a href={`tel:${phone}`} className={styles.ctaCall}>
+                    Call {phone}
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
 
       <footer className={styles.footer}>
         <div className="container">
-          <Reveal>
-            <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-              <Globe size={48} style={{ margin: '0 auto 30px', color: '#6366f1', opacity: 0.5 }} />
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{t(PrimePrintConfig.footer.title)}</h2>
-              <p style={{ fontSize: '1.25rem', marginBottom: '50px', opacity: 0.7 }}>
-                {t(PrimePrintConfig.footer.subtitle)}
+          <div className={styles.footerInner}>
+            <div>
+              <div className={styles.footerBrand}>{name}</div>
+              <p className={styles.footerNote}>
+                Print, signage, packaging, and branded production support across {location}.
               </p>
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', color: '#fbbf24', marginBottom: '40px' }}>
-                {[1,2,3,4,5].map(i => <Star key={i} size={20} fill="currentColor" />)}
-              </div>
-              <motion.a 
-                animate={{ boxShadow: ["0 0 20px rgba(99, 102, 241, 0.2)", "0 0 40px rgba(99, 102, 241, 0.5)", "0 0 20px rgba(99, 102, 241, 0.2)"] }}
-                transition={{ repeat: Infinity, duration: 3 }}
-                href={`tel:${phone}`} 
-                className={styles.ctaBtn} 
-                style={{ padding: '25px 80px', fontSize: '1.4rem' }}
-              >
-                CALL PRODUCTION: {phone}
-              </motion.a>
             </div>
-          </Reveal>
-          <div style={{ marginTop: '100px', opacity: 0.3, fontSize: '0.8rem', letterSpacing: '4px' }}>
-            © 2026 {name.toUpperCase()} | CERTIFIED {niche.toUpperCase()} | {location.toUpperCase()} REGION
+
+            <div className={styles.footerMeta}>
+              <span>{location}</span>
+              <span>{phone}</span>
+              <span>{new Date().getFullYear()} Copyright {name}</span>
+            </div>
           </div>
         </div>
       </footer>
 
-      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );
@@ -183,7 +504,7 @@ function PrintContent() {
 
 export default function PrintPage() {
   return (
-    <Suspense fallback={<div>Inking the layout...</div>}>
+    <Suspense fallback={<div>Preparing the print-studio preview...</div>}>
       <PrintContent />
     </Suspense>
   );

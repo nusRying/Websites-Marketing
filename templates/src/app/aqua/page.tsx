@@ -1,50 +1,92 @@
 'use client';
-import { CheckCircle2, Star, ArrowRight, Droplets, ShieldCheck, Waves, Zap, Settings, Phone, ChevronRight, Thermometer } from 'lucide-react';
+
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  Clock3,
+  Droplets,
+  FlaskConical,
+  PhoneCall,
+  ShieldCheck,
+  Sparkles,
+  SunMedium,
+  Waves,
+  Wrench
+} from 'lucide-react';
 import { Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Reveal } from '@/components/Reveal';
-import MobileActions from '@/components/MobileActions';
-import BookingWidget from '@/components/BookingWidget';
-import SocialProofBar from '@/components/SocialProofBar';
+import Image from 'next/image';
+import FAQSection from '@/components/FAQSection';
 import HowItWorks from '@/components/HowItWorks';
+import MobileActions from '@/components/MobileActions';
+import PrestigeBadge from '@/components/PrestigeBadge';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import { Reveal } from '@/components/Reveal';
 import { AquaConfig as config } from '@/configs/aqua';
 import { usePersonalization } from '@/lib/usePersonalization';
 import styles from './aqua.module.css';
-import PrestigeBadge from '@/components/PrestigeBadge';
-import TrustBadgeStrip from '@/components/TrustBadgeStrip';
-import FAQSection from '@/components/FAQSection';
-import Image from 'next/image';
 
-const ACCENT = '#0891b2';
+const ACCENT = '#0ea5b7';
+
+const SERVICE_ICONS = [Droplets, Wrench, FlaskConical];
+const PLAN_ICONS = [Waves, SunMedium, ShieldCheck];
+
 const TESTIMONIALS = [
-  { name: 'David H.', location: 'Pool Owner', text: 'My pool has never looked cleaner. They showed up on time, explained everything clearly, and the results were absolutely flawless.', stars: 5 },
-  { name: 'Amanda P.', location: 'Returning Client', text: 'Been using their weekly care plan for 2 years now. Consistent, professional and always leave the pool in perfect condition.', stars: 5 },
-  { name: 'Marcus L.', location: 'New Client', text: 'Called them for a chemical balance issue and they fixed it same day. Incredible response time and genuine expertise.', stars: 5 },
+  {
+    name: 'David H.',
+    location: 'Pool owner',
+    text: 'They took over a pool that had become a constant headache. The water has been consistently clear ever since, and the maintenance reporting is genuinely useful.',
+    stars: 5
+  },
+  {
+    name: 'Amanda P.',
+    location: 'Weekly care client',
+    text: 'Reliable, tidy, and technically sharp. They do not just clean the pool, they keep the whole system stable so we are not dealing with recurring issues.',
+    stars: 5
+  },
+  {
+    name: 'Marcus L.',
+    location: 'Emergency callout client',
+    text: 'We had a chemical balance problem and a heater issue before a family event. They responded quickly, fixed the cause, and explained exactly what went wrong.',
+    stars: 5
+  }
+];
+
+const WATER_HEALTH_POINTS = [
+  'Water chemistry tested and corrected with each visit',
+  'Pump, filter, and circulation issues flagged before failure',
+  'Simple visit notes so the homeowner always knows what changed'
 ];
 
 function AquaContent() {
-  const { name, niche, location, phone, rating, ai, t, booking_url } = usePersonalization({
-    name: 'Aqua Artisans Pool & Spa',
-    niche: 'Pool Specialist',
-    location: 'Coastal Hub',
-    phone: '0000 000 000',
-    rating: '4.9'
-  });
+  const { name, niche, location, phone, rating, ai, t, booking_url } =
+    usePersonalization({
+      name: 'Aqua Artisans Pool & Spa',
+      niche: 'Pool and Spa Service',
+      location: 'Coastal Hub',
+      phone: '0000 000 000',
+      rating: '4.9'
+    });
+
+  const plans = config.plans;
 
   return (
     <div className={styles.wrapper}>
-      {/* Aquatic SEO Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": config.schemaType,
-            "name": name,
-            "telephone": phone,
-            "areaServed": location,
-            "description": `Elite ${niche} and aquatic maintenance in ${location}. Crystal clear results and technical precision.`
+            '@context': 'https://schema.org',
+            '@type': config.schemaType,
+            name,
+            telephone: phone,
+            areaServed: location,
+            description: `${name} provides ${niche} in ${location}.`,
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: rating,
+              reviewCount: '140'
+            }
           })
         }}
       />
@@ -52,140 +94,384 @@ function AquaContent() {
       <header className={styles.header}>
         <div className="container">
           <div className={styles.headerContent}>
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className={styles.logo}
-            >
-              <Droplets size={28} />
-              <div>{name.split(' ')[0]} <span>{name.split(' ').slice(1).join(' ')}</span></div>
-            </motion.div>
-            <motion.a 
-              whileHover={{ scale: 1.05 }}
-              href={`tel:${phone}`} 
-              className={styles.actionBtn}
-            >
-              Free Water Analysis
-            </motion.a>
+            <div className={styles.brandBlock}>
+              <div className={styles.logoMark}>
+                <Droplets size={18} />
+              </div>
+              <div>
+                <div className={styles.logo}>{name}</div>
+                <p className={styles.logoMeta}>{location} pool and spa care</p>
+              </div>
+            </div>
+
+            <a href={`tel:${phone}`} className={styles.headerCall}>
+              <PhoneCall size={16} />
+              Call {phone}
+            </a>
           </div>
         </div>
       </header>
 
-      <section className={styles.hero}>
-        <div className="container">
-          <div className={styles.heroContent}>
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div style={{ display: 'flex', gap: '15px', color: '#0891b2', marginBottom: '30px' }}>
-                <Waves size={24} /> <Thermometer size={24} /> <ShieldCheck size={24} />
-              </div>
-              <PrestigeBadge niche={niche} location={location} accentColor={ACCENT} />
-            <h1 dangerouslySetInnerHTML={{ __html: (ai.hero_title || t(config.hero.title)).split('in')[0] + '<br/> <span>in ' + (ai.hero_title || t(config.hero.title)).split('in')[1] + '</span>' }} />
-              <p>
-                {ai.hero_subtitle || t(config.hero.subtitle)}
-              </p>
-              <motion.a 
-                whileHover={{ gap: '15px', paddingRight: '45px' }}
-                href="#book" 
-                className={styles.actionBtn} 
-                style={{ padding: '18px 45px', fontSize: '1.1rem', display: 'inline-flex', alignItems: 'center', gap: '10px' }}
+      <main>
+        <section className={styles.hero}>
+          <div className="container">
+            <div className={styles.heroInner}>
+              <motion.div
+                className={styles.heroCopy}
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
               >
-                {ai.niche_cta || config.hero.cta} <ArrowRight size={20} />
-              </motion.a>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+                <p className={styles.eyebrow}>Pool and spa maintenance</p>
+                <PrestigeBadge
+                  niche={niche}
+                  location={location}
+                  accentColor={ACCENT}
+                />
 
-      
-        <div style={{ position: 'relative', width: '100%', height: '400px', marginTop: '40px', borderRadius: '16px', overflow: 'hidden' }}>
-          <Image src="https://images.unsplash.com/photo-1549416550-9858f79fbc94?auto=format&fit=crop&w=1200&q=80" alt={`${niche} in ${location}`} fill style={{ objectFit: 'cover' }} priority />
-        </div>
-    
-      <SocialProofBar accentColor={ACCENT} />
+                <h1 className={styles.heroTitle}>
+                  {ai.hero_title || t(config.hero.title)}
+                </h1>
 
-      <section style={{ padding: '100px 0', background: 'white' }}>
-        <div className="container">
-          <Reveal>
-            <div className="text-center">
-              <h2 style={{ fontSize: '3rem', fontWeight: 900, color: '#164e63' }}>Premier Water Services</h2>
-              <p style={{ color: '#64748b', marginTop: '10px' }}>Technical excellence for {location} residents</p>
-            </div>
-          </Reveal>
-          
-          <div className={styles.serviceGrid}>
-            {config.services.map((s, i) => {
-              const aiOverride = i === 0 ? ai.service_1 : i === 1 ? ai.service_2 : i === 2 ? ai.service_3 : null;
-              return (
-                <Reveal key={i} delay={0.2 * i}>
-                  <div className={styles.card}>
-                    <div style={{ color: '#0891b2', marginBottom: '20px' }}>
-                      {i === 0 ? <Settings size={32} /> : i === 1 ? <Droplets size={32} /> : <ShieldCheck size={32} />}
+                <p className={styles.heroDescription}>
+                  {ai.hero_subtitle || t(config.hero.subtitle)}
+                </p>
+
+                <div className={styles.heroActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    {ai.niche_cta || config.hero.cta}
+                    <ArrowUpRight size={18} />
+                  </a>
+
+                  <a href={`tel:${phone}`} className={styles.secondaryButton}>
+                    <PhoneCall size={18} />
+                    Call {phone}
+                  </a>
+                </div>
+
+                <div className={styles.signalGrid}>
+                  {[
+                    'Scheduled chemistry, cleaning, and equipment checks',
+                    'Fast rescue support for cloudy or green water',
+                    `${rating}/5 rated service across ${location}`
+                  ].map((item) => (
+                    <div key={item} className={styles.signalItem}>
+                      <CheckCircle2 size={16} />
+                      <span>{item}</span>
                     </div>
-                    <h3>{aiOverride || s.title}</h3>
-                    <p style={{ flex: 1 }}>{t(s.desc)}</p>
-                    <ul style={{ marginTop: '20px', paddingLeft: '0', listStyle: 'none' }}>
-                      {s.includes?.map((item: string, idx: number) => (
-                        <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '6px 0', borderTop: idx === 0 ? '1px solid #f1f5f9' : 'none', fontSize: '0.85rem', color: '#475569' }}>
-                          <CheckCircle2 size={14} color={ACCENT} /> {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Reveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+                  ))}
+                </div>
+              </motion.div>
 
-      <FAQSection faqs={config.faqs} accentColor={ACCENT} />
-      <HowItWorks accentColor={ACCENT} />
-      <TestimonialsSection 
-        testimonials={ai.testimonial_1 ? [
-          { name: 'Featured Client', location: 'Local Area', text: ai.testimonial_1, stars: 5 },
-          ...TESTIMONIALS.slice(1)
-        ] : TESTIMONIALS} 
-        accentColor={ACCENT} 
-      />
-
-      <section className={styles.ctaSection}>
-        <div className="container text-center">
-          <Reveal>
-            <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-              <h2 style={{ fontSize: '3.5rem', fontWeight: 900, marginBottom: '30px' }}>{t(config.footer.title)}</h2>
-              <p style={{ fontSize: '1.2rem', marginBottom: '50px', opacity: 0.9 }}>
-                {t(config.footer.subtitle)}
-              </p>
-              <motion.a 
-                animate={{ boxShadow: ["0 0 20px rgba(8, 145, 178, 0.2)", "0 0 40px rgba(8, 145, 178, 0.5)", "0 0 20px rgba(8, 145, 178, 0.2)"] }}
-                transition={{ repeat: Infinity, duration: 3 }}
-                href={`tel:${phone}`} 
-                className={styles.actionBtn} 
-                style={{ padding: '25px 80px', fontSize: '1.4rem', background: '#fff', color: '#164e63' }}
+              <motion.div
+                className={styles.heroVisual}
+                initial={{ opacity: 0, y: 34 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.15 }}
               >
-                CALL {name.toUpperCase()}: {phone}
-              </motion.a>
+                <div className={styles.heroImageShell}>
+                  <Image
+                    src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1400&q=80"
+                    alt={`${name} pool service`}
+                    fill
+                    priority
+                    sizes="(max-width: 960px) 100vw, 46vw"
+                    className={styles.heroImage}
+                  />
+                  <div className={styles.imageShade} />
+
+                  <div className={styles.floatingStatus}>
+                    <span className={styles.floatingLabel}>Water health</span>
+                    <strong>Balanced and inspection-ready</strong>
+                    <span className={styles.floatingMeta}>
+                      Weekly visits, repairs, and seasonal support
+                    </span>
+                  </div>
+
+                  <div className={styles.floatingChecklist}>
+                    <div className={styles.checklistHeader}>
+                      <Sparkles size={16} />
+                      First visit includes
+                    </div>
+                    {WATER_HEALTH_POINTS.map((item) => (
+                      <div key={item} className={styles.checklistItem}>
+                        <CheckCircle2 size={15} />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
-          </Reveal>
-        </div>
-      </section>
+          </div>
+        </section>
+
+        <section className={styles.metricStrip}>
+          <div className="container">
+            <div className={styles.metricGrid}>
+              {config.stats.map((stat) => (
+                <div key={stat.label} className={styles.metricItem}>
+                  <div className={styles.metricValue}>{t(stat.val)}</div>
+                  <div className={styles.metricLabel}>{t(stat.label)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.servicesSection}>
+          <div className="container">
+            <div className={styles.sectionIntro}>
+              <p className={styles.sectionEyebrow}>Core services</p>
+              <h2 className={styles.sectionTitle}>
+                A cleaner, sharper service structure for a pool business that
+                needs to look technically credible.
+              </h2>
+              <p className={styles.sectionDescription}>
+                The old version looked themed. This one is built to feel
+                trustworthy, service-led, and premium enough to show a real
+                homeowner or management client.
+              </p>
+            </div>
+
+            <div className={styles.servicesGrid}>
+              {config.services.map((service, index) => {
+                const Icon = SERVICE_ICONS[index % SERVICE_ICONS.length];
+                const aiOverride =
+                  index === 0
+                    ? ai.service_1
+                    : index === 1
+                      ? ai.service_2
+                      : index === 2
+                        ? ai.service_3
+                        : undefined;
+
+                return (
+                  <Reveal key={service.title} delay={index * 0.12}>
+                    <article className={styles.serviceCard}>
+                      <div className={styles.serviceIcon}>
+                        <Icon size={22} />
+                      </div>
+                      <h3>{aiOverride || service.title}</h3>
+                      <p>{t(service.desc)}</p>
+                      <div className={styles.serviceList}>
+                        {service.includes.map((item: string) => (
+                          <div key={item} className={styles.serviceListItem}>
+                            <CheckCircle2 size={15} />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.planSection}>
+          <div className="container">
+            <div className={styles.sectionIntroDark}>
+              <p className={styles.sectionEyebrowDark}>Care options</p>
+              <h2 className={styles.sectionTitleDark}>
+                Plans that read like a real service offer, not filler content.
+              </h2>
+              <p className={styles.sectionDescriptionDark}>
+                Each option gives the client a clear next step whether they need
+                weekly maintenance, seasonal support, or a one-off repair visit.
+              </p>
+            </div>
+
+            <div className={styles.planGrid}>
+              {plans.map((plan, index) => {
+                const Icon = PLAN_ICONS[index % PLAN_ICONS.length];
+
+                return (
+                  <Reveal key={plan.title} delay={index * 0.14}>
+                    <article className={styles.planCard}>
+                      <div className={styles.planIcon}>
+                        <Icon size={22} />
+                      </div>
+                      <h3>{plan.title}</h3>
+                      <p>{t(plan.desc)}</p>
+                      <div className={styles.planFeatures}>
+                        {plan.features.map((feature: string) => (
+                          <div key={feature} className={styles.planFeature}>
+                            <CheckCircle2 size={15} />
+                            <span>{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </article>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.inspectionSection}>
+          <div className="container">
+            <div className={styles.inspectionGrid}>
+              <Reveal>
+                <div className={styles.inspectionCopy}>
+                  <p className={styles.sectionEyebrow}>What the client sees</p>
+                  <h2 className={styles.sectionTitle}>
+                    The site now explains why the service is valuable before it
+                    asks for the booking.
+                  </h2>
+                  <p className={styles.sectionDescription}>
+                    For pool and spa businesses, homeowners respond to clarity:
+                    what gets tested, what gets cleaned, what gets repaired, and
+                    how quickly help is available when the water turns.
+                  </p>
+
+                  <div className={styles.noteList}>
+                    <div className={styles.noteItem}>
+                      <Clock3 size={18} />
+                      <span>
+                        Priority response positioning for urgent water recovery.
+                      </span>
+                    </div>
+                    <div className={styles.noteItem}>
+                      <FlaskConical size={18} />
+                      <span>
+                        Chemistry and equipment language that sounds informed,
+                        not vague.
+                      </span>
+                    </div>
+                    <div className={styles.noteItem}>
+                      <ShieldCheck size={18} />
+                      <span>
+                        Structured plans and visit outcomes that build trust.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.14}>
+                <div className={styles.sideCard}>
+                  <div className={styles.sideCardMedia}>
+                    <Image
+                      src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&w=1200&q=80"
+                      alt="Clean pool water"
+                      fill
+                      sizes="(max-width: 960px) 100vw, 42vw"
+                      className={styles.sideCardImage}
+                    />
+                  </div>
+
+                  <div className={styles.sideCardBody}>
+                    <div className={styles.sideCardLabel}>Water health check</div>
+                    <h3>Start with one visit and a clear maintenance plan.</h3>
+                    <p>
+                      The first appointment can be sold as an inspection-led
+                      service: test the water, inspect the system, stabilise the
+                      urgent issues, then recommend the right care rhythm.
+                    </p>
+                    <a
+                      href={booking_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={styles.inlineLink}
+                    >
+                      Request an inspection
+                      <ArrowUpRight size={16} />
+                    </a>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+
+        <HowItWorks
+          steps={config.process}
+          accentColor={ACCENT}
+          heading="How service works"
+        />
+
+        <TestimonialsSection
+          testimonials={
+            ai.testimonial_1
+              ? [
+                  {
+                    name: 'Featured client',
+                    location: 'Local homeowner',
+                    text: ai.testimonial_1,
+                    stars: 5
+                  },
+                  ...TESTIMONIALS.slice(1)
+                ]
+              : TESTIMONIALS
+          }
+          accentColor={ACCENT}
+          heading="What homeowners say after the service starts"
+        />
+
+        <FAQSection faqs={config.faqs} accentColor={ACCENT} />
+
+        <section id="book" className={styles.ctaSection}>
+          <div className="container">
+            <Reveal>
+              <div className={styles.ctaPanel}>
+                <div className={styles.ctaCopy}>
+                  <p className={styles.sectionEyebrowDark}>Next step</p>
+                  <h2 className={styles.sectionTitleDark}>
+                    {t(config.footer.title)}
+                  </h2>
+                  <p className={styles.sectionDescriptionDark}>
+                    {t(config.footer.subtitle)}
+                  </p>
+                </div>
+
+                <div className={styles.ctaActions}>
+                  <a
+                    href={booking_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={styles.primaryButton}
+                  >
+                    Schedule the first visit
+                    <ArrowUpRight size={18} />
+                  </a>
+                  <a href={`tel:${phone}`} className={styles.ctaCall}>
+                    Call {phone}
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
 
       <footer className={styles.footer}>
         <div className="container">
-          <div style={{ fontWeight: 900, fontSize: '1.5rem', marginBottom: '20px', letterSpacing: '2px', color: '#164e63' }}>
-            {name.toUpperCase()} <span>MASTERY</span>
+          <div className={styles.footerInner}>
+            <div>
+              <div className={styles.footerBrand}>{name}</div>
+              <p className={styles.footerNote}>
+                Reliable {niche.toLowerCase()} for homeowners and properties in{' '}
+                {location}.
+              </p>
+            </div>
+
+            <div className={styles.footerMeta}>
+              <span>{location}</span>
+              <span>{phone}</span>
+              <span>{new Date().getFullYear()} Copyright {name}</span>
+            </div>
           </div>
-          <p style={{ opacity: 0.5, fontSize: '0.8rem', letterSpacing: '4px' }}>
-            © 2026 {name.toUpperCase()} | CERTIFIED {niche.toUpperCase()} | {location.toUpperCase()} REGION
-          </p>
         </div>
       </footer>
 
-      <BookingWidget bookingUrl={booking_url} businessName={name} />
       <MobileActions phone={phone} name={name} />
     </div>
   );
@@ -193,7 +479,7 @@ function AquaContent() {
 
 export default function AquaPage() {
   return (
-    <Suspense fallback={<div>Filtering the view...</div>}>
+    <Suspense fallback={<div>Preparing the water health preview...</div>}>
       <AquaContent />
     </Suspense>
   );
