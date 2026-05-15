@@ -34,33 +34,35 @@ export async function POST(request: Request) {
   }
 
   const stripe = getStripe()
-  const priceId = process.env.STRIPE_PRICE_ID
-  if (!stripe || !priceId) {
+  if (!stripe) {
     return NextResponse.json(
-      { error: 'Stripe checkout is not configured yet.' },
+      { error: 'Stripe is not configured yet.' },
       { status: 503 }
     )
   }
 
-  try {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ],
-      mode: 'subscription',
-      success_url: `${request.headers.get('origin')}/?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${request.headers.get('origin')}/billing`,
-      client_reference_id: user.id,
-      customer_email: user.email,
-    })
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('stripe_customer_id')
+    .eq('id', user.id)
+    .single()
 
-    return NextResponse.json({ url: session.url })
-  } catch (error: any) {
-    console.error('Stripe Checkout Error:', error)
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  if (profileError) {
+    return NextResponse.json({ error: profileError.message }, { status: 500 })
   }
+
+  if (!profile?.stripe_customer_id) {
+    return NextResponse.json(
+      { error: 'No Stripe customer is linked to this account yet.' },
+      { status: 400 }
+    )
+  }
+
+  const origin = request.headers.get('origin') || new URL(request.url).origin
+  const session = await stripe.billingPortal.sessions.create({
+    customer: profile.stripe_customer_id,
+    return_url: `${origin}/`,
+  })
+
+  return NextResponse.json({ url: session.url })
 }

@@ -3,14 +3,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HelpCircle, MessageCircle, FileText, Bug, X, Send } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 export default function SupportWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const supportEmail = process.env.NEXT_PUBLIC_SUPPORT_EMAIL || 'support@leadpro.local';
 
   const supportOptions = [
-    { icon: <FileText size={18} />, label: 'Documentation', href: '#' },
-    { icon: <MessageCircle size={18} />, label: 'Live Chat', href: '#' },
-    { icon: <Bug size={18} />, label: 'Report a Bug', href: '#' },
+    { icon: <FileText size={18} />, label: 'Documentation', href: process.env.NEXT_PUBLIC_SUPPORT_DOCS_URL || 'https://github.com/nusRying/Websites-Marketing#readme' },
+    { icon: <MessageCircle size={18} />, label: 'Live Chat', href: `mailto:${supportEmail}?subject=Lead Pro support` },
+    { icon: <Bug size={18} />, label: 'Report a Bug', href: `mailto:${supportEmail}?subject=Lead Pro bug report` },
   ];
 
   return (
@@ -38,6 +40,7 @@ export default function SupportWidget() {
                 <a 
                   key={i} 
                   href={opt.href} 
+                  onClick={() => trackEvent('SUPPORT_OPTION_CLICKED', { label: opt.label })}
                   style={{ 
                     display: 'flex', 
                     alignItems: 'center', 
@@ -60,12 +63,12 @@ export default function SupportWidget() {
               ))}
             </div>
             <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
-              <button style={{ width: '100%', padding: '14px', borderRadius: 'var(--radius-md)', background: 'var(--secondary)', color: 'var(--white)', border: 'none', fontWeight: 800, fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', transition: 'all 0.2s', fontFamily: 'var(--font-outfit), sans-serif', boxShadow: 'var(--shadow-sm)' }}
+              <a href={`mailto:${supportEmail}?subject=Lead Pro feedback`} onClick={() => trackEvent('SUPPORT_FEEDBACK_STARTED')} style={{ width: '100%', padding: '14px', borderRadius: 'var(--radius-md)', background: 'var(--secondary)', color: 'var(--white)', border: 'none', fontWeight: 800, fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', transition: 'all 0.2s', fontFamily: 'var(--font-outfit), sans-serif', boxShadow: 'var(--shadow-sm)', textDecoration: 'none' }}
                 onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = 'var(--shadow-md)'; }}
                 onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'var(--shadow-sm)'; }}
               >
                 <Send size={14} /> Send Feedback
-              </button>
+              </a>
             </div>
           </motion.div>
         )}

@@ -1,9 +1,14 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
+import { DEMO_SESSION_COOKIE, demoCrmData, isDemoRequest } from '@/lib/demo'
 
-export async function GET() {
+export async function GET(request: Request) {
   const cookieStore = await cookies()
+  if (isDemoRequest(request.headers.get('host'), cookieStore.get(DEMO_SESSION_COOKIE)?.value)) {
+    return NextResponse.json(demoCrmData)
+  }
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -28,6 +33,26 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const cookieStore = await cookies()
+  if (isDemoRequest(request.headers.get('host'), cookieStore.get(DEMO_SESSION_COOKIE)?.value)) {
+    const { leadId, status, notes, ai_copy } = await request.json()
+
+    if (!leadId) {
+      return NextResponse.json({ error: 'Lead ID required' }, { status: 400 })
+    }
+
+    const existing = demoCrmData[leadId] || { id: leadId, history: [] }
+    return NextResponse.json({
+      success: true,
+      entry: {
+        ...existing,
+        id: leadId,
+        status: status || existing.status || 'NEW',
+        notes: notes !== undefined ? notes : existing.notes || '',
+        ai_copy: ai_copy || existing.ai_copy,
+      }
+    })
+  }
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,

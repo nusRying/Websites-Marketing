@@ -1,6 +1,13 @@
 import pytest
 from httpx import AsyncClient, ASGITransport
-from src.api_worker import app
+from src.api_worker import app, parse_allowed_origins
+
+
+def test_parse_allowed_origins_from_csv():
+    origins = parse_allowed_origins(
+        "https://app.example.com, http://localhost:3000/, https://app.example.com"
+    )
+    assert origins == ["http://localhost:3000", "https://app.example.com"]
 
 
 @pytest.mark.asyncio
@@ -22,4 +29,11 @@ async def test_run_pipeline_unauthorized():
             json={"niche": "plumber", "location": "london", "user_id": "test-user"},
         )
     # Should be 401 because we haven't provided a Bearer token
+    assert response.status_code == 401
+
+
+@pytest.mark.asyncio
+async def test_job_status_requires_authentication():
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        response = await ac.get("/job/00000000-0000-0000-0000-000000000000")
     assert response.status_code == 401

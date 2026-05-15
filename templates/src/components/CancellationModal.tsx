@@ -7,10 +7,12 @@ import { AlertCircle, Gift, ArrowRight, X } from 'lucide-react';
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: () => void;
+  onConfirm: (reason: string) => void;
+  onReasonSelected?: (reason: string) => void;
+  onClaimOffer?: (reason: string) => void;
 }
 
-export default function CancellationModal({ isOpen, onClose, onConfirm }: Props) {
+export default function CancellationModal({ isOpen, onClose, onConfirm, onReasonSelected, onClaimOffer }: Props) {
   const [step, setStep] = useState(1);
   const [reason, setReason] = useState('');
 
@@ -42,7 +44,7 @@ export default function CancellationModal({ isOpen, onClose, onConfirm }: Props)
               {reasons.map((r, i) => (
                 <button 
                   key={i} 
-                  onClick={() => { setReason(r); setStep(2); }}
+                  onClick={() => { setReason(r); onReasonSelected?.(r); setStep(2); }}
                   style={{ textAlign: 'left', padding: '15px 20px', borderRadius: '12px', border: '1px solid #e2e8f0', background: 'white', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s' }}
                   onMouseOver={(e) => e.currentTarget.style.borderColor = '#3b82f6'}
                   onMouseOut={(e) => e.currentTarget.style.borderColor = '#e2e8f0'}
@@ -65,13 +67,13 @@ export default function CancellationModal({ isOpen, onClose, onConfirm }: Props)
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
               <button 
-                onClick={onClose}
+                onClick={() => { onClaimOffer?.(reason); onClose(); }}
                 style={{ padding: '18px', background: '#10b981', color: 'white', border: 'none', borderRadius: '16px', fontWeight: 800, cursor: 'pointer', boxShadow: '0 10px 15px -3px rgba(16, 185, 129, 0.3)' }}
               >
                 KEEP SUBSCRIPTION & CLAIM OFFER
               </button>
               <button 
-                onClick={onConfirm}
+                onClick={() => onConfirm(reason)}
                 style={{ padding: '15px', background: 'transparent', color: '#94a3b8', border: 'none', fontWeight: 700, fontSize: '0.85rem', cursor: 'pointer' }}
               >
                 No thanks, finish cancellation

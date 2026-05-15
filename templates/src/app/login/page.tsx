@@ -2,18 +2,30 @@
 
 export const dynamic = 'force-dynamic';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { motion } from 'framer-motion';
 import { Zap, Mail, Lock, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { isLocalDemoHost, startBrowserDemoSession } from '@/lib/demo';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [demoAvailable, setDemoAvailable] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setDemoAvailable(isLocalDemoHost(window.location.host));
+  }, []);
+
+  const enterDemo = () => {
+    startBrowserDemoSession();
+    router.push('/');
+    router.refresh();
+  };
 
     const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,7 +66,7 @@ export default function LoginPage() {
     }
   } catch (err: any) {
     console.error("UNEXPECTED ERROR during login flow:", err);
-    setError("An unexpected error occurred.");
+    setError("Failed to reach Supabase. Use Local Demo for now, or configure Supabase before signing in.");
     setLoading(false);
   }
   };
@@ -154,6 +166,25 @@ export default function LoginPage() {
           >
             {loading ? <Loader2 className="animate-spin" size={20} /> : 'SIGN IN TO COMMAND CENTER'}
           </button>
+
+          {demoAvailable && (
+            <button
+              type="button"
+              onClick={enterDemo}
+              style={{
+                padding: '16px',
+                background: '#0f172a',
+                color: 'white',
+                border: 'none',
+                borderRadius: '16px',
+                fontWeight: 800,
+                fontSize: '0.9rem',
+                cursor: 'pointer'
+              }}
+            >
+              CONTINUE IN LOCAL DEMO
+            </button>
+          )}
           
           <div style={{ textAlign: 'center', marginTop: '15px' }}>
             <p style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 500 }}>

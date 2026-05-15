@@ -1,5 +1,6 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
+import { DEMO_SESSION_COOKIE, isDemoRequest } from '@/lib/demo'
 
 export async function proxy(request: NextRequest) {
   let response = NextResponse.next({
@@ -7,6 +8,28 @@ export async function proxy(request: NextRequest) {
       headers: request.headers,
     },
   })
+
+  const isProtectedRoute = request.nextUrl.pathname === '/' || request.nextUrl.pathname.startsWith('/api/')
+  const isAuthRoute = request.nextUrl.pathname.startsWith('/login') || request.nextUrl.pathname.startsWith('/signup')
+  const demoSession = isDemoRequest(
+    request.headers.get('host'),
+    request.cookies.get(DEMO_SESSION_COOKIE)?.value
+  )
+
+  // SECURITY HEADERS
+  response.headers.set('X-Frame-Options', 'DENY')
+  response.headers.set('X-Content-Type-Options', 'nosniff')
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
+  response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
+
+  if (demoSession && isAuthRoute) {
+    return NextResponse.redirect(new URL('/', request.url))
+  }
+
+  if (demoSession) {
+    return response
+  }
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -73,17 +96,6 @@ export async function proxy(request: NextRequest) {
   const user = data?.user
   if (authError) console.error("Proxy: Auth error", authError.message);
 
-  // Protect dashboard and internal API routes
-  const isProtectedRoute = request.nextUrl.pathname === '/' || request.nextUrl.pathname.startsWith('/api/')
-  const isAuthRoute = request.nextUrl.pathname.startsWith('/login')
-  
-  // SECURITY HEADERS
-  response.headers.set('X-Frame-Options', 'DENY')
-  response.headers.set('X-Content-Type-Options', 'nosniff')
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
-  response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
-  response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains')
-
   // ... (isPublicTemplate checks kept)
 
   // Special case: Tracking and Site Templates are public
@@ -97,7 +109,7 @@ export async function proxy(request: NextRequest) {
   
   const isPublicApi = request.nextUrl.pathname === '/api/status' || request.nextUrl.pathname === '/api/track' || request.nextUrl.pathname === '/api/proxy-image'
 
-  if (isProtectedRoute && !isPublicApi && !user && !isPublicTemplate) {
+  if (isProtectedRoute && !isPublicApi && !user && !isPublicTemplate && !demoSession) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 

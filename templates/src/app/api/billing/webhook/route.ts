@@ -5,24 +5,45 @@ import { headers } from 'next/headers'
 
 export const dynamic = 'force-dynamic'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
-  apiVersion: '2026-03-25.dahlia' as any,
-})
+function getStripe() {
+  const secretKey = process.env.STRIPE_SECRET_KEY
+  if (!secretKey) return null
 
-// Use Service Role Key for backend updates (bypasses RLS)
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder_key'
-)
+  return new Stripe(secretKey, {
+    apiVersion: '2026-03-25.dahlia' as any,
+  })
+}
+
+function getSupabaseAdmin() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  if (!supabaseUrl || !serviceRoleKey) return null
+
+  return createClient(supabaseUrl, serviceRoleKey)
+}
 
 export async function POST(request: Request) {
+  const stripe = getStripe()
+  const supabaseAdmin = getSupabaseAdmin()
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
+
+  if (!stripe || !supabaseAdmin || !webhookSecret) {
+    return NextResponse.json(
+      { error: 'Stripe webhook is not configured yet.' },
+      { status: 503 }
+    )
+  }
+
   const body = await request.text()
-  const sig = (await headers()).get('stripe-signature')!
+  const sig = (await headers()).get('stripe-signature')
+  if (!sig) {
+    return NextResponse.json({ error: 'Missing Stripe signature' }, { status: 400 })
+  }
 
   let event: Stripe.Event
 
   try {
-    event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!)
+    event = stripe.webhooks.constructEvent(body, sig, webhookSecret)
   } catch (err: any) {
     return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 })
   }
@@ -48,6 +69,19 @@ export async function POST(request: Request) {
         break
       }
 
+      case 'customer.subscription.updated': {
+        const subscription = event.data.object as Stripe.Subscription
+        const customerId = subscription.customer as string
+
+        const { error } = await supabaseAdmin
+          .from('profiles')
+          .update({ subscription_status: subscription.status })
+          .eq('stripe_customer_id', customerId)
+
+        if (error) throw error
+        break
+      }
+
       case 'customer.subscription.deleted': {
         const subscription = event.data.object as Stripe.Subscription
         const customerId = subscription.customer as string
@@ -60,8 +94,6 @@ export async function POST(request: Request) {
         if (error) throw error
         break
       }
-
-      // Add more cases as needed (past_due, trial, etc.)
     }
 
     return NextResponse.json({ received: true })

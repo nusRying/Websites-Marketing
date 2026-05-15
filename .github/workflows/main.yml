@@ -86,6 +86,12 @@ jobs:
       run: |
         python -m pytest tests/test_api_worker.py
 
+    - name: Run Production Hardening Tests
+      env:
+        PYTHONPATH: .
+      run: |
+        python -m pytest tests/test_job_store.py tests/test_nyquist_audit.py
+
   frontend-build:
     needs: lint-and-typecheck
     runs-on: ubuntu-latest

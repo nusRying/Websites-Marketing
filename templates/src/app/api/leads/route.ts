@@ -1,6 +1,7 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
+import { DEMO_SESSION_COOKIE, demoBatches, demoLeads, isDemoRequest } from '@/lib/demo'
 
 export async function GET(request: Request) {
   const cookieStore = await cookies()
@@ -12,6 +13,30 @@ export async function GET(request: Request) {
   const quality = searchParams.get('quality')
   const limit = parseInt(searchParams.get('limit') || '50')
   const offset = parseInt(searchParams.get('offset') || '0')
+
+  if (isDemoRequest(request.headers.get('host'), cookieStore.get(DEMO_SESSION_COOKIE)?.value)) {
+    let leads = demoLeads;
+
+    if (query) {
+      const normalizedQuery = query.toLowerCase();
+      leads = leads.filter((lead) =>
+        [lead.name, lead.category, lead.address]
+          .filter(Boolean)
+          .some((value) => String(value).toLowerCase().includes(normalizedQuery))
+      );
+      return NextResponse.json({ leads: leads.slice(offset, offset + limit), total: leads.length });
+    }
+
+    if (!batchId) {
+      return NextResponse.json({ files: demoBatches });
+    }
+
+    leads = leads.filter((lead) => lead.batch_id === batchId);
+    if (status && status !== 'ALL') leads = leads.filter((lead) => lead.status === status);
+    if (quality && quality !== 'ALL') leads = leads.filter((lead) => lead.quality === quality);
+
+    return NextResponse.json({ leads: leads.slice(offset, offset + limit), total: leads.length });
+  }
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

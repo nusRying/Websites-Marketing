@@ -6,6 +6,7 @@ from pydantic import BaseModel
 import os
 from supabase import create_client, Client
 import sentry_sdk
+from src.job_store import JobStore
 
 # Initialize Sentry
 SENTRY_DSN = os.getenv("SENTRY_DSN")
@@ -30,10 +31,46 @@ logger = logging.getLogger("APIWorker")
 
 app = FastAPI(title="Lead Engine SaaS Worker")
 
+
+def parse_allowed_origins(raw_origins: str | None = None) -> list[str]:
+    raw = raw_origins
+    if raw is None:
+        raw = (
+            os.getenv("WORKER_ALLOWED_ORIGINS")
+            or os.getenv("NEXT_PUBLIC_APP_URL")
+            or os.getenv("NEXT_PUBLIC_SITE_URL")
+            or ""
+        )
+
+    origins = [origin.strip().rstrip("/") for origin in raw.split(",") if origin.strip()]
+
+    vercel_url = os.getenv("VERCEL_URL")
+    if vercel_url:
+        vercel_origin = (
+            vercel_url
+            if vercel_url.startswith(("http://", "https://"))
+            else f"https://{vercel_url}"
+        )
+        origins.append(vercel_origin.rstrip("/"))
+
+    if origins:
+        return sorted(set(origins))
+
+    return [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:3001",
+    ]
+
+
+ALLOWED_ORIGINS = parse_allowed_origins()
+
+
 # Add CORS Middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -89,8 +126,13 @@ class JobStatus(BaseModel):
     message: str
 
 
-# In-memory job store (in production, use Redis/Postgres)
-jobs = {}
+job_store = JobStore()
+
+
+def model_to_dict(model: BaseModel) -> dict:
+    if hasattr(model, "model_dump"):
+        return model.model_dump()
+    return model.dict()
 
 
 def run_full_pipeline(job_id: str, request: PipelineRequest):
@@ -98,7 +140,7 @@ def run_full_pipeline(job_id: str, request: PipelineRequest):
     Orchestrates the full Lead Engine pipeline in the background.
     """
     try:
-        jobs[job_id] = "RUNNING"
+        job_store.update(job_id, "RUNNING", "Scraping Google Maps leads.")
         logger.info(f"Starting Pipeline Job {job_id} for user {request.user_id}")
 
         # 1. SCRAPE
@@ -113,7 +155,11 @@ def run_full_pipeline(job_id: str, request: PipelineRequest):
         )
 
         if not leads:
-            jobs[job_id] = "COMPLETED_NO_RESULTS"
+            job_store.update(
+                job_id,
+                "COMPLETED_NO_RESULTS",
+                "Pipeline completed, but no matching leads were found.",
+            )
             logger.warning(f"Job {job_id}: No leads found.")
             return
 
@@ -129,6 +175,7 @@ def run_full_pipeline(job_id: str, request: PipelineRequest):
 
         # 3. Trigger Enrichment (which now handles Screenshots and Cloud Sync)
         enrich_engine = AIEnrichmentEngine()
+        job_store.update(job_id, "ENRICHING", "Generating AI copy and screenshots.")
         logger.info(f"Job {job_id}: Starting AI Enrichment and Cloud Sync...")
 
         final_file = enrich_engine.process_file(
@@ -137,7 +184,12 @@ def run_full_pipeline(job_id: str, request: PipelineRequest):
             user_id=request.user_id,
         )
 
-        jobs[job_id] = "SUCCESS"
+        job_store.update(
+            job_id,
+            "SUCCESS",
+            "Pipeline completed successfully and synced to cloud.",
+            output_file=final_file,
+        )
         logger.info(
             f"Job {job_id}: Pipeline completed successfully. Data synced to cloud."
         )
@@ -149,7 +201,7 @@ def run_full_pipeline(job_id: str, request: PipelineRequest):
             os.remove(final_file)
 
     except Exception as e:
-        jobs[job_id] = f"FAILED: {str(e)}"
+        job_store.update(job_id, "FAILED", "Pipeline failed.", error=str(e))
         logger.error(f"Job {job_id} failed: {e}")
 
 
@@ -172,7 +224,7 @@ async def trigger_pipeline(
         raise HTTPException(status_code=403, detail="Forbidden: User ID mismatch")
 
     job_id = str(uuid.uuid4())
-    jobs[job_id] = "PENDING"
+    job_store.create(job_id, user.id, model_to_dict(request))
 
     background_tasks.add_task(run_full_pipeline, job_id, request)
 
@@ -184,11 +236,23 @@ async def trigger_pipeline(
 
 
 @app.get("/job/{job_id}")
-async def get_job_status(job_id: str):
+async def get_job_status(job_id: str, user=Depends(get_current_user)):
     """
     Returns the status of a specific job.
     """
-    if job_id not in jobs:
+    record = job_store.get(job_id)
+    if not record:
         raise HTTPException(status_code=404, detail="Job not found")
 
-    return {"job_id": job_id, "status": jobs[job_id]}
+    if record.get("user_id") != user.id:
+        raise HTTPException(status_code=403, detail="Forbidden")
+
+    return {
+        "job_id": job_id,
+        "status": record.get("status"),
+        "message": record.get("message"),
+        "error": record.get("error"),
+        "created_at": record.get("created_at"),
+        "updated_at": record.get("updated_at"),
+        "completed_at": record.get("completed_at"),
+    }

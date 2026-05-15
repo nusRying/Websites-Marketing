@@ -4,6 +4,7 @@
  */
 
 import { supabase } from './supabase';
+import { isBrowserDemoSession } from './demo';
 
 export type AnalyticsEvent = 
   | 'SCRAPE_STARTED'
@@ -11,28 +12,38 @@ export type AnalyticsEvent =
   | 'OUTREACH_EXPORTED'
   | 'PITCH_COPIED'
   | 'SITE_PREVIEWED'
-  | 'BOOKING_ATTEMPTED';
+  | 'BOOKING_ATTEMPTED'
+  | 'BILLING_PORTAL_OPENED'
+  | 'CANCELLATION_REASON_SELECTED'
+  | 'CANCELLATION_OFFER_CLAIMED'
+  | 'CANCELLATION_CONFIRMED'
+  | 'SUPPORT_OPTION_CLICKED'
+  | 'SUPPORT_FEEDBACK_STARTED';
 
-export async function trackEvent(event: AnalyticsEvent, metadata: Record<string, any> = {}) {
+export async function trackEvent(event: AnalyticsEvent, metadata: Record<string, unknown> = {}) {
   try {
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
+    if (!user && !isBrowserDemoSession()) return;
 
-    const entry = {
-      user_id: user.id,
-      event_type: event,
-      metadata: {
-        ...metadata,
-        timestamp: new Date().toISOString(),
-        url: window.location.href,
-      }
+    const eventMetadata = {
+      ...metadata,
+      timestamp: new Date().toISOString(),
+      url: typeof window !== 'undefined' ? window.location.href : undefined,
+      demo: !user,
     };
 
-    // 1. Log to internal audit table (Optional, using crm_history logic for now)
-    console.log(`[ANALYTICS] ${event}:`, metadata);
+    const response = await fetch('/api/customer-success/events', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event_type: event,
+        metadata: eventMetadata,
+      }),
+    });
 
-    // 2. Integration: Future PostHog/Mixpanel push
-    // pushToPostHog(entry);
+    if (!response.ok) {
+      console.warn(`[ANALYTICS] ${event} was not persisted.`);
+    }
 
   } catch (error) {
     console.error('Failed to track analytics event:', error);

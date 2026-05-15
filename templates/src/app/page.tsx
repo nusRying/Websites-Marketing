@@ -19,6 +19,7 @@ import GlobalHealthBanner from '@/components/GlobalHealthBanner';
 import SupportWidget from '@/components/SupportWidget';
 import CancellationModal from '@/components/CancellationModal';
 import { trackEvent } from '@/lib/analytics';
+import { isBrowserDemoSession } from '@/lib/demo';
 
 interface ScrapedFile {
   id: string;
@@ -135,6 +136,13 @@ export default function LeadCRM() {
   useEffect(() => {
     const fetchProfile = async () => {
       console.log("Dashboard mount: fetchProfile started");
+      if (isBrowserDemoSession()) {
+        setSubscriptionStatus('active');
+        setProfileLoading(false);
+        setAppError(null);
+        return;
+      }
+
       const timeout = setTimeout(() => {
         if (profileLoading) {
           console.warn("fetchProfile: Hanging detected. Forcing profileLoading to false.");
@@ -189,6 +197,23 @@ export default function LeadCRM() {
     const res = await fetch('/api/billing/checkout', { method: 'POST' });
     const data = await res.json();
     if (data.url) window.location.href = data.url;
+  };
+
+  const handleBillingPortal = async (showCancelFallback = true) => {
+    try {
+      await trackEvent('BILLING_PORTAL_OPENED');
+      const res = await fetch('/api/billing/portal', { method: 'POST' });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Billing portal is not available yet.');
+      }
+
+      if (data.url) window.location.href = data.url;
+    } catch (e: any) {
+      setAppError(e.message || 'Billing portal is not available yet.');
+      if (showCancelFallback) setIsCancelModalOpen(true);
+    }
   };
 
   const toggleLeadSelection = (id: string) => {
@@ -1974,7 +1999,7 @@ export default function LeadCRM() {
               <span style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.7rem', fontWeight: 600 }}>{service.label}</span>
             </div>
           ))}
-          <button onClick={() => setIsCancelModalOpen(true)} style={{ marginTop: '12px', width: '100%', padding: '10px', borderRadius: '10px', background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.3)', border: '1px solid rgba(255,255,255,0.06)', fontSize: '0.7rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '1px' }}>MANAGE SUBSCRIPTION</button>
+          <button onClick={() => handleBillingPortal()} style={{ marginTop: '12px', width: '100%', padding: '10px', borderRadius: '10px', background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.3)', border: '1px solid rgba(255,255,255,0.06)', fontSize: '0.7rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '1px' }}>MANAGE SUBSCRIPTION</button>
         </div>
       </aside>
 
@@ -2500,7 +2525,7 @@ export default function LeadCRM() {
                     Automated pipelines are currently healthy. Monitoring `exports/` for new leads to enrich.
                   </p>
                   <button 
-                    onClick={() => setIsCancelModalOpen(true)}
+                    onClick={() => handleBillingPortal()}
                     style={{ width: '100%', padding: '10px', borderRadius: '10px', background: 'rgba(255,255,255,0.05)', color: 'rgba(255,255,255,0.4)', border: 'none', fontSize: '0.7rem', fontWeight: 700, cursor: 'pointer' }}
                   >
                     MANAGE SUBSCRIPTION
@@ -2513,9 +2538,12 @@ export default function LeadCRM() {
           <CancellationModal 
             isOpen={isCancelModalOpen} 
             onClose={() => setIsCancelModalOpen(false)} 
-            onConfirm={() => {
-              console.log("Subscription Cancelled");
+            onReasonSelected={(reason) => trackEvent('CANCELLATION_REASON_SELECTED', { reason })}
+            onClaimOffer={(reason) => trackEvent('CANCELLATION_OFFER_CLAIMED', { reason })}
+            onConfirm={(reason) => {
+              trackEvent('CANCELLATION_CONFIRMED', { reason });
               setIsCancelModalOpen(false);
+              handleBillingPortal(false);
             }}
           />
         </div>

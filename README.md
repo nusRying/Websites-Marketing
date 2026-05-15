@@ -1,124 +1,150 @@
-# Lead Engine SaaS 🚀
+# Lead Engine SaaS
 
-A high-performance, AI-powered Lead Generation and Discovery Engine. This platform scrapes local business data from Google Maps, deep-extracts social media and email information, and enriches it using AI—all accessible via a premium Next.js dashboard.
+An AI-assisted lead generation and website preview system for agencies selling websites to local businesses. The platform finds businesses without strong web presence, enriches them with AI-generated positioning, generates personalized sample-site links, and gives operators a dashboard for pipeline review, outreach, and conversion tracking.
 
----
+## Product Screenshots
 
-## 🏗️ Architecture Overview
+### Revenue Command Center
 
-The system is built with a decoupled architecture focusing on reliability, speed, and AI-driven precision.
+![Revenue Command Center](docs/readme-assets/dashboard-overview.png)
+
+### Lead Pipeline
+
+![Pipeline Command Center](docs/readme-assets/pipeline-command-center.png)
+
+### Template Studio
+
+![Template Studio](docs/readme-assets/template-studio.png)
+
+### Personalized Sample Site
+
+![Personalized sample website](docs/readme-assets/sample-site-preview.png)
+
+## Architecture
 
 ```mermaid
 graph TD
-    User([User]) <--> Dashboard[Next.js Dashboard]
-    Dashboard <--> SupabaseDB[(Supabase DB & Auth)]
-    SupabaseDB <--> API_Worker[Python API Worker]
-    API_Worker --> MapsScraper[Google Maps Scraper]
-    API_Worker --> SocialScraper[Social Discovery Engine]
-    API_Worker --> AI_Enrich[OpenAI Enrichment]
-    API_Worker --> Screenshots[Supabase Storage]
-    
-    subgraph "External Engines"
-        MapsScraper
-        SocialScraper
-    end
-    
-    subgraph "Intelligent Logic"
-        AI_Enrich
-    end
+    User([Operator]) <--> Dashboard[Next.js Dashboard]
+    Dashboard <--> SupabaseDB[(Supabase DB and Auth)]
+    Dashboard --> PublicSites[Personalized Sample Sites]
+    SupabaseDB <--> APIWorker[FastAPI Worker]
+    APIWorker --> MapsScraper[Google Maps Scraper]
+    APIWorker --> SocialDiscovery[Social and Email Discovery]
+    APIWorker --> AIEnrich[OpenAI Enrichment]
+    APIWorker --> Screenshots[Visual Proof Screenshots]
+    APIWorker --> Outreach[Smartlead-ready Outreach Export]
 ```
 
----
+## Key Features
 
-## ✨ Key Features
+- Google Maps lead discovery for local businesses without websites.
+- Detail extraction for names, phone numbers, categories, ratings, addresses, reviews, and social links.
+- Email discovery from public social profiles where available.
+- OpenAI-powered copy generation for niche-specific sample websites.
+- Screenshot worker for visual proof assets.
+- Next.js command center for pipeline review, lead scoring, filtering, CRM notes, and outreach exports.
+- Public personalized sample-site templates across many niches.
+- Supabase-ready auth, multi-tenant data model, RLS policies, billing columns, audit logs, and worker job tracking.
+- Stripe checkout, webhook handling, and billing portal route.
+- Local demo mode for reviewing the dashboard without production credentials.
 
-- **📍 Intelligent Maps Scraping**: Extracts targeted local business data (names, phone numbers, categories, ratings) from Google Maps.
-- **🔍 Deep Email Discovery**: Goes beyond standard scraping by analyzing social media profiles (Facebook, Instagram) to find elusive contact emails.
-- **🤖 AI Enrichment**: Uses OpenAI to qualify leads, categorize businesses, and extract key insights from reviews and websites.
-- **📊 Premium SaaS Dashboard**: A full Next.js application with real-time job tracking, lead management, and export capabilities.
-- **💳 Integrated Billing**: Fully functional subscription management powered by Stripe.
-- **📸 Visual Verification**: Automated screenshots of found websites stored directly in Supabase.
-- **📁 Multi-Format Export**: Export your curated leads to high-quality Excel or CSV files.
+## Tech Stack
 
----
+- Frontend: Next.js 16 App Router, React 19, TypeScript, Framer Motion, Lucide React.
+- Backend: Python, FastAPI, Playwright, Scrapling, Patchright.
+- Database: Supabase Postgres with RLS.
+- Auth: Supabase Auth.
+- Payments: Stripe.
+- AI: OpenAI.
+- Exports: Excel and CSV.
+- Deployment: Docker and GitHub Actions.
 
-## 🛠️ Tech Stack
+## Local Preview
 
-- **Frontend**: Next.js 16 (App Router), TypeScript, Framer Motion, Lucide React, Tailwind CSS.
-- **Backend/Workers**: Python 3.13, FastAPI, Playwright, Scrapling, Patchright.
-- **Database**: Supabase (PostgreSQL).
-- **Authentication**: Supabase Auth.
-- **Payment Processing**: Stripe.
-- **AI Engine**: OpenAI GPT models.
-- **Deployment**: Docker & Docker Compose.
-
----
-
-## 🚀 Getting Started
-
-### 1. Prerequisites
-- Python 3.11+
-- Node.js 20+
-- Supabase Project
-- OpenAI API Key
-- Stripe Account (for billing)
-
-### 2. Backend Setup
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Setup Playwright
-playwright install chromium
-```
-
-### 3. Frontend Setup
 ```bash
 cd templates
 npm install
-npm run dev
+npm run build
+npm run start -- --hostname 127.0.0.1 --port 3001
 ```
 
-### 4. Database Setup
-Follow the [SAAS_SETUP.md](SAAS_SETUP.md) for detailed SQL migration steps to initialize your Supabase instance.
+Open:
 
----
-
-## ⚙️ Configuration
-
-### Environment Variables
-Configure these in `templates/.env.local` and your system environment:
-
-| Variable | Description |
-| :--- | :--- |
-| `NEXT_PUBLIC_SUPABASE_URL` | Your Supabase project URL |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public API key |
-| `SUPABASE_SERVICE_ROLE_KEY` | Admin key for backend worker auth |
-| `OPENAI_API_KEY` | API key for lead enrichment |
-| `STRIPE_SECRET_KEY` | Your Stripe secret key for payments |
-
-### Scraper Settings
-Customize the engine behavior in `src/config.py`:
-```python
-SCRAPE_SETTINGS = {
-    "max_results_per_search": 20,
-    "max_reviews_per_lead": 150,
-    "default_timeout": 30000,
-}
+```text
+http://127.0.0.1:3001/login
 ```
 
----
+For local review without Supabase credentials, click `CONTINUE IN LOCAL DEMO`.
 
-## 📂 Project Structure
+Public sample site preview:
 
-- `src/`: Core Python scraping and enrichment logic.
-- `templates/`: Next.js SaaS dashboard frontend.
-- `supabase/`: SQL migrations and security policies.
-- `exports/`: Default directory for generated lead reports.
-- `tests/`: Comprehensive test suite for backend components.
-- `skills/`: Shared AI agent knowledge and interaction patterns.
+```text
+http://127.0.0.1:3001/preview?name=Demo%20Services&niche=Plumber&location=London
+```
 
----
+## Backend Setup
 
-## 🛡️ License
-This project is private and intended for internal use only.
+```bash
+pip install -r requirements.txt
+playwright install chromium
+python -m pytest tests
+```
+
+Run the worker:
+
+```bash
+uvicorn src.api_worker:app --host 0.0.0.0 --port 8000
+```
+
+Run a local scrape:
+
+```bash
+python -m src.main --niche "plumber" --location "Bradford" --max-results 20
+```
+
+## Configuration
+
+Configure these in `templates/.env.local` and the backend runtime:
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public anon key |
+| `SUPABASE_SERVICE_ROLE_KEY` | Backend worker and sync access |
+| `OPENAI_API_KEY` | AI enrichment |
+| `STRIPE_SECRET_KEY` | Stripe checkout, webhook, and billing portal |
+| `STRIPE_PRICE_ID` | Subscription price |
+| `STRIPE_WEBHOOK_SECRET` | Stripe webhook verification |
+| `WORKER_ALLOWED_ORIGINS` | Allowed frontend origins for the FastAPI worker |
+| `CUSTOMER_SUCCESS_WEBHOOK_URL` | Optional customer-success event webhook |
+| `NEXT_PUBLIC_SUPPORT_EMAIL` | Support link shown in the dashboard |
+
+Database setup is documented in [SAAS_SETUP.md](SAAS_SETUP.md).
+
+## Project Structure
+
+```text
+src/                         Python scraping, enrichment, worker, sync logic
+templates/                   Next.js dashboard and public sample-site templates
+supabase/migrations/          Database schema, RLS, billing, audit, job tracking
+tests/                       Backend and browser smoke tests
+docs/readme-assets/          README screenshots captured from the local app
+exports/                     Local generated lead exports and screenshots
+```
+
+## Verification
+
+Current local verification:
+
+```bash
+ruff check .
+npm run lint --prefix templates
+npm run build --prefix templates
+python -m pytest tests
+```
+
+Recent result: `14 passed` with the local production server running for browser smoke tests.
+
+## License
+
+Private internal project.
