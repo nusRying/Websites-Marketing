@@ -22,8 +22,12 @@ export type AnalyticsEvent =
 
 export async function trackEvent(event: AnalyticsEvent, metadata: Record<string, unknown> = {}) {
   try {
+    if (isBrowserDemoSession()) {
+      console.log(`[DEMO ANALYTICS] ${event}`, metadata);
+      return;
+    }
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user && !isBrowserDemoSession()) return;
+    if (!user) return;
 
     const eventMetadata = {
       ...metadata,

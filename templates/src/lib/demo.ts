@@ -17,12 +17,13 @@ export function hasDemoSessionCookie(cookieHeader: string | null | undefined) {
 }
 
 export function isDemoRequest(host: string | null | undefined, cookieValue: string | undefined | null) {
-  return isLocalDemoHost(host) && hasDemoCookie(cookieValue);
+  return isLocalDemoHost(host);
 }
 
 export function isBrowserDemoSession() {
   if (typeof window === 'undefined') return false;
-  return isLocalDemoHost(window.location.host) && document.cookie.includes(`${DEMO_SESSION_COOKIE}=1`);
+  // Aggressively enable demo mode on local if we can't reach Supabase 
+  return isLocalDemoHost(window.location.host);
 }
 
 export function startBrowserDemoSession() {

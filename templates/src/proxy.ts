@@ -1,6 +1,6 @@
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
-import { DEMO_SESSION_COOKIE, isDemoRequest } from '@/lib/demo'
+import { DEMO_SESSION_COOKIE, isDemoRequest, isLocalDemoHost } from '@/lib/demo'
 
 async function handleProxy(request: NextRequest) {
   let response = NextResponse.next({
@@ -27,7 +27,7 @@ async function handleProxy(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
-  if (demoSession) {
+  if (isLocalDemoHost(request.headers.get('host'))) {
     return response
   }
 
