@@ -2,7 +2,7 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 import { DEMO_SESSION_COOKIE, isDemoRequest } from '@/lib/demo'
 
-export async function proxy(request: NextRequest) {
+async function handleProxy(request: NextRequest) {
   let response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -17,7 +17,7 @@ export async function proxy(request: NextRequest) {
   )
 
   // SECURITY HEADERS
-  response.headers.set('X-Frame-Options', 'DENY')
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN')
   response.headers.set('X-Content-Type-Options', 'nosniff')
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
   response.headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()')
@@ -119,6 +119,16 @@ export async function proxy(request: NextRequest) {
 
   return response
 }
+
+export async function proxy(request: NextRequest) {
+  return handleProxy(request)
+}
+
+export async function middleware(request: NextRequest) {
+  return handleProxy(request)
+}
+
+export default middleware
 
 export const config = {
   matcher: [

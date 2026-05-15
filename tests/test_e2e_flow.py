@@ -53,6 +53,30 @@ def test_local_demo_opens_dashboard():
 
 
 @pytest.mark.skipif(not server_is_running(), reason="Next.js server is not running")
+def test_template_editor_canvas_loads():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        page.add_init_script("localStorage.setItem('onboarding_complete', 'true')")
+
+        page.goto(f"{BASE_URL}/login", wait_until="domcontentloaded")
+        page.get_by_role("button", name="CONTINUE IN LOCAL DEMO").click()
+        page.wait_for_url(f"{BASE_URL}/", wait_until="domcontentloaded")
+
+        page.get_by_text("Templates", exact=True).first.click()
+        expect(page.get_by_role("heading", name="Template Studio")).to_be_visible(
+            timeout=30000
+        )
+        page.get_by_text("Lead Machine (Default)").first.click()
+        page.get_by_role("button", name="Enter Visual Editor").click()
+
+        canvas = page.frame_locator('iframe[title="Editor Canvas"]').locator("body")
+        expect(canvas).to_contain_text("Acme Services", timeout=30000)
+
+        browser.close()
+
+
+@pytest.mark.skipif(not server_is_running(), reason="Next.js server is not running")
 def test_public_template_page_loads():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
